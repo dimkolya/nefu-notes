@@ -1,0 +1,897 @@
+\documentclass[9pt]{article}
+\input{header.tex}
+
+\begin{document}
+
+\begin{center}
+    \huge\textbf{Комплексный анализ.}
+\end{center}
+
+\section{Введение.}
+
+\par\ 
+\par\textbf{Определение.} \textit{Комплексным числом} называется упорядоченная пара действительных чисел \(z=(a,b)\), \(a,b\in\mathbb{R}\). Здесь число \(a=\Re(z)\) называется \textit{действительной частью}, а \(b=\Im(z)\) -- мнимой частью комплексного числа \(z\). Если \(a=0\), то комплексное число называется \textit{чисто мнимым}, и если \(b=0\), то \textit{действительным}. Множество всех комплексных чисел обозначается \(\mathbb{C}\).
+\par\textbf{Определение.} Два комплексных числа \(z_1=(a_1,b_1)\) и \(z_2=(a_2,b_2)\) называются \textit{равными} тогда и только тогда, когда \(a_1=a_2\) и \(b_1=b_2\).
+\par\textbf{Определение.} \textit{Суммой} двух комплексных чисел \(z1=(a_1,b_1)\) и \(z_2=(a_2,b_2)\) называется комплексное число \(z_3=(a_3,b_3)\), где \(a_3=a_1+a_2\) и \(b_3=b_1+b_2\). Все свойства (коммутативность и ассоциативность) суммы выполняются. Нейтральным элементом относительно суммы является \textit{ноль} \(\mathbb{0}=(0,0)\).
+\par\textbf{Определение.} \textit{Произведением} двух комплексных чисел \(z1=(a_1,b_1)\) и \(z_2=(a_2,b_2)\) называется комплексное число \(z_3=(a_3,b_3)\), где \(a_3=a_1a_2-b_1b_2\) и \(b_3=a_1b_2+a_2b_1\). Все свойства (коммутативность и ассоциативность) произведения, а также дистрибутивность выполняются. Нейтральным элементом относительно произведения является \textit{единица} \(\mathbb{1}=(1,0)\).
+\par\textbf{Определение.} Число \((0,1)\in\mathbb{C}\) называется \textit{мнимой единицей} и обозначается как \(i\). Свойства:
+\par1. \(i\cdot i=(0,1)\cdot(0,1)=(0-1,0+0)=(-1,0)=-1 \Rightarrow\) \boxed{i\cdot i=-1} -- связь мнимой единицы с действительной единицей;
+\par2. \((a,0)\cdot(1,0)+(0,1)\cdot(b,0)=(a,0)+(0,b)=(a,b) \Rightarrow\) \boxed{z=a+i\cdot b} -- \textit{алгебраическая} запись комплексного числа;
+\parРаз уж у нас есть операции суммы и произведения, то можно вводить и операции \textit{разности} и \textit{деления}. Если в случае разности все понятно как делать, то при делении для приведения к арифметической записи необходимо домножить знаменатель на сопряжонное, чтобы получить действительное число: \[\dfrac{z_1}{z_2}=\dfrac{a_1+ib_1}{a_2+ib_2}=\dfrac{(a_1+ib_1)(a_2-ib_2)}{(a_2+ib_2)(a_2-ib_2)}=\dfrac{(a_1+ib_1)(a_2-ib_2)}{a_2^2+b_2^2}.\]
+\par\textbf{Определение.} Комплексное число \((a,-b)=a-ib\) называется сопряженным к числу \(z=(a,b)=a+ib\) и обозначается \(\overline{z}\).
+
+\subsection{Геометрическое изображение комплексных чисел.}
+
+\begin{wrapfigure}[9]{l}{0pt}
+\raisebox{-1pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (O) -- (1,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (O) -- (0,1) node[anchor=west]{\(\Im z\)};
+\draw[vector guide] (z) -- (0.5,0) node[anchor=north]{\(x\)};
+\draw[vector guide] (z) -- (0,0.7) node[anchor=east]{\(y\)};
+\draw[vector] (O) -- (z);
+\filldraw[black] (z) circle (0.5pt) node[anchor=south west]{\(z\)};
+\draw[black,-stealth,thick] (0.2,0) arc (0:54.46:0.2);
+\node[rotate = 54.46] (absz) at (0.19,0.41) {\(|\vec z|\)};
+\node (angle) at (0.25,0.1) {\(\varphi\)};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z1) at (0.6,0.2);
+\coordinate (z2) at (0.1,0.3);
+\coordinate (z) at (0.7,0.5);
+\draw[axis] (O) -- (1,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (O) -- (0,1) node[anchor=west]{\(\Im z\)};
+\draw[vector] (O) -- (z1) node[anchor=north west]{\(\vec z_1\)};
+\draw[vector] (O) -- (z2) node[anchor=south]{\(\vec z_2\)};
+\draw[vector] (O) -- (z) node[anchor=south west]{\(\vec z\)};
+\draw[vector guide] (z) -- (z1);
+\draw[vector guide] (z) -- (z2);
+\filldraw[black] (z1) circle (0.5pt);
+\filldraw[black] (z2) circle (0.5pt);
+\filldraw[black] (z) circle (0.5pt);
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par\ 
+\parКомплексное число \(z=(x,y)\in\mathbb{C}\equiv\mathbb{R}^2\) можно представить как точку/радиус-вектор на координатной плоскости с координатами \(x\) и \(y\). Интерпретация суммы двух комплексных чисел \(z_1\) и \(z_2\) на координатной плоскости -- \textit{сумма двух векторов} \(\vec z=\vec z_1+\vec z_2\).
+\par\textbf{Определение.} \textit{Модулем} комплексного числа \(z=(x,y)\) называется неотрицательное действительное число, равное \(|\vec z|=\sqrt{x^2+y^2}\).
+\par\textbf{Определение.} \textit{Аргументом} комплексного числа \(z=(x,y)\) называется угол между действительной осью и вектором, соответствующим данному комплексному числу. Обозначается \(\arg(z)\), если \(-\pi<\varphi\le\pi\), \(\Arg(z)=\arg(z)+2\pi k,\ k\in\mathbb{Z}\). \(\tg\varphi=\tg(\arg(z))=\tg(\Arg(z))=\dfrac{y}{x}\).
+
+\[\arg z = \left\{
+\begin{array}{ll}
+     \displaystyle\arctan\dfrac{y}{x},& x>0\\
+     \displaystyle\arctan\dfrac{y}{x}+\pi,& x<0,y>0\\
+     \arctan\dfrac{y}{x}-\pi,& x>0,y<0\\
+     0,& y=0,x>0\\
+     \pi,& y=0,x<0\\
+     \frac{\pi}{2},& x=0,y>0\\
+     -\frac{\pi}{2},& x=0,y<0
+\end{array}\right.\]
+
+\par\textbf{Замечание.} Модуль \(\mathbb{0}\in\mathbb{C}\) равен 0, но \(\Arg\mathbb{0}\) не определен.
+
+\subsection{Тригонометрическая и показательная формы комплексного числа.}
+
+\begin{wrapfigure}[9]{l}{0pt}
+\raisebox{-1pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (O) -- (1,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (O) -- (0,1) node[anchor=west]{\(\Im z\)};
+\draw[vector guide] (z) -- (0.5,0) node[anchor=north]{\(x\)};
+\draw[vector guide] (z) -- (0,0.7) node[anchor=east]{\(y\)};
+\draw[vector] (O) -- (z);
+\filldraw[black] (z) circle (0.5pt) node[anchor=south west]{\(z\)};
+\draw[black,-stealth,thick] (0.2,0) arc (0:54.46:0.2);
+\node[rotate = 54.46] (absz) at (0.19,0.41) {\(r\)};
+\node (angle) at (0.25,0.1) {\(\varphi\)};
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par\ 
+\par\(z = x+iy,\quad x,y\in\mathbb R\)
+\par\(|z|=r=\sqrt{x^2+y^2}\ge0,\quad \Arg z=\varphi\).
+\par\textbf{Свойства} модуля и аргумента:
+\par1. \(|\Re z|\le |z|,\ |\Im z|\le |z|\);
+\par2. \(|z_1+z_2|\le|z_1|+|z_2|\) -- неравенство треугольника;
+\parФормулы перехода к полярным координатам: 
+\[\left\{
+\begin{array}{l}
+x=r\cos\varphi \\
+y=r\sin\varphi
+\end{array}\right.\]
+\parПодставляем: \(z=x+iy=r\cos\varphi+ir\sin\varphi=\)\boxed{r(\cos\varphi+i\sin\varphi)} -- \textit{\textbf{тригонометрическая форма}} комплексного числа \(z\).
+\parРассмотрим два комплексных числа \(z_1=r_1(\cos\varphi_1+i\sin\varphi_1)\) и \(z_2=r_2(\cos\varphi_2+i\sin\varphi_2)\):
+\[z_1z_2=r_1r_2(\cos\varphi_1\cos\varphi_2-\sin\varphi_1\sin\varphi_2+i(\cos\varphi_1\sin\varphi_2+\sin\varphi_1\cos\varphi_2))=r_1r_2(\cos(\varphi_1+\varphi_2)+i\sin(\varphi_1+\varphi_2))\]
+\parОказывается \(|z_1z_2|=r_1r_2=|z_1||z_2|\) и \(\Arg(z_1z_2)=\varphi_1+\varphi_2=\Arg z_1+\Arg z_2\). Данные формулы растягиваются и для произведения \(n\) комплексных чисел:\[|z|=|z_1|\cdot...\cdot|z_n|,\quad\Arg z = \displaystyle\sum^n_{k=1}z_k.\]
+\parТаким образом, получаем формулу для возведения в степень:\[z^n=r^n(\cos(\varphi n)+i\sin(\varphi n)),\quad|z^n|=|z|^n,\quad\Arg(z^n).=n\cdot\Arg(z),\quad n\in\mathbb N.\]
+\parОперация корня выглядит немного иначе:\[\sqrt[n]{z}=\sqrt[n]{r}(\cos\dfrac{\varphi+2\pi k}{n}+i\sin\dfrac{\varphi+2\pi k}{n}),\quad k=0,...,n-1.\]
+\parМножество значений \(\sqrt[n]{z}\) являются вершинами правильного \(n\)-угольника с центром в точке \(O(0,0)\) и поворотом \(\dfrac{\varphi}{n}\). Последние две формулы называются \textit{\textbf{формулой Муавра}}.
+\parТригонометрическая форма \(z = r(\cos\varphi+i\sin\varphi)\), если взять \(|z|=r=1\) получим \boxed{\cos\varphi+i\sin\varphi=e^{i\varphi}} -- \textit{тождество Эйлера}. Для \(\forall r\in \mathbb R_+\) получаем формулу \boxed{z=re^{i\varphi}} -- \textbf{\textit{показательную форму}} комплексного числа.
+
+\section{Предел последовательности комплексных чисел.}
+
+\ 
+\par\textbf{Определение.} Последовательность комплексных чисел \(z_1,z_2,...,z_3\), где \(z_n=a_n+ib_n,\ a_n,b_n\in\mathbb R\) называется сходящейся к пределу \(z=a+ib,\ a,b\in\mathbb R\), при \(n\to\infty\) если
+\[\forall \varepsilon>0\quad \exists N\in \mathbb N:\ |z_n-z|<\varepsilon,\quad\forall n>N.\]
+\par\textbf{Теорема.} Соотношение \(\displaystyle\lim_{n\to\infty}z_n=z\) эквивалентно соотношениям \(\displaystyle\lim_{n\to\infty}a_n=a,\ \displaystyle\lim_{n\to\infty}b_n=b\).
+\par\textit{Доказательство.} \(\Rightarrow\). Возьмем \(\forall \varepsilon>0 \Rightarrow|a_n-a|=|\Re z_n-\Re z|=|\Re(z_n-z)|\le|z_n-z|<\varepsilon \Rightarrow \displaystyle\lim_{n\to\infty}a_n=a\). Совершенно аналогично получаем для \(b_n\).
+\par\(\Leftarrow\). Возьмем \(\forall \varepsilon > 0\) и подберем для него \(N_1, N_2:\ |a_n-a|<\dfrac{\varepsilon}{\sqrt2}, |b_n-b|<\dfrac{\varepsilon}{\sqrt2}\). Пусть \(N=\max\{N_1, N_2\}\). Тогда имеем \(|z_n-z|=|(a_n-a)+i(b_n-b)|=\sqrt{(a_n-a)^2+(b_n-b)^2}<\varepsilon,\ \forall n>N\) что и требовалось. \(\blacksquare\)
+\par\textbf{Замечание.} Для последовательности комплексных чисел применима теория последовательности действительных чисел.
+
+\section{Кривые и области на комплексной плоскости.}
+
+\ 
+\par\textbf{Определение.} Пусть функция \(z=z(t),\ t\in[\alpha,\beta]\) принимает комплексные значения \(z(t)=x(t)+iy(t),\ x=\Re z(t),\ y=\Im z(t)\), тогда она называется \textit{комплекснозначной функцией} действительного переменного.
+\parПредел функции определяется покоординатно \[\displaystyle\lim_{t\to t_0}z(t)=\lim_{t\to t_0}x(t)+i\lim_{t\to t_0}y(t).\]
+\par\textbf{Определение.} Функция \(z(t)\) называется непрерывной в точке или на отрезке, если \(x(t)\) и \(y(t)\) непрерывны в этой точке или на этом отрезке.
+
+\textbf{\textit{Геометрическая интерпретация.}}
+
+\[z=z(t)\Leftrightarrow\left\{
+\begin{array}{l}
+    x=x(t) \\
+    y=y(t)
+\end{array}\right.,\quad \alpha\le t\le\beta\] -- ориентированная кривая, и нам известно направление.
+
+\par\textbf{Пример.}
+\par\textbf{1.} \(z=\cos t,\ \pi\le t\le2\pi\).
+\par\textit{Решение.} функция принимает только действительные значения от -1 до 1 (в соответствующем направлении).
+
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.5,0) -- (0.5,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.2) -- (0,0.2) node[anchor=west]{\(\Im z\)};
+\draw[vector] (-0.3,0) -- (0.3,0);
+\draw[vector] (-0.3,0) -- (-0.1,0);
+\draw[vector] (-0.3,0) -- (0.1,0);
+\filldraw[black] (-0.3,0) circle (0.5pt) node[anchor=north]{\(-1\)};
+\filldraw[black] (0.3,0) circle (0.5pt) node[anchor=north]{\(1\)};
+\end{tikzpicture}
+\end{center}
+
+\par\textbf{2.} \(z=e^{it},\ 0\le t\le\pi\).
+\par\textit{Решение.} Знаем уравнение окружности: \(z=re^{i\varphi}\), где \(r\) -- радиус, и \(\varphi\) -- угол, переменная, которая показывает, какие сектора присутствуют (для полной окружности \(\varphi\in[0;2\pi]\).
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.5,0) -- (0.5,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.2) -- (0,0.5) node[anchor=west]{\(\Im z\)};
+\draw[vector] (0.01,0.3) -- (0, 0.3);
+\draw[vector] (0.3,0) arc (0:180:0.3);
+\filldraw[black] (-0.3,0) circle (0.5pt) node[anchor=north]{\(-1\)};
+\filldraw[black] (0.3,0) circle (0.5pt) node[anchor=north]{\(1\)};
+\filldraw[black] (0,0.3) circle (0.5pt) node[anchor=south west]{\(i\)};
+\end{tikzpicture}
+\end{center}
+
+\par\textbf{Определение.} Если \(z(t_1)=z(t_2),\ t_1\neq t_2\), то точки \(z_1=z(t_1)\) и \(z_2=z(t_2)\) называется \textit{точкой самопересечения}.
+\par\textbf{Определение.} Кривая, не имеющая точек самопересечения называется простой кривой.
+\par\textbf{Определение.} Кривая, у которой начало и конец совпадают, называется замкнутой кривой.
+
+\par\textbf{Пример.}
+\par\textbf{1.} \(z=e^{it},\ 0\le t\le2\pi\).
+\par\textit{Решение.} \(|z|=1,\ 0\le\varphi\le2\pi\) -- единичная окружность, являющаяся простой замкнутой кривой.
+
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.5,0) -- (0.5,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.5) -- (0,0.5) node[anchor=west]{\(\Im z\)};
+\draw[vector] (0, 0) circle (0.25);
+\draw[vector] (0.25, -0.01) -- (0.25, 0);
+\draw[vector] (0.01,0.25) -- (0, 0.25);
+\draw[vector] (-0.25, 0.01) -- (-0.25, 0);
+\draw[vector] (-0.01,-0.25) -- (0, -0.25);
+\filldraw[black] (0.25,0) circle (0.5pt) node[anchor=north west]{\(1\)};
+\end{tikzpicture}
+\end{center}
+
+\par\textbf{2.} \(z=z(t),\ -\dfrac{\pi}{2}\le t \le 2\pi\),
+\[z(t)=\left\{
+\begin{array}{ll}
+    e^{it}, & -\dfrac{\pi}{2}\le t \le \pi \\
+    \dfrac{3t}{\pi}-4 & \pi\le t\le2\pi
+\end{array}\right..\]
+\par\textit{Решение.} Сначала получается четверть окружности, потом действительный отрезок. \(z=1\) -- точка самопересечения, \(t_1=0,\ t_2=\dfrac{5\pi}{3}\).
+
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.5,0) -- (0.8,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.5) -- (0,0.5) node[anchor=west]{\(\Im z\)};
+\draw[vector] (0.25, -0.01) -- (0.25, 0);
+\draw[vector] (0.01,0.25) -- (0, 0.25);
+\draw[vector] (0, -0.25) arc (-90:180:0.25);
+\draw[vector] (-0.25,0) -- (-0.1,0);
+\draw[vector] (-0.25,0) -- (0.1,0);
+\draw[vector] (-0.25,0) -- (0.5,0);
+\filldraw[black] (-0.25,0) circle (0.5pt) node[anchor=north]{\(-1\)};
+\filldraw[black] (0.25,0) circle (0.5pt)
+node[anchor=north west]{\(1\)}
+node[anchor=south west]{\(z=1\) -- самопересечение};
+\filldraw[black] (0.5,0) circle (0.5pt) node[anchor=north]{\(2\)};
+\end{tikzpicture}
+\end{center}
+
+\par\textbf{3.} \(z = \cos t,\ -\pi\le t\le \pi\).
+\par\textit{Решение.} Если рассмотреть график функции \(y=\cos x\), то при \(t\in[-\pi, \pi]\) функция сначала идет от -1 до 1, потом от 1 до -1 обратно. То есть действительный отрезок будет обходиться два раза в противоположных направлениях.
+
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.5,0) -- (0.5,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.3) -- (0,0.3) node[anchor=west]{\(\Im z\)};
+\draw[color=red, very thick] plot ({\x / 16}, {cos(\x r) / 5});
+\draw[dashed] (-3.14/16,0) -- (-3.14/16,-1/5);
+\draw[dashed] (3.14/16,0) -- (3.14/16,-1/5);
+\filldraw[black] (-3.14/16,0) circle (0.5pt) node[anchor=south]{\(-\pi\)};
+\filldraw[black] (3.14/16,0) circle (0.5pt) node[anchor=south]{\(\pi\)};
+\end{tikzpicture}
+\(\quad\)
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.5,0) -- (0.5,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.3) -- (0,0.3) node[anchor=west]{\(\Im z\)};
+\draw[vector] (-0.3,0) -- (0.3,0);
+\draw[vector] (-0.3,0) -- (-0.1,0);
+\draw[vector] (-0.3,0) -- (0.1,0);
+\draw[vector] (0.3,0) -- (-0.3,0);
+\draw[vector] (0.3,0) -- (-0.1,0);
+\draw[vector] (0.3,0) -- (0.1,0);
+\filldraw[black] (-0.3,0) circle (0.5pt) node[anchor=north]{\(-1\)};
+\filldraw[black] (0.3,0) circle (0.5pt) node[anchor=north]{\(1\)};
+\end{tikzpicture}
+\end{center}
+
+\par\textbf{Определение.} Точка \(a\) называется \textit{внутренней точкой} множества \(D\), если \(\exists V_a\subset D\).
+\par\textbf{Определение.} Точка \(a\) называется \textit{внешней точкой} множества \(D\), если \(\exists V_a\cup D=\emptyset\).
+\par\textbf{Определение.} Точка \(a\) называется \textit{граничной точкой} множества \(D\), если в \(\forall \dot{V}_a\cup D\neq\emptyset\).
+\par\textbf{Определение.} Множество всех граничных точек \(A\) множества \(D\) называется ее \textit{границей}.
+\par\textbf{Определение.} Множество \(D\) называется \textit{замкнутым}, если содержит все свои граничные точки.
+\par\textbf{Определение.} Подмножество \(D\) метрического пространства \(X\) называется \textit{ограниченным}, если оно содержится в некотором замкнутом шаре:
+\[\exists a\in X,\ R>0,\ D\subset\overline B(a,R).\]
+Иначе множество \(D\) называется \textit{неограниченным}.
+\parЗамкнутым шаром \(\overline B(a,R)\) метрического пространства \((X, \rho)\), где \(a,R\in\mathbb R\) называется множество
+\[\overline B(a,R)=\{x\in X\ :\ \rho(a,x)\le R\}.\]
+\par\textbf{Определение.} Открытое связное множество точек расширенной комплексной плоскости называется областью.
+\par\textbf{Ориентация граничной кривой:} при обходе границы в положительном направлении область всегда остается слева.
+
+\section{Понятие функции комплексной переменной.}
+
+\ 
+\par\textbf{Определение.} Будем говорить, что на множестве \(E\subset \mathbb C\) задана \textit{функция \(f\) комплексной переменной}, если введено отображение \(f:E\to\mathbb C\).
+\par\textbf{Определение.} Область \(D\) называется \textit{односвязной}, если любую замкнутую кривую, лежащую в области \(D\) можно непрерывно деформировать в точку, оставаясь при этом в области \(D\). В противном случае область называется \textit{многосвязной}.
+\par\textbf{Определение.} Пусть \(G\) -- область (может быть замкнутая) на комплексной плоскости. Тогда \textit{однозначной функцией} комплексной переменной называется функция \(z:G\to\mathbb C\) если \(z\) -- сюръекция.
+\par\textbf{Определение.} Функция \(f(z)\) -- однолистной функцией в области \(G\), если в различных точках \(z\in G\) она принимает различные значения (является биекцией).
+\par\textbf{Замечание.} Однолистная функция осуществляет взаимнооднозначное отображение.
+\par\textbf{Определение по Гейне.} Пусть функция комплексной переменной \(f(z):E\to\mathbb C\), \(\exists \{z_n\}\in E:\ z_n\to z_0,\ z_n\neq z_0\). Если независимо от выбора последовательности существует единственный предел \(\displaystyle\lim_{n\to\infty}f(z_n)=w_0\), то этот предел называется \textit{пределом функции \(f(z)\) в точке \(z_0\)}. Обозначается \(\displaystyle\lim_{z\to z_0}f(z)=w_0\).
+\par\textbf{Определение по Коши.} Число \(w_0\) называется пределом функции комплексной переменной \(f(z):E\to\mathbb C\) в точке \(z_0\), если
+\[\forall \varepsilon>0\ \exists\delta>0:\ |f(z)-w_0|<\varepsilon,\ |z-z_0|<\delta.\]
+\par\textbf{Эквивалентность определений предела функции комплексного переменного.}
+\par\textit{Доказательство.} (\(\Rightarrow\)). Пусть \(w_0\) -- предел функции \(f\) в точке \(z_0\) по Гейне. Тогда докажем, что \(w_0\) предел \(f\) по Коши. Предположим противное: пусть \(w_0\) не есть предел по Коши:
+\[\exists \varepsilon^*>0:\ \forall \delta>0,\ z\in E,\ z\neq z_0,\ |z-z_0|<\delta,\ |f(z)-w_0|\ge\varepsilon^*.\]
+Следовательно, \(\forall n\in\mathbb N\) по числу \(\delta=\frac{1}{n}\) найдется \(z_n\), что
+\[z_n\in E,\ z_n\neq z_0,\ |z_n-z_0|<\dfrac{1}{n},\ |f(z_n)-w_0|\ge\varepsilon^*.\]
+Но, у нас получается, что полученная последовательность \(\{z_n\}\to z_0\). Но по предположению Гейне для любой последовательности \({z_n}\) выполнено \(f(z_n)\to w_0\). Противоречие.
+\par\((\Leftarrow)\). Пусть \(w_0\) -- предел функции \(f\) в точке \(z_0\) по Коши. Докажем, что тогда \(w_0\) -- предел \(f\) и по Гейне. Возьмем последовательность \(\{z_n\}\) со свойствами из определения Гейне: \(z_n\in E, z_n\neq z_0, z_n\to z_0\). Необходимо доказать, что \(f(z_n)\to w_0\). Возьмем \(\forall \varepsilon>0\). По определению Коши подберем такое \(\delta>0\), что для всех \(z\in D\), для которых \(z\neq z_0\) и \(|z-z_0|<\delta\) будет выполнено \(|f(z)-w_0|<\varepsilon\). По определению предела последовательности для \(\{z_n\}\) для числа \(\delta\) всегда найдется номер \(N\in\mathbb N\), что \(\forall n>N\) выполнено \(|z_n-z|<\delta\). Но тогда \(|f(z_n)-w_0|<\varepsilon\ \forall n>N\). В силу произвольности \(\varepsilon\) это значит, что \(f(z_n)\to w_0\ \blacksquare\). 
+\par\textbf{Определение.} Функция комплексной переменной \(f(z):E\to\mathbb C\), называется \textit{непрерывной в точке} \(z_0\in E\), если \(\displaystyle\lim_{z\to z_0}f(z)=f(z_0)\).
+\par\textbf{Замечание.} Из непрерывности функции \(f(z)=u(x,y)+iv(x,y)\) в точке \(z_0=x_0+iy_0\) следует непрерывность функции \(u(x,y)\) и \(v(x,y)\) в точках \(x_0\) и \(y_0\) соответственно. 
+\par\textbf{Замечание.} Если функции \(f_1(z), f_2(z)\) непрерывны в точке \(z_0\), то в этой точке непрерывны также и функции:
+\par1. \(f(z)=f_1(z)+f_2(z)\);
+\par2. \(f(z)=f_1(z)\cdot f_2(z)\);
+\par3. Если \(f_2(z_0)\neq\), то \(f(z)=\dfrac{f_1(z)}{f_2(z)}\).
+\par\textbf{Замечание.} Функция \(f(z)\), непрерывная на замкнутом множестве ограничена по модулю на нем.
+\par\textbf{Пример.}
+\par\textbf{1.} Найти множество точек непрерывности функции \(w=cz,\ c\in\mathbb C\).
+\par\textit{Решение.} В \(\varepsilon\)-определении выберем \(\delta=\dfrac{\varepsilon}{|c|}\). Тогда \[|f(z)-f(z_0)|=|cz-cz_0|=|c(z-z_0)|\leq|c|\cdot|z-z_0|<|c|\dfrac{\varepsilon}{|c|}=\varepsilon.\]
+\parТо есть данная функция непрерывна во всей области определения. \(\blacksquare\)
+\par\textbf{2.} Найти множество точек непрерывности функции \(w=\Re z.\)
+\par\textit{Решение.} В \(\varepsilon\)-определении возьмем \(\delta=\varepsilon.\) Тогда получим, что функция непрерывная везде \(\blacksquare\).
+
+\section{Примеры простейших функций комплексной переменной.}
+
+\ 
+\par\textbf{I.} \textit{Целая линейная функция} \(w=az+b\), где \(a,b\in \mathbb C,\ a\neq0\). Она однозначна и однолистна. Обратная функция \(z=\dfrac{w}{a}-\dfrac{b}{a}\) также является целой линейной.
+\[w=(a_1+ia_2)(x+iy)+(b_1+ib_2)=(a_1x+b_1-a_2y)+i(a_1y+a_2x+b_2).\]
+\parИз непрерывности \(u(x,y)=a_1x+b_1-a_2y\) и \(v(x,y)=a_1y+a_2x+b_2\) следует непрерывность \(w(x,y)=w(z)\) на всей комплексной плоскости \(\mathbb C\).
+\par\textit{Геометрическая интерпретация.}
+\par1) \(w=rz,\ r>0,\ r\in\mathbb R\). Возьмем модуль \(|w|=|rz|=|r|\cdot|z|=r|z|\) -- задает растяжение/сжатие, где \(r\) -- коэффициент растяжения/сжатия. А аргумент \(\Arg(w)=\Arg(rz)=\Arg(r)+\Arg(z)=\Arg(z).\)
+
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.1) -- (0,0.5) node[anchor=west]{\(\Im z\)};
+\draw[vector] (0,0) -- (0.2,0.15);
+\filldraw[black] (0.2,0.15) circle (0.5pt) node[anchor=west]{\(z\)};
+\draw[black,-stealth,thick] (0.15,0) arc (0:35.54:0.15);
+\node[rotate = 35.54] (absz) at (0.10,0.18) {\(|z|\)};
+\node[anchor=west] (angle) at (0.15,0.05) {\(\varphi\)};
+\end{tikzpicture}
+\(\quad\)
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(\Re w\)};
+\draw[axis] (0,-0.1) -- (0,0.5) node[anchor=west]{\(\Im w\)};
+\draw[vector] (0,0) -- (0.4,0.3);
+\filldraw[black] (0.4,0.3) circle (0.5pt) node[anchor=west]{\(z\)};
+\draw[black,-stealth,thick] (0.2,0) arc (0:35.54:0.2);
+\node[rotate = 35.54] (absz) at (0.16,0.23) {\(r|z|\)};
+\node[anchor=west] (angle) at (0.2,0.1) {\(\varphi\)};
+\end{tikzpicture}
+\end{center}
+
+\par2) \(w=e^{i\alpha}z,\ \alpha\in\mathbb R\). Модуль \(|w|=|e^{i\alpha}z|=|e^{i\alpha}|\cdot|z|=|z|\), а аргумент \(\Arg(w)=\Arg(e^{i\alpha}z)=\Arg(e^{i\alpha})+\Arg(z)=\alpha+\Arg(z)\).
+
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.1) -- (0,0.5) node[anchor=west]{\(\Im z\)};
+\draw[vector] (0,0) -- (0.4,0.3);
+\filldraw[black] (0.4,0.3) circle (0.5pt) node[anchor=west]{\(z\)};
+\draw[black,-stealth,thick] (0.2,0) arc (0:35.54:0.2);
+\node[rotate = 35.54] (absz) at (0.20,0.21) {\(r\)};
+\node[anchor=west] (angle) at (0.2,0.1) {\(\varphi\)};
+\end{tikzpicture}
+\(\quad\)
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(\Re w\)};
+\draw[axis] (0,-0.1) -- (0,0.5) node[anchor=west]{\(\Im w\)};
+\draw[vector] (0,0) -- (0.3,0.4);
+\filldraw[black] (0.3,0.4) circle (0.5pt) node[anchor=west]{\(w\)};
+\draw[black,-stealth,thick] (0.2,0) arc (0:54.46:0.2);
+\node[rotate = 54.46] (absz) at (0.12,0.25) {\(r\)};
+\node[anchor=west] (angle) at (0.2,0.1) {\(\varphi+\alpha\)};
+\end{tikzpicture}
+\end{center}
+
+\par3) \(w=z+b\). Здесь все просто: \(w=x+iy+b_1+ib_2=(x+b_1)+i(y+b_2)\), координаты
+\[\left\{\begin{array}{l}
+    u=x+b_1 \\
+    v=y+b_2
+\end{array}\right.\]
+
+\begin{center}
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(\Re z\)};
+\draw[axis] (0,-0.1) -- (0,0.5) node[anchor=west]{\(\Im z\)};
+\draw[vector] (0,0) -- (0.3,0.1);
+\filldraw[black] (0.3,0.1) circle (0.5pt) node[anchor=west]{\(z\)};
+\draw[vector] (0,0) -- (0.1,0.2);
+\filldraw[black] (0.1,0.2) circle (0.5pt) node[anchor=west]{\(b\)};
+\end{tikzpicture}
+\(\quad\)
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\coordinate (z) at (0.5,0.7);
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(\Re w\)};
+\draw[axis] (0,-0.1) -- (0,0.5) node[anchor=west]{\(\Im w\)};
+\draw[-stealth, thick] (0,0) -- (0.3,0.1);
+\draw[-stealth, thick] (0,0) -- (0.1,0.2);
+\draw[dashed] (0.3,0.1) -- (0.4,0.3);
+\draw[dashed] (0.1,0.2) -- (0.4,0.3);
+\draw[vector] (0,0) -- (0.4,0.3);
+\filldraw[black] (0.4,0.3) circle (0.5pt) node[anchor=west]{\(w\)};
+\end{tikzpicture}
+\end{center}
+
+\par4) В общем случае \(w=az+b=re^{i\alpha}z+b_1+ib_2\) целая линейная функция задает преобразование, являющееся результатом последовательного выполнения преобразований подобия 1) поворота 2) и переноса 3).
+
+\par\textbf{II.} \textit{Показательная функция} \(w=e^z\). В алгебраической форме \(z=x+iy\Rightarrow w=e^{x+iy}=e^xe^{iy}=e^x(\cos y+i\sin y),\ x,y\in \mathbb R\Rightarrow |e^z|=e^x,\ \Arg e^z=y\). Если взять \(y=0\), то \(w=e^z=e^x\).
+\par\textit{Свойства}:
+\par1) Область определения \(\forall z\in\mathbb C\);
+\par2) Непрерывна \(\forall z\in\mathbb C\), так как \(e^z=e^x\cos y+ie^x\sin y\), где \(e^x\cos y\) и \(e^x\sin y\) непрерывны на всей плоскости \(\mathbb R^2\);
+\par3) \(e^{z+2\pi i}=e^ze^{2\pi i}=e^z\) -- периодичность, \(T=2\pi i\);
+\par4) Рассмотрим уравнение вида
+\begin{equation}
+e^z=A,\quad A\in\mathbb C.
+\end{equation}
+Тогда \(e^{x+iy}=|A|e^{i\Arg A}\Rightarrow e^xe^{iy}=|A|e^{i\Arg A}\Rightarrow e^x=|A|,\ y = \arg A + 2\pi k,\ k\in \mathbb Z \Rightarrow z=\ln|A|+i(\arg A + 2\pi k),\ k\in\mathbb Z\). На самом деле мы получили выражения для функции \(z=g(w)\) -- обратного к \(e^z\).
+\parУравнение (1) всегда имеет решение, если \(A\neq 0\), то есть \(e^z\) принимает все значения кроме 0.
+\par\textbf{Определение.} Если \(e^z=A\), то \(z\in\mathbb C\) называется \textit{логарифмом} числа \(A\in\mathbb C,\ A\neq 0\) и обозначается \(\ln A\).
+\parНужно различать \(\ln A\) и \(\Ln A\): \(\ln A = \ln|A|+i\arg A\) -- \textit{главное значение аргумента}, и \(\Ln A=\ln|A|+i\Arg A\) -- \textit{общее значение логарифма}.
+\par\textbf{III.} \textit{Тригонометрические функции.} Рассмотрим синус \(\sin z = \dfrac{e^{iz}-e^{-iz}}{2i}\) и косинус \(\cos z = \dfrac{e^{iz}+e^{-iz}}{2}\).
+\par\textit{Свойства:}
+\par1) Определены и непрерывны везде \(\forall z\in\mathbb C\);
+\par2) Все формулы элементарной тригонометрии, справедливые при \(z\in\mathbb R\) остаются справедливыми и при всех значениях \(z\in\mathbb C\).
+\par3) \(\sin z\) и \(\cos z\) -- периодические функции, \(T=2\pi\).
+\par4) \(\sin (-z)=\sin(z),\ \cos(-z)=\cos(z)\) -- четность и нечетность;
+\par5) \(\forall z\in \mathbb C\) выполнены:
+\begin{equation}
+    \frac{1}{2}|e^y-e^{-y}|\le|\sin z|\le\frac{1}{2}(e^y+e^{-y})
+\end{equation}
+\begin{equation}
+    \frac{1}{2}|e^y-e^{-y}|\le|\cos z|\le\frac{1}{2}(e^y+e^{-y})
+\end{equation}
+\par\textit{Доказательство.} Докажем для синуса. \(|\sin z|=\left|\dfrac{e^{iz}-e^{-iz}}{2i}\right|=\dfrac{|e^{iz}+(-e^{-iz})|}{2}\). С одной стороны можно написать \(\dfrac{|e^{iz}+(-e^{-iz})|}{2}\le\dfrac{|e^{iz}|+|e^{-iz}|}{2}\), и с другой \(\dfrac{|e^{iz}+(-e^{-iz})|}{2}\ge\dfrac{||e^{iz}|-|e^{-iz}||}{2}\). Найдем \(|e^{iz}|=|e^{i(x+iy)}|=|e^{ix-y}|=|e^{ix}e^{-y}|=|e^{ix}|\cdot|e^{-y}|=|e^{-y}|\) и \(|e^{-iz}|=|e^{-i(x+iy)}|=|e^{y-ix}|=|e^{-ix}e^{y}|=|e^{-ix}|\cdot|e^{y}|=|e^{y}|\), откуда и вытекают (2) и (3) \(\blacksquare\).
+\parЕсли в (2) перейти к пределу \(\displaystyle\lim_{y\to+\infty}\dfrac{|e^y-e^{-y}|}{2}=+\infty\). Отсюда следует неограниченность функций \(\sin z\) и \(\cos z\).
+\par6) \(\sin z = \sin(z+iy)=\sin x\cos(iy)+\sin(iy)\cos x=\sin x\dfrac{e^{-y}+e^y}{2}+\cos x\dfrac{e^{-y}-e^y}{2i}=\sin x \ch y + i\cos x \sh y\). Аналогично \(\cos z=\cos x \ch y -i\sin x \sh y\). 
+\parДавайте решим \(\sin z = 0\). Тогда \(\sin x \ch y=0\) и \(\cos x \sh y=0 \Rightarrow \sin x=0,\ \sh y=0\Rightarrow z=\pi k\), где \(k\in\mathbb Z\). Для \(\cos z=0\) решением будет \(z=\dfrac{\pi}{2}+\pi k,\ k\in\mathbb Z\).
+\parУравнения \(\sin z = 0\) и \(\cos z = 0\) имеют решения только на действительной оси.
+\par\textit{Тангенс} и \textit{котангенс} определяются ожидаемым образом: \(\tan z=\dfrac{\sin z}{\cos z},\ \cot z = \dfrac{\cos z}{\sin z}\).
+\par\textbf{IV.} \textit{Гиперболические функции} \(\sh z = \dfrac{e^z-e^{-z}}{2},\ \ch z = \dfrac{e^z+e^{-z}}{2}\).
+\par\textit{Свойства:}
+\par1) Определены и непрерывны \(\forall z\in\mathbb C\);
+\par2) \(\sh z = -i\sin(iz),\ \ch z = \cos(iz)\);
+\par3) Решения для уравнений
+\[\begin{array}{ll}
+    \sh z = 0 & \Rightarrow z = \pi k i\\
+    \ch z = 0 & \Rightarrow z = \left(\dfrac{\pi}{2}+\pi k\right)i
+\end{array},\quad k\in\mathbb Z\]
+\par4) Гиперболический тангенс и котангенс: \(\tanh z = \dfrac{\sh z}{\ch z},\ \coth z=\dfrac{\ch z}{\sh z}\).
+\par\textbf{Замечание}. Примеры неэлементарных функций:
+\par1. \(w=\Re z,\ w = \Im z\);
+\par2. \(w=|z|=\sqrt{x^2+y^2}\);
+\par3. \(w=\overline z\);
+\par4. \(w = \Arg z\).
+
+\section{Производная функции комплексного переменного.}
+
+\ 
+\par\textbf{Определение.} Пусть в области \(G\subset\mathbb C\) задана функция \(f(z)\). Если в точке \(z_0\in\mathbb G\) существует предел
+\begin{equation}
+    \displaystyle\lim_{\Delta z\to0}\dfrac{f(z_0+\Delta z)-f(z_0)}{\Delta z},
+\end{equation}
+то этот предел называется \textit{производной} функции \(f\) по переменной \(z\) в точке \(z_0\). Обозначение \(f'(z_0)\).
+\parФункция \(f(z)\) в этом случае называется \textit{дифференцируемой в точке} \(z_0\).
+\par\textbf{Теорема.} Если функция \(f(z)=u(x,y)+iv(x,y)\) дифференцируема в точке \(z_0=x_0+iy_0\), то в точке \((x_0,y_0)\) существуют частные производные от функций \(u(x,y)\) и \(v(x,y)\) по переменным \(x,y\), причем в этой точке выполняются соотношения
+\begin{equation}
+    \left.
+    \begin{array}{l}
+        \dfrac{\partial u}{\partial x}=\dfrac{\partial v}{\partial y} \\
+        \dfrac{\partial u}{\partial y}=-\dfrac{\partial v}{\partial x}
+    \end{array}\right\}\ -\ \textup{условия Коши-Римана}
+\end{equation}
+\par\textit{Доказательство.} Распишем по определению:
+\[f'(z_0)=\displaystyle\lim_{\Delta z\to0}\dfrac{f(z_0+\Delta z)-f(z_0)}{\Delta z}=\lim_{\Delta z\to0}\dfrac{u(x_0+\Delta x, y_0+\Delta y)+iv(x_0+\Delta x, y_0+\Delta y)-u(x_0,y_0)-iv(x_0,y_0)}{\Delta x+i\Delta y}\]
+\parРассмотрим два случая:
+\par1. Пусть \(\Delta z=\Delta x,\ \Delta y=0\). Тогда
+\[f'(z_0)=\displaystyle\lim_{\Delta x\to0}\dfrac{u(x_0+\Delta x, y_0)-u(x_0,y_0)}{\Delta x}+i\lim_{\Delta x\to0}\dfrac{iv(x_0+\Delta x, y_0)-iv(x_0,y_0)}{\Delta x}=\dfrac{\partial u}{\partial x}+i\dfrac{\partial v}{\partial x}.\]
+\par2. Пусть \(\Delta z=i\Delta y,\ \Delta x=0\). Тогда
+\[f'(z_0)=\displaystyle\lim_{\Delta y\to0}\dfrac{u(x_0, y_0+\Delta y)-u(x_0,y_0)}{i\Delta y}+i\lim_{\Delta y\to0}\dfrac{iv(x_0, y_0+\Delta y)-iv(x_0,y_0)}{i\Delta y}=-\dfrac{\partial u}{\partial y}i+\dfrac{\partial v}{\partial y}.\]
+\par\(\Rightarrow \dfrac{\partial u}{\partial x}+i\dfrac{\partial v}{\partial x}=-\dfrac{\partial u}{\partial y}i+\dfrac{\partial v}{\partial y}\), откуда и вытекает требуемое \(\blacksquare\).
+\parВообще, мы вывели формулу для вычисления производной:
+\begin{equation}
+    f'(z_0)=\dfrac{\partial u}{\partial x}+i\dfrac{\partial v}{\partial x}=-\dfrac{\partial u}{\partial y}i+\dfrac{\partial v}{\partial y}
+\end{equation}
+\par\textit{Условие Коши-Римана в полярных координатах.}
+\parПереход в полярные координаты \(x=r\cos(\varphi),y=r\sin(\varphi)\):
+\[\left.\begin{array}{r}
+    \dfrac{\partial u}{\partial \varphi}=\dfrac{\partial u}{\partial x}\dfrac{\partial x}{\partial \varphi}+\dfrac{\partial u}{\partial y}\dfrac{\partial y}{\partial \varphi}=-r\sin\varphi\dfrac{\partial u}{\partial x}+r\cos\varphi\dfrac{\partial u}{\partial y} \\
+    
+    \dfrac{\partial v}{\partial r}=\dfrac{\partial v}{\partial x}\dfrac{\partial x}{\partial r}+\dfrac{\partial v}{\partial y}\dfrac{\partial y}{\partial r}=\cos\varphi\dfrac{\partial v}{\partial x}+\sin\varphi\dfrac{\partial v}{\partial y}=-\cos\varphi\dfrac{\partial u}{\partial y}+\sin\varphi\dfrac{\partial u}{\partial x}
+\end{array}\right\}\Rightarrow \dfrac{\partial v}{\partial r}=-\dfrac{\partial u}{r\partial\varphi}\]
+Делаем то же самое аналогично теперь для \(\dfrac{\partial v}{\partial \varphi}\) и \(\dfrac{\partial u}{\partial r}\) получаем:
+\[\left.\begin{array}{l}
+    \dfrac{\partial u}{\partial r}=\dfrac{\partial v}{r\partial\varphi} \\
+    \dfrac{\partial v}{\partial r}=-\dfrac{\partial u}{r\partial\varphi}
+\end{array}\right\}\ -\ \textup{условия Коши-Римана в полярных координатах}\]
+\par\textbf{Теорема.} Если в точке \((x_0,y_0)\) функции \(u(x,y)\) и \(v(x,y)\) дифференцируемы, а их частные производные связаны соотношениями (2), то функция \(f(z)=u(x,y)+iv(x,y)\) является дифференцируемой функцией комплексной переменной \(z\) в точке \(z_0\).
+\par\textit{Доказательство.} Условие дифференцируемости \(u,v\) в точке \((x_0,y_0)\Leftrightarrow\) 
+\begin{equation}
+    u(x_0+\Delta x,y_0+\Delta y)-u(x_0,y_0)=u'_x(x_0,y_0)\Delta x+u'_y(x_0,y_0)\Delta y+\alpha(x,y)
+\end{equation}
+\begin{equation}
+    v(x_0+\Delta x,y_0+\Delta y)-v(x_0,y_0)=v'_x(x_0,y_0)\Delta x+v'_y(x_0,y_0)\Delta y+\beta(x,y),
+\end{equation}
+где \(\alpha,\beta\) -- бесконечно малые более высокого порядка, чем \(\Delta x, \Delta y\).
+\[\dfrac{f(z_0+\Delta z)-f(z_0)}{\Delta z}=\dfrac{u(x_0+\Delta x,y_0+\Delta y)-u(x_0,y_0)+iv(x_0+\Delta x,y_0+\Delta y)-iv(x_0,y_0)}{\Delta x+i\Delta y}=\]
+\[=\dfrac{u'_x(x_0,y_0)\Delta x+u'_y(x_0,y_0)\Delta y}{\Delta x+i\Delta y}+i\dfrac{v'_x(x_0,y_0)\Delta x+v'_y(x_0,y_0)\Delta y}{\Delta x+i\Delta y}+\dfrac{\alpha(x,y)+i\beta(x,y)}{\Delta x +i\Delta y}=\]
+Вспомним про соотношение (2) и сделаем некоторые замены:
+\[=\dfrac{u'_x(x_0,y_0)(\Delta x + i\Delta y)}{\Delta x + i\Delta y}+\dfrac{iv'_x(x_0,y_0)(\Delta x+i\Delta y)}{\Delta x + i\Delta y}+\dfrac{\alpha(x,y)+i\beta(x,y)}{\Delta x +i\Delta y}=u'_x(x_0,y_0)+iv'_x(x_0,y_0)+\dfrac{\alpha(x,y)+i\beta(x,y)}{\Delta x +i\Delta y}\]
+Но у нас \(\dfrac{\alpha(x,y)+i\beta(x,y)}{\Delta x +i\Delta y}\to0\) при \(\Delta z\to0\). Тогда
+\[\displaystyle\lim_{\Delta z\to0}=\dfrac{f(z_0+\Delta z)-f(z_0)}{\Delta z}=u'_x(x_0,y_0)+iv'_x(x_0,y_0)\ \blacksquare\]
+\par\textbf{Определение.} Если функция \(f(z)\) дифференцируема во всех точках области \(G\), а ее производная непрерывна в этой области, то функция \(f(z)\) называется \textit{аналитической} в этой области. 
+
+\section{Геометрический смысл аргумента и модуля производной.}
+
+\ 
+\parПусть задана аналитическая в \(G\) функция \(f(z)\); \(z_0\in G\); \(f'(z_0)\neq0\).
+
+\par\(\exists f'(z_0)=\displaystyle\lim_{\Delta z\to0}\dfrac{\Delta w}{\Delta z}=\lim_{\Delta z\to0}\dfrac{f(z_0+\Delta z)-f(z_0)}{\Delta z}\). При \(\Delta z\to0\Rightarrow\Delta w\to0,\ z=z_0+\Delta z\Rightarrow w = w_0+\Delta w,\ z\in\gamma\Rightarrow w\in \Gamma\).
+\par1) \(\alpha=\Arg f'(z_0)=\Arg\displaystyle\lim_{\Delta z\to0}\dfrac{\Delta w}{\Delta z}=\lim_{\Delta z\to0}\Arg\dfrac{\Delta w}{\Delta z}=\lim_{\Delta z\to0}(\Arg\Delta w-\Arg\Delta z)=\lim_{\Delta z\to0}\Arg\Delta w-\lim_{\Delta z\to0}\Arg\Delta z=\lim_{\Delta z\to0}\Psi-\lim_{\Delta z\to0}\Phi=\psi-\varphi\), где \(\psi\) -- угол наклона касательной в \(\Gamma\) в \(w_0\), \(\varphi\) -- угол наклона касательной в \(\gamma\) в \(z_0\).  
+\par\textbf{Геометрический смысл аргумента производной:} угол поворота касательной в точке \(z_0\).
+\par\textbf{Замечание.} Поскольку \(f'(z_0)\) не зависит от способа предельного перехода (от кривой \(\gamma\)), то угол поворота касательной к любой кривой выходящей из точки \(z_0\) остается постоянным.
+\par2) Обозначим \(k=|f'(z_0)|=|\displaystyle\lim_{\Delta z\to0}\dfrac{\Delta w}{\Delta z}|=\lim_{\Delta z\to0}\dfrac{|\Delta w|}{|\Delta z|}\).
+\par\textbf{Геометрический смысл модуля производной:} отображение подобия бесконечно малых линейных элементов, \(k\) означает коэффициент подобия.
+\par\textbf{Вывод.} Отображение с помощью аналитической функции обладает свойством сохранения углов и постоянство растяжений, если \(f'(z_0)\neq0\).
+
+\subsection{Свойства аналитических функций.}
+
+\ 
+\par1) Функция \(f(z)\), аналитическая в области \(G\), непрерывна в этой области;
+\par2) Если \(f_1(z)\) и \(f_2(z)\) аналитические функции в области \(G\), то функции \(f_1+f_2,\ f_1\cdot f_2\) также являются аналитическими в области \(G\), \(\dfrac{f_1}{f_2}\) является аналитической в области \(G\) кроме точек, в которых \(f_2=0\);
+\par3) Пусть \(w=f(z)\) аналитическая в области \(G\) на \(z\), \(E\) -- область значений \(f(z)\) на \(w\), в области \(E\) определена аналитическая функция \(\zeta=\varphi(w)\Rightarrow F(z)=\varphi(f(z))\) является аналитической функцией комплексной переменной \(z\) в области \(G\);
+\par4) Если \(w=f(z)\) аналитическая в области \(G\), \(|f'(z)|\neq0\) в окрестности некоторой точки \(z_0\in G\Rightarrow\) в окрестности точки \(w_0=f(z_0)\) в области \(E\) определена обратная функция \(z=\varphi(w)\), аналитическая в \(w_0\) и \(f'(z_0)=\dfrac{1}{\varphi'(w_0)}\);
+\par5) Пусть в области \(G\) на плоскости \(Oxy\) задана функция \(u(x,y)\), что \(u(x,y)=\Re f(z)\), где \(f(z)\) -- аналитическая в области \(G \Rightarrow \Im f(z)=v(x,y)\) определяется с точностью до аддитивной постоянной.
+
+\section{Гармонические функции.}
+
+\ 
+\parПусть \(f(z)=u(x,y)+iv(x,y)\) дифференцируема в \(G\) и существуют частные производные второго порядка у \(u,v\).
+\[\dfrac{\partial u}{\partial x}=\dfrac{\partial v}{\partial y},\ \dfrac{\partial u}{\partial y}=-\dfrac{\partial v}{\partial x}\Rightarrow \dfrac{\partial^2 u}{\partial x\partial y}=\dfrac{\partial^2 v}{\partial y^2},\ \dfrac{\partial^2 u}{\partial y\partial x}=-\dfrac{\partial^2 v}{\partial x^2}\Rightarrow\]
+\begin{equation}
+    \boxed{\dfrac{\partial^2 v}{\partial x^2}+\dfrac{\partial^2 v}{\partial y^2}=0,\ \dfrac{\partial^2 u}{\partial x^2}+\dfrac{\partial^2 u}{\partial y^2}=0}
+\end{equation}
+\par\textbf{Определение.} Действительная функция \(u(x,y)\) имеющая в области \(G\) непрерывные частные производные второго порядка и удовлетворяющими уравнению (1) называются \textit{гармоническими в области} \(G\), а уравнение (1) \textit{уравнением Лапласа}.
+\par\(\Delta\) -- оператор Лапласа, \(\Delta u=\dfrac{\partial^2 u}{\partial x^2}+\dfrac{\partial^2 u}{\partial y^2},\ \Delta u=0\) -- уравнение Лапласа.
+\par\textbf{Определение.} Гармонические функции \(u(x,y)\) и \(v(x,y)\), связанные между собой условиями Коши-Римана называются \textit{сопряженными}.
+\par\textbf{Пример.} Найти функцию \(f(z)\) аналитическую, если \(u(x,y)=y^3-3x^2y\).
+\par\textit{Решение.} \(u_x=-6xy,\ u_y=3y^2-3x^2,\ u_{xx}=-6y,\ u_{yy}=6y\Rightarrow\Delta u=0\Rightarrow u\) -- гармоническая.
+\parУсловие КР: \(u_x=v_y,\ u_y=-v_x\Rightarrow-6xy=\dfrac{\partial v}{\partial y}\Rightarrow -6\int xydy=\int dv\Rightarrow v(x,y)=-3xy^2+g(x);\ 3y^2-3x^2=3y^2-g'(x)\Rightarrow g'(x)=3x^2\Rightarrow g(x)=x^3+C\). Полный вид функции \(f(z)=u+iv=y^3-3x^2y+i(-3xy^2+x^3+C)=iz^3+C,\ C\in\mathbb C\).
+
+\section{Интеграл по комплексной переменной.}
+
+\ 
+\par\textbf{Определение.} Кривая \(C:z=z(t),\ \alpha<t\beta\) и \(z_\alpha=z(\alpha)\) -- нач., \(z_\beta=z(\beta)\) -- кон.
+\begin{equation}
+    \left\{\begin{array}{l}
+    x=x(t) \\
+    y=y(t)
+\end{array}\right.,\quad z=x+iy
+\end{equation}
+\(L\) -- длина кривой. Сделаем разбиение \(\alpha=t_0<t_1<...<t_{n-1}<t_n=\beta\). Функция \(w=f(z)\). \(\Breve{(z_k;z_k+1)}\) -- частичная дуга, \(k=\overline{0,n-1}\). \(\zeta_k\in(z_k;z_{k+1})\) -- произвольная точка, \(l_k\) -- длина \(k\)-ой дуги.
+\begin{equation}
+    S(z_k,\zeta_k)=\displaystyle\sum_{k=0}^{n-1}f(\zeta_k)\Delta z_k.
+\end{equation}
+\parЕсли при условии \(\displaystyle\max_{0\le k\le n-1}|\Delta z_k|\to0\) существует предел интегральных сумм (2), не зависящий ни от способа разбиения кривой \(C\), ни от выбора точки \(\zeta_k\), то этот предел называется \textit{интегралом} от функции \(f(z)\) по кривой \(C\). Обозначение
+\begin{equation}
+    \int_Cf(z)dz.
+\end{equation}
+
+\subsection{Существование интеграла.}
+
+\ 
+\parИнтегральная сумма:
+\[S(z_k,\zeta_k)=\displaystyle\sum_{k=0}^{n-1}f(\zeta_k)\Delta z_k,\quad\zeta_k=\xi_k+i\eta_k\mapsto P_k(\zeta_k;\eta_k),\ f(\zeta_k)=u(\xi_k,\eta_k)+iv(\zeta_k,\eta_k).\]
+Подставляем и получаем
+\[S(z_k,\zeta_k)=\displaystyle\sum_{k=0}^{n-1}(u(P_k)\Delta x_k-v(P_k)\Delta y_k)+i\sum_{k=0}^{n-1}(v(P_k)\Delta x_k+u(P_k)\Delta y_k).\]
+\[\displaystyle\max_{0\le k\le n-1}|\Delta z_k|\to0\Rightarrow \Delta x_k\to0,\ \Delta y_k\to0\Rightarrow\]
+\begin{equation}\tag{4}
+    \int_Cf(z)dz=\int_Cudx-vdy+i\int_Cvdx+udy.
+\end{equation}
+Сущестование интеграла (3) эквивалентно существованию криволинейных интегралов (4).
+
+\subsection{Свойства интеграла.}
+
+\ 
+\par1. \(\int_{\Breve{AB}} f(z)dz=-\int_{\Breve{BA}} f(z)dz\);
+\par2. \(\int_{C_1}f(z)dz+\int_{C_2}f(z)dz=\int_{C_1\cup C_2}f(z)dz\);
+\par3. \(\int_Caf(z)dz=a\int_Cf(z)dz\);
+\par4. \(\int_C(f_1(z)+f_2(z))dz=\int_Cf_1(z)dz+\int_Cf_2(z)dz\);
+\par5. \(|\int_Cf(z)dz|\le\int_C|f(z)|dS\), где \(dS=\sqrt{(x')^2+(y')^2}dt\) -- дифференциал дуги;
+\par\textit{Доказательство.} \(|\int_Cf(z)dz|=|\displaystyle\lim_{\max|\Delta z_k|\to0}\sum_{k=0}^{n-1}f(z_k,\zeta_k)\Delta z_k|\le\displaystyle\lim_{\max|\Delta z_k|\to0}\sum_{k=0}^{n-1}|f(z_k,\zeta_k)||\Delta z_k|=\int_C|f(z)|dS\ \blacksquare\)
+\par5'. \(\displaystyle\max_{z\in C}|f(z)|=M,\ L\) -- длина кривой \(C\). Тогда \(|\int_Cf(z)dz|\le ML\);
+\par6. \(\int_Cf(z)dz=\int_\Gamma f(\varphi(\zeta))\varphi'(\zeta)d\zeta\), где \(z=\varphi(\zeta)\) -- аналитическая функция, устанавливающая биекцию между кривыми \(C\) и \(\Gamma\);
+\par6'. \(z=z(t),\ \int_Cf(z)dz=\int_\alpha^\beta f(z(t))z'(t)dt\).
+\par\textbf{Пример.}
+\par1. \(\int_{C_\rho}\dfrac{dz}{z-z_0}\).
+\par\textit{Решение.} \(C_\rho:\ |z-z_0|=\rho\Rightarrow z=z_0+\rho e^{i\varphi},\ 0\le\varphi\le 2\pi\). \(dz=i\rho e^{i\varphi}\). Тогда \(\int_{C_\rho}\dfrac{dz}{z-z_0}=i\int_0^{2R}d\varphi=2\pi i\).
+\newline
+\newline
+\par\textbf{Определение.} Несобственный интеграл первого рода (по бесконечной кривой) называется сходящимся, если существует предел последовательности интегралов \(\int_{C_n}f(z)dz\) с произвольной последовательностью конечных кривых \(\{C_n\}:\ C_n\subset C; \{C_n\}\to C\) и предел не зависит от выбора последовательности. Если предел существует лишь при определенном выборе последовательности \(\{C_n\}\), то интеграл называется \textit{сходящимся в смысле главного значения}.
+
+\section{Интегральная теорема Коши.}
+
+\ 
+\par\textbf{Определение.} Область \(G\) называется \textit{связной}, если между \(\forall x,y\in G\) существует путь \(C\subset G\), соединяющий \(x\) и \(y\).
+\par\textbf{Определение.} Область \(G\) называется \textit{односвязной}, если любой замкнутый путь в \(G\) стягивается в точку в \(G\). Иначе область называется \textit{многосвязной}.
+\par\textit{Формула Грина}: \(P(x,y), Q(x,y)\) -- непрерывны в \(\overline{G}\); \(C\) -- граница \(G\). тогда
+\begin{equation}
+    \int_CPdx+Qdy=\int\int_G(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y})dxdy
+\end{equation}
+\par\textbf{Теорема Коши для односвязной области.} Пусть в односвязной области \(G\) задана однозначная аналитическая функция \(f(z)\), и \(\Gamma\subset G\) -- произвольный замкнутый контур. Тогда
+\[\int_\Gamma f(z)dz=0.\]
+\par\textit{Доказательство.} \(\int_\Gamma f(z)dz=\int_\Gamma udx-vdy+i\int_\Gamma vdx+udy\). Так как \(f(z)\) аналитическая, то
+\[\int_\Gamma udx-vdy=\int\int_{G'}(-\dfrac{\partial v}{\partial x}-\dfrac{\partial u}{\partial y})dxdy=0,\quad \int_\Gamma vdx+udy=\int\int_{G'}(\dfrac{\partial u}{\partial x}-\dfrac{\partial v}{\partial y})dxdy=0.\]
+\par\textbf{Теорема.} Если функция \(f(z)\) аналитическая в односвязной области \(G\), ограниченной кусочно-гладким контуром \(C\) и непрерывна в \(\overline{G}\), то
+\[\int_Cf(z)dz=0.\]
+Следует из предыдущей теоремы и формулы Грина.
+\par\textbf{Интегральная теорема Коши для многосвязной области.} Пусть \(f(z)\) аналитическая функция в многосвязной области \(G\), граница которой состоит из контуров \(C_0\) (внешний контур),\(C_1,C_2,...,C_n\) (внутренние границы), \(f(z)\) непрерывна в \(\overline{G}\). Тогда 
+\[\int_Cf(z)dz=0,\]
+где \(C=C_0\bigcup C_1\bigcup C_2\bigcup...\bigcup C_n\).
+\par\textit{Доказательство.} Добавим обходы от внешнего контура к внутренний контурам \(\gamma_k\) для каждой внутренней \(C_k\). \(\int_Cf(z)dz=\int_{C_0^+}+\int_{C_1^+}+\int_{C_2^+}+...\int_{C_n^+}=\int_C+\displaystyle\sum_{k=1}^n\int_{\gamma_k}=0\).
+\parОбласть с границей \(C = C_0^+\bigcup C_1^+\bigcup C_2^+\bigcup ... \bigcup C_n^+\bigcup\gamma_1^\pm\bigcup...\bigcup\gamma_n^\pm\).
+\par\textbf{Замечание.} Если \(\Gamma\) -- произвольный замкнутый контур, полностью лежащий в многосвязной области \(G\), то интеграл \(\int_\Gamma f(z)dz\) от аналитической в области \(G\) функции \(f(z)\) может быть отличным от нуля.
+
+\section{Неопределенный интеграл.}
+
+\ 
+\parПусть \(f(z)\) -- аналитическая в односвязной области \(G\) функция; \(z_1,z_2\in G\), \(L_1,L_2\subset G\) -- кривые, соединяющие \(z_1\) и \(z_2\).
+\[\int_{L_1^+}f(z)dz+\int_{L_2^-}f(z)dz=0\Rightarrow\int_{L_1^+}f(z)dz=\int_{L_2^+}f(z)dz.\]
+\par\textit{Вывод.} Интеграл \(\int_{z_0}^zf(\zeta)d\zeta\) не зависит от пути интегрирования в области аналитичности функции \(f(z)\), а зависит только от точек \(z_0\) и \(z\):
+\begin{equation}
+    \int_{z_0}^zf(\zeta)d\zeta=\Phi(z).
+\end{equation}
+\par\textbf{Теорема.} Пусть \(f(z)\) определена и непрерывна в односвязной области \(G\), а интеграл от нее по любому замкнутому контуру \(\Gamma\in G\) равен 0. Тогда функция (1), где \(z_0,z\in G\) является аналитической функцией в области \(G\) и \(\Phi'(z)=f(z)\).
+\par\textit{Доказательство.} Рассмотрим предел \(\displaystyle\lim_{\Delta z\to0}\dfrac{\int_{z_0}^{z+\Delta z}f(\zeta)d\zeta-\int_{z_0}^zf(\zeta)d\zeta}{\Delta z}=\lim_{\Delta z\to0}\dfrac{\int_{z}^{z+\Delta z}f(\zeta)d\zeta}{\Delta z}\). Теперь обратимся к определению определенного интеграла: \(\int_Cf(z)dz=\lim\sum f(\zeta_k)\Delta z_k\). Так как нам все равно, по какой кривой интегрировать, то просто возьмем \(x=\Delta xt,\ y=\Delta yt,\ t\in[0,1]\). Тогда наш предел просто обратится в функцию \(f(z)\). Мы буквально получили, что \(\Phi'(z)=f(z)\ \blacksquare\).
+\par\textbf{Определение.} Аналитическая функция \(\Phi(z)\) называется \textit{первообразной} от функции \(f(z)\) в области \(G\), если в этой области \(\Phi'(z)=f(z)\).
+\par\textbf{Замечание.} Функция \(f(z)\) имеет бесконечное множество первообразных, различающихся на постоянную слагаемую.
+\par\textbf{Определение.} Множество всех первообразных называется \textit{неопределенным интегралом}.
+
+\section{Интеграл Коши.}
+
+\ 
+\parПусть \(f(z)\) -- аналитическая в области \(G\) функция; \(z_0\in G\), \(\partial G=C\) -- граница, контуры \(\Gamma,\gamma\subset G\), \(z_0\) -- внутри \(\Gamma\) и \(\gamma\); \(\varphi(z)=\dfrac{f(z)}{z-z_0}\) -- аналитическая в \(G\backslash\{z_0\}\). \(G^*\) -- область с границей \(\partial G^*=\Gamma^+\bigcup\gamma^-\) многосвязная \(\Rightarrow\) по теореме Коши для многосвязной области
+\[\int_{\Gamma^+}\varphi(z)dz+\int_{\gamma^-}\varphi(z)dz=0\Rightarrow \int_{\Gamma^+}\dfrac{f(z)}{z-z_0}dz+\int_{\gamma^-}\dfrac{f(z)}{z-z_0}dz=0.\]
+\par\(\gamma_\rho:\ z=z_0+\rho e^{i\varphi},\ dz=\rho ie^{i\varphi}d\varphi\). Тогда
+\[\int_{\Gamma^+}\dfrac{f(z)dz}{z-z_0}=\int_0^{2\pi}\dfrac{f(z_0+\rho e^{i\varphi}}{\rho e^{i\varphi}}=i\int_0^{2\pi}f(z)d\varphi=i\int_0^{2\pi}f(z)-f(z_0)d\varphi+i\int_0^{2\pi}f(z_0)d\varphi=\]
+\begin{equation}
+    =i\int_0^{2\pi}f(z)-f(z_0)d\varphi+2\pi if(z_0).
+\end{equation}
+\par\(f(z)\) -- аналитическая \(\Rightarrow\) непрерывная \(\Rightarrow\)
+\[\displaystyle\lim_{\rho\to0}\int_0^{2\pi}f(z)-f(z_0)=0.\]
+\parПерейдем к пределу в (1):
+\[\int_{\Gamma^+}\dfrac{f(z)dz}{z-z_0}=2\pi if(z_0)\]
+\begin{equation}
+    f(z_0)=\dfrac{1}{2\pi i}\int_{\Gamma^+}\dfrac{f(z)dz}{z-z_0}
+\end{equation}
+-- интегральная форма Коши, а \boxed{\int_{\Gamma}\dfrac{f(z)dz}{z-z_0}} -- интеграл Коши.
+\par\[\int_{\Gamma}\dfrac{f(z)dz}{z-z_0}=\left\{
+\begin{array}{ll}
+    2\pi if(z_0), & z_0 \textup{ внутри } \Gamma\\
+    0, & z_0 \textup{ вне } \Gamma
+\end{array}\right.\]
+\par\textbf{Замечание.} В формуле (2) интегрирование производится по замкнутому контуру \(\Gamma\), целиком лежащеиу в аналитичности функции \(f(z)\) и содержащему внутри точку \(z_0\). При дополнительном условии непрерывности \(f(z)\) в замкнутой области \(\overline{G}\) аналогичная формула имеет место в силу теоремы (из 10 главы) и при интегрировании по границе \(C\) области \(G\).
+\par\textbf{Замечание.} Проведенные рассмотрения остаются справедливыми и в случае многосвязной области \(G\). При этом для вывода основной формулы (2) следует рассматривать такой замкнутый контур \(\Gamma\), который может быть стянут к точке \(z_0\), все время оставаясь в области \(G\). Тогда легко показать, что при условии непрерывности функции \(f(z)\) в области \(\overline{G}\) с кусочно гладкой границей формула (2) остается справедливой при интегрировании в положительном направлении по полной границе \(C\) данной многосвязной области.
+
+\subsection{Следствия из формулы Коши.}
+
+\ 
+\par1. Интеграл имеет смысл для любого положения точки \(z_0\), при условии, что эта точка не лежит внутри \(\Gamma\):
+\begin{equation}
+    \int_{\Gamma}\dfrac{f(z)dz}{z-z_0}=\left\{
+\begin{array}{ll}
+    2\pi if(z_0), & z_0 \textup{ внутри } \Gamma\\
+    0, & z_0 \textup{ вне } \Gamma
+\end{array}\right..
+\end{equation}
+\parПри \(z_0\in\Gamma\) интеграл в обычном смысле не существует, однако при дополнительных требованиях на поведение функции \(f(\zeta)\) на контуре \(\Gamma\) этому интегралу може быть придан определенный смысл.
+\par2. Пусть \(f(z)\) -- аналитическая функция в односвязной области \(G\) и \(z_0\) -- некоторая внутренняя точка этой области. Опишем из этой точки как из центра окружность радиуса \(R_0\), целиком лежащую в области \(G\). Тогда 
+\[f(z_0)=\dfrac{1}{2\pi i}\int_{C_{R_0}}\dfrac{f(\zeta)}{\zeta-z_0}d\zeta=\dfrac{1}{2\pi}\int_0^{2\pi}f(z_0+R_0e^{i\varphi})d\varphi\Rightarrow\]
+\begin{equation}
+    f(z_0)=\dfrac{1}{2\pi R_0}\int_{C_{R_0}}f(\zeta)d\zeta
+\end{equation}
+
+\section{Интегралы, зависящие от параметра.}
+
+\subsection{Аналитическая зависимость от параметра.}
+
+\ 
+\parПусть задана функция двух комплексных переменных \(\varphi(z,\zeta)\), однозначно определенная для значений комплексной переменной \(z=x+iy\) из области \(G\) и для значений комплексной переменной \(\zeta=\xi+i\eta\), принадлежащих некоторой кусочно гладкой кривой \(C\). Взаимное расположение области \(G\) и кривой \(C\) может быть совершенно произвольно. Пусть функция двух комплексных переменных \(\varphi(z,\zeta)\) удовлетворяет следующим условиям:
+\par1) Функция \(\varphi(z,\zeta)\) при \(\forall \zeta\in G\) является аналитической функцией \(z\) в области \(G\);
+\par2) Функция \(\varphi(z,\zeta)\) и ее производная \(\dfrac{\partial\varphi(z,\zeta)}{\partial z}\) являются непрерывными функциями по совокупности переменных \(z,\zeta\) при произвольном изменении \(z\) в области \(G\) и \(\zeta\) в \(C\).
+\parУсловие 2) означает, что действительная и мнимая части функции \(\dfrac{\partial\varphi(z,\zeta)}{\partial z}\) непрерывны по совокупности переменных \(z,y,\xi,\eta\).
+\parОчевидно, что при сделанных предположениях интеграл от функции \(\varphi(z,\zeta)\) по кривой \(C\) существует при любом \(z\in G\) и является функцией комплексной переменной \(z\):
+\[F(z)=\int_C\varphi(z,\zeta)d\zeta=U(x,y)+iV(x,y).\]
+\par\textbf{Замечание.} При сделанных предположениях относительно функции \(\varphi(z,\zeta)\) функция \(F(z)\) является аналитической функцией комплексной переменной \(z\) в области \(G\), причем производную функции \(F(z)\) можно вычислять при помощи дифференцирования под знаком интеграла.
+
+\subsection{Существование производных всех порядков у аналитической функции.}
+
+\ 
+\par\textbf{Теорема.} Пусть функция \(f(z)\) является аналитической в области \(G\) и непрерывной в замкнутой области \(\overline{G}\). Тогда во внутренних точках области \(G\) существует производная любого порядка функции \(f(z)\), причем для нее имеет место формула
+\begin{equation}
+    f^{(n)}(z)=\dfrac{n!}{2\pi i}\int_\Gamma\dfrac{f(\zeta)}{(\zeta-z)^{n+1}}d\zeta.
+\end{equation}
+\par\textbf{Теорема Морера.} Пусть функция \(f(z)\) является непрерывной в односвязной области \(G\) и интеграл от \(f(z)\) по любому замкнутому контуру, целиком принадлежащему \(G\) равен нулю. Тогда \(f(z)\) является аналитической функцией в области \(G\).
+\par\textbf{Теорема Лиувилля.} Пусть на всей комплексной плоскости функция \(f(z)\) является аналитической, а ее модуль равномерно ограничен. Тогда эта функция \(f(z)\) тождественно равна постоянной.
+
+\section{Принцип максимума модуля аналитической функции.}
+
+\ 
+\par\textbf{Теорема.} Пусть \(f(z)\) аналитична в области \(G\) и непрерывна в \(\overline G\). Тогда или \(|f(z)|=\const\) или максимальные значения \(|f(z)|\) достигаются только на границе области.
+
+\section{Числовые ряды.}
+
+\ 
+\par\(\displaystyle\sum_{k=1}^\infty a_k,\ a_k\in\mathbb C\). Сходимость, частичные суммы, остаток ряда, критерий Коши сходимости ряда, необходимое условие сходимости.
+\parЧисловой ряд в комплексном пространестве понятно что: \begin{equation}
+    \displaystyle\sum_{k=1}^\infty a_k
+\end{equation}
+\par\textbf{Определение.} Ряд (1) называется \textit{сходящимся}, если сходится последовательность \(\{S_n\}\) его частичных сумм. При этом предел \(S\) последовательности \(\{S_n\}\) называется \textit{суммой ряда} (1). Ряд \(\displaystyle_{k=n+1}^\infty\) называется \(n\)-\textit{м остатком ряда} (1).
+\par\textit{\textbf{Необходимым условием сходимости ряда}} (1) является требование \(\displaystyle\lim_{n\to\infty}a_n=0\).
+\par\textbf{Определение.} Если сходится ряд \[\displaystyle\sum_{k=1}^\infty |a_k|,\]
+то ряд (1) называется абсолютно сходящимся.
+\par\textbf{Замечание.} Понятно, что если ряд сходится абсолютно, то он сходится и в обычном смысле.
+\parДля рядов из к.ч., конечно же есть все привычные признаки сходимости: \textit{Даламбера, Коши и др.}
+
+\section{Функциональные ряды.}
+
+\ 
+\par\textbf{Определение.} Пусть в области \(G\) определена бесконечная последовательность однозначных функций комплексной переменной \(\{u_n(z)\}\). Тогда выражение 
+\begin{equation}
+    \sum_{n=1}^\infty u_n(z)
+\end{equation}называется \textit{функциональным рядом}. Ряд (1) называется \textit{сходящимся} в области \(G\), если для любого \(z\in G\) соответсвующий ему числовой ряд сходится. Тогда в этой области определена функция \(f(z)\) такая, что
+\[f(z_0)=\displaystyle\sum_{n=1}^\infty u_n(z_0),\quad\forall z_0\in G.\]
+\par\textbf{Замечание.} Если \(f(z)\) -- это сумма ряда (1), 
+\[\forall\varepsilon>0\ \exists N:\ |f(z)-\displaystyle\sum_{n=1}^n u_n(z_0)|<\varepsilon,\ \forall n\ge N,\]
+то (1) сходится к \(f(z)\).
+\par\textbf{}Если \(\forall\varepsilon>0\ \exists N:\ |f(z)-\displaystyle\sum_{n=1}^n u_n(z_0)|<\varepsilon\ \forall n\ge N,\ \forall z\in G,\)
+то (1) \textit{равномерно сходится} к \(f(z)\) в \(G\).
+\par\textbf{Теорема (признак Вейерштрасса равномерной сходимости функционального ряда).} Если всюду в области \(G\) элементы ряда (1) могут быть мажорированы элементами абсолютно сходящегося ряда, то ряд (1) равномерно сходится в области \(G\).
+\par\textit{Доказательство.} элементарно.
+\par\textbf{Теорема (критерий Коши равномерной сходимости ряда).} Для того, чтобы ряд (1) равномерно сходился в области \(G\) необходимо и достаточно, чтобы \[\forall\varepsilon>0\ \exists N:\ |S_{n+m}(z)-S_n(z)|<\varepsilon,\ \forall n\ge N,\ \forall m\in\mathbb N.\]
+\par\textit{Доказательство.} элементарно.
+
+\section{Свойства равномерно сходящихся рядов.}
+
+\ 
+\par\textbf{Теорема.} Если функции \(u_n(z)\) непрерывны в области \(G\), а ряд
+\begin{equation}
+    \sum_{n=1}^\infty u_n(z)
+\end{equation}
+сходится в этой области равномерно к функции \(f(z)\), то \(f(z)\) также непрерывно в области \(G\).
+\par\textit{Доказательство.} \(|f(z_0+\Delta z)-f(z_0)|=|(f(z_0+\Delta z)-\sum_{n=1}^N u_n(z_0+\Delta z))+(\sum_{n=1}^N u_n(z_0+\Delta z)-\sum_{n=1}^N u_n(z_0))+(\sum_{n=1}^N u_n(z_0)-f(z_0))|\le|f(z_0+\Delta z)-\sum_{n=1}^N u_n(z_0+\Delta z)|+|\sum_{n=1}^N u_n(z_0+\Delta z)-\sum_{n=1}^N u_n(z_0)|+|\sum_{n=1}^N u_n(z_0)-f(z_0)|\le\dfrac{\varepsilon}{3}+\dfrac{\varepsilon}{3}+\dfrac{\varepsilon}{3}=\varepsilon.\)
+\par\textbf{Теорема.} Если ряд (1) из непрерывных функций сходится равномерно в области \(G\) к функции \(f(z)\), то интеграл от функции \(f(z)\) по любой кусочно гладкой кривой \(C\), целиком лежащей в кривой \(G\) можно вычислить путем почленного интегрирования ряда (1):
+\[\int_Cf(z)dz=\displaystyle\sum_{n=1}^\infty\int_Cu_n(z)dz.\]
+\par\textbf{Теорема (первая теорема Вейерштрасса).} Пусть функции \(u_n(z)\) являются аналитическими в области \(G\), а ряд (1) сходится равномерно в любой замкнутой подоболасти \(\overline{G'}\subset G\) к функции \(f(z)\). Тогда:
+\par1. \(f(z)\) -- аналитическая в области \(G\);
+\par2. \(f^{(k)}(z)=\displaystyle\sum_{n=1}^\infty u_n^{(k)}(z)\);
+\par3. \(\displaystyle\sum_{n=1}^\infty u_n^{(k)}(z)\) сходится \(\forall \overline{G'}\subset G\).
+\par\textbf{Теорема (вторая теорема Вейерштрасса).} Пусть функции \(u_n(z)\) являются аналитическими в области \(G\), непрерывными в \(\overline{G}\) и ряд (1) сходится равномерно на кривой \(\Gamma=\fr G\) . Тогда этот ряд сходится равномерно и в \(\overline{G}\).
+
+\section{Степенные ряды.}
+
+\ 
+\parРассматриваем степенной ряд
+\begin{equation}
+    \sum_{n=0}^\infty u_n(z)=\sum_{n=0}^\infty c_n(z-z_0)^n,\quad c_n\in\mathbb C
+\end{equation}
+\par\textbf{Теорема (аналог теоремы Абеля).} Если степенной ряд (1) сходится в некоторой точке \(z_1\neq z_0\), то абсолютно сходится и в любой точке \(z\), что \(\forall z:\ |z-z_0|<|z_1-z_0|\), причем в круге \(|z-z_0|\le\rho,\ \rho<|z_1-z_0|\) ряд сходится равномерно.
+\par\textit{Доказательство.} Выберем произвольную точку \(z\), удовлетворяющую условию \(|z-z_0|<|z_1-z_0|\), и рассмотрим ряд (!). Обозначим \(|z-z_0|<|z_1-z_0|q,q<1\). В силу необходимого условия сходимости ряда (1) его члены стремятся к нулю при \(n\to\infty\Rightarrow\exists M:\ |c_n|\cdot|z_1-z_0|^n\le M\). Отсюда для коэффициентов \(c_n\) данного степенного ряда получим оценку \(|c_n|\le\dfrac{M}{|z_1-z_0|^n}\). Тогда \[\displaystyle|\sum_{n=0}^\infty c_n(z-z_0)^n|\le\sum_{n=0}^\infty |c_n|\cdot|z-z_0|^n\le M\sum_{n=0}^\infty\left|\frac{z-z_0}{z_1-z_0}\right|^n.\]
+По условию теоремы число \(q=\left|\dfrac{z-z_0}{z_1-z_0}\right|<1\). Ряд \(\displaystyle\sum_{n=0}^\infty q^n\), представляющий собой сумму бесконечной геометрической прогрессии со знаменателем, меньшим единицы, сходится \(\Rightarrow\) ряд (1) сходится.
+\parЧтобы доказать равномерную сходимость ряда (1) в круге \(|z-z_0|\le\rho<|z_1-z_0|\), достаточно, в силу признака Вейерштрасса построить сходящийся числовой ряд, мажорирующий данный функциональный ряд в рассматриваемой области. Очевидно, таковым является ряд \(M\displaystyle\sum_{n=0}^\infty\dfrac{\rho^n}{|z_1-z_0|^n}\), также представляющий собой сумму бесконечной геометрической прогрессии со знаменателем, меньшим единицы. \(\blacksquare\)
+\par\textbf{Следствие.} Если ряд (1) расходится в некоторой точке \(z_1\), то он расходится и во всех точках \(z\) таких, что \(|z-z_0|>|z_1-z_0|\). \par\textbf{Следствие.} Для любого степенного ряда \(\exists R>0\), что внутри круга \(|z-z_0|<R\) ряд 1 сходится а вне его расходится.
+\par\textbf{Определение.} Пусть \(R=\sup|z'-z_0|,\ z'\in E\), где \(E\) -- множество точек, в которых ряд (1) сходится. Тогда область \(|z-z_0|<R\) наызвается \textit{кругом сходимости} ряда (1), а число \(R\) -- его \textit{радиусом сходимости}.
+\par\textbf{Замечание.} В круге \(|z-z_0|\le\rho,\ \rho<R\) ряд (1) сходится равномерно
+\par\textbf{Следствие.} Внутри круга сходимости ряд (1) сходится к аналитической функции (из первой теорема Вейерштрасса).
+\par\textbf{Следствие.} Внутри круга сходимости ряд (1) можно почленно дифференцировать и интегрировать любое число раз, при этом радиус сходимости не меняется.
+\par\textbf{Следствие.} Коэффициенты степенного ряда (1) вычисляются по формулам:
+\[c_n=\dfrac{1}{n!}f^{(n)}(z_0),\]
+где \(f\) -- сумма степенного ряда.
+\par\textbf{Следствие (Формула Коши-Адамара).} \(R=\dfrac{1}{l},\ l=\displaystyle\overline{\lim_{n\to\infty}}\sqrt[n]{|c_n|}\).
+\par\textbf{Доказательство.} Пусть \(0<l<\infty\). Нужно, чтобы в каждой точке \(z_1\), удовлетворяющей условию \(|z_2-z_0|>\dfrac{1}{l}\), ряд сходится, а в любой точке \(z_2\), удовлетворяющей условию \(|z_2-z_0|>\dfrac{1}{l}\), -- расходится. Так как \(l\) -- верхний предел последовательности \(\{\sqrt[n]{|c_n|}\}\), то для любого \(\varepsilon>0\) можно указать номер \(N\), начиная с которого \(\sqrt[n]{|c_n|}<l+\varepsilon\). С другой стороны, для того же \(\varepsilon\) найдется бесконечно много членов последовательности \(\{\sqrt[n]{|c_n|}\}\), больших \(l-\varepsilon\). Возьмем произвольную точку \(z_1\), удовлетворяющую неравенству \(l|z_1-z_0|<1\), и выберем в качестве \(\varepsilon\) число \(\dfrac{1-l|z_1-z_0|}{2|z_1-z_0|}>0\). Тогда \[\sqrt[n]{|c_n|}|z_1-z_0|<(l + \varepsilon)|z_1-z_0|=\dfrac{1+l|z_1-z_0|}{2}=q<1.\]
+Отсюда следует, что ряд (1) мажорируется геометрической прогрессией со знаменателем меньше единицы, что и доказывает его сходимость. Взяв теперь некоторую точку \(z_2\), удовлетворяющую неравенству \(l|z_2-z_0|>1\), и выбрав в качестве \(\varepsilon\) число \(\dfrac{l|z_2-z_0|-1}{|z_2-z_0|}>0\), получим \[\sqrt[n]{|c_n|}|z_2-z_0|>(l-\varepsilon)|z_2-z_0|=1\] для бесконечного множества значений \(n\). Отсюда \(|c_n(z_2-z_0)^n|>1\), то есть ряд расходится. \(\blacksquare\)
+\par\textbf{Замечание.} Радиус может быть равен нулю или бескончености.
+\par\textbf{Пример.}
+\par1. \(\dfrac{1}{1-z}=1+z+z^2+...+z^n+...,\ R=1\). Он сходится внутри круга \(|z|=1\).
+
+\section{Ряд Тейлора.}
+
+\ 
+\par\textbf{Теорема Тейлора.} Пусть \(f(z)\) -- аналитическая внутри \(|z-z_0|<R\) функция. Тогда она может быть представлена сходящимся степенным рядом
+\begin{equation}
+    f(z)=\sum_{n=0}^\infty c_n(z-z_0)^n,
+\end{equation}
+причем этот ряд определен однозначно.
+\par\textit{Доказательство.} Выберем произвольную точку \(z\) внутри круга \(|z-z_0|<R\) и построим окружность \(C_\rho\) с центром в точке \(z_0\) радиуса \(\rho<R\), содержащую точку \(z\) внутри. Очевидно, для любой точки \(z\) данной области такое построение возможно. Так как точка \(z\) -- внутренняя точка области \(|z-z_0|<\rho\), в которой функция \(f(z)\) является аналитической, то по формуле Коши имеем \[f(z)=\dfrac{1}{2\pi i}\int_{C_\rho}\dfrac{f(\zeta)}{\zeta-z}d\zeta.\]
+Осуществим в подынтегральном выражении преобразование \(\dfrac{1}{\zeta - z}=\dfrac{1}{\zeta - z_0}\cdot\dfrac{1}{1-\dfrac{z-z_0}{\zeta-z_0}}=\dfrac{1}{\zeta-z_0}\sum_{n=0}^\infty\dfrac{(z-z_0)^n}{(\zeta-z_0)^n}.\)
+При \(\zeta\in C_\rho\) ряд сходится равномерно по \(\zeta\), так как он мажорируется сходящимся числовым рядом \(\displaystyle\sum_{n=0}^\infty\dfrac{|z-z_0|^n}{\rho^{n+1}}\). Из двух полученных равенство получаем \(f(z)=\displaystyle_{n=0}^\infty\dfrac{1}{2\pi i}\int_{C_\rho}\dfrac{f(\zeta)}{(\zeta-z_0)^{n+1}}d\zeta(z-z_0)^n.\) Введя обозначение \[c_n=\dfrac{1}{2\pi i}\int_{C_\rho}\dfrac{f(\zeta)}{(\zeta-z_0)^{n+1}}d\zeta,\] перепишем в виде сходящегося в выбранной точке \(z\) степенного ряда:
+\[f(z)=\displaystyle\sum_{n=0}^\infty c_n(z-z_0)^n.\] Так как \(z\) -- проивзольная точка данной области, то ряд сходится к \(f(z)\) всюду внутри круга \(|z-z_0|<R\), причем в круге \(|z-z_0|\le\rho<R\) этот ряд сходится равномерно. Итак, функция разлагается в этом круге в сходящийся степенной ряд, коэффициенты которого равны
+\[c_n=\dfrac{1}{2\pi i}\int_{C_\rho}\dfrac{f(\zeta)}{(\zeta-z_0)^{n+1}}d\zeta=\dfrac{f^{(n)}(z_0)}{n!}.\]
+\parТеперь докажем единственность разложения. Пусть есть другое разложение с коэффициентами \(\{c'_n\}\). Тогда этот степенной сходится в круге и \(c'_n=\dfrac{f^{(n)}(z_0)}{n!}\Rightarrow c'_n=c_n\). \(\blacksquare\)
+\par\textbf{Определение.} Разложение функции, аналитической в круге \(|z-z_0|<R\) сходящейся в степенной ряд (1) называется \textit{разложением Тейлора}, а сам ряд \textit{рядом Тейлора}.
+\par\textbf{Замечание.} Если \(f(z)\) аналитическая в области \(G\) и \(r_0\in G\), то ряд (1) сходится при \(|r-r_0|<\rho\), где \(\rho\) -- это расстояние: \(\rho=dist(r_0,\delta G)\).
+
+\section{Единственность определения аналитической функции.}
+
+\ 
+\par\textbf{Определение.} Пусть \(f(z)\) -- аналитическая в области \(G\). Точка \(z_0\) называется нулем функции \(f(z)\), если \(f(z_0)=0\). Если в разложении в ряд Тейлора в точке \(z_0\) константы \(c_0=c_1=...=c_{k-1}=0,c_k\neq0\), то \(z_0\) называется нулем \(k\)-го порядка.
+\par\textbf{Теорема.} Пусть \(f(z)\) -- аналитическая в области \(G\) и обращается в 0 в разложении в точках \(z_n\in G\). Если последовательность \(\{z_n\}\) сходится к \(a\in G\), то \(f(z)=0\) в области \(G\).
+\par\textit{Доказательство.} Так как \(a\in G\), то функцию \(f(z)\) можно разложить в степенной ряд в окрестности данной точки, причем радиус \(R_0\) сходимости данного ряда не меньше расстояния от точки \(a\) до границы области. Из определения непрерывности функции \(f(z)\) следует, что \(f(a)=0\Rightarrow c_0=0, f(z)=(z-a)f_1(z)\). Будем предпологать, что все точки последовательности \(\{z_n\}\) отличны от \(a\). В силу последнего условия \(f_1(z_n)=0\Rightarrow f_1(a)=0\) в силу непрерывности. Продолжая таким образом получаем, что все коэффициенты равны нулю, то есть \(f(z)=0\). \(\blacksquare\)
+\par\textbf{Следствие.} Функция \(f(z)\neq0\), аналитическая в области \(G\), в любой замкнутой ограниченной подобласти \(\overline{G'}\) области \(G\) имеет лишь конечное число нулей.
+\par\textbf{Следствие.} Если точка \(z_0\in G\) является нулем бесконечного порядка, то \(f(z)=0\) в области \(G\).
+\par\textbf{Следствие.} Аналитическая функция может иметь бесконечное число нулей лишь в открытой или неограниченной области.
+\par\textbf{Теорема.} Пусть функции \(f(z)\) и \(\varphi(z)\) являются аналитическими в области \(G\). Если в \(G\) существует сходящаяся к некоторой точке \(a\in G\) последовательность различных точек \(\{z_n\}\), в которых значения функций \(f(z)\) и \(\varphi(z)\) совпадают, то \(f(z)\equiv\varphi(z)\) в \(G\).
+\par\textbf{Следствие.} Если функции \(f_1(z)\) и \(f_2(z)\), аналитические в области \(G\), совпадают на некоторой кривой \(L\), принадлежащей данной области, то они тождественно равны в области \(G\).
+\par\textbf{Следствие.} Если функции \(f_1(z)\) и \(f_2(z)\), аналитические в областях \(G_1\) и \(G_2\), имеющих общую подобласть \(G\), совпадают в \(G\), то существует единственная аналитическая функция \(F(z)\) такая, что
+\[F(z)\equiv\left\{\begin{array}{ll}
+    f_1(z), & z\in G_1 \\
+    f_2(z), & z\in G_2
+\end{array}\right.\]
+\par\textbf{Определение.} Риманова поверхность -- это \textit{связное} комплексное одномерное многообразие. Это значит, что на \(M\) опредлен некоторый атлас комплексных одномерных карт, \(M=\bigcup_{-1}U_j\), \(z_j:U_j\to\mathbb C\), с голоморфными функциями переходов \(z_j\circ z_k^{-1}\).
+
+\section{Ряд Лорана.}
+
+\ 
+\par
+
+\parБесконечно удаленная точка комплексной плоскости является изолированной особой точкой однозначной аналитической функции \(f(z)\), если можно указать такое значение \(R\),что вне круга \(|z|>R\) функция \(f(z)\) не имеет особых точек, находящихся на конечном расстоянии от точки \(z=0\). Так как \(f(z)\) является аналитической функцией в круговом кольце \(R<|z|<\infty\), то ее можно разложить в ряд Лорана
+\begin{equation}
+    f(z)=\displaystyle\sum_{n=-\infty}^\infty c_nz^n,\quad R<|z|<\infty
+\end{equation}
+сходяшийся к \(f(z)\) в данном кольце. Так же как и для конечной изолированной особой точки \(z_0\) здесь возможны три случая:
+\par1. Точка \(z=\infty\) называется \textit{устранимой особой точкой} функции \(f(z)\), если разложение (1) не содержит членов с положительными степенями.
+\par2. Точка \(z=\infty\) называется \textit{полюсом порядка} \(m\) функции \(f(z)\), если разложение (1) содержит конечное \(m\) число членов с положительными степенями \(z\).
+\par3. Точка \(z=\infty\) называется \textit{существенно} особой точкой функции \(f(z)\), если разложение (1) содержит бесконечное число членов с положительными степенями \(z\).
+\par\textbf{Теорема.} Пусть точка \(z_0\) является изолированной особой точкой функции \(f(z)\), аналитической в области \(G\). Пусть аналитическая функция \(\zeta = \psi(z)\) устанавливает биекцию между областью \(G\) и областью \(G'\) комплексной плоскости \(\zeta\), в которой определена обратная функция \(z=\varphi(\zeta\). Тогда точка \(\zeta_0=\psi(z_0)\) является изолированной особой точкой аналитической функции \(F(\zeta)=f(\varphi(\zeta))\), причем характер этой особой точки тот же, что и точки \(z_0\).
+
+\section{Вычет аналитической функции в изолированной особой точке.}
+
+\ 
+\parПусть точка \(z\) является изолированной особой точкой однозначной аналитической функции \(f(z)\). Согласно предыдущим рассмотрениям в окрестности этой точки функция \(f(z)\) может быть единственным образом разложена в ряд Лорана
+\[f(z)=\displaystyle\sum_{n=-\infty}^\infty c_n(z-z_0)^n,\]
+где
+\[c_n=\dfrac{1}{2\pi i}\int_C\dfrac{f(\zeta)}{(\zeta-z_0)^{n+1}}d\zeta\].
+\par\textbf{Определение.} Вычетом аналитической функции \(f(z)\) в изолированной особой точке \(z_0\) называется комплексное число, равное значению интеграла \(\dfrac{1}{2\pi i}\int_\gamma f(\zeta)d\zeta\), взятому в положительном направлении по любому лежащему в области аналитичности функции \(f(z)\) замкнутому контуру \(\gamma\), содержащему единственную особую точку \(z_0\) функции \(f(z)\).
+\par1. Пусть точка \(z_0\) является полюсом первого порядка функции \(f(z)\). Тогда в окрестности этой точки
+\begin{equation}
+    res(f(z),z_0)=\dfrac{\varphi(z_0)}{\psi'(z_0)}\quad\left(f(z)=\dfrac{\varphi(z)}{\psi(z)}\right)
+\end{equation}
+\par2. Пусть точка \(z_0\) является полюсом порядка \(m\) функции \(f(z)\). Тогда
+\begin{equation}
+    res(f(z),z_0)=\dfrac{1}{(m-1)!}\lim_{z\to z_0}\dfrac{d^{m-1}}{dz^{m-1}}((z-z_0)^mf(z))
+\end{equation}
+\par\textbf{Теорема (основная теорема теории вычетов).} Пусть функция \(f(z)\) является аналитической всюду в замкнутой области \(\overline{G}\), заисключением конечного числа изолированных особых точек \(z_k\), лежащих внутри области \(G\). Тогда
+\begin{equation}
+    \int_{\Gamma^+}f(\zeta)d\zeta=2\pi i\sum_{k=1}^N res(f(z),z_k),
+\end{equation}
+где \(\Gamma^+\) представляет собой полную границу области \(G\), проходимую в положительном направлении.
+\par\textit{Доказательство.} Выделим каждую из особых точек контуром \(\gamma_k\). По второй теореме Коши
+\[\int_{\Gamma^+}f(\zeta)d\zeta+\sum_{k=1}^N\int_{\gamma_k^-}f(\zeta)d\zeta\]
+Теперь в силу формулы (1) получим утверждение теоремы. \(\blacksquare\)
+\par\textbf{Определение.} Вычетом аналитической функции \(f(z)\) в точке \(z=\infty\) называется комплексное число, равное значению интеграла
+\[\dfrac{1}{2\pi i}\int_Cf(\zeta)d\zeta=-\dfrac{1}{2\pi i}\int_{C^+}f(\zeta)d\zeta,\]
+где контур \(C\) -- произвольный замкнутый контур, вне которого функция \(f(z)\) является аналитической и не имеет особых точек, отличных от \(\infty\). Очевидно, в силу определения коэффициентов ряда Лорана имеет место формула
+\begin{equation}
+    res(f(z),\infty)=-\dfrac{1}{2\pi i}\int_{C^+}f(\zeta)d\zeta=-c_{-1}.
+\end{equation}
+\par\textbf{Теорема.} Пусть функция \(f(z)\) является аналитической на полной комплексной плоскости. за исключением конечного числа изолированных особых точек \(z_k\), включая и \(z=\infty\). Тогда
+\begin{equation}
+    \sum_{k=1}^Nres(f(z),z_k)=0.
+\end{equation}
+\par\textit{Доказательство.} Рассмотрим замкнутый контур \(C\), содержащий внутри все \((N-1)\) особые точки, расположенные на конечном расстоянии от точки \(z=0\). По предыдущей теореме
+\[\dfrac{1}{2\pi i}\int_{C^+}f(\zeta)d\zeta=\sum_{k=1}^{N-1}res(f(z),z_k).\]
+Но, в силу (4), интеграл, стоящий слева равен вычету функции \(f(z)\) в точке \(z=\infty\), взятому с обратным знаком, что и завершает доказательство теоремы.
+
+\section{Вычисление определенных интегралов с помощью вычетов.}
+
+\ 
+\par1) \(I=\int^{2\pi}_0R(\cos\varphi,\sin\varphi)d\varphi,\ R(u,v)\) -- рациональная функция, \(z=e^{i\varphi},\ 0\le\varphi\le2\pi\).
+\par\(\sin\varphi=\dfrac{e^{i\varphi}-e^{-i\varphi}}{2i}=\dfrac{1}{2i}(z-\dfrac{1}{z}),\ \cos\varphi=\dfrac{e^{i\varphi}+e^{-i\varphi}}{2}=\dfrac{1}{2}(z+\dfrac{1}{2}),\ dz=ie^{i\varphi}d\varphi\Rightarrow d\varphi=\dfrac{dz}{iz}\Rightarrow I=\int_{|z|=1}R(z+\dfrac{1}{z}, z-\dfrac{1}{z})\dfrac{dz}{iz}=2\pi i\displaystyle\sum_{k=1}^n \res_{z=z_k}R_1(z)\), где \(R_1(z)=R(z+\dfrac{1}{z},z-\dfrac{1}{z})\dfrac{1}{iz};\ z_k\) -- особые точки внутри \(|z|=1\).
+\par\textbf{Пример.}
+\par1) \(I=\int_0^{2\pi}\dfrac{d\varphi}{1-2a\cos\varphi+a^2},\ |a|<1\).
+\par\(I=\int_{|z|=1}\dfrac{dz}{iz(1-a(z+\dfrac{1}{z})+a^2)}=\int_{|z|=1}\dfrac{idz}{az^2-(a^2+1)z+a}\), где особые точки \(z_1=a,z_2=\dfrac{1}{a}\) и т.к. \(|a|<1\), то \(z_1\in|z|=1\Rightarrow I=\int_{|z|=1}\dfrac{idz}{a(z-z_1)(z-z_2)}=2\pi i\displaystyle\res_{z=a}(\dfrac{i}{a(z-a)(z-\dfrac{1}{a})})=2\pi i\lim_{z\to a}\dfrac{i(z-a)}{a(z-a)(z-\dfrac{1}{a})}=\dfrac{2\pi}{1-a^2}.\)
+\par\textbf{Лемма.} Пусть \(f(z)\) -- аналитическая в верхней полуплоскости, включая действительную полуось за исключением конечного числа особых точек \(z_1,z_2,...,z_n\), лежащих сверху от действительной оси, точка \(z=\infty\) является нулем функции \(f(z)\) порядка не ниже второго. Тогда
+\begin{equation}
+    \int_{-\infty}^{+\infty}f(x)dx=2\pi i\displaystyle\sum_{k=1}^n\res_{z=z_k}f(z)
+\end{equation}.
+\par2) \(I=\int_{-\infty}^{+\infty}\dfrac{dx}{1+x^2}\); \(f(z)=\dfrac{1}{1+z^2}\) -- аналитическая кроме \(z=\pm i\).
+\par\(\res_{z=i}f(z)=\res_{z=i}\dfrac{1}{(z-i)(z+i)}=\displaystyle\lim_{z\to i}\dfrac{z-i}{(z-i)(z+i)}=\dfrac{1}{2i}\Rightarrow I=2\pi i\res_{z=i}f(z)=2\pi i\dfrac{1}{2i}=\pi\).
+\par3) \(I=\int_{-\infty}^{+\infty}\dfrac{dx}{1+x^4}\);
+\par\(f(z)=\dfrac{1}{1+z^4}\), особые точки \(z^4=-1\Rightarrow z_k=e^{i\dfrac{\pi+2\pi k}{4}},\ k=0,1,2,3\) или \(z_{1,2,3,4}=\pm\dfrac{\sqrt{2}}{2}\pm i\dfrac{\sqrt{2}}{2},\ I=2\pi i(\res_{z=z_0}f(z)+\res_{z=z_1}f(z))=2\pi i(\dfrac{1}{4z^3}|_{z=z_0}+\dfrac{1}{4z^3}|_{z=z_1})=\dfrac{\pi\sqrt{2}}{2}\);
+\par\textbf{Лемма Жордана.} Пусть \(f(z)\) -- аналитическая в верхней полуплоскоти кроме конечного числа изолированных особых точек и равномерно относительно аргумента \(z\ (0\le\arg z\le\pi\), стремится к нулю при \(|z|\to\infty\). Тогда
+\begin{equation}
+    \lim_{R\to\infty}\int_{C_R}e^{iaz}f(z)dz=0, \textup{ где } a>0,\ C_R \textup{ -- дуга } |z|=R.
+\end{equation}
+\par\textbf{Теорема.} Пусть \(f(x)\) задана на всей числовой прямой и может быть аналитически продолжена на верхнюю полуплоскость, а ее аналитическое продолжение \(f(z)\) удовлетворяет условиям леммы Жордана и не имеет особых точек на действительной оси. Тогда
+\begin{equation}
+    \int_{-\infty}^{+\infty}e^{iax}f(x)dx=2\pi i\sum_{k=1}^n\res_{z=z_k}(e^{iaz}f(z)), \textup{ где } z_k \textup{ -- особые точки } f(z).
+\end{equation}
+\par4) \(I=\int_{-\infty}^{+\infty}\dfrac{(x-1)\cos5x}{x^2-2x+5}dx\);
+\par\(e^{i5x}=\cos5x+i\sin5x;\ I_1=\int_{-\infty}^{+\infty}\dfrac{(z-1)e^{i5z}}{z^2-2z+5}dz\Rightarrow I=\Re I_1;\ f(z)=\dfrac{z-1}{z^2-2z+5},\ z_1=1+2i,\ z_2=...\Rightarrow \res_{z=z_1}f(z)e^{i5z}=\dfrac{(z-1)e^{i5z}}{2z-2}|_{z=z_1}=\dfrac{e^{-10}}{2}(\cos5+\sin5)\Rightarrow I=\Re(2\pi i\dfrac{e^{-10}}{2}(\cos5+\sin5))=-\pi e^{-10}\sin5.\)
+
+\end{document}

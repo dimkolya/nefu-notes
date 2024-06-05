@@ -1,0 +1,1036 @@
+\documentclass[9pt]{article}
+\input{header.tex}
+
+\begin{document}
+
+\begin{center}
+    \huge\textbf{Численные методы.}
+\end{center}
+
+\section{Введение.}
+
+\ 
+\par\textbf{I. Математический анализ:}
+\par1. Определенные интегралы -- примерное вычисление численных значений с помощью компьютера;
+\par2. Приближение функций, интерполирование/экстраполирование (табличные данные);
+\par3. Дифференцирование.
+\par\textbf{II. Дифференциальные уравнения;}
+\par\textbf{III. Линейная алгебра:}
+\par1. СЛАУ;
+\par2. Нелинейные уравнения.
+
+\par\textbf{Основные этапы математического моделирования:}
+\par1. Постановка задачи/формализация;
+\par2. Разработка, выбор и модификация метода;
+\par3. Численная реализация (алгоритм);
+\par4. Тестирование (на модельной задаче).
+
+\subsection{Лабораторная работа №1. Введение в теорию погрешностей.}
+
+\ 
+\par\textbf{Погрешность:}
+\par I. Вычислительная погрешность:
+\par\textit{-- абсолютная погрешность \(\Delta a = |a^* - a|\)}
+\par\textit{-- относительная погрешность \(\delta a = \dfrac{\Delta a}{a} \cdot 100\% \)}
+\par II. Погрешность метода;
+\par III. Погрешность модели.
+\par\textbf{Определение 1.} \textit{Абсолютная погрешность} -- это модуль разности между приближенным значением и точным: \(\Delta a = |a^* - a|\), где \(a\) -- приближенное значение, \(a^*\) -- точное значение.
+\par\textbf{Определение 2.} \textit{Относительная погрешность} -- это отношение абсолютной погрешности к приближенному значению: \(\delta a = \dfrac{\Delta a}{a} \Rightarrow \Delta a = a \cdot \delta a\).
+\par\textbf{Определение 3.} \textit{Значащими цифрами} числа называют все цифры, начиная с первой ненулевой слева.
+\par\textbf{Определение 4.} Значащую цифру называют \textit{верной в широком смысле}, если модуль погрешности числа не превосходит единицы разрядов, соответствующей этой цифре.
+\parЗначащую цифру называют \textit{верной в узком смысле}, если модуль погрешности числа не превосходит половину единицы разрядов, соответствующей этой цифре.
+
+\section{Численное решение систем линейных алгебраических уравнений (СЛАУ).}
+
+\begin{wrapfigure}[9]{l}{0pt}
+\raisebox{-1pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\draw[axis] (O) -- (1,0) node[anchor=north]{\(x_1\)};
+\draw[axis] (O) -- (0,1) node[anchor=west]{\(x_2\)};
+\filldraw[black] (0.5,0.4) circle (0.5pt);
+\draw (0.1,0.1) -- (0.9,0.7) node[anchor=west]{\(l_1\)};
+\draw (0.2,0.6) -- (0.8,0.2) node[anchor=west]{\(l_2\)};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\coordinate (O) at (0,0);
+\draw[axis] (O) -- (1,0) node[anchor=north]{\(x_1\)};
+\draw[axis] (O) -- (0,1) node[anchor=west]{\(x_2\)};
+\draw (0.2,0.8) -- (0.8,0.3) node[anchor=west]{\(l_1\)};
+\draw (0.2,0.6) -- (0.8,0.1) node[anchor=west]{\(l_2\)};
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\ 
+\par1. \textbf{Постановка задачи.} 
+\[\left\{
+\begin{array}{ll}
+    a_{11}x_1+a_{12}x_2=b_1& (l_1)\\
+    a_{21}x_1+a_{22}x_2=b_2& (l_2)
+\end{array}
+\right.\] Данная система -- это две прямые. Возможны несколько вариантов: прямые пересекаются (есть единственное решение), параллельны или совпадают (\(\det(A)=0\), ноль и бесконечное количество решений соответственно).
+\par\textbf{Норма векторов.}
+\[||x||_1=\displaystyle\sum_{i=1}^n|x_i|,\quad||x||_2=\displaystyle\sqrt{\sum_{i=1}^nx_i^2},\quad||x||_3=\displaystyle\max_{1\le i\le n}|x_i|\]
+\par\textit{Норма марицы} \(||A||\):
+\par1. \(||A||>0,\ \);
+\par2. \(||C\cdot A||=C\cdot||A||\);
+\par3. \(||A+B||\le||A||+\le||B||\);
+\par4. \(||AB||\le||A||\cdot\le||B||\).
+\par\textbf{Определение.} Норма матрицы \(||A||\) называется \textit{подчиненной векторной норме} \(||x||\) если выполняются условия, если \(||A||=\displaystyle\max_{x\neq0}\dfrac{||Ax||}{||x||}\Rightarrow||Ax||\le||A||\cdot||x||\).
+\par\textbf{Норма матриц.}
+\[||A||_1=\displaystyle\max_i\sum_j|a_{ij}|,\quad||A||_1=\displaystyle\max_j\sum_i|a_{ij}|,\quad||A||_2=\displaystyle\max_i|\lambda_i(A)|\]
+\parЗадачу лучше записывать матрично: \(Ax=b:\ \det(A)\neq0,\ \cond(A)\).
+
+\subsection{Методы решения СЛАУ.}
+
+\ 
+\parМожно разделить на два крупных класса:
+\par1. \textbf{Прямые методы.}
+\par-- метод Крамера;
+\par-- метод Гаусса:
+\par\quad-- \(A=LU\):
+\par\quad\quad-- метод квадратного корня;
+\par\quad-- метод прогонки;
+\par-- метод Холецкого \(A=LDL^T\);
+\par-- метод ортогонализации \(A=QR\);
+\par-- метод отражений;
+\par-- метод вращений.
+\par2. \textbf{Итерационные.}
+\par-- двухслойные (для вычисления \(x^k\) достаточно знать \(x^{k-1}\):
+\par\quad-- метод Якоби;
+\par\quad-- метод Зейделя.
+\par-- трехслойные (для вычисления \(x^k\) необходимы \(x^{k-1},x^{k-2}\).
+\par-- метод скорейшего спуска;
+\par-- метод сопряженных градиентов;
+\par-- метод минимальных невязок.
+
+\par\textbf{Метод Гаусса (метод \(LU\) -- разложения).} Сначала нужно разложить матрицу на две треугольные.
+\[A=LU,\quad LUx=b\]
+\par1. \(Ly=b \Rightarrow\) находим \(y\);
+\par2. \(Ux=y \Rightarrow\) находим \(x\);
+\par\textbf{Пример.} Решить СЛАУ \(Ax=b\):
+\[A = \left(
+\begin{array}{cccc}
+    2 & 1 & 1 & 0\\
+    4 & 3 & 3 & 1\\
+    8 & 7 & 9 & 5\\
+    6 & 7 & 9 & 8
+\end{array}
+\right),\quad b=\left(
+\begin{array}{c}
+    4\\
+    11\\
+    29\\
+    30
+\end{array}
+\right).\]
+\par\textbf{Решение.} \textit{1 шаг (обнуляем поддиагональные элементы первого столбца):}
+\[L_1A=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    -2 & 1 & 0 & 0\\
+    -4 & 0 & 1 & 0\\
+    -3 & 0 & 0 & 1
+\end{array}
+\right)\cdot\left(
+\begin{array}{cccc}
+    2 & 1 & 1 & 0\\
+    4 & 3 & 3 & 1\\
+    8 & 7 & 9 & 5\\
+    6 & 7 & 9 & 8
+\end{array}
+\right)=\left(
+\begin{array}{cccc}
+    2 & 1 & 1 & 0\\
+    0 & 1 & 1 & 1\\
+    0 & 3 & 5 & 5\\
+    0 & 4 & 6 & 8
+\end{array}
+\right)
+\]
+\par\textit{2 шаг (обнуляем поддиагональные элементы второго столбца):}
+\[L_2L_1A=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & -3 & 1 & 0\\
+    0 & -4 & 0 & 1
+\end{array}
+\right)\cdot\left(
+\begin{array}{cccc}
+    2 & 1 & 1 & 0\\
+    0 & 1 & 1 & 1\\
+    0 & 3 & 5 & 5\\
+    0 & 4 & 6 & 8
+\end{array}
+\right)=\left(
+\begin{array}{cccc}
+    2 & 1 & 1 & 0\\
+    0 & 1 & 1 & 1\\
+    0 & 0 & 2 & 2\\
+    0 & 0 & 2 & 4
+\end{array}
+\right)\]
+\par\textit{3 шаг (обнуляем поддиагональные элементы третьего столбца):}
+\[L_3L_2L_1A=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & -1 & 1
+\end{array}
+\right)\cdot\left(
+\begin{array}{cccc}
+    2 & 1 & 1 & 0\\
+    0 & 1 & 1 & 1\\
+    0 & 0 & 2 & 2\\
+    0 & 0 & 2 & 4
+\end{array}
+\right)=\left(
+\begin{array}{cccc}
+    2 & 1 & 1 & 0\\
+    0 & 1 & 1 & 1\\
+    0 & 0 & 2 & 2\\
+    0 & 0 & 0 & 2
+\end{array}
+\right)=U\]
+\parПолучили верхнюю треугольную матрицу \(U\), осталось найти \(L\). \(L_3L_2L_1A=U \Rightarrow L=L_1^{-1}L_2^{-1}L_3^{-1}\).
+\[L_1^{-1}=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    -2 & 1 & 0 & 0\\
+    -4 & 0 & 1 & 0\\
+    -3 & 0 & 0 & 1
+\end{array}
+\right)^{-1}=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    2 & 1 & 0 & 0\\
+    4 & 0 & 1 & 0\\
+    3 & 0 & 0 & 1
+\end{array}
+\right)\]
+\[L_2^{-1}=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 3 & 1 & 0\\
+    0 & 4 & 0 & 1
+\end{array}
+\right)^{-1}=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 3 & 1 & 0\\
+    0 & 4 & 0 & 1
+\end{array}
+\right)\]
+\[L_3^{-1}=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & -1 & 1
+\end{array}
+\right)^{-1}=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 1 & 1
+\end{array}
+\right)\]
+\parПеремножая три полученные матрицы наконец вычисляем:
+\[L=L_1^{-1}L_2^{-1}L_3^{-1}=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    2 & 1 & 0 & 0\\
+    4 & 3 & 1 & 0\\
+    3 & 4 & 1 & 1
+\end{array}
+\right)\]
+\par1. Решаем систему \(Ly=b\):
+\[Ly=\left(
+\begin{array}{cccc}
+    1 & 0 & 0 & 0\\
+    2 & 1 & 0 & 0\\
+    4 & 3 & 1 & 0\\
+    3 & 4 & 1 & 1
+\end{array}
+\right)\cdot\left(
+\begin{array}{c}
+    y_1\\
+    y_2\\
+    y_3\\
+    y_4
+\end{array}
+\right)=\left(
+\begin{array}{c}
+    4\\
+    11\\
+    29\\
+    30
+\end{array}
+\right)\]
+Получаем \(y=(4, 3, 4, 2)^T\).
+\par2. Решаем систему \(Ux=y\):
+\[Ux=\left(
+\begin{array}{cccc}
+    2 & 1 & 1 & 0\\
+    0 & 1 & 1 & 1\\
+    0 & 0 & 2 & 2\\
+    0 & 0 & 0 & 2
+\end{array}
+\right)\cdot\left(
+\begin{array}{c}
+    x_1\\
+    x_2\\
+    x_3\\
+    x_4
+\end{array}
+\right)=\left(
+\begin{array}{c}
+    4\\
+    3\\
+    4\\
+    2
+\end{array}
+\right)\]
+Получаем \(x=(1,1,1,1)^T\).
+\par\textbf{Вывод числа обусловленности.}
+\parДопустим, что входные данные заданы с погрешностью, тогда решение тоже будет иметь погрешность  \[(A+\Delta A)(x+\Delta x)=b+\Delta b\Rightarrow Ax+A\Delta x + \Delta Ax+\Delta A\Delta x=b+\Delta b,\] и так как у нас \(Ax=b\) получаем\[A\Delta x=\Delta b-\Delta Ax-\Delta A\Delta x.\]Домножим на обратную матрицу чтобы вычислить \(\Delta x\): \[\Delta x = A^{-1}\Delta b-A^{-1}\Delta Ax-A^{-1}\Delta A\Delta x.\]
+\parМы получили \textit{абсолютную} погрешность. Чтобы вычислить \textit{относительную} погрешность, мы используем норму:
+\[||\Delta x||\le||A^{-1}||\cdot||\Delta b||+||A^{-1}||\cdot||\Delta A||\cdot||x||+||A^{-1}||\cdot||\Delta A||\cdot||\Delta x|| \Rightarrow\]
+\[\dfrac{||\Delta x||}{||x||}\le\dfrac{||A^{-1}||\cdot||\Delta b||}{||x||}+||A^{-1}||\cdot||\Delta A||+\dfrac{||A^{-1}||\cdot||\Delta A||\cdot||\Delta x||}{||x||}\Rightarrow\]
+\[\dfrac{||\Delta x||}{||x||}\le\dfrac{||A^{-1}||\cdot||\Delta b||\cdot||b||}{||x||\cdot||b||}+\dfrac{||A^{-1}||\cdot||\Delta A||\cdot||A||}{||A||}+\dfrac{||A^{-1}||\cdot||\Delta A||\cdot||\Delta x||}{||x||}\Rightarrow\]
+\[\dfrac{||\Delta x||}{||x||}\cdot(1-||A^{-1}||\cdot||\Delta A||)\le||A^{-1}||\cdot||A||\cdot\dfrac{\Delta b}{b}+||A^{-1}||\cdot||A||\cdot\dfrac{\Delta A}{A}\Rightarrow\]
+\[\dfrac{||\Delta x||}{||x||}\le\dfrac{||A^{-1}||\cdot||A||}{1-||A^{-1}||\cdot||\Delta A||}\cdot\left(\dfrac{||\Delta b||}{||b||}+\dfrac{||\Delta A||}{||A||}\right).\]
+То есть решение будет иметь устойчивость, и число обусловленности \boxed{\cond(A) =||A^{-1}||\cdot ||A||}. \(\blacksquare\)
+
+\par\textbf{Итерационные методы решения СЛАУ.}
+
+\parЗапишем систему из трех уравнений:
+\begin{equation}
+    \left\{
+\begin{array}{l}
+    a_{11}x_1+a_{12}x_2+a_{13}x_3=b_1\\
+    a_{21}x_1+a_{22}x_2+a_{23}x_3=b_2\\
+    a_{31}x_1+a_{32}x_2+a_{33}x_3=b_3
+\end{array}
+\right.
+\end{equation}
+\parБудем решать данную систему итерационным методом -- \textbf{\textit{методом Якоби}}.
+\par1. Задаем начальное приближение \(\{x_1^0,x_2^0,x_3^0\}^T,\quad k = 0\);
+\par2. Уточнение -- подставить приближение и вычислить новое:
+\[x_1^{k+1}=\dfrac{b_1-a_{12}x_2^k-a_{13}x_3^k}{a_{11}},\quad x_2^{k+1}=\dfrac{b_2-a_{21}x_1^k-a_{23}x_3^k}{a_{22}},\quad x_3^{k+1}=\dfrac{b_3-a_{31}x_1^k-a_{32}x_2^k}{a_{33}}\]
+\par3. Условие окончания итерационного процесса -- \(||Ax^k-b||<\varepsilon\).
+\parЗапишем систему (1) в матричном виде \(A=L+D+U\)
+\[L=\left(
+\begin{array}{ccc}
+    0 & 0 & 0 \\
+    a_{21} & 0 & 0 \\
+    a_{31} & a_{32} & 0
+\end{array}\right),\quad D=\left(
+\begin{array}{ccc}
+    a_{11} & 0 & 0 \\
+    0 & a_{22} & 0 \\
+    0 & 0 & a_{33}
+\end{array}\right),\quad U=\left(
+\begin{array}{ccc}
+    0 & a_{12} & a_{13} \\
+    0 & 0 & a_{23} \\
+    0 & 0 & 0
+\end{array}\right)\]
+\parЗапишем уточнение ответа в матричном виде
+\[x^{k+1}=D^{-1}b-D^{-1}Lx^k-D^{-1}Ux^k\]
+\parИтерационный метод будет \textit{сходиться}, если выполнено \(||x^k-x||\to0\).
+\par\textit{\textbf{Замечание.}} \textit{Данный алгоритм далеко не универсален -- для его работы необходимо выполнение условия сходимости. Достаточное условие сходимости: если в системе выполняется диагональное преобладание, то метод Якоби сходится}\[|a_{ii}|>\displaystyle\sum^n_{j=1,j\neq i}|a_{ij}|,\quad i=1,...,n.\]
+\par\textbf{\textit{Метод Зейделя}} -- улучшение метода Якоби. Если мы уже вычислили \(x_i^{k+1}\), то мы можем использовать его прямо сейчас:
+\[x_1^{k+1}=\dfrac{b_1-a_{12}x_2^k-a_{13}x_3^k}{a_{11}},\quad x_2^{k+1}=\dfrac{b_2-a_{21}x_1^{k+1}-a_{23}x_3^k}{a_{22}},\quad x_3^{k+1}=\dfrac{b_3-a_{31}x_1^{k+1}-a_{32}x_2^{k+1}}{a_{33}}\]
+\parВ матричном виде
+\[x^{k+1}=D^{-1}b-D^{-1}Lx^{k+1}-D^{-1}Ux^k \Rightarrow\]
+\[x^{k+1}+D^{-1}Lx^{k+1}=D^{-1}b-D^{-1}Ux^k \Rightarrow\]
+\[(E+D^{-1}L)x^{k+1}=D^{-1}b-D^{-1}Ux^k\Rightarrow\]
+\[x^{k+1}=(E+D^{-1}L)^{-1}(D^{-1}b-D^{-1}Ux^k)\]
+
+
+\subsection{Лабораторная работа №2. Прямые методы решения СЛАУ. Метод \(LU\)-разложения.}
+
+\par\ 
+\par\textit{Постановка задачи}\[\left\{
+\begin{array}{l}
+    -3x_1+x_2+x_3=-1\\
+    x_1+4x_2+x_3=6\\
+    -2x_1+2x_2-5x_3=-5
+\end{array}
+\right.,\quad A=\left(
+\begin{array}{ccc}
+    -3 & 1 & 1\\
+    1 & 4 & 1\\
+    -2 & 2 & -5
+\end{array}
+\right),\quad b=\left(
+\begin{array}{c}
+    -1\\
+    6\\
+    -5
+\end{array}\right).\]
+Вычисляем \(\det A = 79,\quad ||A^{-1}||\cdot||A||=10\cdot\frac{32}{79}=\frac{320}{79}\).
+\par\textit{Решение.} Поменяем местами первую и вторую строку. Обнуляем поддиагональные элементы первого столбца:
+\[L_1A=\left(
+\begin{array}{ccc}
+    1 & 0 & 0\\
+    3 & 1 & 0\\
+    2 & 0 & 1
+\end{array}
+\right)\cdot\left(
+\begin{array}{ccc}
+    1 & 4 & 1\\
+    -3 & 1 & 1\\
+    -2 & 2 & -5
+\end{array}
+\right)=\left(
+\begin{array}{ccc}
+    1 & 4 & 1\\
+    0 & 13 & 4\\
+    0 & 10 & -3
+\end{array}
+\right)
+\]
+\parОбнуляем поддиагональные элементы второго столбца:
+\[L_2L_1A=\left(
+\begin{array}{ccc}
+    1 & 0 & 0\\
+    0 & 1 & 0\\
+    0 & -\frac{10}{13} & 1
+\end{array}
+\right)\cdot\left(
+\begin{array}{ccc}
+    1 & 4 & 1\\
+    0 & 13 & 4\\
+    0 & 10 & -3
+\end{array}
+\right)=\left(
+\begin{array}{ccc}
+    1 & 4 & 1\\
+    0 & 13 & 4\\
+    0 & 10 & -\frac{79}{13}
+\end{array}
+\right)=U\]
+\parПолучили верхнюю треугольную матрицу \(U\), осталось найти \(L\). \(L_2L_1A=U \Rightarrow L=L_1^{-1}L_2^{-1}\).
+\[L_1^{-1}=\left(
+\begin{array}{ccc}
+    1 & 0 & 0\\
+    3 & 1 & 0\\
+    2 & 0 & 1
+\end{array}
+\right)^{-1}=\left(
+\begin{array}{ccc}
+    1 & 0 & 0\\
+    -3 & 1 & 0\\
+    -2 & 0 & 1
+\end{array}
+\right)\]
+\[L_2^{-1}=\left(
+\begin{array}{ccc}
+    1 & 0 & 0\\
+    0 & 1 & 0\\
+    0 & -\frac{10}{13} & 1
+\end{array}
+\right)^{-1}=\left(
+\begin{array}{ccc}
+    1 & 0 & 0\\
+    0 & 1 & 0\\
+    0 & \frac{10}{13} & 1
+\end{array}
+\right)\]
+\parПеремножая три полученные матрицы наконец вычисляем:
+\[L=L_1^{-1}L_2^{-1}=\left(
+\begin{array}{ccc}
+    1 & 0 & 0\\
+    -3 & 1 & 0\\
+    -2 & \frac{10}{13} & 1
+\end{array}
+\right)\]
+\par1. Решаем систему \(Ly=b\):
+\[Ly=\left(
+\begin{array}{ccc}
+    1 & 0 & 0\\
+    -3 & 1 & 0\\
+    -2 & \frac{10}{13} & 1
+\end{array}
+\right)\cdot\left(
+\begin{array}{c}
+    y_1\\
+    y_2\\
+    y_3
+\end{array}
+\right)=\left(
+\begin{array}{c}
+    6\\
+    -1\\
+    -5
+\end{array}
+\right)\]
+Получаем \(y=(6, 17, -\frac{79}{13})^T\).
+\par2. Решаем систему \(Ux=y\):
+\[Ux=\left(
+\begin{array}{ccc}
+    1 & 4 & 1\\
+    0 & 13 & 4\\
+    0 & 10 & -\frac{79}{13}
+\end{array}
+\right)\cdot\left(
+\begin{array}{c}
+    x_1\\
+    x_2\\
+    x_3
+\end{array}
+\right)=\left(
+\begin{array}{c}
+    6\\
+    17\\
+    -\frac{79}{13}
+\end{array}
+\right)\]
+Получаем \(x=(1,1,1)^T\). Так как мы поменяли местами первую и вторую строки, то все возвращаем в свое место: \boxed{x=(1,1,1)^T}.
+
+\subsection{Двухслойные итерационные методы.}
+
+\ 
+\par\textbf{\textit{Канонический вид}} -- \boxed{B\dfrac{x^{k+1}-x^k}{\tau_{k+1}}+Ax^k=b}, где \(\tau_{k+1}\) -- итерационный параметр, если \(\tau=\const\), то метод итерации называется \textit{стационарным}, иначе -- \textit{нестационарным}. Матрица \(B\) задает итерационный метод. Если \(B=E\), то метод называется \textit{явным}, иначе -- \textit{неявным}.
+\par\(B\dfrac{x^{k+1}-x^k}{\tau_{k+1}}+Ax^k=b\Rightarrow x^{k+1}=x^k-\tau_{k+1}B^{-1}(Ax^k-b)\), где \(Ax^k-b\) -- \textit{невязка} \(r^k\). Тогда можно переписать как
+\[x^{k+1}=x^k-\tau_{k+1}r^k.\]
+\par\textbf{Замечание.} Не стоит путать невязку \(r^k=Ax^k-b\) с погрешностью \(z^k=x^k-x\).
+\par\textit{\textbf{Метод Якоби в каноническом виде.}}
+\parПусть исходное уравнение: \(Ax=b\), итерация \(x^{k+1}=D^{-1}(b-Lx^k-Ux^k)\). Так как \(A=L+D+U\), то \(L+U=A-D\). Из итерации \(Dx^{k+1}+(A-D)x^k=b\) преобразуя, получаем метод Якоби в каноническом виде:
+\[D\dfrac{x^{k+1}-x^k}{1}+Ax^k=b.\]
+Метод является стационарным и явным.
+\parЕсли приписать вместо 1 число \(\tau\), то
+\begin{equation}
+    D\dfrac{x^{k+1}-x^k}{\tau}+Ax^k=b,\quad \tau=\dfrac{2}{\lambda_{min}+\lambda_{max}}.
+\end{equation}
+\par\textbf{\textit{Метод Зейделя в каноническом виде.}}
+\parИтерация теперь \(x^{k+1}=D^{-1}(b-Lx^{k+1}-Ux^k)\). \(A=L+D+U,\ Dx^{k+1}+Lx^{k+1}+Ux^k=b\). Так как \(U=A-L-D\), то получим \((D+L)x^{k+1}+Ax^k-(D+L)x^k=b\). И, наконец, канонический вид
+\[(D+L)\dfrac{x^{k+1}-x^k}{1}+Ax^k=b.\]
+Метод является стационарным и неявным.
+\par\((D+\omega L)\dfrac{x^{k+1}-x^k}{\omega}+Ax^k=b\) -- \textit{метод верхней релаксации}. То есть метод Якоби и Зейделя являются частными случаями метода верхней релаксации.
+\parМатрица \(A\) является симметричной, если \(\forall i,j:\ a_{ij}=a{ji}\). Вообще из любой матрицы можно получить симметричную путем умноженения на транспонированную.
+\par\textbf{Теорема о сходимости итерационного метода.} Пусть \(A\) -- симметричная, положительно-определенная матрица, \(\tau>0\) и пусть выполнено неравенство \(B-\dfrac{\tau}{2}A>0\), тогда двухслойный итерационный метод (1) сходится.
+\par\textbf{Пример.} Рассмотрим метод Зейделя: \(B=D+L,\ A\) -- симметричная \(\Rightarrow L=U^T\).
+\[(((D+L)-\dfrac{1}{2}A)x,x)=(Dx,x)+(Lx,x)-\dfrac{1}{2}(Ax,x).\]
+Так как \(A=L+D+U\), то \((Lx,x)=(x,Ux)\):
+\[(((D+L)-\dfrac{1}{2}A)x,x)=(Dx,x)+(Lx,x)-\dfrac{1}{2}(Lx,x)-\dfrac{1}{2}(x,Ux)-\dfrac{1}{2}(Dx,x)=\dfrac{1}{2}(Dx,x)>0.\]
+
+\subsection{Нестационарные двухслойные итерационные методы.}
+
+\ 
+\parРассматриваем явный метод \(\dfrac{x^{k+1}-x^k}{\tau_{k+1}}+Ax^k=b\).
+\par\textbf{\textit{Метод минимальных невязок.}}
+\parПусть \(A\) -- симметричная матрица. Будем уменьшать невязку.
+\[x^{k+1}=x^k-\tau_{k+1}(A_{x^k}-b)=x^k-\tau_{k+1}r^k\]
+\[||r^{k+1}||=||Ax^{k+1}-b||\to\min.\]
+\parМы должны минимизировать норму. Домножим слева и справа на \(A\):
+\[Ax^{k+1}=Ax^k-\tau_{k+1}Ar^k\Rightarrow Ax^{k+1}-b=Ax^k-\tau_{k+1}Ar^k-b\]
+\[\Rightarrow||r^{k+1}||^2=||Ax^{k+1}-b||^2=||r^k-\tau_{k+1}Ar^k||^2\to\min.\]
+\parВспомним, что \(||r^k||^2=(r^k,r^k)\). Тогда \(||r^k-\tau_{k+1}Ar^k||^2=(r^k-\tau_{k+1}Ar^k, r^k-\tau_{k+1}Ar^k)=(r^k,r^k)-\tau_{k+1}(r^k, Ar^k)-\tau_{k+1}(Ar^k,r^k)+\tau^2_{k+1}(Ar^k,Ar^k)\). Так как \(A\) -- симметричная, то
+\[||r^k-\tau_{k+1}Ar^k||^2=(r^k,r^k)-2\tau_{k+1}(r^k, Ar^k)+\tau^2_{k+1}(Ar^k,Ar^k).\]
+\parОсталось взять производную по \(\tau\):
+\[(||r^{k+1}||^2)'_\tau=-2(r^k,Ar^k)+2\tau_{k+1}(Ar^k,Ar^k)=0\Rightarrow\]
+\[\tau_{k+1}=\dfrac{(r^k,Ar^k)}{(Ar^k,Ar^k)}.\]
+
+\subsection{Итерационные методы вариационного типа.}
+
+\ 
+\parа) \textit{Метод минимальных невязок:} вместо исходной задачи мы будем искать минимум функционала \(||Ax-b||^2\to\min\) или \(J=||r^{k+1}||^2\to\min,\ \gra J=0\Rightarrow \tau_{k+1}\).
+\parб) \textit{Метод наискорейшего спуска:} будем минимизировать погрешность \(||z^{k+1}||^2\to\min\). Но \(z^k=x^k-x\) и ничего не получится, так как \(x\) неизвестно. Поэтому берут расширенную норму \(||z^{k+1}||_A=(Az^{k+1},z^{k+1})\to\min,\) \(||z^{k+1}||'_{\tau_{k+1}}=0.\) 
+\parКанонический вид \(\dfrac{x^{k+1}-x^k}{\tau_{k+1}}+Ax^k=b\). Найдем \(z^{k+1}=x^{k+1}-x\Rightarrow x^{k+1}=x+z^{k+1}\) и подставим в наш итерационный метод:
+\[\dfrac{z^{k+1}+x-z^k-x}{\tau_{k+1}}+Az^k+Ax=b\]
+\[\Rightarrow\dfrac{z^{k+1}-z^k}{\tau_{k+1}}+Az^k=0.\]
+\parОтсюда \(z^{k+1}=z^k-\tau^{k+1}Az^k.\) Найдем скалярное произведение:
+\[(Az^{k+1},z^{k+1})=(Az^k-\tau_{k+1}A^2z^k, z^k-\tau^{k+1}Az^k)=\]
+\[=(Az^k, z^k)-\tau_{k+1}(Az^k,Az^k)-\tau_{k+1}(A^2z^k,z^k)+\tau_{k+1}^2(A^2z^k,Az^k)=\]
+\[=(Az^k, z^k)-2\tau_{k+1}(Az^k,Az^k)+\tau_{k+1}^2(A^2z^k,Az^k).\]
+\parОсталось найти производную
+\[(||z^{k+1}||^2)'_\tau=-2(Az^k,Az^k)+2\tau_{k+1}(A^2z^k,Az^k)=0\]
+\parТогда \(\tau_{k+1}=\dfrac{(Az^k, Az^k)}{(A^2z^k, Az^k)}\) И тут понятно что делать, так как \(Az^k=Ax^k-Ax=Ax^k-b=r^k\). Получаем конечную формулу \boxed{\tau_{k+1}=\dfrac{(r^k, r^k)}{(Ar^k, r^k)}}.
+\parИтерационный метод сходится, если \(||z^k||_A\to0\)
+
+\section{Численные методы решения нелинейных уравнений.}
+
+\ 
+\parПока возьмем \(f(x)=0\), \(f:\mathbb R\to\mathbb R\). С геометрической точки зрения решение -- пересечение графика функции и оси абсцисс.
+\parДопущения: \textit{непрерывность}, \textit{монотонность}.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,-0.2) -- (0,0.5) node[anchor=west]{\(y\)};
+\draw plot[smooth] coordinates {(0.1,-0.1) (0.3,0) (0.6,0.4)};
+\filldraw[black] (0.3,0) circle (0.5pt) node[anchor=north west]{\(x_0\)};
+\node at (0.3,-0.3) {\textit{геометрический смысл}};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,-0.2) -- (0,0.5) node[anchor=west]{\(y\)};
+\draw plot[smooth] coordinates {(-0.1,-0.2) (0.3,0) (0.6,0.4)};
+\filldraw[black] (0.3,0) circle (0.5pt) node[anchor=north west]{\(x_0\)};
+\draw[dashed] (0.1,0) -- (0.1,-0.12);
+\draw[dashed] (0.5,0) -- (0.5,0.24);
+\draw (0.12,-0.02) -- (0.12,0.02);
+\draw (0.14,-0.02) -- (0.14,0.02);
+\draw (0.16,-0.02) -- (0.16,0.02);
+\draw (0.18,-0.02) -- (0.18,0.02);
+\draw (0.20,-0.02) -- (0.20,0.02);
+\draw (0.22,-0.02) -- (0.22,0.02);
+\draw (0.24,-0.02) -- (0.24,0.02);
+\draw (0.26,-0.02) -- (0.26,0.02);
+\draw (0.28,-0.02) -- (0.28,0.02);
+\draw (0.30,-0.02) -- (0.30,0.02);
+\draw (0.32,-0.02) -- (0.32,0.02);
+\draw (0.34,-0.02) -- (0.34,0.02);
+\draw (0.36,-0.02) -- (0.36,0.02);
+\draw (0.38,-0.02) -- (0.38,0.02);
+\draw (0.40,-0.02) -- (0.40,0.02);
+\draw (0.42,-0.02) -- (0.42,0.02);
+\draw (0.44,-0.02) -- (0.44,0.02);
+\draw (0.46,-0.02) -- (0.46,0.02);
+\draw (0.48,-0.02) -- (0.48,0.02);
+\filldraw[black] (0.1,0) circle (0.5pt) node[anchor=south]{\(a\)};
+\filldraw[black] (0.5,0) circle (0.5pt) node[anchor=south west]{\(b\)};
+\node at (0.3,-0.3) {\textit{полный перебор}};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,-0.2) -- (0,0.5) node[anchor=west]{\(y\)};
+\draw plot[smooth] coordinates {(-0.1,-0.2) (0.25,0) (0.6,0.4)};
+\draw[dashed] (0.1,0) -- (0.1,-0.11);
+\draw[dashed] (0.6,0) -- (0.6,0.42);
+\draw[dashed] (0.35,0) -- (0.35,0.1);
+\filldraw[black] (0.1,0) circle (0.5pt) node[anchor=south]{\(a_0\)};
+\filldraw[black] (0.6,0) circle (0.5pt) node[anchor=south west]{\(b_0\)};
+\filldraw[black] (0.35,0) circle (0.5pt) node[anchor=south west]{\(b_1\)};
+\filldraw[black] (0.25,0) circle (0.5pt) node[anchor=north]{\(x_0\)};
+\node at (0.3,-0.3) {\textit{бинарный поиск}};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\draw[axis] (-0.1,0) -- (0.7,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,-0.2) -- (0,0.5) node[anchor=west]{\(y\)};
+\draw plot[smooth] coordinates {(-0.1,-0.1) (0.2,0) (0.4,0.15) (0.6,0.4)};
+\draw[color=red, very thin] (0.2,-0.1) -- (0.7,0.5);
+\draw[dashed] (0.5,0.265) -- (0.5,0);
+\filldraw[black] (0.2,0) circle (0.5pt) node[anchor=south east]{\(x_0\)};
+\filldraw[black] (0.5,0) circle (0.5pt) node[anchor=north]{\(a_0\)};
+\filldraw[black] (0.5,0.265) circle (0.5pt);
+\filldraw[black] (0.28,0) circle (0.5pt) node[anchor=north west]{\(a_1\)};
+\draw[color=red, very thin] (0.1,-0.1) -- (0.6,0.3);
+\filldraw[black] (0.28,0.05) circle (0.5pt);
+\draw[dashed] (0.28,0) -- (0.28,0.05);
+\node at (0.3,-0.3) {\textit{метод касательных}};
+\end{tikzpicture}
+\end{center}
+
+\parПогрешность \(z_k=|x - x_k|\), а невязка \(r_k=|F(x_k)|<\varepsilon\).
+\par1) \textbf{\textit{Перебор:}} \([a,b]\Rightarrow x_i=a+ih,\ |f(x_i)|\le\varepsilon\);
+\par2) \textbf{\textit{Бинарный поиск:}} выбираем отрезок \([a_i,b_i]\), где \(f(a_i)f(b_i)<0\) и \(a_i\) или \(b_i\) равно \(\dfrac{a_{i-1}+b_{i-1}}{2}\).
+\parИтерационные методы: сначала нужно отделить корни: можно это сделать аналитически, графически, перебором \(x_k=a+kh\), где \(h\) -- шаг или бинарным поиском.
+\par3) \textit{\textbf{Метод простых итераций:}} \(F(x)=0 \Rightarrow\) выделяем \(x:\ x=\varphi(x)\).
+\par\textbf{Пример:} \(4x-5\ln x=5\).
+\parПерепишем в виде \(4x-5\ln x - 5=0\Rightarrow\left[
+\begin{array}{ll}
+    x=\dfrac{5}{4}(1+\ln x) \\
+    x=5+5\ln x-3x \\
+    \ln x = -1+\dfrac{4}{5}\Rightarrow x=e^{\frac{4}{5}x-1}
+\end{array}\right.\) Нужно выбрать, какой из этих способов самый подходящий.
+\par1. Задаем начальное приближение \(x^0=a\);
+\par2. Следующее приближение \(x^{k+1}=\varphi(x^k),\ k=1,2,...\);
+\par3. Проверяем условие окончания итерации \(|x^{k+1}-x^k|<\varepsilon\) или \(F(x^{k+1})<\varepsilon\).
+\parСходимость \(|x-x^k|\to0,\ x\) -- точное решение.
+\parГрафически \(x=\varphi(x)\) -- это пересечение графиков \(y=x\) и \(y=\varphi(x)\).
+
+\begin{center}
+\begin{tikzpicture}
+\draw[axis] (-0.1,0) -- (1,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,-0.2) -- (0,0.9) node[anchor=west]{\(y\)};
+\draw plot[smooth] coordinates {(0.05,-0.2) (0.15,0.15) (0.4,0.6) (0.6,0.8)} node[anchor=east]{\(y=\varphi(x)\)};
+\draw (-0.1,-0.1) -- (0.8,0.8) node[anchor=north west]{\(y=x\)};
+\filldraw[black] (0.15,0.15) circle (0.5pt);
+\filldraw[black] (0.15,0) circle (0.5pt) node[anchor=north]{\(x\)};
+\filldraw[black] (0.4,0) circle (0.5pt) node[anchor=north]{\(x_0\)};
+\filldraw[black] (0.6,0) circle (0.5pt) node[anchor=north]{\(x_1\)};
+\draw[dashed] (0.4,0) -- (0.4,0.6);
+\draw[dashed] (0.6,0) -- (0.6,0.6);
+\draw[dashed] (0.15,0) -- (0.15,0.15);
+\draw[vector] (0.4,0.6) -- (0.6,0.6);
+\node at (0.3,-0.3) {\textit{Расходящийся, \(|\varphi'(x)|>=1\)}};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\draw[axis] (-0.1,0) -- (1,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,-0.2) -- (0,0.9) node[anchor=west]{\(y\)};
+\draw plot[smooth] coordinates {(-0.1,0.6) (0.3,0.3) (0.8,0.2) (1,0.18)} node[anchor=south]{\(y=\varphi(x)\)};
+\draw (-0.1,-0.1) -- (0.7,0.7) node[anchor=north west]{\(y=x\)};
+\filldraw[black] (0.3,0.3) circle (0.5pt);
+\filldraw[black] (0.3,0) circle (0.5pt) node[anchor=north]{\(x\)};
+\filldraw[black] (0.8,0) circle (0.5pt) node[anchor=north]{\(x_0\)};
+\filldraw[black] (0.2,0) circle (0.5pt) node[anchor=north]{\(x_1\)};
+\draw[dashed] (0.2,0) -- (0.2,0.2);
+\draw[dashed] (0.8,0) -- (0.8,0.2);
+\draw[dashed] (0.3,0) -- (0.3,0.3);
+\draw[vector, thin] (0.8,0.2) -- (0.2,0.2);
+\draw[vector, thin] (0.2,0.2) -- (0.2,0.36);
+\draw[vector, thin] (0.2,0.36) -- (0.36,0.36);
+\draw[vector, thin] (0.36,0.36) -- (0.36,0.27);
+\draw[vector, thin] (0.36,0.27) -- (0.27,0.27);
+\node at (0.3,-0.3) {\textit{Сходящийся, \(|\varphi'(x)|<1\)}};
+\end{tikzpicture}
+\end{center}
+
+\par\textbf{Теорема.} Пусь на интервале \((a,b)\) имеется единственный корень уравнения \(x=\varphi(x)\) и во всех точках этого интервала \(|\varphi'(x)|<1\). В этом случае итерационный процесс сходится.
+\par\textit{Доказательство:} Разложим в ряд тейлора в точке \(x_0\) \(\varphi(x)=\varphi(x)+\varphi'(\xi)(x-x_0)\Rightarrow\varphi'(\xi)=\dfrac{\varphi(x)-\varphi(x_0)}{x-x_0}\), но это по условию задачи \(\varphi(x_0)=x_1,\ \varphi(x)=x\Rightarrow\varphi'(x)=\dfrac{x-x_1}{x-x_0}\). Итерационный процесс сходится, если \(|x-x_1|<|x-x_0|\). Значит, достаточно \(|\varphi'(\xi)|<1\ \blacksquare\).
+\par4) \textbf{\textit{Метод касательных (метод Ньютона).}} Выведем данный метод с помощью разложения Тейлора. \(x_{k+1}=x_k+\Delta x_k,\ \Delta x_k=?\). Решаем исходное уравнение \(F(x)=0\). Разложим в ряд тейлора функцию \(F(x_{k+1})\) в точке \(x_k\): \(F(x_{k+1})=F(x_k)+F'(x_k)\Delta x_k+o(\Delta x_k)\approx0\Rightarrow\Delta x_k=-\dfrac{F(x_k)}{F'(x_k)},\ x_{k+1}=x_k-\dfrac{F(x_k)}{F'(x_k)}\). Осталась сходимость. Заметим, что она очень похожа на метод простых итераций: \(\varphi(x)=x-\dfrac{F(x)}{F'(x)}\). Но тогда нам нужна двойная дифференцируемость функции на интервале.
+\par\textit{Модифицированный метод Ньютона.} Достаточно посчитать производную в одной точке: \(x_{k+1}=x_k-\dfrac{F(x_k)}{F'(x_0)}\).
+
+\subsection{Численное решение систем нелинейных уравнений.}
+
+\ 
+\parПонятно, тут никаких прямых методов нет.
+\parИтерационные методы:
+\par1. Постановка задачи
+\[\left\{
+\begin{array}{l}
+    f_1(x_1,...,x_n)=0 \\
+    ... \\
+    f_n(x_1,...,x_n)=0
+\end{array}\right.\Rightarrow F(x)=0,\quad F(x)=
+\left(
+\begin{array}{c}
+    f_1 \\
+    ... \\
+    f_n
+\end{array}\right).\]
+\par2. \textit{\textbf{Метод Ньютона}}
+\[\left\{
+\begin{array}{l}
+    x_1^1=x_1^0+\Delta x_1 \\
+    x_2^1=x_2^0+\Delta x_2 \\
+    ... \\
+    x_n^1=x_n^0+\Delta x_n
+\end{array}\right.\]
+\par Многомерный ряд тейлора
+\[f_1(x_1^1,...,x_n^1)\approx f_1(x_1^0,...x_n^0)+\dfrac{\partial f_1}{\partial x_1}\Delta x_1+\dfrac{\partial f_1}{\partial x_2}\Delta x_2+...+\dfrac{\partial f_1}{\partial x_n}\Delta x_n=0\]
+\[f_2(x_1^1,...,x_n^1)\approx f_2(x_1^0,...x_n^0)+\dfrac{\partial f_2}{\partial x_1}\Delta x_1+\dfrac{\partial f_2}{\partial x_2}\Delta x_2+...+\dfrac{\partial f_2}{\partial x_n}\Delta x_n=0\]
+\[...\]
+\[f_n(x_1^1,...,x_n^1)\approx f_n(x_1^0,...x_n^0)+\dfrac{\partial f_n}{\partial x_1}\Delta x_1+\dfrac{\partial f_n}{\partial x_2}\Delta x_2+...+\dfrac{\partial f_n}{\partial x_n}\Delta x_n=0\]
+\parДля нахождения \(\Delta x\) получаем СЛАУ, которое мы уже умеем считать:
+\[\left\{
+\begin{array}{l}
+    \dfrac{\partial f_1}{\partial x_1}\Delta x_1+\dfrac{\partial f_1}{\partial x_2}\Delta x_2+...+\dfrac{\partial f_1}{\partial x_n}\Delta x_n=-f_1(x_1^0,...,x_n^0) \\
+    \dfrac{\partial f_2}{\partial x_1}\Delta x_1+\dfrac{\partial f_2}{\partial x_2}\Delta x_2+...+\dfrac{\partial f_2}{\partial x_n}\Delta x_n=-f_2(x_1^0,...,x_n^0) \\
+    ... \\
+    \dfrac{\partial f_n}{\partial x_1}\Delta x_1+\dfrac{\partial f_n}{\partial x_2}\Delta x_2+...+\dfrac{\partial f_n}{\partial x_n}\Delta x_n=-f_n(x_1^0,...,x_n^0)
+\end{array}
+\right.\]
+\parМатрица Якоби \(J_1\Delta X=-F(X^0)\Rightarrow\Delta X=-J^{-1}_1F(X^0)\), где
+\[J_1=\left(
+\begin{array}{ccc}
+    \dfrac{\partial f_1}{\partial x_1} & ... & \dfrac{\partial f_1}{\partial x_n} \\
+    ... & & ... \\
+    \dfrac{\partial f_n}{\partial x_1} & ... & \dfrac{\partial f_n}{\partial x_n}
+\end{array}
+\right),\quad \det J_1=\left|
+\begin{array}{ccc}
+    \dfrac{\partial f_1}{\partial x_1} & ... & \dfrac{\partial f_1}{\partial x_n} \\
+    ... & & ... \\
+    \dfrac{\partial f_n}{\partial x_1} & ... & \dfrac{\partial f_n}{\partial x_n}
+\end{array}
+\right|\neq0\]
+\parВ итоге \boxed{X^{k+1}=X^k-J_k^{-1}F(X^k)}.
+\par3.\textit{\textbf{ Метод простой итерации:}} \(x^{s+1} = \varphi(x^s)\);
+\parЗдесь мы рассмариваем только стационарные и явные методы. Вспомним канонический вид итерационного метода решения СЛАУ: \(\dfrac{x^{s+1}-x^s}{\tau}+F(x^s)=0\). Отсюда \(x^{s+1}=x^s-\tau F(x^s)=\varphi(x^s)\)
+\par4. \textit{\textbf{Метод релаксации}}.
+\par\textbf{Теорема о сжимающих отображениях.} Пусть \(\varphi(x)\) определен на множестве \({x\in H:\ ||x-a||\le r}\) и выполнено \(||\varphi(a)-a||\le(1-q)r,\ 0<q<1\), тогда стационарный итерационный метод сходится: \(||x^k-x||\le q^k||x^0-x||\).
+
+\section{Приближение функций.}
+
+\ 
+\par1) Степенные ряды:
+\par-- ряд Тейлора (Маклорена).
+\par2) Разложение по базису \(f=\displaystyle\sum c_if(x_i)\):
+\par-- ряд Фурье;
+\par-- многочлен Чебышева;
+\par-- многочлен Лежандра.
+\par3) Табличное разложение:
+\par-- интерполирование.
+\par\quad -- многочлен Лагранжа;
+\par\quad -- многочлен Ньютона;
+\par\quad -- сплайны.
+\par4) Аппроксимизация.
+
+\subsection{Интерполирование.}
+
+\ 
+\par\textit{Постановка задачи:} дана табличная функция:
+
+\[\begin{array}{c|c|c|c|c}
+    x & x_0 & x_1 & ... & x_n\\
+    \hline
+    y & y_0 & y_1 & ... & y_n
+\end{array}\]
+\parНайти значение функции во внутренней точке. \(x_i\) -- это узлы интерполирования.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[axis] (-0.1,0) -- (1,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,-0.1) -- (0,0.8) node[anchor=west]{\(y\)};
+\filldraw[black] (0.1,0.2) circle (0.5pt);
+\filldraw[black] (0.3,0.4) circle (0.5pt);
+\filldraw[black] (0.5,0.4) circle (0.5pt);
+\filldraw[black] (0.8,0.7) circle (0.5pt);
+\draw[dashed] (0.1,0.2) -- (0.1,0) node[anchor=north]{\(x_0\)};
+\draw[dashed] (0.3,0.4) -- (0.3,0) node[anchor=north]{\(x_1\)};
+\draw[dashed] (0.8,0.7) -- (0.8,0) node[anchor=north]{\(x_n\)};
+\draw[dashed] (0.1,0.2) -- (0,0.2) node[anchor=east]{\(y_0\)};
+\draw[dashed] (0.3,0.4) -- (0,0.4) node[anchor=east]{\(y_1\)};
+\draw[dashed] (0.8,0.7) -- (0,0.7) node[anchor=east]{\(y_n\)};
+\draw[color=red, thin] plot[smooth] coordinates {(0.1,0.2) (0.3,0.4) (0.5,0.4) (0.8,0.7)};
+\node[anchor=north] at (0.5,0) {\(...\)};
+\filldraw[red] (0.2,0.3) circle (0.5pt);
+\node[anchor=north, color=black] at (0.23,0.3) {\(x^*\)};
+\end{tikzpicture}
+\end{center}
+\parИнтерполирование \(x^*\in[a,b]\), экстраполяция (предсказание) \(x^*\notin[a,b]\).
+\par\textit{Основное условие интерполирования:} \(f(x_i)=y_i\).
+\parБудем искать функцию \(f(x)=\displaystyle\sum^n_0c_i\varphi_i(x)\). Исходя из основного условия интерполирования:
+\[\left\{\begin{array}{l}
+    c_0\varphi(x_0)+c_1\varphi(x_0)+...+c_n\varphi(x_0)=y_0 \\
+    c_0\varphi(x_1)+c_1\varphi(x_1)+...+c_n\varphi(x_1)=y_1 \\
+    ... \\
+    c_0\varphi(x_n)+c_1\varphi(x_n)+...+c_n\varphi(x_n)=y_n
+\end{array}\right.\]
+\parНо тут количество уравнений прямо зависит от количества данных.
+\par\textbf{Пример.} \(\varphi_k(x)=x^k,\ k=3\). Тогда у нас получится полином \(f(x)=c_0+c_1x+c_2x^2+c_3x^3,\) где \(c_0,c_1,c_2,c_3\) -- неизвестны.
+\[\left\{\begin{array}{l}
+    c_0+c_1x_0+c_2x_0^2+c_3x_0^3=y_0 \\
+    c_0+c_1x_1+c_2x_1^2+c_3x_1^3=y_1 \\
+    c_0+c_1x_2+c_2x_2^2+c_3x_2^3=y_2 \\
+    c_0+c_1x_3+c_2x_3^2+c_3x_3^3=y_3
+\end{array}\right.- \textup{ СЛАУ относительно } c_i,\quad
+\det W=\left|\begin{array}{cccc}
+    1 & x_0 & x_0^2 & x_0^3\\
+    1 & x_1 & x_1^2 & x_1^3\\
+    1 & x_2 & x_2^2 & x_2^3\\
+    1 & x_3 & x_3^2 & x_3^3
+\end{array}\right|,\]
+\parгде \(W\) -- матрица Вандермонда, СЛАУ имеет решение, если \(\det W\neq0\).
+\parИнтерполирование бывает двух видов:
+\par1. Глобальное -- учитываются все узлы \((x_i,\ i = \overline{1,n})\);
+\par2. Локальное -- кусочная интерполяция.
+\par\textbf{\textit{I. Глобальная интерполяция.}}
+\[f(x)=\displaystyle\sum_{i=0}^nc_i\varphi_i(x),\quad c_i=?,\ \varphi_i(x)=x^i.\]
+\parИз-за этого у нас получается полином степени \(O(n)\), что не есть хорошо.
+\par\textit{\textbf{II. Кусочно-полиномиальная интерполяция.}}
+\par\textit{2.1. Кусочно-линейная интерполяция (линейный сплайн).} На каждом отрезке будем строить функцию \(S(x): S_i(x)=b_i+a_i(x-x_i),\ x\in(x_{i-1}, x_i)\).
+\begin{center}
+\begin{tikzpicture}
+\draw[axis] (-0.1,0) -- (1,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,-0.1) -- (0,0.6) node[anchor=west]{\(y\)};
+\draw[red] (0.2,0.2) -- (0.4,0.4);
+\node at(0.32,0.2){\(S_i\)};
+\draw[red] (0.4,0.4) -- (0.8,0.3);
+\node at(0.6,0.45){\(S_{i+1}\)};
+\filldraw[black] (0.2,0.2) circle (0.5pt);
+\filldraw[black] (0.4,0.4) circle (0.5pt);
+\filldraw[black] (0.8,0.3) circle (0.5pt);
+\draw[dashed] (0.2,0.2) -- (0.2,0) node[anchor=north]{\(x_{i-1}\)};
+\draw[dashed] (0.4,0.4) -- (0.4,0) node[anchor=north]{\(x_{i}\)};
+\draw[dashed] (0.8,0.3) -- (0.8,0) node[anchor=north]{\(x_{i+1}\)};
+\draw[dashed] (0.2,0.2) -- (0,0.2) node[anchor=east]{\(y_{i-1}\)};
+\draw[dashed] (0.4,0.4) -- (0,0.4) node[anchor=east]{\(y_{i}\)};
+\draw[dashed] (0.8,0.3) -- (0,0.3) node[anchor=east]{\(y_{i+1}\)};
+\end{tikzpicture}
+\end{center}
+\[\left\{\begin{array}{l}
+    S_i(x_i)=y_i \\
+    S_i(x_i)=S_{i+1}(x_i)
+\end{array}\right.\Rightarrow b_i=y_i,\ a_{i+1}=\dfrac{y_i-y_{i+1}}{x_i-x_{i+1}}.\]
+\parАлгоритм реализации кусочно-линейного сплайна:
+\par1) Определить отрезок \(x\in[x_{i-1},x_i]\);
+\par2) Строим полином \(S_i=y_i+\dfrac{y_i-y_{i-1}}{h}(x-x_i)\);
+\par\textit{2.2. Кубический сплайн.}
+\par1) На каждом отрезке \([x_{i-1},x_i]:\ S_i=a_i+b_i(x_i-x)+\dfrac{1}{2}c_i(x_i-x)^2+\dfrac{1}{6}d_i(x_i-x)^3\);
+\par2) Должно выполняться основное условие интерполирования (сплайн проходит через узел);
+\par3) \(S(x),S'(x),S''(x)\) непрерывны;
+\par4) \(S''(a)=S''(b)=0.\)
+\[\left\{
+\begin{array}{l}
+    S_i(x_i)=y_i \\
+    S_i(x_i)=S_{i+1}(x_i) \\
+    S_i'(x_i)=S_{i+1}'(x_i) \\
+    S_i''(x_i)=S_{i+1}''(x_i) \\
+\end{array}\right.\Rightarrow\left\{
+\begin{array}{l}
+    a_i=y_i \\
+    a_i=a_{i+1}+b_{i+1}h+\frac{1}{2}c_{i+1}h^2+\frac{1}{6}d_{i+1}^3 \\
+    b_i=b_{i+1}+c_{i+1}h+\frac{1}{2}d_{i+1}h^2 \\
+    c_i=c_{i+1}+d_{i+1}h
+\end{array}
+\right.\]
+\par\(c_0=0,\ c_n=0\). Из 4-го уравнения \(d_{i+1}=\dfrac{c_i-c_{i+1}}{h}\), из 2-го \(b_{i+1}=\dfrac{y_i-y_{i+1}}{h}-\frac{1}{2}c{i+1}h-\frac{1}{6}(c_i-c_{i+1})h\). Все это подставим в 3-е уравнение: \(Ac_{i-1}+Bc_i+Dc_{i+1}=E,\ i=\overline{1,n}\), где \(A=h,B=4h,D=h,E=6\dfrac{y_{i+1}-2y_i+y_{i-1}}{h}\) -- трехдиагональная СЛАУ.
+\par\textbf{\textit{Решение трехдиагонального СЛАУ.}}
+\parРешаем \textit{методом прогонки} (прямой метод). Решения ищем в виде \boxed{c_i=p_{i+1}c_{i+1}+q_{i+1}} \(\Rightarrow A(p_ic_i+q_i)+Bc_i+Dc_{i+1}=E\Rightarrow c_i=\dfrac{-D}{Ap_i+B}c_{i+1}+\dfrac{E-Aq_i}{Ap_i+B}\). Из этого получаем \(p_{i+1}=\dfrac{-D}{Ap_i+B},\ q_{i+1}=\dfrac{E-Aq_i}{Ap_i+B},\ i=\overline{1,n-1}\). Нужно найти значение \(p_1,q_1\): \(c_0=0,\ c_0=p_1c_1+q_1\Rightarrow p_1=0,q_1=0\ \blacksquare\).
+\parАлгоритм:
+\par1. Определить отрезок \(x\in[x_{i-1},x_i]\);
+\par2. \(c_i:\ p_1=0,\ q_1=0,\ \)\boxed{p_{i+1}=\dfrac{-D}{Ap_i+B}, q_{i+1}=\dfrac{E-Aq_i}{Ap_i+B},\ i=\overline{1,n-1}}, \(c_n=0\), \boxed{c_i=c_{i+1}p_{i+1}+q_{i+1},\ i=\overline{n-1,0}};
+\par3. \(d_i=\dfrac{c_{i-1}-c_i}{h},\ b_i=\dfrac{y_{i-1}-y_i}{h}-\frac{1}{2}c_ih-\frac{1}{6}(c_{i-1}-c_i)h\);
+\par4. \(S_i=a_i+b_i(x_i-x)+\dfrac{1}{2}c_i(x_i-x)^2+\dfrac{1}{6}d_i(x_i-x)^3\).
+
+\subsection{Интерполяционный полином Лагранжа.}
+
+\ 
+\parЗадана \(y_i=f(x_i),\ i=\overline{0,n}\). Построить полином Лагранжа \(L_n(x_i)=y_i,\ i=\overline{0,n}\), где \[L_n=\displaystyle\sum^n_0 y_iP_i(x):\ P_i(x)=\left\{\begin{array}{cc}
+    1, & i=j \\
+    0, & i\neq j
+\end{array}\right..\]
+\parТогда этот полином может выглядеть следующим образом: \[P_i(x)=\dfrac{(x-x_0)(x-x_1)...(x-x_{i-1})(x-x_{i+1})...(x-x_n)}{(x_i-x_0)(x_i-x_1)...(x_i-x_{i-1})(x_i-x_{i+1})...(x_i-x_n)}=\prod_{i\neq j}\dfrac{x-x_j}{x_i-x_j}.\]
+\par\textbf{Пример.}
+\par1. Построить полином Лагранжа для двух узлов \(y_0=f(x_0),\ y_1=f(x_1)\).
+\parПодставляем и получаем: \(L(x)=y_0\dfrac{x-x_1}{x_0-x_1}+y_1\dfrac{x-x_0}{x_1-x_0}\) -- уравнение прямой. Проверяем: \(L(x_0)=y_0,\ L(x_1)=y_1\).
+\par2. Построить полином Лагранжа для трех точек.
+\parПодставляем: \(L(x)=y_0\dfrac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}+y_1\dfrac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}+y_2\dfrac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}\).
+
+\subsection{Формула Ньютона.}
+
+\ 
+\parПусть \(f(x_0,x_1,x_2)=\dfrac{f(x_1,x_2)-f(x_0,x_1)}{x_2-x_0}\). Тогда:
+\begin{center}
+\boxed{L_n=f(x_0)+(x-x_0)f(x_0,x_1)+(x-x_0)(x-x_1)f(x_0,x_1,x_2)+...}
+\end{center}
+На самом деле это то же самое, что и форма Лагранжа, но записанное в другом виде.
+
+\subsection{Аппроксимация.}
+
+\ 
+\par\textit{Постановка задачи:} дана табличная функция:
+
+\[\begin{array}{c|c|c|c|c}
+    x & x_0 & x_1 & ... & x_n\\
+    \hline
+    y & y_0 & y_1 & ... & y_n
+\end{array}\]
+\parУсловие прохождения через узлы необязательна, \(\sum||f(x_i)-y_i||\to\min\).
+\par\textit{Метод наименьших квадратов:}
+\parа) Линейная регрессия (модель), то есть \(f(x) = ax + b\); Функция потерь: \(L=(f(x)-y)^2\), функционал -- \(Q=\dfrac{1}{n}\displaystyle\sum_{i=0}^nL(x_i)\); Обучение, найти \(a, b\):
+\[\left\{\begin{array}{l}
+    \dfrac{\partial Q}{\partial a}=0\\
+    \dfrac{\partial Q}{\partial b}=0
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{l}
+    \dfrac{\partial Q}{\partial a}=\dfrac{2}{n}\displaystyle\sum_{i=0}^n(ax_i+b-y_i)x_i=0\\
+    \dfrac{\partial Q}{\partial b}=\dfrac{2}{n}\displaystyle\sum_{i=0}^n(ax_i+b-y_i)=0
+\end{array}\right.\Rightarrow\left\{\begin{array}{l}
+    a\sum x_i^2+b\sum x_i=\sum x_iy_i \\
+    a\sum x_i+b=\sum y_i
+\end{array}\right.\]
+\parАлгоритм реализации:
+\[\begin{array}{c|c|c|c}
+    x & y & x^2 & xy\\
+    \hline
+    x_0 & y_0 & x_0^2 & x_0y_0 \\
+    x_1 & y_1 & x_1^2 & x_1y_1 \\
+    ... & ... & ... & ... \\
+    \hline
+    \sum x_i & \sum y_i & \sum x_i^2 & \sum x_iy_i
+\end{array}\]
+\parб) \(f(x)=ax^2+bx+c\); \(Q=\dfrac{1}{n}\sum(ax_i^2+bx_i+c-y_i)^2\)
+\[\left\{\begin{array}{l}
+    \dfrac{\partial Q}{\partial a}=0\\
+    \dfrac{\partial Q}{\partial b}=0\\
+    \dfrac{\partial Q}{\partial c}=0
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{l}
+    \dfrac{\partial Q}{\partial a}=\dfrac{2}{n}\displaystyle\sum_{i=0}^n(ax_i^2+bx_i+c-y_i)x_i^2=0\\
+    \dfrac{\partial Q}{\partial a}=\dfrac{2}{n}\displaystyle\sum_{i=0}^n(ax_i^2+bx_i+c-y_i)x_i=0\\
+    \dfrac{\partial Q}{\partial a}=\dfrac{2}{n}\displaystyle\sum_{i=0}^n(ax_i^2+bx_i+c-y_i)=0
+\end{array}\right.\Rightarrow\left\{\begin{array}{l}
+    a\sum x_i^4+b\sum x_i^3+c\sum x_i^2=\sum x_i^2y_i \\
+    a\sum x_i^3+b\sum x_i^2+c\sum x_i=\sum x_iy_i \\
+    a\sum x_i^2+b\sum x_i+c=\sum y_i
+\end{array}\right.\]
+\parв) Степенная функция \(f(x)=ax^m\). Возьем логарифм: \(\ln f(x)=\ln a+m\ln x\) -- это на самом деле уже линенйная функция;
+\parг) Показательная функция \(f(x)=ae^{mx}\). Снова возьмем логарифм: \(\ln f(x)=\ln a + mx\);
+\[\left\{\begin{array}{l}
+    m\sum x_i^2+\ln a\sum x_i=\sum x_i\ln y_i \\
+    m\sum x_i+\ln a=\sum \ln y_i
+\end{array}\right.\quad\begin{array}{c|c|c|c}
+    x & \ln y & x^2 & xy\\
+    \hline
+    x_0 & \ln y_0 & x_0^2 & x_0\ln y_0 \\
+    x_1 & \ln y_1 & x_1^2 & x_1\ln y_1 \\
+    ... & ... & ... & ... \\
+    \hline
+    \sum x_i & \sum \ln y_i & \sum x_i^2 & \sum x_i\ln y_i
+\end{array}\]
+\parд) Дробная функция \(f(x)=\dfrac{1}{ax+b}\). Теперь перевернем: \(\dfrac{1}{f(x)}=ax+b\);
+\parе) Логарифмическая \(f(x)=a\ln x+b\);
+\parж) Гипербола \(f(x)=\dfrac{a}{x}+b\);
+\parз) Дробно-рациональная \(f(x)=\dfrac{x}{ax+b}\).
+
+\subsection{Погрешность интерполирования.}
+
+\ 
+\par\(R_n=|f(x)-L_n(x)|,\) \boxed{R_n\le\dfrac{f^{(n+1)}(\xi)}{n+1}\omega(x)}, где \(\omega(x)=\prod(x-x_j)\).
+\par\textbf{Пример.} Определить степень полинома Лагранжа на равномерной сетке, обеспечивающее точность приближения не менее \(10^{-3}\) для функции \(e^x,\ x\in[0,1]\).
+
+\section{Минимизация функций.}
+
+\ 
+\parПостановка \(f(x):\) \(f(x)\to\min,\ x\in X\).
+\par\textbf{Определение.} \(x^*\) называется точкой \textit{глобального минимума}, если \(f(x^*)<f(x),\ \forall x\in X\).
+\par1) Переход к нелинейному уравнению \(f'(x) = 0\Rightarrow \Phi(x)=0\);
+\par2) Приближение функций (интерполирование) \(f(x)=\sum c_i\varphi_i(x)\);
+\par-- в форме Ньютона \(L_2(x)=f(x^k)+(x-x^k)f(x^k,x^{k-1})+(x-x^k)(x-x^{k-1})f(x^k,x^{k-1},x^{k-2})\), где \(f(x^k,x^{k-1})=\dfrac{f(x^k)-f(x^{k-1})}{x^k-x^{k-1}}\approx f'(x),\ f(x^k,x^{k-1},x^{k-2})\approx f''(x)\Rightarrow 2x^{k+1}=x^k+x^{k-1}-\dfrac{f(x^k,x^{k-1})}{f(x^k,x^{k-1},x^{k-2})}\);
+\par3) Метод золотого сечения;
+
+\subsection{Одномерный случай (ФОП).}
+
+\ 
+\par\(f(x)\to\min\ (\exists \textup{ глобальный }\min) \Rightarrow f'(x^*)=0\) -- задача сводится к решению нелинейного уравнения.
+
+\subsection{Минимизация функций многих переменных.}
+
+\ 
+\parПостановка \(f(x)\to\min,\ x = \{x1,x2,...,x_n\}\) -- задача безусловной оптимизации (никаких ограничений нет);
+\par\(x^{k+1}=x^k-\alpha\gra(f(x))\) -- метод градиентного спуска.
+\parЕсли есть ограничения -- задача условной оптимизации:
+\parа) \[\begin{array}{ll}
+    f(x)\to\min, & x = \{x1,x2,...,x_n\} \\
+    g_i(x)=0
+\end{array}\Rightarrow\Phi(x,y)=f(x)+\sum y_ig_i(x);\]
+\parб) \[\begin{array}{ll}
+    f(x)\to\min, & x = \{x1,x2,...,x_n\} \\
+    g_i(x)\le0
+\end{array}\Rightarrow\Phi(x,\varepsilon)=f(x)+\dfrac{1}{\varepsilon}\sum g_i(x)^2.\]
+
+\section{Численное интегрирование.}
+
+\ 
+\par1) Рациональное приближение:
+\par-- интерполяционные формулы (формула прямоугольников \(n=0\), формула трапеций \(n=1\), формула парабол (Симпсона) \(n=2\));
+\par-- формула Гаусса (подбираем узлы интерполирования);
+\par2) Вероятностные методы (метод Монте-Карло);
+\parПостановка задачи \(\int_a^b\rho(x)f(x)dx\approx\displaystyle\sum_{i=0}^nc_if(x_i)\), где \(\rho(x)\) -- весовая функция;
+\par\(\Psi_n=\int_a^b\rho(x)f(x)dx-\sum_{i=0}^nc_if(x_i)\) -- погрешность интегрирования;
+\parОсновные подходы: выбор \(c_i\) или выбор узов интерполирования;
+
+\subsection{Классические квадратурные формулы составного типа.}
+
+\ 
+\par\(\rho(x)=1,\ \int_a^bf(x)dx=\sum_{i=1}^n\int_{x_{i-1}}^{x_i}f(x)dx\)
+
+\end{document}

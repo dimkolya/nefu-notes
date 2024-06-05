@@ -1,0 +1,42 @@
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[margin=1cm,portrait]{geometry}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{MnSymbol}
+\usepackage{wasysym}
+\usepackage{tkz-euclide}
+\usepackage{graphicx}
+\usepackage{chngcntr}
+\usepackage{wrapfig}
+\usepackage{amsfonts}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{geometry}
+\usepackage{physics}
+
+\geometry{legalpaper, paperheight=16383pt, margin=1in}
+\counterwithin*{equation}{section}
+\counterwithin*{equation}{subsection}
+\pagenumbering{gobble}
+
+\DeclareSymbolFont{md}{OMX}{mdput}{m}{n} 
+\DeclareMathSymbol{\intop}{\mathop}{md}{90}
+
+\tikzset{every picture/.append style=
+    {scale=3,
+    axis/.style={->,blue,thick}, 
+    vector/.style={-stealth,red,very thick},
+    vector guide/.style={dashed,black,thick}}}
+
+\DeclareMathOperator\Arg{Arg}
+\DeclareMathOperator\sign{sign}
+\DeclareMathOperator\cond{cond}
+\DeclareMathOperator\const{const}
+\DeclareMathOperator\gra{grad}
+\DeclareMathOperator\fr{fr}
+\DeclareMathOperator\Ln{Ln}
+\DeclareMathOperator\di{div}
+\DeclareMathOperator\rot{rot}
+\DeclareMathOperator\res{res}

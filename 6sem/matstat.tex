@@ -1,0 +1,1145 @@
+\documentclass[9pt]{article}
+\input{header.tex}
+\usetikzlibrary{hobby}
+\usetikzlibrary{decorations.pathmorphing,patterns}
+
+\begin{document}
+
+\begin{center}
+    \huge\textbf{Матстат.}
+\end{center}
+
+\section{Функции случайных величин.}
+
+\subsection{Двумерный случайный вектор.}
+
+\ 
+\par\textbf{Определение.} \(n\)-мерным случайным вектором называется любая измеримая функция \(x(w)=(x_1(w),x_2(w),...,x_n(w))\) со значениями в \(\mathbb R^n\). Данная функция отображает \(\Omega\to\mathbb R^n\).
+\par\textbf{Определение.} Функцией распределения \(f(x)\) случайного вектора \(x(w)\) называется функция \( f(x_1,x_2,...,x_n) = p(X_1<x_1,X_2<x_2,...,X_n<x_n),\ x\in\mathbb R^n\).
+\par\textit{Свойства:}
+\par1. \(\displaystyle\lim_{x\to-\infty}f(x,y)=\lim_{y\to-\infty}f(x,y)=0\);
+\par2. \(\begin{array}{l}
+    \displaystyle\lim_{x\to+\infty}f(x,y)=f_Y(y) \\
+    \displaystyle\lim_{y\to+\infty}f(x,y)=f_X(x) 
+\end{array};\)
+\par3. \(\displaystyle\lim_{x,y\to+\infty}=1\);
+\par4. \(f(x,y)\) --- неубывающая функция своих аргументов непрерывно слева по каждому;
+\par5. \(p(a<X<b,c<Y<d)=(f(b,d)f(a,d))-(f(b,c)f(a,c))\);
+
+
+\parРассмотрим дискретный случай. 
+\par\textbf{Определение.} Двумерный случайный вектор \((x,y)\) называется \textit{дискретным}, если множество его значений не более чем счетно.
+\par\textbf{Определение.} Совокупность возможных значений \((x_i,y_i)\) дискретной случайной величины \((x,y)\) и соответствующих им вероятностей \(p_{ij}=P(X=x_i,Y=y_i)\) называется \textit{законом распределения} вероятностей случайного вектора \((x,y)\).
+
+\parРассмотрим непрерывный случай.
+\par\textbf{Определение.} Пусть \((x,y)\) --- случайный вектор с функцией распределения \(F(x,y)\). Если существует функция \(f(x,y)\) такая, что \[F(x,y)=\int_{-\infty}^x\int_{-\infty}^yf(s,t)dsdt,\] то говорят, что \((x,y)\) --- \textit{абсолютно непрерывный случайный вектор}, а \(f(x,y)\) --- плотность распределения.
+\par\textit{Свойства:}
+\par1. \(f(x,y)\ge0\);
+\par2. \(F(x,y)=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f(s,t)dsdt\);
+\par3. Если \((x,y)\) --- точка непрерывности \(f(x,y)\), то \(f(x,y)\) можно представить как \[f(x,y)=\dfrac{\partial^2f(x,y)}{\partial x\partial y}.\]
+\par4. \(\begin{array}{l}
+    f_X(x)=\int_{-\infty}^{+\infty}f(x,y)dy \\
+    f_Y(y)=\int_{-\infty}^{+\infty}f(x,y)dx
+\end{array};\)
+\par5. \(p((x,y)\in G)=\int_G\int f(x,y)dxdy\).
+\par\textbf{Определение.} \(X\) и \(Y\) независимы \(\Leftrightarrow f(x,y)=f_X(x)f_Y(y)\).
+
+\subsection{Числовые характеристики двумерного случайного вектора.}
+
+\ 
+\par\textbf{Определение.} Математическим ожиданием случайного вектора \((X,Y)\) называется неслучайный вектор \((MX, MY)\).
+\par\textbf{Определение.} Дисперсией случайного вектора \((X,Y)\) называется неслучайный вектор \((DX,DY)\).
+\par\textbf{Определение.} Величина \(\cov(X,Y)=M((X-MX), (Y-MY))\) называется ковариацией.
+\par\textit{Свойства:}
+\par1. \(\cov(X,Y)=M(X,Y)-MX\cdot MY\);
+\par2. \(\cov(X,Y)=\cov(Y,X)\);
+\par3. \(\cov(X,X)=DX\);
+\par4. \(\cov(X+c,Y)=\cov(X,Y+c)=\cov(X,Y)\);
+\par5. \(\cov(cX,Y)=(X,cY)=c\cdot \cov(X,Y)\);
+\par6. \(\cov(X,Y)\le\sqrt{DXDY}\);
+\par7. Если случайные величины \(X\) и \(Y\) независимы, то их \(\cov(X,Y)=0\).
+
+\par\textbf{Определение.} \textit{Непрерывной ковариацией} \(k_{XY}=k(X,Y)=\dfrac{\cov(X,Y)}{\sqrt{DXDY}}\) называется коэффициент корреляции векторов \(X\) и \(Y\).
+\par1. \(k_{XY}=\dfrac{M(XY)}{\sqrt{DXDY}}\);
+\par2. \(k(X,Y)=k(Y,X)\);
+\par3. \(k(X,X)=k(Y,Y)=1\);
+\par4. \(k(X+c,Y)=k(X,Y+c)=k(X,Y)\);
+\par5. \(k(cX,Y)=k(X,cY)=c\cdot k(X,Y)\);
+\par6. \(-1\le k\le1\);
+\par7. Если \(X\) и \(Y\) независимы, то \(k(X,Y)=0\);
+\par8. Если \(k(X,Y)=1\), то определяется линейная зависимость \(x=aY+b,\ a>0\) и \(a<0\), если \(k(X,Y)=-1\);
+
+\subsection{Условное распределение. Условное математическое ожидание.}
+
+\ 
+\par\textbf{Определение.} \textit{Условным распределением} составляющей из \(X\) при условии, что составляющая \(Y\) приняла определенное значение \(g_i\), называется совокупность возможных значений \(X\) и соответсвующие условные вероятности
+\[P(X=X_i/Y=y_i)=\dfrac{P(X=x_i,Y=y_i)}{P(Y=y_i)}.\]
+\par\textit{Свойства:}
+\par1. \(\sum P(X=x_i/Y=y_i)=1\);
+\par2. \(X\) и \(Y\) независимы \(\Leftrightarrow P(X=x_i/Y=y_i)=P(X=x_i)\).
+\par\textbf{Определение.} Условной плотностью распределения вероятностей \(X\) при условии, что \(Y=y,f_Y(y)>0\) называется \[f(x,y)=\dfrac{f(x,y)}{f_Y(y)}.\]
+\par\textit{Свойства:}
+\par1. \(\int_{-\infty}^{+\infty}f(x/y)dx=1\);
+\par\textbf{Определение.} \((X,Y)\) --- дискретная случайная величина. Тогда \(M(X/Y=y_i)=\sum x_i\cdot P(X=x_i/Y=y_i)\) называется \textit{условным математическим ожиданием}.
+\par\textbf{Определение.} Пусть \((X,Y)\) --- непрерывная случайная величина. Тогда \[M(X,Y=y_i)=\int_{-\infty}^{+\infty}x\cdot f(x/y)dx.\]
+\par\textit{Свойства:}
+\par1. Если \(X\) и \(Y\) независимы, то условное матожидание перестает быть таковым, т.е \(M(X,Y)=MX\);
+\par2. \(M(M(X/Y))=MX\).
+
+\par\textbf{Пример.}
+\par1. \((x,y):f(x,y)=C\cos x\cos y,\{0\le x\le \frac{\pi}{4}, 0\le y\le \frac{\pi}{2}\}\), вне квадрата \(f(x,y)=0\). Найти:
+\parа) \(C=?\);
+\parб) Вероятность попадания случайной точки \((x,y)\) в область \(x=0,x=\frac{\pi}{6},y=0,y=\frac{\pi}{6}\);
+\parв) \(f_Y(y)=?\);
+\parг) Матожидание, дисперсию \((x,y),\ k_{XY}\);
+\par\textit{Решение:}
+\parа) Мы знаем, что \(\int_{-\infty}^{+\infty}f(x/y)dx=1\Rightarrow \int_0^{\frac{\pi}{4}}\int_0^{\frac{\pi}{4}}C\cos x\cos ydxdy=1\Rightarrow C=2\);
+\parб) Формула \(P(a<x<b,c<y<d)=\int_a^b\int_c^df(x,y)dxdy\Rightarrow P(0<x<\frac{\pi}{6},0<y<\frac{\pi}{6})=\frac{1}{2}\);
+\parв) \(f_Y(y)=\int_{-\infty}^{+\infty}f(x,y)dx=\int_0^\frac{\pi}{4}2\cos x\cos ydx = \sqrt2\cos y\);
+\parг) \(M(X,Y)=(MX,MY), D(X,Y)=(DX,DY); MX=\int_0^\frac{\pi}{4}\int^\frac{\pi}{4}2x\cos x\cos ydxdy, M(X,Y)=\int\int xyf(x,y)dxdy\).
+
+\subsection{Функция двух случайных величин.}
+
+\ 
+\parПусть дана плотность двумерного случайного вектора \((X,Y):f(x,y)\). Пусть задана некоторая функция \(g(X,Y)=z\). Тогда \(F_Z(z)=P(Z<z)=\int_{g(x,y)<z}\int f(x,y)dxdy\).
+\parПусть \((X,Y)\) --- дискретный случайный вектор. Пусть \(z=x+y\). Тогда закон распределения \(P(Z=z_k)=\displaystyle\sum_{i,j:x_i+y_i=z_k}P(X=x_i,Y=y_i)\). А если \(X\) и \(Y\) независимы, то \(P(Z=z_k)=\sum P(X=x_i)P(Y=y_i)\).
+\parПусть \((X,Y)\) --- непрерывный случайный вектор. \(z=x+y,z=x-y,z=xy,z=\frac{x}{y}\).
+\[f_{X+Y}(z)=\int f_X(z-y)f_Y(y)dy=\int f_X(x)f_Y(z-x)dx\]
+\[f_{XY}(z)=\int_0^{+\infty}\dfrac{1}{y}f_X(\dfrac{z}{y})f_Y(y)dy-\int_{-\infty}^0\dfrac{1}{y}f_X(\dfrac{z}{y})f_Y(y)dy\]
+\[f_{\frac{X}{Y}}(z)=\int_0^{+\infty}\dfrac{x}{z^2}f_X(x)f_Y(\dfrac{x}{z})dx-\int_{-\infty}^0\dfrac{x}{z^2}f_X(x)f_Y(\dfrac{x}{z})dx\]
+
+
+\par\textbf{Пример.}
+\par1. Независимые случайные величины имеют распределение \(R[0;1]\). \(f_{X+Y}=?.\)
+\parРешение: \(f_X(x)=\left\{\begin{array}{ll}
+    1, & x\in[0,1] \\
+    0, & x\notin[0,1]
+\end{array}\right.\)
+\par2. Имеется 15 урн. В 5 урнах по 4 белых и 4 черных шара \(U\), в 10 урнах 2 черных и 8 белых \(V\). Из каждой урны извлекается по 2 шарика. \(X=\{\textup{число извлеченных черных шаров}\}\). \(MX,\sigma X\).
+\par\textit{Решение.} \(MU_1 \cdot 5 = MU, MV_1\cdot 10=MV\). \(MU_1=1, DU_1=\frac{3}{7}\).
+\par3. \(z=\dfrac{-x+5}{y+2}, MZ,DZ=?\)
+
+\subsection{Характеристическая функция.}
+
+\ 
+\par\textbf{Определение.} Комплекснозначной случайной величиной \(z\) называется случайная величина \(x+iy\). В тригонометрической форме \(z=r(\cos\varphi + i\sin\varphi)\).
+\parМатематическим ожиданием комплекснозначной случайной величины называется величина \(MZ=MX+iMY\). Характеристической функцией \(\varphi(t)\) случайной величины в \(X\) называется функция определенная при \(t\in(-\infty,+\infty)\) и \(\varphi(t)=Me^{itX}=M(\cos(tX)-i\sin(tX))\). Если \(F(x)\) --- функция распределения, то \(\varphi(t)=\int_{-\infty}^{+\infty}e^{itX}dF(x)\), \(f(x)\) --- плотность распределения: \(\varphi(t)=\int_{-\infty}^{+\infty}e^{itX}f(x)dx\). Для дискретного сулчая \(\varphi(t)=\displaystyle\sum_ke^{itx_k}\cdot P(X=x_k)\).
+\par\textit{Свойства:}
+\par1. \(\varphi(0)=1,|\varphi(t)|\le1\);
+\par2. Если \(\varphi(t)\) --- характеристическая функция \(X\) и \(Y=aX+b\), то \(\varphi_y(t)=e^{itb}\varphi(at)\);
+\par3. Если \(\exists M|X|^m\), то \(\varphi^{(k)}(0)=i^k\cdot MX^k,\ k=\overline{1,m}\);
+\par\textbf{Утверждение.} Сумма $n$ независимых случайных величин, имеющих распределение Бернулли $p$, имеют биномиальное распределение с \(n\) и \(p\).
+\par\textbf{Утверждение.} Если случайные величины \(X\) и \(Y\) независимы и имеют распределение Пуассона с параметрами \(\lambda_1,\lambda_2\) соответственно, то величина \(X+Y\) имеет распределение Пуассона с параметром \(\lambda_1+\lambda_2\).
+
+\section{Математическая статистика.}
+
+\ 
+\parСбор, обработка и анализ данных.
+
+\subsection{Точечное оценивание.}
+
+\subsubsection{Выборка. Вариацоинный ряд.}
+
+\ 
+\par\(\Omega\) --- пространство всевозможных исходов. \(\Omega\to G^n\) --- \textit{генеральная совокупность}. \(X\to\xi,\eta,\zeta\).
+\parРассматривается некоторая \textit{выборка} \(\xi=(\xi_1,...,\xi_n),\ \xi_i\) --- элементы выборки, а \(n\) --- объем выборки. Если эксперимент произведен \(x=(x_1,...,x_n)\) --- \textit{реализация выборки}. Каждой реализации выборки можно поставить в соответствие упорядоченную последовательность \(x_{(1)}\le x_{(2)}\le...\le x_{(n)}\). Тогда такая последовательность \(\{x_{(i)}\}\) будет называться \textit{вариационным рядом}.
+\parПусть \(\xi^*\) --- дискретная случайная величина. \(\sum n_k=n,\sum \frac{n_k}{n}=1\)
+\[\begin{array}{c|c|c|c|c}
+    \textup{варианты } x_{(i)} & x_{(1)} & x_{(2)} & ... & x_{(n)} \\
+    \hline
+    \textup{частоты } n_i & n_1 & n_2 & ... & n_k \\
+    \hline
+    \textup{относительные частоты} \frac{n_i}{n} & \frac{n_1}{n} & \frac{n_2}{n} & ... & \frac{n_k}{n}
+\end{array}\]
+\parПусть \(\xi^*\) --- непрерывная случайная величина.
+\par1. \(l=1+[3,322\cdot\lg n]\) --- число интервалов, на которые мы будем делить нашу выборку;
+\par2. \(h=\dfrac{x_{\max}-x_{\min}}{l - 1}\) --- шаг интервала;
+\par3. \(x_\textup{нач}=x_{\min}-0,5\cdot h\) --- начало первого интервала.
+\[\begin{array}{c|c|c|c|c}
+    [x_i;x_{i+1}) & [\Tilde{x}_1;\Tilde{x}_2) & [\Tilde{x}_2;\Tilde{x}_3) & [\Tilde{x}_3;\Tilde{x}_4) & ...  \\
+    \hline 
+    x_i^* & \frac{\Tilde{x}_1+\Tilde{x}_2}{2} & \frac{\Tilde{x}_2+\Tilde{x}_3}{2} & \frac{\Tilde{x}_3+\Tilde{x}_4}{2} & ... \\
+    \hline
+    n_i & n_1 & n_2 & n_3 & ... \\
+    \hline
+    \frac{n_i}{n} & \frac{n_1}{n} & \frac{n_2}{n} & \frac{n_3}{n} & ...
+\end{array}\]
+здесь \(n_i\) --- количество значений в интервале
+
+\subsubsection{Эмпирическая функция распределения.}
+
+\ 
+\parСтатистическим аналогом функции распределения вероятностей случайной величины \(\xi^*\) является эмпирическая функция распределния.
+\par\textbf{Определение.} \textit{Эмпирической функцией распределения}, построенной по выборке \(\xi^*\) называется случайная функция \(F_n(x):\mathbb R\times\Omega\to[0;1]\). Обычно \(F_n(x)=\dfrac{1}{n}\displaystyle\sum_{i=1}^nI(\xi_i<x),\ F_n(-\infty)=0,F_n(+\infty)=1\).
+\[F_n(x)=\left\{
+\begin{array}{ll}
+    0, & x\le x_{(1)} \\
+    \dfrac{n_1}{n}, & x_{(1)}<x\le x_{(2)}\\
+    \dfrac{n_1}{n}+\dfrac{n_2}{n}, & x_{(2)}<x\le x_{(3)}\\
+    \hdots \\
+    \dfrac{1}{n}\displaystyle\sum_{i=1}^{m-1}n_i, & x_{(m-1)}<x\le x_{(m)}\\
+    1, & x>x_{(m)}
+\end{array}
+\right.\quad F_n(x)=\left\{
+\begin{array}{ll}
+    0, & x\le \Tilde{x}_{1} \\
+    \dfrac{n_1}{n}, & \Tilde{x}_{1}<x\le \Tilde{x}_{2}\\
+    \dfrac{n_1}{n}+\dfrac{n_2}{n}, & \Tilde{x}_{2}<x\le \Tilde{x}_{3}\\
+    \hdots \\
+    \dfrac{1}{n}\displaystyle\sum_{i=1}^{l-1}n_i, & \Tilde{x}_{l-1}<x\le \Tilde{x}_{l}\\
+    1, & x>\Tilde{x}_{l}
+\end{array}
+\right.\]
+
+\par\textbf{Теорема.} Пусть дана некоторая выборка \(\xi=(\xi_1,...,\xi_n),\ F_{\xi_i}=F_{\xi^*}(x),i=\overline{1,n}\). Пусть \(F_n(x)\) --- эмпирическая функция распределения по выбобрке \(\xi\). Тогда для \(\forall x\in\mathbb R:\ F_n(x)\to F_{\xi^*}(x)\) при \(n\to\infty\).
+\par\textit{Свойства:}
+\par1. \(MF_n(x)=F_{\xi^*}(x)\);
+\par2. \(DF_n(x)\to0\) при \(n\to\infty\);
+
+\subsubsection{Гистограмма и полигон относительных частот. Медиана и мода реализации выборки.}
+
+\ 
+\parСтатистическими аналогами плотности распределения вероятностей наблюдаемой случайной величины \(\xi^*\) являются \textit{полигон и гистограмма}.
+\par\textbf{Определение.} Полигон относительных частот --- это ломаная, отрезки которой соединяют точки с координатами \((x_i,\frac{n_i}{n})\).
+\parДля непрерывного случая будут точки \((x_i^*,\frac{n_i}{n})\).
+\par\textbf{Определение.} Гистограммой относительных частот называют ступенчатую фигуру, состояющую из \(l\) прямоугольников, с основаниями интервала длины \(h\) и с высотами \(\frac{n_i}{nh}\). Площадь гистограммы равна единице.
+\par\textbf{Определение.} Пусть \(\xi^*\) --- дискретная случайная величина. Тогда \textit{мода} \(M_o=x_{(k)}, n_k=\max\{n_1,..,n_m\}\) --- варианта с максимальной частотой.
+\parЕсли \(n\) четное, то медиана \(M_e=\frac{1}{2}(x_{(\frac{n}{2})}+x_{(\frac{n}{2}+1)}\), иначе \(M_e=x_{(\frac{n+1}{2})}\).
+\par\textbf{Определение.} Пусть \(\xi^*\) --- непрерывная случайная величина. Тогда \(M_o=x_0+h\dfrac{n_i-n_{i-1}}{(n_i-n_{i-1})+(n_i-n_{i+1})}\), где \(n_i\) --- частота модального интервала. Медиана \(M_e=x_e+h\dfrac{\frac{n}{2}-N_{i-1}}{n_i}\), где \(x_e\) --- начало медианного интервала, а \(N_{i-1}\) --- сумма всех предыдуших частот до медианного.
+
+\subsubsection{Точечные оценки. Свойства оценок.}
+
+\ 
+\parПусть дана некоторая выборка \(\xi=(\xi_1,...,\xi_n)\). У данной выборки есть функция распределения \(F_{\xi^*}(x;\theta),\ \theta\in\Theta\).
+\parОсновные параметрические модели \((\xi^*)\).
+\par1. Нормальная модель 1. \(N(\theta,\sigma^2),\quad f(x)=\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\theta)^2}{2\sigma^2}}\);
+\par2. Нормальная модель 2. \(N(a,\theta),\quad f(x)=\dfrac{1}{\sqrt{2\pi}\theta}e^{-\frac{(x-a)^2}{2\theta^2}}\);
+\par3. Равномерная модель 1. \(R[0,\theta],\quad f(x)=\left\{
+\begin{array}{ll}
+    \frac{1}{\theta}, & x\in[0,\theta] \\
+    0, & x\notin[0,\theta]
+\end{array}\right.\);
+\par4. Равномерная модель 2. \(R[\theta_1,\theta_2],\quad f(x)=\left\{
+\begin{array}{ll}
+    \frac{1}{\theta_2-\theta_1}, & x\in[\theta_1,\theta_2] \\
+    0, & x\notin[\theta_1,\theta_2]
+\end{array}\right.\).
+\par\(B_i(n,\theta)\) --- биномиальное распределение, \(\Pi(\theta)\) --- пуассоновское распределение, \(E(\theta)\).
+\par\textbf{Определение.} Случайная величина \(T(\xi)\), являющаяся функцией от выборки \(\xi\), называется \textit{статистикой}.
+\par\textbf{Определение.} Статистика \(T(\xi)\) называется \textit{оценкой неизвестного параметра} \(\theta\) распределения случайной величины \(\xi^*\), если \(T(x)\approx\Theta\ \forall x\).
+\par\textbf{Определение.} Статистика \(T(\xi)\) называется \textit{несмещенной оценкой неизвестного параметра} \(\theta\), если \(M(T(\xi))=\theta,\ \theta\in\Theta\). Свойство несмещенности оценки означает отсутствие ошибки в приближении в среднем.
+\par\textbf{Определение.} Статистика \(T(\xi)\) называется \textit{состоятельной оценкой неизвестного параметра} \(\theta\), если \(T(\xi)\to\theta,\ n\to\infty\). Свойство состоятельности оценки означает, что при увеличении числа наблюдений последовательность оценок приближается к оцениваемому параметру.
+
+\subsubsection{Выборочные характеристики.}
+
+\ 
+\par\textit{1. Выборочное среднее.} \(\overline\xi=\dfrac{1}{n}\displaystyle\sum_{i=1}^n\xi_i\) матожидание;
+\par\textit{2. Выборочная дисперсия.} \(S^2=\dfrac{1}{n}\displaystyle\sum_{i=1}^n(\xi_i-\overline\xi)^2\) дисперсия;
+\par\textit{3. Исправленная выборочная дисперсия.} \(\hat S^2=\dfrac{1}{n - 1}\displaystyle\sum_{i=1}^n(\xi_i-\overline\xi)\). \(\hat S^2\);
+\par\textit{4. Выборочное среднеквадратическое отклонение.} \(S=\sqrt{S^2},\ \hat S=\sqrt{\hat S^2}\);
+\par\textit{5. Выборочные начальный момент \(k\)-го порядка.} \(\overline\xi^k=\dfrac{1}{n}\displaystyle\sum_{i=1}^n\xi^k_i\);
+\par\textit{6. Выборочный центральный момент \(k\)-го порядка.} \(M_k=\dfrac{1}{n}\displaystyle\sum_{i=1}^n(\xi_i-\overline{\xi})^k\);
+\par\textit{7. Выборочный коэффициент асимметрии.} \(A_1=\dfrac{M_3}{nS^3}\);
+\par\textit{8. Выборочный коэффициент эксцесса.} \(A_2=\dfrac{M_4}{nS^4}-3\).
+
+\subsubsection{Эффективные оценки. Неравенство Рао-Крамера.}
+
+\ 
+\parПусть \(f(x;\theta)=f(x_1,...,x_n,\theta)\) -- плотность распределения вероятностей выборки \(\xi=(\xi_1,\xi_2,...,\xi_n)\). В силу независимости \(\xi_i,i=\overline{1,n}\), имеем 
+\[f(x;\theta)=f(x_1;\theta)\cdot...\cdot f(x_n;\theta)=\displaystyle\prod_{i=1}^nf(x_i;\theta).\]
+\par\textbf{Определение.} Случайная величина \(f(\xi;\theta)=\displaystyle\prod_{i=1}^nf(\xi_i;\theta)\) называется \textit{функцией правдоподобия}. Случайная величина \(U(\xi;\theta)=\dfrac{\partial \ln f(\xi;\theta)}{\partial \theta}\) называется \textit{функцией вклада}. Матожидание функции вклада равна нулю.
+\par\textbf{Определение.} \textit{Информацией Фишера}, содержащейся в выборке \(\xi\), называется величина \(i_n(\theta)=DU(\xi;\theta)\). Информацией Фишера, содержащейся в одном наблюдении, называется величина \(i(\theta)=i_1(\theta)=DU(\xi_1;\theta)\).
+\par\textbf{Теорема (неравенство Рао-Крамера).} Пусть задана регулярная параметрическая модель. Для любой несмещенной оценки \(T(\xi)\) неизвестной функции \(\tau(\theta)\) справедливо неравенство 
+\[DT(\xi)\ge\dfrac{(\tau'(\theta))^2}{ni(\theta)}.\]
+\par\textbf{Определение.} Несмещенная оценка \(T(\xi)\) неизвестной функции \(\tau(\theta)\) называется эффективной, если 
+\[DT(\xi)=\dfrac{(\tau'(\theta))^2}{ni(\theta)}.\]
+
+\subsubsection{Достаточные статистики.}
+
+\ 
+\par\textbf{Определение.} Статистика \(T(\xi)\) называется достаточной для параметра \(\theta\), если условная плотность \(f(x|T(\xi)=t)\) случайного вектора \(\xi=(\xi_1,...,\xi_n)\) не зависит от параметра \(\theta\).
+\par\textbf{Теорема (критерий факторизации).} Для того, чтобы статистика \(T(\xi)\) была достаточной для параметра \(\theta\), необходимо и досточно, чтобы функция правдоподобия \(f(\xi;\theta)\) имела вид \[f(\xi;\theta)=g(T(\xi);\theta)\cdot h(\xi).\]
+
+\subsubsection{Функции от достаточных статистик.}
+
+\ 
+\par\textbf{Теорема (Рао-Блекулла-Колмогорова).} Оптимальная оценка, если существует, является функцией от достаточной статистики.
+\par\textbf{Определение.} Достаточная статистика \(T(\xi)\) называется \textit{полной}, если для всякой функции \(\varphi(T(\xi))\) из того, что \(M\varphi(T(\xi))=0\ \forall\theta\in\Theta\) следует, что \(\varphi(T(\xi))\equiv0\) на всем множестве значений статистики \(T(\xi)\).
+
+\subsubsection{Оценки максимального правдоподобия.}
+
+\ 
+\parПусть \(\xi=(\xi_1,\xi_2,...,\xi_n)\) --- выборка из некоторого распределения \(F_\xi(x;\theta)\), известным образом зависящее от неизвестного параметра \(\theta\in\Theta\), где \(\Theta\) --- параметрическое множество, и \(f(\xi;\theta)\) функция правдоподобия.
+\par\textbf{Определение.} \textit{Оценкой максимального правдоподобия (ОМП)} \(\hat{\theta}\) параметра \(\theta\) называется такая точка параметрического множества \(\Theta\), в которой функции правдоподобия \(f(\xi;\theta)\) при заданном \(x\) достигает максимума, т.е.
+\[f(x;\hat{\theta})=\sup_{\theta\in\Theta}f(x;\theta).\]
+Если для каждого \(x\) из выборочного пространства максимум \(f(x;\theta)\) достигается во внутренней точке \(\Theta\) и \(f(x;\theta)\) дифференцируема по \(\theta\), то ОМП \(\hat{\theta}\) удовлетворяет уравнениям
+\[\dfrac{\partial f(\xi;\theta)}{\partial\theta}=0\textup{ или }\dfrac{\ln f(\xi;\theta)}{\partial \theta}=0,\]
+которые называют \textit{уравнениями правдоподобия}.
+
+\subsection{Интервальное оценивание.}
+
+\ 
+\par\textbf{Определение.} \textit{Доверительным интервалом (ДИ)} для неизвестного параметра \(\theta\) распределения случайной величины \(\xi^*\) соответствующей доверительной вероятности \(\beta\) называется случайный интервал \((T_1(\xi);T_2(\xi)):P(T_1(\xi)<\theta<T_2(\xi))=\beta\).
+\par\(\beta=0,9,\ 0,99,\ 0,999,\ ... \neq 1\).
+\parПусть ДИ задается в виде \((T(\xi)-\varepsilon;T(\xi)+\varepsilon),\) где \(T(\xi)\) --- точечная оценка параметра \(\theta\). Тогда задача отыскания данного \(T(\xi)\) сводится к определению распределения \(\xi^*\) значения \(\varepsilon\) из условия \(P(|T(\xi)-\theta|<\varepsilon)=\beta\).
+\par1) ДИ для матожидания \(M\xi^*\) нормального распределения при известной дисперсии \(D\xi^*=\sigma^2\) будет называться интервал \(P(\overline\xi-\dfrac{t_\beta\sigma}{\sqrt{n}}<M\xi^*<\overline\xi+\dfrac{t_\beta\sigma}{\sqrt{n}})=\beta=2\Phi_0(t_\beta)\), где \(\Phi_0(x)=\dfrac{1}{\sqrt{2\pi}}\int_0^xe^{-\frac{t^2}{2}}dt\).
+\par2) ДИ для матожидания \(M\xi^*\) нормального распределения при неизвестной дисперсии \(D\xi^*\) будет называться интервал \(P(\overline\xi-\dfrac{t_\beta\hat{S}}{\sqrt{n}}<M\xi^*<\overline\xi+\dfrac{t_\beta\hat{S}}{\sqrt{n}})=\beta=s\int_0^{t_\beta}T_{n-1}(u)du\), где \(T_{n-1}(x)\) --- плотность распределения Стьюдента с \(n-1\) степенями свободы.
+\par\textbf{Замечание.} При \(n>30\) допускается использование предыдущей формулы.
+\par3) ДИ для дисперсии \(D\xi^*\) нормального распределния при известном матожидании \(M\xi^*=a\) и при малых \(n\): \(P(\dfrac{nS_a^2}{t_2}<D\xi^*<\dfrac{nS_a^2}{t_1})=\beta=\int_{t_1}^{t_2}\chi^2_n(u)du\), где \(S_a^2=\dfrac{1}{n}\displaystyle\sum_{i=1}^n(\xi_i-a)^2\).
+\par4) ДИ для дисперсии \(D\xi^*\) нормального распредления при известном матожидании \(M\xi^*=a\) и при больших \(n\): \(P(S_a^2-t_\beta\sigma_{S^2_a}<D\xi^*<S_a^2+t_\beta\sigma_{S^2_a})=\beta=2\Phi_0(t_\beta)\), где \(\sigma_{S^2_a}=\sqrt{\dfrac{M_4-S^4_a}{n}},\ M_4=\dfrac{1}{n}\displaystyle\sum_{i=1}^n(\xi_i-a)^4\).
+\par5) ДИ для дисперсии \(D\xi^*\) нормального распределения при неизвестном матожидании \(M\xi^*\) и при малых \(n\): \(P(\dfrac{(n-1)\hat{S}^2}{t_2}<D\xi^*<\dfrac{(n-1)\hat{S}^2}{t_1})=\beta=\int_{t_1}^{t_2}\xi^2_{n-1}(u)du\).
+\par6) ДИ для дисперсии \(D\xi^*\) нормального распределния при неизвестном матожидании \(M\xi^*\) и при больших \(n\): \(P(\hat{S}^2-t_\beta\sigma_{\hat{S}^2}<D\xi^*<\hat{S}^2+t_\beta\sigma_{\hat{S}^2})=\beta=2\Phi_0(t_\beta)\), где \(\sigma_{\hat{S}^2}=\sqrt{\dfrac{M_4}{n}-\dfrac{n-3}{n(n-1)}\hat{S}^4}\).
+\par7) ДИ для среднего квадратического отклонения \(\sigma(\xi^*)\) нормального распределения: \(P(\hat{S}(1-q)<\sigma(\xi^*)<\hat{S}(1+q))=\beta=\int_{\frac{\sqrt{n-1}}{1+q}}^{\frac{\sqrt{n-1}}{1-q}}Q_{n-1}(u)du\).
+\par8) Если требуется оценить матожидание \(M\xi^*\) с заданной точностью \(\varepsilon\) и доверительной вероятностью \(\beta\), то минимальный объем выборки, который обеспечит эту точность можно вычислить по следующей формуле: \(n=\dfrac{t_\beta^2\sigma^2}{\varepsilon^2}\).
+
+\subsection{Проверка статистических гипотез.}
+
+\subsubsection{Статистическая гипотеза и статистический критерий.}
+
+\ 
+\par\textbf{Опредление.} \textit{Статистической гипетозой} называют любое утверждение о виде или свойствах распределения наблюдаемой в эксперименте случайной величины.
+\par\textbf{Опредление.} Если по статистическим данным сформулирована та или иная гипотеза, то ее называют \textit{основной гипотезой} \(H_0\).
+\par\textbf{Определение.} Любое распределение случайной величины \(\xi^*\), которое может оказаться истинным, но отлично от основной гипотезы называется \textit{альтернативная гипотеза} \(H_1\).
+\par\textbf{Определение.} Правило, по которому, проверяемая основная гипотеза принимается или отвергается, назыавется статистическим критерием
+\[\delta(\xi)=\left\{
+\begin{array}{ll}
+    H_0, & \xi\notin A \\
+    H_1, & \xi\in A
+\end{array}\right.,\]
+где \(A\) --- критическая область, область, в которой принимается альтернативная гипотеза.
+\par\textbf{Опредление.} Для заданного критерия \(\delta(\xi)\) говорят, что произошла \textit{ошибка 1-го рода}, если основная гипотеза отвергнута в то время, как она верна. Вероятность ошибки 1-го рода \(\alpha_1(\delta)=P_{H_0}(\delta(\xi)\neq H_0)\) --- \textit{уровень значимости}.
+\par\textbf{Определение.} Для заданного критерия \(\delta(\xi)\) говорят, что произошла \textit{ошибка 2-го рода}, если альтерная гипотеза отвергнута в то время, как она верна. Вероятность ошибки 2-го рода \(\alpha_2(\delta)=P_{H_1}(\delta(\xi)\neq H_1)\), \(1-\alpha_2(\delta)\) --- \textit{мощность критерия}.
+\begin{center}
+\begin{tikzpicture}[level distance=1em,every node/.style={shape=rectangle,draw,align=center}]
+\node{\(H_0\) --- истина\\ \(H_1\) --- ложь}[sibling distance=3em]
+   child{node{\(H_0\) принято}
+      child{node{верное решение}}}
+   child{node{\(H_0\) отвергнуто}
+      child{node{ошибка I-го рода}}};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}[level distance=1em,every node/.style={shape=rectangle,draw,align=center}]
+\node{\(H_0\) --- истина \\ \(H_1\) --- ложь}[sibling distance=3em]
+   child{node{\(H_0\) принято}
+      child{node{ошибка II-го рода}}}
+   child{node{\(H_0\) отвергнуто}
+      child{node{верное решение}}};
+\end{tikzpicture}
+\end{center}
+\par\textbf{Основные виды статистических гипотез.}
+\par1) \textit{Гипотеза о виде распределения.} Пусть произведено \(n\) независимых наблюдений над \(\xi^*\) и есть функция \(F_{\xi^*}\).
+\[H_0:F_{\xi^*}(x)\in\{F(x,\theta),\theta\in\Theta\}\]
+это означает, что фиксируется вид неизвестной функции распределения вероятностей неизвестной случайной величины с областью допустимых значений неизвестного параметра.
+\par2) \textit{Гипотеза однородности.} Пусть произведено \(k\) серий независимых наблюдений, если можно с достаточной надежностью считать, что закон распределения от серии к серии не менялся, то говорят, что статистические данные однородные
+\[H_0:F_1(x)=F_2(x)=...=F_n(x)\]
+\[H_1:F_i(x)\neq F_j(x)\ \forall i,j\]
+\par3) \((X,Y)\) и есть функция распределения \(F(x,y)\)
+\[H_0:F(x,y)=F(x)\cdot F(y)\]
+\[H_1:F(x,y)\neq F(x)\cdot F(y)\]
+
+\subsubsection{Критерии о виде распределения (критерии согласия)}
+
+\ 
+\par\textbf{1. Критерий Пирсена:}
+\par\(H_0:\ F_{\xi^*}(x)=F(x)\), \(H_1:\ F_{\xi^*}(x)\neq F(x)\); \parСтатистика критерия: \(\chi^2=\displaystyle\sum_{i=1}^l\dfrac{(n_i-np_i)^2}{np_i}\), где \(l\) --- количество интервалов, \(n_i\) --- частоты, \(n\) --- объем выборки и \(p_i\) --- теоретическая вероятность.
+\[\delta(\xi)=\left\{\begin{array}{ll}
+    H_0, & \chi^2\notin A \\
+    H_1, & \chi^2\in A
+\end{array}\right.,\quad A:(t_\alpha;+\infty),\]
+где \(t_\alpha\) ищется по приложению №4 (\(l-r-1;\alpha\)), \(r\) --- сколько выборок рассматривается, \(\alpha\) --- уровень значимости.
+\par\textit{Вывод.} Статические данные не противоречат заданной гипотезе/основная гипотеза отвергается, принимается альтернативная гипотеза.
+\par\textit{Замечание.} \(F_{\xi^*}(x)\) может быть как разрывной, так и непрерывной функцией. Данный критерий оптимален когда \(n\ge50,n_i\ge5\), но это не критично.
+\par\textbf{2. Критерий Колмогорова:}
+\par\(H_0:\ F_{\xi^*}(x)=F(x)\), \(H_1:\ F_{\xi^*}(x)\neq F(x)\);
+\parСтатистика критерия \(D_n=\displaystyle\sup_{-\infty<x<+\infty}|F_n(x)-F_{\xi^*}(x)|\);
+\[\delta(\xi)=\left\{\begin{array}{ll}
+    H_0, & \sqrt{n}D_n\notin A \\
+    H_1, & \sqrt{n}D_n\in A
+\end{array}
+\right.,\quad A:(\lambda_\alpha,+\infty),\]
+где \(\lambda_\alpha\) ищется по приложению №5.
+\par\textit{Замечание.} Данный критерий оптимален, если \(F_{\xi^*}(x)\) --- непрерывная функция и \(n>20\).
+
+\subsubsection{Критерии однородности распределения}
+
+\ 
+\par\textbf{1. Критерий Пирсена:}
+\par\(H_0:\ F_1(x)=F_2(x)=...=F_k(x),\ H_1:\ F_i\neq F_j\);
+\parСтатистика критерия: \(\xi^2=n\left(\displaystyle\sum_{i=1}^s\sum_{j=1}^k\dfrac{v_{ij}}{n_jv_i}-1\right)\), где \(s\) --- число интервалов, \(k\) --- количество выборок, \(v_i\) --- частота попадания элементов объединенной выборки в \(i\)-й интервал, \(v_{ij}\) --- частота попадания элементов \(j\)-й выборки в \(i\)-й интервал, \(n_j\) --- объем \(j\)-й выборки.
+\[\delta(\xi)=\left\{\begin{array}{ll}
+    H_0, & \chi^2\notin A \\
+    H_1, & \chi^2\in A
+\end{array}\right.,\quad A:(t_\alpha;+\infty),\]
+где \(t_\alpha\) ищется как пересечение \(((s-1)(k-1),\alpha)\) по приложению №4.
+\par\textit{Замечание.} \(F_{\xi^*}(x)\) может быть как разрывной, так и непрерывной функцией. Число проверяемых выборок может быть любым.
+\par\textbf{2. Критерий Колмогорова:}
+\par\(H_0:\ F_n(x)=F_m(x),\ H_1:\ F_n\neq F_m(x)\);
+\parСтатистика критерия \(D_{nm}=\displaystyle\sup_{-\infty<x<+\infty}|F_n(x)-F_m(x)|\);
+\[\delta(\xi)=\left\{\begin{array}{ll}
+    H_0, & \sqrt{\dfrac{nm}{n+m}}D_{nm}\notin A \\
+    H_1, & \sqrt{\dfrac{nm}{n+m}}D_{nm}\in A
+\end{array}
+\right.,\quad A:(\lambda_\alpha,+\infty),\]
+\par\textit{Замечание.} \(F_{\xi^*}\) --- непрерывная, \(n,m\ge20\).
+\par\textbf{3. Ранговый критерий Вилкоксона:}
+\par\(H_0:\ F_n(x)=F_m(x),\ H_1:\ F_n(x)\neq F_m(x),\quad n\le m\);
+\parСтатистика критерия \(W=\displaystyle\sum_{i=1}^nR_i\), где \(R_i\) --- ранги, \(R_i=\displaystyle\dfrac{1}{n_x}\sum_{x_i=x}i\).
+\[A:(-\infty;W_1)\cup(W_2;+\infty)\]
+\par1) \(n,m\le25\Rightarrow W_1:\) приложение №8 (\(n,m,\alpha/2\));
+\par2) \(W_1=\left\lfloor\dfrac{(n+m+1)n-1}{2}-t_\alpha\sqrt{\dfrac{nm(n+m+1)}{12}}\right\rfloor,\) где \(t_\alpha\) из приложения №2, \(\Phi_0(t_\alpha)=\dfrac{1-\alpha}{2}\).
+\par3) \(W_2=(n + m + 1)n-W_1\).
+
+\subsubsection{Критерии сравнения дисперсий}
+
+\ 
+\par\textbf{1. Критерий Фишера:}
+\par\(H_0:\ D\xi^*=D\eta^*,\ H_1:\ D\xi^*\neq D\eta^*\);
+\parСтатистика критерия \(F_{nm}=\dfrac{\hat{S}^2_n}{\hat{S}^2_m}\);
+\[\delta(\xi)=\left\{
+\begin{array}{ll}
+    H_0, & F_{nm}\notin A \\
+    H_1, & F_{nm}\in A
+\end{array}\right.,\quad A:(F;+\infty),\]
+где \(F\) из приложения №7 (\(\frac{\alpha}{2},n,m\)).
+\par\textbf{2. Критерий Бартлетта:}
+\par\(H_0:\ D\xi_1^*=D\xi_2^*=...=D\xi_l^*,\ H_1:\ D\xi_i^*\neq D\xi_j^*\);
+\parСтатистика критерия \(B=\dfrac{V}{C}\), где \(V=2.303\cdot((N-l)\lg\overline{S^2}-\displaystyle\sum_{i=1}^l(n_i-1)\lg\hat{S}^2_i)\), \(C=1+\dfrac{1}{3(l-1)}\left(\displaystyle\sum_{i=1}^l\dfrac{1}{n_i-1}-\dfrac{1}{N-l}\right)\), \(N=\displaystyle\sum_{i=1}^ln_i\);
+\[A:(t_\alpha;+\infty),\]
+где \(t_\alpha\) из приложения №4. \(\overline{S^2}=\dfrac{1}{N-l}\displaystyle\sum_{i=1}\hat{S}^2(n_i-1)\)
+объемы выборок не должны быть меньше 4, если все объемы одинаковые, то предпочтительнее использовать критерий Кочрена.
+\par\textbf{3. Критерий Кочрена:}
+\par\(H_0:\ D\xi_1^*=D\xi_2^*=...=D\xi_l^*,\ H_1:\ D\xi_i^*\neq D\xi_j^*\)
+\parСтатистика критерия \(G=\dfrac{\max(\hat S_1^2,...,\hat S_l^2)}{\hat S_1^2+...+\hat S_l^2}\)
+\[A:(t_\alpha;+\infty),\]
+где \(t_\alpha\) из приложения №9.
+
+\subsubsection{Критерии сравнения средних}
+
+\ 
+\par\textbf{1. Критерий Стьюдента:}
+\par\(H_0:\ M\xi^*=M\eta^*,\ H_1:\ M\xi^*\neq M\eta^*\);
+\parСтатистика критерия \(T=\dfrac{\overline\xi-\overline{\eta}}{\sqrt{(n-1)\hat S_\xi^2+(m-1)\hat S^2_\eta}}\cdot\sqrt{\dfrac{nm(n+m-2)}{n+m}}\);
+\[A:(-\infty;-t_\alpha)\cup(t_\alpha;+\infty),\]
+где \(t_\alpha\) из приложения №3 (\(n+m-2,\frac{\alpha}{2}\)).
+
+\subsubsection{Выборочный коэффициент корреляции. Парная линейная регрессия.}
+
+\ 
+\parПусть есть две случайные величины \(X\) и \(Y\). \((X,Y)=((x_1,y_1),(x_2,y_2),...,(x_n,y_n))\)
+
+\[\begin{array}{c|c|c|c|c|c}
+     & x_1^* & x_2^* & \cdots & x_k^* & n_y\\
+    \hline
+    y_1^* & n_{11} & n_{21} & \cdots & n_{k1} & n_{y_1}\\
+    \hline
+    y_2^* & n_{12} & n_{22} & \cdots & n_{k2} & n_{y_2}\\
+    \hline
+    \cdots & \cdots & \cdots & \cdots & \cdots & \cdots \\
+    \hline
+    y_m^* & n_{1m} & n_{2m} & \cdots & n_{km} & n_{y_m}\\
+    \hline
+    n_x & n_{x_1} & n_{x_2} & ... & n_{x_k} & n
+\end{array}\]
+где \(x_i^*,y_i^*\) --- середины интервалов.
+\par\textbf{Определение.} Зависимость между значениями случайной величины \(X\) и соответствующими им условными математическими ожиданиями \(M(Y|X=x)\) случайной величины \(Y\) называется \textit{корреляционной зависимостью} и описывается функцией регрессии \(Y\) на \(X\).
+\parЕсли \(M(Y|X=x)=ax+b,\ a,b\in\mathbb R\), то функция регрессии будет называться \textit{линейной}.
+\par\textbf{Определение.} Степень линейной корреляционной зависимости определяется коэффициентом корреляции:
+\[R(X,Y)=\dfrac{M((X-MX)(Y-MX))}{\sqrt{DX\cdot DY}}\]
+\par\textit{Свойства:}
+\par1. \(|R(X,Y)\le1\);
+\par2. Если \(X\) и \(Y\) независимы, то \(R=0\).
+\par3. Если \(|R(X,Y)|=1\), то \(M(Y|X=x)=ax+b\), причем \(a>0\) при \(R=1\) и \(a<0\) при \(R=-1\).
+\parРеализация выборочного коэффициента корреляции:
+\[r_n=\dfrac{\overline{xy}-\overline{x}\cdot\overline{y}}{S_xS_y},\]
+где \(\overline{xy}=\dfrac{1}{n}\displaystyle\sum_{i=1}^n\sum_{j=1}^mn_{ij}x_iy_j\).
+\parДля проверки значимости выборочного коэффициента корреляции проверяется следующая гипотеза:
+\[H_0:r_n=0,\ H_1:r_n\neq0\]
+\[t=\dfrac{r_n\sqrt{n-2}}{\sqrt{1-r_n^2}},\ \delta(\xi,\eta)=\left\{\begin{array}{ll}
+    t\notin A,&H_0 \\
+    t\in A, &H_1 
+\end{array}\right.\]
+\[A:(-\infty;-t_\alpha)\cup(t_\alpha;+\infty),\]
+где \(t_\alpha(n-2;\frac{\alpha}{2})\) из приложения №3 (\(\alpha=0.05\) если не задан). Если \(r_n\neq0\), то написать уравнение линейной регрессии \(\overline{y_x}=ax+b\) или \(\overline{x_y}=cy+d\). Коэфициенты \(a\) и \(b\) высчитываются методом наименьших квадратов.
+
+\textbf{Метод наименьших квадратов (МНК).} \(y=ax+b\). \(Q=\displaystyle\sum(y_i-ax_i-b)^2\), находим частные производные: 
+\[\left\{\begin{array}{l}
+\dfrac{\partial Q}{\partial a}=2\displaystyle\sum(-y_ix_i+ax_i^2+bx_i)=0 \\
+\dfrac{\partial Q}{\partial b}=2\displaystyle\sum(-y_i+ax_i+b)=0
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{cc}
+    -\overline{xy}+a\overline{x^2}+b\overline{x}=0 \\
+    -\overline{y}+a\overline{x}+b=0
+\end{array}\right.\]
+\parРешая данную систему получаем:
+\[a=\dfrac{\overline{xy}-\overline{x}\cdot\overline{y}}{S_x^2},\quad b=\overline{y}-\dfrac{\overline{xy}-\overline{x}\cdot\overline{y}}{S_x^2}\overline{x},\]
+или же по другому:
+\[a = r_n\dfrac{S_y}{S_x},\quad\overline{y}-r_n\dfrac{S_y}{S_x}\overline{x}.\]
+
+\subsubsection{Выборочное корреляционное отношение. Парная нелинейная регрессия.}
+
+\ 
+\parПусть получена выборка \((\xi_1,\eta_1),(\xi_2,\eta_2),...,(\xi_n,\eta_n)\).
+\par\textbf{Определение.} \textit{Выборочным корреляционным отношением} называется статистика \[\mu_{\xi\eta}=\dfrac{S_{\overline{\eta}_\xi}}{S_\eta},\quad S_{\overline{y}_x}=\sqrt{\dfrac{1}{n}\displaystyle\sum_{i=1}^nn_{x_i}(\overline{y}_{x_i}-\overline{y})^2}\textup{ --- реализация}.\]
+\par\textit{Свойства:}
+\par1. \(0\le\mu_{\xi\eta}\le1\);
+\par2. Если \(\xi\) и \(\eta\) независимы, то \(\mu_{\xi\eta}=0\);
+\par3. Если \(\xi\) и \(\eta\) зависимы, то \(\mu_{\xi\eta}=1\);
+\par4. \(\mu_{\xi\eta}\ge r_{\xi\eta}\).
+\parЕсли выборочный коэффициент корреляции значим, то можно построить уравнение регрессии.
+\par\textbf{Уравнение параболической регрессии.} \(y=Ax^2+Bx+C\). Снова находим коэффициенты через МНК:
+\[\left\{\begin{array}{l}
+    -\displaystyle\sum y_ix_i^2+A\sum x_i^4+B\sum x_i^3+C\sum x_i^2=0 \\
+    -\displaystyle\sum y_ix_i+A\sum x_i^3+B\sum x_i^2+C\sum x_i=0 \\
+    -\displaystyle\sum y_i+A\sum x_i^2+B\sum x_i+nC=0
+\end{array}\right.\]
+
+\subsubsection{Линейная множественная регрессия}
+
+\ 
+\par\(\xi^*,\eta^*,\zeta^2\), \((x,y,z)=((x_1,y_1,z_1),(x_2,y_2,z_2),...,(x_n,y_n,z_n))\).
+\parЕсть знакомые нам характеристики \(\overline{x},\overline{y},\overline{z},\ S_x,S_y,S_z\) и парные \(\overline{xy},\overline{yz},\overline{xz}\).
+\parПарные выборочные коэффициенты корреляции, определяющие степень попарной линейной корреляционной зависимости, можно вычислить:
+\[r_{xy}=\dfrac{\overline{xy}-\overline{x}\cdot\overline{y}}{S_xS_y},\ r_{yz}=\dfrac{\overline{yz}-\overline{y}\cdot\overline{z}}{S_yS_z},\ 
+r_{xz}=\dfrac{\overline{xz}-\overline{x}\cdot\overline{z}}{S_xS_z}.\]
+\parЧастные выборочные коэффициенты корреляции:
+\[r_{xy(z)}=\dfrac{r_{xy}-r_{xz}r_{yz}}{\sqrt{(1-r_{xz}^2)(1-r_{yz}^2)}},\ r_{yz(x)}=\dfrac{r_{yz}-r_{xz}r_{xy}}{\sqrt{(1-r_{xz}^2)(1-r_{xy}^2)}},\ r_{xz(y)}=\dfrac{r_{xz}-r_{xy}r_{yz}}{\sqrt{(1-r_{xy}^2)(1-r_{yz}^2)}}\]
+\parСовокупный коэффициент корреляции:
+\[R_{xyz}=\sqrt{\dfrac{r_{xz}^2+r_{yz}^2-2r_{xz}r_{yz}r_{xy}}{1-r_{xy}^2}}.\]
+\parНужно проверить, что коэффициент корреляции значим или не значим: \(H_0:R_{xyz}=0,\ H_1:R_{xyz}\neq0\). Используем критерий Стьюдента:
+\[t=|R_{xyz}|\sqrt{n-m-1},\]
+где \(n\) --- объем, \(m\) --- число параметров в уравнении регрессии (в данном случае \(m=3\)).
+\parКритическая область \(A=(-\infty;-t_\alpha)\cup(t_\alpha;+\infty)\), где из приложения №3 \(t_\alpha:(n-m-1;\frac{\alpha}{2})\).
+\[\delta = \left\{
+\begin{array}{ll}
+    t\notin A, & H_0\\
+    t\in A, & H_1
+\end{array}
+\right.\]
+\parСтроится уравнение плоскости \(z_{xy}=Ax+By+C\), где коэффициенты:
+\[A=\dfrac{r_{xz}-r_{yz}r_{xy}}{1-r_{xy}^2}\cdot\dfrac{S_z}{S_x},\quad B=\dfrac{r_{zy}-r_{zx}r_{xy}}{1-r_{zy}^2}\cdot\dfrac{S_y}{S_x},\quad C=\overline{z}-A\overline{x}-B\overline{y}.\]
+
+\section{Лабораторные работы}
+
+\subsection{Лабораторная работа №1}
+
+\ 
+\par1. Построить вариационный ряд по выборке \(A\). Найти эмпирическую функцию распределения. Полигон относительных частот, моду и медиану.
+\[\begin{array}{c|c|c|c|c|c|c|c|c|c|c|c}
+    x_i & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 11 \\
+    \hline
+    n_i & 1 & 3 & 10 & 12 & 17 & 15 & 9 & 9 & 7 & 4 & 1 \\
+    \hline
+    \frac{n_i}{n} & 0,011 & 0,034 & 0,11 & 0,14 & 0,19 & 0,17 & 0,1 & 0,1 & 0,08 & 0,045 & 0,011
+\end{array}\]
+\begin{center}
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.15]
+\draw[axis] (0,0) -- (0,1.2 * 6) node[anchor=east]{\(\frac{n_i}{n}\)};
+\draw[axis] (0,0) -- (12,0) node[anchor=north]{\(x\)};
+\draw (0,0.2) -- (0,-0.2) node[anchor=north]{\(0\)};
+\draw (1,0.2) -- (1,-0.2) node[anchor=north]{\(1\)};
+\draw (2,0.2) -- (2,-0.2) node[anchor=north]{\(2\)};
+\draw (3,0.2) -- (3,-0.2) node[anchor=north]{\(3\)};
+\draw (4,0.2) -- (4,-0.2) node[anchor=north]{\(4\)};
+\draw (5,0.2) -- (5,-0.2) node[anchor=north]{\(5\)};
+\draw (6,0.2) -- (6,-0.2) node[anchor=north]{\(6\)};
+\draw (7,0.2) -- (7,-0.2) node[anchor=north]{\(7\)};
+\draw (8,0.2) -- (8,-0.2) node[anchor=north]{\(8\)};
+\draw (9,0.2) -- (9,-0.2) node[anchor=north]{\(9\)};
+\draw (10,0.2) -- (10,-0.2) node[anchor=north]{\(10\)};
+\draw (11,0.2) -- (11,-0.2) node[anchor=north]{\(11\)};
+\draw (0.2,0 * 30) -- (-0.2,0 * 30) node[anchor = east]{\(0\)};
+\draw (0.2,1 * 6) -- (-0.2,1 * 6) node[anchor = east]{\(1\)};
+\draw[very thick, color=red] (0,0.011 * 6) -- (1,0.011 * 6);
+\draw[very thick, color=red] (1,0.045 * 6) -- (2,0.045 * 6);
+\draw[very thick, color=red] (2,0.16 * 6) -- (3,0.16 * 6);
+\draw[very thick, color=red] (3,0.3 * 6) -- (4,0.3 * 6);
+\draw[very thick, color=red] (4,0.49 * 6) -- (5,0.49 * 6);
+\draw[very thick, color=red] (5,0.66 * 6) -- (6,0.66 * 6);
+\draw[very thick, color=red] (6,0.76 * 6) -- (7,0.76 * 6);
+\draw[very thick, color=red] (7,0.86 * 6) -- (8,0.86 * 6);
+\draw[very thick, color=red] (8,0.94 * 6) -- (9,0.94 * 6);
+\draw[very thick, color=red] (9,0.99 * 6) -- (11,0.99 * 6);
+\draw[very thick] (4,0) -- (4, 4) node[anchor = south east]{\(M_o\)};
+\draw[very thick] (5,0) -- (5, 4.5) node[anchor = south]{\(M_e\)};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.15]
+\draw[axis] (0,0) -- (0,0.22 * 30) node[anchor=east]{\(\frac{n_i}{n}\)};
+\draw[axis] (0,0) -- (12,0) node[anchor=north]{\(x\)};
+\draw (0,0.2) -- (0,-0.2) node[anchor=north]{\(0\)};
+\draw (1,0.2) -- (1,-0.2) node[anchor=north]{\(1\)};
+\draw (2,0.2) -- (2,-0.2) node[anchor=north]{\(2\)};
+\draw (3,0.2) -- (3,-0.2) node[anchor=north]{\(3\)};
+\draw (4,0.2) -- (4,-0.2) node[anchor=north]{\(4\)};
+\draw (5,0.2) -- (5,-0.2) node[anchor=north]{\(5\)};
+\draw (6,0.2) -- (6,-0.2) node[anchor=north]{\(6\)};
+\draw (7,0.2) -- (7,-0.2) node[anchor=north]{\(7\)};
+\draw (8,0.2) -- (8,-0.2) node[anchor=north]{\(8\)};
+\draw (9,0.2) -- (9,-0.2) node[anchor=north]{\(9\)};
+\draw (10,0.2) -- (10,-0.2) node[anchor=north]{\(10\)};
+\draw (11,0.2) -- (11,-0.2) node[anchor=north]{\(11\)};
+\draw (0.2,0 * 30) -- (-0.2,0 * 30) node[anchor = east]{\(0\)};
+\draw (0.2,0.19 * 30) -- (-0.2,0.19 * 30) node[anchor = east]{\(0.19\)};
+\draw[very thick, color=red] (0,0.011 * 30) -- (1,0.034 * 30);
+\draw[very thick, color=red] (1,0.034 * 30) -- (2,0.11 * 30);
+\draw[very thick, color=red] (2,0.11 * 30) -- (3,0.14 * 30);
+\draw[very thick, color=red] (3,0.14 * 30) -- (4,0.19 * 30);
+\draw[very thick, color=red] (4,0.19 * 30) -- (5,0.17 * 30);
+\draw[very thick, color=red] (5,0.17 * 30) -- (6,0.1 * 30);
+\draw[very thick, color=red] (6,0.1 * 30) -- (7,0.1 * 30);
+\draw[very thick, color=red] (7,0.1 * 30) -- (8,0.08 * 30);
+\draw[very thick, color=red] (8,0.08 * 30) -- (9,0.045 * 30);
+\draw[very thick, color=red] (9,0.045 * 30) -- (11,0.011 * 30);
+\draw[very thick] (4,0) -- (4, 0.2 * 30) node[anchor = south east]{\(M_o\)};
+\draw[very thick] (5,0) -- (5, 0.18 * 30) node[anchor = south west]{\(M_e\)};
+\end{tikzpicture}
+\end{center}
+
+\par\[M_o=x_{(4)}=4, M_e=\dfrac{1}{2}(x_{(44)}+x_{(45)})=5\].
+
+\par2. Построить интервальный вариационный ряд по выборке \(B\). Найти эмпирическую функцию распределения. Построить полигон и гистограмму относительных частот. Найти моду и медиану.
+
+\par1. $l = 8$;
+\par2. $h = 9.0$;
+\par3. $x_{\textup{нач}} = 20.5$;
+\[\begin{array}{c|c|c|c|c|c|c|c|c}
+[\Tilde x_i;\Tilde x_{i + 1}) & [20.5;...) & [29.5;...) & [38.5;...) & [47.5;...) & [56.5;...) & [65.5;...) & [74.5;...) & [83.5;...)\\
+\hline x_i^* & 25.0 & 34.0 & 43.0 & 52.0 & 61.0 & 70.0 & 79.0 & 88.0\\
+\hline n_i & 3 & 9 & 20 & 38 & 35 & 37 & 19 & 6\\
+\hline \frac{n_i}{n} & 0.018 & 0.054 & 0.120 & 0.228 & 0.210 & 0.222 & 0.114 & 0.036\\
+\end{array}\]
+\begin{center}
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.15]
+\draw[axis] (0,0) -- (0,1.2 * 6) node[anchor=east]{\(\frac{n_i}{n}\)};
+\draw[axis] (0,0) -- (13,0) node[anchor=north]{\(x\)};
+\draw (0.2,0) -- (-0.2,0) node[anchor = east]{\(0\)};
+\draw (0.2,1 * 6) -- (-0.2,1 * 6) node[anchor = east]{\(1\)};
+\draw (0.0,0.2) -- (0.0,-0.2)node[anchor=north]{\(20.5\)};
+\draw (1.5,0.2) -- (1.5,-0.2);
+\draw (3.0,0.2) -- (3.0,-0.2)node[anchor=north]{\(38.5\)};
+\draw (4.5,0.2) -- (4.5,-0.2);
+\draw (6.0,0.2) -- (6.0,-0.2)node[anchor=north]{\(56.5\)};
+\draw (7.5,0.2) -- (7.5,-0.2);
+\draw (9.0,0.2) -- (9.0,-0.2)node[anchor=north]{\(74.5\)};
+\draw (10.5,0.2) -- (10.5,-0.2);
+\draw[very thick, color=red] (0.0,0.018 * 6) -- (1.5,0.018 * 6);
+\draw[very thick, color=red] (1.5,0.072 * 6) -- (3.0,0.072 * 6);
+\draw[very thick, color=red] (3.0,0.192 * 6) -- (4.5,0.192 * 6);
+\draw[very thick, color=red] (4.5,0.419 * 6) -- (6.0,0.419 * 6);
+\draw[very thick, color=red] (6.0,0.629 * 6) -- (7.5,0.629 * 6);
+\draw[very thick, color=red] (7.5,0.850 * 6) -- (9.0,0.850 * 6);
+\draw[very thick, color=red] (9.0,0.964 * 6) -- (10.5,0.964 * 6);
+\draw[very thick, color=red] (10.5,1.000 * 6) -- (12.0,1.000 * 6);
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.15]
+\draw[axis] (0,0) -- (0,0.27 * 30) node[anchor=east]{\(\frac{n_i}{n}\)};
+\draw[axis] (0,0) -- (13,0) node[anchor=north]{\(x\)};
+\draw (0.2,0 * 30) -- (-0.2,0 * 30) node[anchor = east]{\(0\)};
+\draw (0.2,0.228 * 30) -- (-0.2,0.228 * 30) node[anchor = east]{\(0.228\)};
+\draw (0.75,0.2) -- (0.75,-0.2)node[anchor=north]{\(25.0\)};
+\draw (2.25,0.2) -- (2.25,-0.2);
+\draw (3.75,0.2) -- (3.75,-0.2)node[anchor=north]{\(43.0\)};
+\draw (5.25,0.2) -- (5.25,-0.2);
+\draw (6.75,0.2) -- (6.75,-0.2)node[anchor=north]{\(61.0\)};
+\draw (8.25,0.2) -- (8.25,-0.2);
+\draw (9.75,0.2) -- (9.75,-0.2)node[anchor=north]{\(79.0\)};
+\draw (11.25,0.2) -- (11.25,-0.2);
+\draw[very thin, fill=orange] (0.0,0) rectangle (1.5,0.018 * 30);
+\draw[very thin, fill=orange] (1.5,0) rectangle (3.0,0.054 * 30);
+\draw[very thin, fill=orange] (3.0,0) rectangle (4.5,0.120 * 30);
+\draw[very thin, fill=orange] (4.5,0) rectangle (6.0,0.228 * 30);
+\draw[very thin, fill=orange] (6.0,0) rectangle (7.5,0.210 * 30);
+\draw[very thin, fill=orange] (7.5,0) rectangle (9.0,0.222 * 30);
+\draw[very thin, fill=orange] (9.0,0) rectangle (10.5,0.114 * 30);
+\draw[very thin, fill=orange] (10.5,0) rectangle (12.0,0.036 * 30);
+\draw[very thick, color=red] (0.75,0.018 * 30) -- (2.25,0.054 * 30);
+\draw[very thick, color=red] (2.25,0.054 * 30) -- (3.75,0.120 * 30);
+\draw[very thick, color=red] (3.75,0.120 * 30) -- (5.25,0.228 * 30);
+\draw[very thick, color=red] (5.25,0.228 * 30) -- (6.75,0.210 * 30);
+\draw[very thick, color=red] (6.75,0.210 * 30) -- (8.25,0.222 * 30);
+\draw[very thick, color=red] (8.25,0.222 * 30) -- (9.75,0.114 * 30);
+\draw[very thick, color=red] (9.75,0.114 * 30) -- (11.25,0.036 * 30);
+\end{tikzpicture}
+\end{center}
+\[M_o=50.714,\ M_e=55.343\]
+
+\subsection{Лабораторная работа №2}
+
+\ 
+\par1. \(\overline x,S^2,S,A_1,A_2\) по выборке \(A\).
+
+\[\overline{x}=4.795454545454546,\ S^2=4.912706611570243,\ S=2.216462634823841,\]
+\[A_1=0.3214712588307139,\ A_2=-0.3654704316660293\]
+
+\par2. \(\overline x,S^2,S,A_1,A_2\) + с учетом поправок Шеппарда.
+
+\[\overline{x}=59.82634730538922,\ S^2=192.53870701710366,\ S=13.875831759469545,\]
+\[A_1=-0.17683953783469217,\ A_2=-0.5094709860045574\]
+
+\parС поправками Шеппарда:
+
+\[\overline{x} = 59.706586826347305,\ S^2=199.12947757180245,\ S=14.111324444282417\]
+\[A_1=-0.16233995892726255,\ A_2=-0.6609037140748968\]
+
+\subsection{Лабораторная работа №3}
+
+\ 
+\par\textbf{1.} \(\beta=0.9.\)
+\[30,41,44,49,54,56,58,67,71,72,73,83\quad n = 12\]
+\par\(\overline{x}=58.1667, S^2=222.1389\Rightarrow\hat S = \sqrt{\dfrac{12}{11}\cdot222.1389}=15.5671\Rightarrow\) доверительный интервал \textit{для матожидания:} \( t_\beta=t_\beta(n-1,\alpha)=1.795885,\ (\overline{x}-\dfrac{t_\beta\hat S}{\sqrt{n}};\overline{x}+\dfrac{t_\beta\hat S}{\sqrt{n}})=(50.0963;66.2371)\); \textit{для дисперсии:} \(t_1=\chi^2(n-1,\frac{1+\beta}{2})=4.5748,t_2=\chi^2(n-1,\frac{1-\beta}{2})=19.675,\ (\dfrac{n-1}{t_2}\hat S;\dfrac{n-1}{t_1}\hat S)=(135.4850;582.6850)\).
+\par\textbf{2.} \(\varepsilon=0.1,\beta=0.9\). \(\hat S = \sqrt{\dfrac{167}{166}\cdot192.4587}=13.9146, \Phi_0(t_\beta)=\frac{\beta}{2}\Rightarrow t_\beta=1.645\), минимальный объем выборки \(n=\dfrac{t_\beta^2\hat S^2}{\varepsilon^2}=52393.5336\approx52394\).
+\par\textbf{3.} \(\beta=0.95\). \(\Phi_0(t_\beta)=\frac{\beta}{2}\Rightarrow t_\beta=1.96, \overline{x}=59.1078, S^2=192.4587, \hat S = 13.9146, M_4=91534.0276,\sigma_{\hat S^2}=\sqrt{\dfrac{M_4}{n}-\dfrac{n-3}{n(n-1)}\hat S^4}=18.0647\Rightarrow\) доверительный интервал \textit{для матожидания} \((\overline x-\dfrac{t_\beta\sigma}{\sqrt{n}}; \overline x+\dfrac{t_\beta\sigma}{\sqrt{n}})=(57.0037;61.2119)\); \textit{для дисперсии} \((\hat{S}^2-t_\beta\sigma_{\hat{S}^2};\hat{S}^2+t_\beta\sigma_{\hat{S}^2})=(158.2112;229.0249)\); \(\beta=\int_\frac{\sqrt{n-1}}{1+q}^\frac{\sqrt{n-1}}{1-q}Q_{n-1}(u)du\Rightarrow q=0.11\) \textit{для среднего квадратического отклонения} \((\hat S(1-q);\hat S(1+q))=(12.3841;15.4453)\).
+
+\subsection{Лабораторная работа №4}
+
+\ 
+\par\textbf{1.} Уровень значимости \(\alpha=0.05\). \(H_0:\ z(x)=\prod(\lambda=\overline x),\ H_1:\ z(x)\neq \prod(\lambda=\overline x)\); \(\chi^2=\displaystyle\sum_i\dfrac{(n_i-np_i)^2}{np_i}\), по приложению №1:
+\[\begin{array}{c|c|c|c}
+    x_i & n_i & p_i & np_i\\
+    \hline 
+    0 & 1 & 0.00822974704902003 & 0.7242177403137626\\
+    1 & 3 & 0.03950278583529614 & 3.476245153506061\\
+    2 & 10 & 0.09480668600471075 & 8.342988368414545\\
+    3 & 12 & 0.15169069760753717 & 13.348781389463271\\
+    4 & 17 & 0.1820288371290446 & 16.018537667355925\\
+    5 & 15 & 0.1747476836438828 & 15.377796160661687\\
+    6 & 9 & 0.13979814691510625 & 12.30223692852935\\
+    7 & 9 & 0.09586158645607284 & 8.43581960813441\\
+    8 & 7 & 0.0575169518736437 & 5.061491764880646\\
+    9 & 4 & 0.030675707665943314 & 2.6994622746030115\\
+    11 & 1 & 0.006425166405666672 & 0.5654146436986671
+\end{array}\Rightarrow\chi^2=3.33223.\]
+\par\(t_\alpha: (l-r-1,\alpha)=(11-1-1,0.05)=(9,0.05)=16.919\Rightarrow\) критическая область \((16.919;+\infty)\Rightarrow\) основная гипотеза принята \(\chi^2\nin A\), величина имеет распределение Пуассона с параметром \(\overline x = \lambda\).
+\par\textbf{2.} \(\alpha=0.01\). \(H_0:z(x)=N(a=\overline x,\sigma^2=\hat S^2),\ H_1:z(x)\neq N\).
+\[\begin{array}{c|c|c|c|c|c|c|c}
+    \lbrack x_i;x_{i+1}) & n_i & A=\dfrac{x_i-\overline x}{\hat S} & B=\dfrac{x_{i+1}-\overline x}{\hat S} & \Phi_0(A) & \Phi_0(B) & p_i & np_i\\
+    \hline 
+    (-\infty;29.5) & 3 & -\infty & -2.18 & -0.5 & -0.4854 & 0.0146 & 2.4382 \\
+    \lbrack29.5;38.5) & 9 & -2.18 & -1.53 & -0.4854 & -0.4370 & 0.0484 & 8.0828 \\
+    \lbrack38.5;47.5) & 20 & -1.53 & -0.89 & -0.4370 & -0.3133 & 0.1237 & 20.6579 \\
+    \lbrack47.5;56.5) & 38 & -0.89 & -0.24 & -0.3133 & -0.0948 & 0.2185 & 36.4895 \\
+    \lbrack56.5;65.5) & 35 & -0.24 & 0.41 & -0.0948 & 0.1591 & 0.2539 & 42.4013 \\
+    \lbrack65.5;74.5) & 37 & 0.41 & 1.05 & 0.1591 & 0.3531 & 0.1940 & 32.3980 \\
+    \lbrack74.5;83.5) & 19 & 1.05 & 1.70 & 0.3531 & 0.4554 & 0.1023 & 17.0841 \\
+    \lbrack83.5;+\infty) & 6 & 1.70 & +\infty & 0.4554 & 0.5 & 0.0446 & 7.4482
+\end{array}\Rightarrow\chi^2=109.3756.\]
+\par\(t_\alpha: (l-r-1,\alpha)=(8-1-1,0.01)=(6,0.01)=16.812\Rightarrow\) критическая область \((16.812;+\infty)\Rightarrow\) принята альтернативная гипотеза \(\chi^2\in A\), величина не имеет нормальное распределение.
+\par\textbf{3.} \(\alpha=0.01,H_0:z(x)=N(a=\overline x,\sigma^2=\hat S^2),\ H_1:z(x)\neq N\), \(D_n=\sup|F_n-F_{\xi^*}|\)
+\[\begin{array}{c|c|c|c|c|c}
+    x_i^* & F_n(x) & A=\dfrac{x_i^*-\overline x}{\hat S} & \Phi_0(A) & F_{\xi^*}=0.5+\Phi(A) & |F_n(x)-F_{\xi^*}|\\
+    \hline 
+    25.0 & 0.0180 & -2.50 & -0.4938 & 0.0062 & 0.0118\\
+    34.0 & 0.0720 & -1.86 & -0.4686 & 0.0314 & 0.0406\\
+    43.0 & 0.1916 & -1.21 & -0.3869 & 0.1131 & 0.0785\\
+    52.0 & 0.4192 & -0.56 & -0.2224 & 0.2776 & 0.1416\\
+    61.0 & 0.6287 & 0.08 & 0.0319 & 0.5319 & 0.0968\\
+    70.0 & 0.8503 & 0.73 & 0.2673 & 0.7673 & 0.083\\
+    79.0 & 0.9641 & 1.38 & 0.4162 & 0.9162 & 0.0479\\
+    88.0 & 1 & 2.02 & 0.4783 & 0.9783 & 0.0217
+\end{array}\Rightarrow 
+\begin{array}{cc}
+    D_n=0.1416, \\
+    \sqrt{n}D_n=1.83
+\end{array}.\]
+\par\(\lambda_\alpha=1.627\Rightarrow\) критическая область \((1.627;+\infty)\Rightarrow\) принята альтернативная гипотеза \(\sqrt{n}D_n\in A\), величина не имеет нормальное распределение.
+
+\subsection{Лабораторная работа №5}
+
+\ 
+\par\textbf{1.} \(\alpha=0.05;\ H_0:F_n(x)=F_m(x),\ H_1:F_n(x)\neq F_m(x)\)
+\[2,3,3,4,4,4,4,5,5,6,7,7,7,7,8\quad n=15=n_1\]
+\[0,2,4,4,4,4,4,4,5,5,5,6,8,8,9\quad m=15=n_2\]
+\par\(k=2:\)
+\[\begin{array}{c|c|c|c|c|c}
+    x_i & v_{i1} & v_{i2} & v_i=v_{i1}+v_{i2} & \dfrac{v_{i1}^2}{n_1v_i} & \dfrac{v_{i2}^2}{n_2v_i}\\
+    \hline
+    0 & 0 & 1 & 1 & 0.0 & 0.0667\\
+    2 & 1 & 1 & 2 & 0.0333 & 0.0333\\
+    3 & 2 & 0 & 2 & 0.1333 & 0.0 \\
+    4 & 4 & 6 & 10 & 0.1067 & 0.24\\
+    5 & 2 & 3 & 5 & 0.0533 & 0.12 \\
+    6 & 1 & 1 & 2 & 0.0333 & 0.0333\\
+    7 & 4 & 0 & 4 & 0.2667 & 0.0\\
+    8 & 1 & 2 & 3 & 0.0222 & 0.0889\\
+    9 & 0 & 1 & 1 & 0.0 & 0.0667 \\
+    \hline
+    & 15 & 15 & 30 &\sum_1=0.6489 & \sum_2=0.6489
+\end{array}\]
+\[\chi^2=(n_1+n_2)(\textstyle\sum_1+\sum_2-1)=8.9333,\]
+\[t_\alpha: ((k-1)(s-1),\alpha)=((2-1)(9-1),0.05)=(8,0.05)=15.507\]
+\par\(\Rightarrow\) критическая область \((15.507;+\infty)\Rightarrow\) основная гипотеза принята \(\chi^2\nin A\), данные являются однородными.
+\par\textbf{2.} \(\alpha=0.01\).
+\[30,41,44,49,54,56,58,67,71,72,73,83\quad n=12\]
+\[44,45,46,50,53,54,62,62,62,65,82,88\quad m=12\]
+\[\begin{array}{c|c|c|c|c|c}
+    x_i & F_n(x) & F_m(x) & |F_n(x)-F_m(x)| \\
+    \hline
+    30 & 0.0833 & 0.0 & 0.0883 \\
+    41 & 0.1667 & 0.0 & 0.1667\\
+    44 & 0.25 & 0.0833 & 0.1667\\
+    45 & 0.25 & 0.1667 & 0.833\\
+    46 & 0.25 & 0.25 & 0.0\\
+    49 & 0.3333 & 0.25 & 0.0833\\
+    50 & 0.3333 & 0.3333 & 0.0\\
+    53 & 0.3333 & 0.4167 & 0.0833\\
+    54 & 0.4167 & 0.5 & 0.0833\\
+    56 & 0.5 & 0.5 & 0.0\\
+    58 & 0.5833 & 0.5 & 0.0833\\
+    62 & 0.5833 & 0.75 & 0.1667\\
+    65 & 0.5833 & 0.8333 & 0.25\\
+    67 & 0.6667 & 0.8333 & 0.1667\\
+    71 & 0.75 & 0.8333 & 0.0833\\
+    72 & 0.8333 & 0.8333 & 0.0\\
+    73 & 0.9167 & 0.8333 & 0.0833\\
+    82 & 0.9167 & 0.9167 & 0.0\\
+    83 & 1 & 0.9167 & 0.0833\\
+    88 & 1 & 1 & 0.0\\
+\end{array}\]
+\[D_{nm}=\sup|F_n(x)-F_m(x)|=0.25,\ \sqrt{\dfrac{nm}{n+m}}D_{nm}=0.6124\]
+\par\(\lambda_\alpha=1.627\Rightarrow\) критическая область \((1.627;+\infty)\Rightarrow\) принята основная гипотеза \(\sqrt{\dfrac{nm}{n+m}}D_{nm}\nin A\), данные являются однородными.
+\par\textbf{3.} \(\alpha=0.05\)
+\[30,41,44,49,54,56,58,67,71,72,73,83\quad n=12\]
+\[44,45,46,50,53,54,62,62,62,65,82,88\quad m=12\]
+\[\begin{array}{c|c|c}
+    x_i & i & R_i \\ \hline
+    30 & 1 & 1\\
+    41 & 2 & 2\\
+    44 & 3 & 3.5\\
+    44 & 4 & \\
+    45 & 5 & 5\\
+    46 & 6 & 6\\
+    49 & 7 & 7\\
+    50 & 8 & 8\\
+    53 & 9 & 9\\
+    54 & 10 & 10.5\\
+    54 & 11 & \\
+    56 & 12 & 12\\
+\end{array}\quad
+\begin{array}{c|c|c}
+    x_i & i & R_i \\ \hline
+    58 & 13 & 13\\
+    62 & 14 & 15\\
+    62 & 15 & \\
+    62 & 16 & \\
+    65 & 17 & 17\\
+    67 & 18 & 18\\
+    71 & 19 & 19\\
+    72 & 20 & 20\\
+    73 & 21 & 21\\
+    82 & 22 & 22\\
+    83 & 23 & 23\\
+    88 & 24 & 24\\
+\end{array}
+\Rightarrow W=\displaystyle\sum_i R_i=256.0.\]
+\par\(n,m\le25\Rightarrow W_1(m,n,\alpha/2)=115\) из приложения №8, \(W_2=(n+m+1)n-W_1=185\Rightarrow\) критическая область \(A:(-\infty;W_1)\cup(W_2;+\infty)=(-\infty;115)\cup(185;+\infty)\Rightarrow\) принята альтернативная гипотеза \(W\in A\), данные не являются однородными.
+\par\textbf{4.} \(\alpha=0.02\)
+\[30,41,44,49,54,56,58,67,71,72,73,83\quad n=12\]
+\[25,27,29,31,34,35,35,35,36,38,38,...\quad m=155\]
+\[W=\displaystyle\sum_i R_i=4464.5.\]
+\par\(\Phi_0(t_\alpha)=\frac{1-\alpha}{2}\Rightarrow t_\alpha=2.33, m>25\Rightarrow W_1=\left\lfloor\dfrac{(n+m+1)n-1}{2}-t_\alpha\sqrt{\dfrac{nm(n+m+1)}{12}}\right\rfloor=631, 
+\quad W_2=(n+m+1)n-W_1=1385\Rightarrow\) критическая область \(A:(-\infty;W_1)\cup(W_2;+\infty)=(-\infty;631)\cup(1385;+\infty)\Rightarrow\) принята альтернативная гипотеза \(W\in A\), данные не являются однородными.
+
+\subsection{Лабораторная работа №6}
+
+\ 
+\par\textbf{1.} \(\alpha=0.05, H_0: D\xi^*=D\eta^*,H_1:D\xi^*\neq D\eta^*\).
+\par\(F_{nm}=\dfrac{\hat S_n^2}{\hat S_m^2}\)
+\[30,41,44,49,54,56,58,67,71,72,73,83\quad n=12\]
+\[44,45,46,50,53,54,62,62,62,65,82,88\quad m=12\]
+\[\hat S_n=53.9259,\ \hat S_m=48.5751\Rightarrow F_{nm}=\dfrac{\hat S_n^2}{\hat S_m^2}=1.2324.\]
+\par\(F(\frac{\alpha}{2},n,m)=F(0.025,12,12)=3.28\Rightarrow\) критическая область \(A:(F;+\infty)=(3.28;+\infty)\Rightarrow\) основная гипотеза выполнена \(F_{nm}\notin A\), дисперсии данных выборок равны.
+\par4. \(\alpha=0.05,H_0:\ D\xi_1^*=D\xi_2^*=D\xi_3^*,\ H_1:\ D\xi_i^*\neq D\xi_j^*\)
+\[71, 62, 43, 80, 70, 44, 42, 25, 48, 55, 58, 44, 74, 55, 56\quad n_1=15\]
+\[49, 54, 63, 60, 57, 70, 52, 74, 65, 61, 60, 72, 69, 68, 47\quad n_2=15\]
+\[30, 62, 81, 56, 55, 38, 68, 55, 74, 50, 29, 35, 55, 52, 27\quad n_3=15\]
+\[\hat S_1=14.7109,\ \hat S_2=8.4075,\ \hat S_3=16.561\Rightarrow G=\dfrac{\max(\hat S_1^2,...,\hat S_l^2)}{\hat S_1^2+...+\hat S_l^2}=0.4886\]
+\par\(t_\alpha(l,n-1)=0.5652\Rightarrow\) критическая область \(A:(t_\alpha;+\infty)=(0.5652;+\infty)\Rightarrow\) основная гипотеза принята \(t\notin A\), выборки имеют одинаковую дисперсию.
+
+\subsection{Лабораторная работа №7}
+
+\ 
+\par\textbf{1.} \(\alpha=0.05,\ H_0:\ M\xi^*=M\eta^*,\ H_1:\ M\xi^*\neq M\eta^*\);
+\[30,41,44,49,54,56,58,67,71,72,73,83\quad n=12\]
+\[44,45,46,50,53,54,62,62,62,65,82,88\quad m=12\]
+\[\overline{\xi}=58.1667,\ \overline{\eta}=59.4167,\ \hat S_\xi=53.9259,\ \hat S_\eta=48.5752,\] \[T=\dfrac{\overline\xi-\overline{\eta}}{\sqrt{(n-1)\hat S_\xi^2+(m-1)\hat S^2_\eta}}\cdot\sqrt{\dfrac{nm(n+m-2)}{n+m}}=-0.0597\]
+\par\(t_\alpha(n+m-2,\frac{\alpha}{2})=t_\alpha(22,0.025)=2.07387\Rightarrow\) критическая область \(A:(-\infty;-t_\alpha)\cup(t_\alpha;+\infty)=(-\infty;-2.07387)\cup(2.07387;+\infty)\Rightarrow\) основная гипотеза принята \(t\notin A\), средние статистические данные данных выборок равны.
+
+\subsection{Лабораторная работа №8}
+
+\ 
+\par\textbf{1.} Рассматриваем только первые 2 столбца \(n=11\). \(\alpha=0.05,\ H_0:r_n=0,\ H_1:r_n\neq0\).
+\[\begin{array}{c|c|c|c|c}
+    x & y & x^2 & y^2 & xy\\ \hline
+    72 & 152 & 5184 & 23104 & 10944 \\
+    72 & 152 & 5184 & 23104 & 10994 \\
+    73 & 155 & 5329 & 24025 & 11315 \\
+    68 & 144 & 4624 & 20736 & 9792 \\
+    71 & 145 & 5041 & 21025 & 10295 \\
+    77 & 155 & 5929 & 24025 & 11935 \\
+    74 & 154 & 5476 & 23716 & 11396 \\
+    67 & 136 & 4489 & 18496 & 9112 \\
+    68 & 142 & 4624 & 20164 & 9656 \\
+    70 & 141 & 4900 & 19881 & 9870 \\
+    66 & 141 & 4356 & 19881 & 9306 \\
+    \hline
+    778 & 1617 & 55136 & 238157 & 114565
+\end{array}\]
+\[\overline{x}=70.7273,\ \overline{y}=147.0,\ S_x^2=\frac{\sum_3}{n}-\overline{x}^2=10.0165,\ S_y^2=\frac{\sum_4}{n}-\overline{y}^2=41.6364,\ \overline{xy}=\frac{\sum_5}{n}=10415.0,\]
+\par\[r_n=\dfrac{\overline{xy}-\overline{x}\cdot\overline{y}}{S_xS_y}=0.0434\Rightarrow t=\dfrac{r_n\sqrt{n-2}}{\sqrt{1-r_n^2}}=0.1304\]
+\par\(t_\alpha(n-2;\frac{\alpha}{2})=t_\alpha(9;0.025)=2.26216\Rightarrow\) критическая область \(A:(-\infty;-t_\alpha)\cup(t_\alpha;+\infty)=(-\infty;-2.26216 )\cup(2.26216 ;+\infty)\Rightarrow\) основная гипотеза принята, корреляция незначительна.
+
+\par\textbf{2.} Берем все \(x\) и \(y\).
+\par\(n=54\Rightarrow l = 1 + [3.322\cdot \lg 54]=6,\ h_x=\dfrac{81 - 64}{6 - 1}=3.4,\ x_{\textup{нач}}=64-0.5\cdot3.4=62.3.\)
+
+\[\begin{array}{c|c|c|c|c|c|c}
+\lbrack x_i;x_{i+1}) & \lbrack 62.3;65.7) & \lbrack 65.7;69.1) & \lbrack 69.1;72.5) & \lbrack 72.5; 75.9) & \lbrack 75.9; 79.3) & \lbrack 79.3; 82.7) \\
+\hline
+n_i & 2 & 18 & 12 & 14 & 5 & 3 \\
+\hline
+x_i^* & 64.0 & 67.4 & 70.8 & 74.2 & 77.6 & 81.0 \\
+\end{array}\]
+
+\par\(h_y=\dfrac{168 - 131}{6 - 1}=7.4,\ y_{\textup{нач}}=131-0.5\cdot7.4=127.3.\)
+\[\begin{array}{c|c|c|c|c|c|c}
+\lbrack y_i;y_{i+1}) & \lbrack 127.3;134.7) & \lbrack 134.7;142.1) & \lbrack 142.1;149.5) & \lbrack 149.5; 156.9) & \lbrack 156.9; 164.3) & \lbrack 164.3; 171.7) \\
+\hline
+m_i & 1 & 16 & 14 & 15 & 6 & 2 \\
+\hline
+y_i^* & 131.0 & 138.4 & 145.8 & 153.2 & 160.6 & 168.0 \\
+\end{array}\]
+
+\[\begin{array}{c|c|c|c|c|c|c|c|c|c}
+x_i^* & n_i & x_i^{*2} & y_i^* & m_i & y_i^{*2} & x_i^*n_i & x_i^{*2}n_i & y_i^*n_i & y_i^{*2}m_i \\
+\hline
+64.0 & 2 & 4096.0 & 131.0 & 1 & 17161.0 & 128.0 & 8192.0 & 131.0 & 17161.0 \\
+67.4 & 18 & 4542.76 & 138.4 & 16 & 19154.56 & 1213.2 & 81769.68 & 2214.4 & 306472.96 \\
+70.8 & 12 & 5012.64 & 145.8 & 14 & 21257.64 & 849.6 & 60151.68 & 2041.2 & 297606.96 \\
+74.2 & 14 & 5505.64 & 153.2 & 15 & 23470.24 & 1038.8 & 77078.96 & 2298.0 & 352053.6 \\
+77.6 & 5 & 6021.76 & 160.6 & 6 & 25792.36 & 388.0 & 30108.8 & 963.6 & 154754.16 \\
+81.0 & 3 & 6561.0 & 168.0 & 2 & 28224.0 & 243.0 & 19683.0 & 336.0 & 56448.0 \\
+\hline
+ & & & & & & 3860.6 & 276984.12 & 7984.2 & 1184496.68
+\end{array}\]
+\[\overline{x}=\dfrac{3860.6}{54}=71.4926,\quad \overline{y}=\dfrac{7984.2}{54}=147.8556,\]\[S_x=\sqrt{\dfrac{276984.12}{54}-71.4926^2}=4.26,\quad S_y=\sqrt{\dfrac{1184496.68}{54}-147.8556^2}=8.5941\]
+\[\begin{array}{c|c|c|c|c|c|c|c|c}
+ & x_i^* & 64.0 & 67.4 & 70.8 & 74.2 & 77.6 & 81.0 & \\
+\hline 
+y_i^* &  & \lbrack 62.3;65.7) & \lbrack 65.7;69.1) & \lbrack 69.1;72.5) & \lbrack 72.5; 75.9) & \lbrack 75.9; 79.3) & \lbrack 79.3; 82.7) & \\
+\hline 
+131.0 & \lbrack 127.3;...) & 1 & & & & & & 1 \\
+\hline
+138.4 & \lbrack 134.7;...) & 1 & 12 & 3 & & & & 16 \\
+\hline
+145.8 & \lbrack 142.1;...) & & 6 & 5 & 3 & & & 14 \\
+\hline
+153.2 & \lbrack 149.5;...) & & & 4 & 9 & 2 & & 15 \\
+\hline
+160.6 & \lbrack 156.9;...) & & & & 2 & 3 & 1 & 6 \\
+\hline
+168.0 & \lbrack 164.3;...) & & & & & & 2 & 2\\
+\hline
+ & & 2 & 18 & 12 & 14 & 5 & 3 & 54
+\end{array}\]
+\[\begin{array}{c|c|c}
+    x_i^*y_i^* & n_{ij} & x_i^*y_i^*n_{ij} \\
+    \hline
+    8384.0 & 1 & 8384.0 \\
+    8857.6 & 1 & 8857.6 \\
+    9328.16 & 12 & 111937.92 \\
+    9798.72 & 3 & 29396.16 \\
+    9826.92 & 6 & 58961.52 \\
+    10322.64 & 5 & 51613.2 \\
+    10818.36 & 3 & 32455.08 \\
+    10846.56 & 4 & 43386.24 \\
+    11367.44 & 9 & 102306.96 \\
+    11888.32 & 2 & 23776.64 \\
+    11916.52 & 2 & 23833.04 \\
+    12462.56 & 3 & 37387.68 \\
+    13008.6 & 1 & 13008.6 \\
+    13608.0 & 2 & 27216.0 \\
+    \hline
+     & & 572520.64
+\end{array}\Rightarrow \overline{xy}=\dfrac{572520.64}{54}=10602.2341\]
+\[\Rightarrow r_n=\dfrac{\overline{xy}-\overline{x}\cdot\overline{y}}{S_xS_y}=0.86476\Rightarrow t=\dfrac{r_n\sqrt{n-2}}{\sqrt{1-r_n^2}}=12.41744\]
+\par\(t_\alpha(n-2;\frac{\alpha}{2})=t_\alpha(52;0.025)=1.95996\Rightarrow\) критическая область \(A:(-\infty;-t_\alpha)\cup(t_\alpha;+\infty)=(-\infty;-1.95996)\cup(1.95996;+\infty)\Rightarrow\) принята альтернативная гипотеза \(t\in A\), имеется корреляция.
+\[y=ax+b,\quad\textup{где }a=r_n\dfrac{S_y}{S_x}=1.7447,\ b=\overline{y}-\overline{x}r_n\dfrac{S_y}{S_x}=23.1227\]
+\begin{center}
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.12]
+\draw[axis] (0,0) -- (0,50 * 0.4) node[anchor=east]{\(y\)};
+\draw[axis] (0,0) -- (27,0) node[anchor=north]{\(x\)};
+
+\draw (0,0) -- (-0.2,0) node[anchor = east]{\(125\)};
+\draw (0.2,45 * 0.4) -- (-0.2,45 * 0.4) node[anchor = east]{\(170\)};
+
+\draw (0,0) -- (0,-0.2) node[anchor=north]{\(60\)};
+\draw (25,0.2) -- (25,-0.2) node[anchor=north]{\(85\)};
+
+\foreach \Point in {(12,27*0.4),(12,27*0.4),(13,30*0.4),(8,19*0.4),(11,20*0.4),(17,30*0.4),(14,29*0.4),(7,11*0.4),(8,17*0.4),(10,16*0.4),(6,16*0.4),(9,15*0.4),(10,20*0.4),(13,30*0.4),(8,15*0.4),(10,19*0.4),(9,20*0.4),(11,25*0.4),(11,17*0.4),(11,17*0.4),(8,18*0.4),(14,31*0.4),(11,24*0.4),(13,23*0.4),(9,14*0.4),(13,22*0.4),(8,14*0.4),(7,10*0.4),(9,14*0.4),(20,43*0.4),(17,32*0.4),(7,12*0.4),(8,19*0.4),(15,34*0.4),(13,27*0.4),(15,27*0.4),(20,39*0.4),(11,26*0.4),(15,33*0.4),(19,39*0.4),(16,28*0.4),(13,27*0.4),(6,14*0.4),(11,19*0.4),(18,36*0.4),(8,12*0.4),(13,28*0.4),(4,6*0.4),(14,28*0.4),(9,20*0.4),(9,18*0.4),(21,43*0.4),(14,24*0.4),(5,12*0.4)}{
+    \node[color = red] at \Point {\textbullet};
+}
+\draw[thick] (2, 6.2938 * 0.4) -- (23, 42.9324 * 0.4);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Лабораторная работа №9.}
+
+\ 
+\parВычислить выборочное корреляционное отношение признака \(V=Y^2\) к \(X\) выборки \(C\).
+\par\(h_v=\dfrac{28224 - 17161}{6 - 1}=2212.6,\ v_{\textup{нач}}=17161-0.5\cdot2212.6=16054.7.\)
+\[\begin{array}{c|c|c|c|c|c|c}
+\lbrack v_i;v_{i+1}) & \lbrack 16054.7;...) & \lbrack 18267.3;...) & \lbrack 20479.9;...) & \lbrack 22692.5;...) & \lbrack 24905.1; ...) & \lbrack 27117.7; ...) \\
+\hline
+m_i & 2 & 17 & 13 & 15 & 5 & 2 \\
+\hline
+v_i^* & 17161.0 & 19373.6 & 21586.2 & 23798.8 & 26011.3 & 28224.0 \\
+\end{array}\]
+
+\[\begin{array}{c|c|c|c}
+v_i^* & m_i & v_i^*n_i & v_i^{*2}m_i \\
+\hline
+17161.0 & 2 & 34322.0 & 588999842.0\\
+19373.6 & 17 & 329351.2 & 6380718408.32\\
+21586.2 & 13 & 280620.6 & 6057532395.72\\
+23798.8 & 15 & 356982.0 & 8495743221.6\\
+26011.4 & 5 & 130057.0 & 3382964649.8\\
+28224.0 & 2 & 56448.0 & 159318835.02\\
+\hline
+ & & 1187780.8 & 26499146869.44
+\end{array}\]
+
+\[\overline{v}=\dfrac{1187780.8}{54}=21995.9407,\quad S_v=\sqrt{\dfrac{26499146869.44}{54}-21995.9407^2}=2627.4575\]
+
+\[\begin{array}{c|c|c|c|c|c|c|c|c}
+ & x_i^* & 64.0 & 67.4 & 70.8 & 74.2 & 77.6 & 81.0 & \\
+\hline 
+v_i^* &  & \lbrack 62.3;...) & \lbrack 65.7;...) & \lbrack 69.1;...) & \lbrack 72.5; ...) & \lbrack 75.9; ...) & \lbrack 79.3; ...) & \\
+\hline 
+17161.0 & \lbrack 16054.7;...) & 1 & 1 & & & & & 2 \\
+\hline
+19373.6 & \lbrack 18267.3;...) & 1 & 13 & 3 & & & & 17 \\
+\hline
+21586.2 & \lbrack 20479.9;...) & & 4 & 6 & 3 & & & 13 \\
+\hline
+23798.8 & \lbrack 22692.5;...) & & & 3 & 9 & 3 & & 15 \\
+\hline
+26011.3 & \lbrack 24905.1;...) & & & & 2 & 2 & 1 & 5 \\
+\hline
+28224.0 & \lbrack 27117.7;...) & & & & & & 2 & 2\\
+\hline
+ & & 2 & 18 & 12 & 14 & 5 & 3 & 54
+\end{array}\]
+
+\[\begin{array}{c|c|c}
+x_i^*v_i^* & n_{ij} & x_i^*v_i^*n_{ij} \\
+\hline
+1098304.0 & 1 & 1098304.0\\
+1156651.4 & 1 & 1156651.4\\
+1239910.4 & 1 & 1239910.4\\
+1305780.64 & 13 & 16975148.32\\
+1371650.88 & 3 & 4114952.64\\
+1454909.88 & 4 & 5819639.52\\
+1528302.96 & 6 & 9169817.76\\
+1601696.04 & 3 & 4805088.12\\
+1684955.04 & 3 & 5054865.12\\
+1765870.96 & 9 & 15892838.64\\
+1846786.88 & 3 & 5540360.64\\
+1930045.88 & 2 & 3860091.76\\
+2018484.64 & 2 & 4036969.28\\
+2106923.4 & 1 & 2106923.4\\
+22861434.0 & 2 & 4572288.0\\
+\hline
+& & 85443849.0
+\end{array}\Rightarrow \overline{xv}=\dfrac{85443849.0}{54}=1582293.5\]
+
+\[\Rightarrow r_n=\dfrac{\overline{xv}-\overline{x}\cdot\overline{v}}{S_xS_v}=0.87085\]
+\[\begin{array}{c|c|c|c|c|c}
+x_i^* & n_i & x_i^*n_i & x_i^{*2}n_i & x_i^{*3}n_i & x_i^{*4}n_i \\
+\hline
+64.0 & 2 & 128.0 & 8192.0 & 524288.0 & 33554432.0\\
+67.4 & 18 & 1213.2 & 81769.68 & 5511276.432 & 371460031.5168\\
+70.8 & 12 & 849.6 & 60151.68 & 4258738.944 & 301518717.2352\\
+74.2 & 14 & 1038.8 & 77078.96 & 5719258.832 & 424369005.3344\\
+77.6 & 5 & 388.0 & 30108.8 & 2336442.88 & 181307967.488\\
+81.0 & 3 & 243.0 & 19683.0 & 1594323.0 & 129140163.0\\
+\hline
+& & \sum x_i=3860.6 & \sum x_i^2=276984.12 & \sum x_i^3=19944328.088 & \sum x_i^4=1441350316.5744
+\end{array}\]
+
+\[\begin{array}{c|c|c|c|c}
+x_i^* & v_i^* & n_i & x_i^*v_i^*n_i & x_i^{*2}v_i^*n_i \\
+\hline
+64.0 & 17161.0 & 1 & 1098304.0 & 70291456.0\\
+67.4 & 17161.0 & 1 & 1156651.4 & 77958304.36\\
+64.0 & 19373.6 & 1 & 1239910.4 & 79354265.6\\
+67.4 & 19373.6 & 13 & 16975148.32 & 1144124996.768\\
+70.8 & 19373.6 & 3 & 4114952.64 & 291338646.912\\
+67.4 & 21586.2 & 4 & 5819639.52 & 392243703.648\\
+70.8 & 21586.2 & 6 & 9169817.76 & 649223097.408\\
+74.2 & 21586.2 & 3 & 4805088.12 & 356537538.504\\
+70.8 & 23798.8 & 3 & 5054865.12 & 357884450.496\\
+74.2 & 23798.8 & 9 & 15892838.64 & 1179248627.088\\
+77.6 & 23798.8 & 3 & 5540360.64 & 429931985.664\\
+74.2 & 26011.4 & 2 & 3860091.76 & 286418808.592\\
+77.6 & 26011.4 & 2 & 4036969.28 & 313268816.128\\
+81.0 & 26011.4 & 1 & 2106923.4 & 170660795.4\\
+81.0 & 28224.0 & 2 & 4572288.0 & 370355328.0\\
+\hline
+& & & \sum x_iv_i=85443849.0& \sum x_i^2v_i=6168840820.568
+\end{array}\]
+\[\begin{array}{rl}
+    \overline{v}_{x=64.0}=\dfrac{17161.0*1+19373.6*1}{2}=18267.3, & n_{x=64.0}=2 \\
+    \overline{v}_{x=67.4}=\dfrac{17161.0*1+19373.6*13+21586.2*4}{18}=19742.3667, & n_{x=67.4}=18 \\
+    \overline{v}_{x=70.8}=\dfrac{19373.6*3+21586.2*6+23798.8*3}{12}=21586.2, & n_{x=70.8}=12 \\
+    \overline{v}_{x=74.2}=\dfrac{21586.2*3+23798.8*9+26011.4*2}{14}=23640.7571, & n_{x=74.2}=14 \\
+    \overline{v}_{x=77.6}=\dfrac{23798.8*3+26011.4*2}{5}=24683.84, & n_{x=77.6}=5 \\
+    \overline{v}_{x=81.0}=\dfrac{26011.4*1+28224.0*2}{3}=27486.4667, & n_{x=81.0}=3
+\end{array}\]
+\[\Rightarrow S_{\overline{v}_x}=\sqrt{\dfrac{1}{n}\displaystyle\sum_i n_{x_i}\overline{v}_{x_i}^2-\overline{v}^2}=2300.0504\]
+\[\mu_{xv}=\dfrac{S_{\overline{v}_x}}{S_v}=0.8754\]
+корреляция существенна, будем строить функцию параболической регрессии \(v=Ax^2+Bx+C\), коэффициенты найдем через систему уравнений из конспекта:
+
+\[\left\{\begin{array}{l}
+    1441350316.5744A+19944328.088B+276984.12C=6168840820.568 \\
+    19944328.088A+276984.12B+3860.6C=85443849.0\\
+    276984.12A+3860.6B+54C=1187780.8
+\end{array}\right.\]
+\[\Rightarrow A=1.3325, B=344.02649, C=-9434.3113\]
+
+\begin{center}
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.12]
+\draw[axis] (0,0) -- (0,12000 * 0.002) node[anchor=east]{\(v\)};
+\draw[axis] (0,0) -- (27,0) node[anchor=north]{\(x\)};
+
+\draw (0,0) -- (-0.2,0) node[anchor = east]{\(17000\)};
+\draw (0.2,11000 * 0.002) -- (-0.2,11000 * 0.002) node[anchor = east]{\(28000\)};
+
+\draw (0,0) -- (0,-0.2) node[anchor=north]{\(60\)};
+\draw (25,0.2) -- (25,-0.2) node[anchor=north]{\(85\)};
+
+\foreach \Point in {(12,6104*0.002),(12,6104*0.002),(13,7025*0.002),(8,3736*0.002),(11,4025*0.002),(17,7025*0.002),(14,6716*0.002),(7,1496*0.002),(8,3164*0.002),(10,2881*0.002),(6,2881*0.002),(9,2600*0.002),(10,4025*0.002),(13,7025*0.002),(8,2600*0.002),(10,3736*0.002),(9,4025*0.002),(11,5500*0.002),(11,3164*0.002),(11,3164*0.002),(8,3449*0.002),(14,7336*0.002),(11,5201*0.002),(13,4904*0.002),(9,2321*0.002),(13,4609*0.002),(8,2321*0.002),(7,1225*0.002),(9,2321*0.002),(20,11224*0.002),(17,7649*0.002),(7,1769*0.002),(8,3736*0.002),(15,8281*0.002),(13,6104*0.002),(15,6104*0.002),(20,9896*0.002),(11,5801*0.002),(15,7964*0.002),(19,9896*0.002),(16,6409*0.002),(13,6104*0.002),(6,2321*0.002),(11,3736*0.002),(18,8921*0.002),(8,1769*0.002),(13,6409*0.002),(4,161*0.002),(14,6409*0.002),(9,4025*0.002),(9,3449*0.002),(21,11224*0.002),(14,5201*0.002),(5,1769*0.002)}{
+    \node[color = red] at \Point {\textbullet};
+}
+\draw[thick, scale=1, domain=3:22, smooth, variable=\x] plot ({\x}, {0.002665*\x*\x + 1.00785*\x - 1.99144});
+\end{tikzpicture}
+\end{center}
+
+\subsection{Лабораторная работа №10}
+
+\ 
+\[\overline{x}=71.5370,\quad\overline{y}=147.8889,\quad\overline{z}=567.3704,\]
+\[\overline{xy}=10611.4815,\quad\overline{yz}=84165.3889,\quad\overline{xz}=40713.6852,\]
+\[S_x=3.9521,\quad S_y=8.5779,\quad S_z=31.9161\]
+\parПарные выборочные коэффициенты корреляции:
+\[\Rightarrow r_{xy}=0.9424,\quad r_{yz}=0.941,\quad r_{xz}=0.9965.\]
+\parЧастные выборочные коэффициенты корреляции:
+\[\Rightarrow r_{xy(z)}=0.1676,\quad r_{yz(x)}=0.0673,\quad r_{xz(y)}=0.9689.\]
+\parСовокупный коэффициент корреляции:
+\[R_{xyz}=0.9965\Rightarrow t=7.45701\]
+\par\(t_\alpha(n-m-1;\frac{\alpha}{2})=t_\alpha(50;0.025)=1.95996\Rightarrow\) критическая область \(A:(-\infty;-1.95996)\cup(1.95996;+\infty)\Rightarrow t\in A\Rightarrow\) корреляции существенна, строим уравнение плоскости:
+\[z=Ax+By+C,\quad A=7.9187,\quad B=0.0614,\quad C=-8.184\]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{img/image.png}
+\end{center}
+
+\end{document}

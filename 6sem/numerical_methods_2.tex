@@ -1,0 +1,410 @@
+\documentclass[9pt]{article}
+\input{header.tex}
+
+\begin{document}
+
+\begin{center}
+    \huge\textbf{Численные методы.}
+\end{center}
+
+\section{Решение ОДУ первого порядка.}
+
+\ 
+\par\textbf{I. Численные методы ОДУ:}
+\par1. Задача Коши для ОДУ первого порядка;
+\par2. Краевая задача для ОДУ второго порядка.
+\par\textbf{II. Численные методы УМФ:}
+\par1. 
+
+\subsection{Численное решение задачи Коши для ОДУ первого порядка.}
+
+\ 
+\par\textbf{1. Постановка:} \(\left\{\begin{array}{l}
+    \dfrac{du}{dx}=f(x,u) \\
+    u(0) = u_0
+\end{array}\right.\)
+\par\textbf{2. Метод Эйлера:} Дискретное решение \(y(x_i)=y_i\) (приближенное).
+\par\(\int_{x_i}^{x_{i+1}} du=\int_{x_i}^{x_{i+1}} f(x,u)dx\) непрерывное решение \(u(x_i)=u_i\) (точное).
+\parСетка \(\overline w=\{x|x_i=ih\}\), где \(h=\const\) --- некторый шаг, \(i=\overline{0,N}\).
+\par\textit{Простой метод Эйлера.} \(y_{i+1}-y_i=f(x_i,y_i)h\) --- формула левых прямоугольников \(\Rightarrow\) \boxed{y_{i+1}=y_i+f(x_i,y_i)h}.
+\par\textit{Симметричный метод Эйлера.} \(y_{i+1}-y_i=\dfrac{f(x_i,y_i)+f(x_{i+1},y_{i+1})}{2}h\). Т.к. имеется \(y_{i+1}\) сначала ее нужно вычислить через обычную формулу Эйлера.
+\par\textit{Модифицированный метод Эйлера.} \(y_{i+1}-y_i=hf(x_i+\frac{h}{2},y_{i+\frac{1}{2}})\), где \(y_{i+\frac{1}{2}}=y_i+\frac{h}{2}f(x_i,y_i)\).
+
+\subsection{Погрешность методов Эйлера.}
+
+\ 
+\par\(u_i\) --- точное решение в точке \(x_i\), а \(y_i\) --- приближенное решение. Тогда \(z_i=y_i-u_i\) --- погрешность решения, а погрешность метода \(\dfrac{z_{i+1}+u_{i+1}-z_i-u_i}{h}=f(x_i,y_i)\Rightarrow \dfrac{z_{i+1}-z_i}{h}=f(x_i,z_i+u_i)-\dfrac{u_{i+1}-u_i}{h}+f(x_i,u_i)-f(x_i,u_i)=\psi^{(1)}_i+\psi^{(2)}_i\), где \(\psi^{(1)}_i=-\dfrac{u_{i+1}-u_i}{h}+f(x_i,u_i)\) --- погрешность аппроксимации на решении исходного уравнения, \(\psi^{(2)}_i=f(x_i,z_i+u_i)-f(x_i,u_i)\). Формула Тейлора \(u_{i+1}=u_i+\dfrac{h}{1!}u_i'+O(h^2)\Rightarrow \psi^{(1)}_i=-u_i'+O(h)+f(x_i,u_i)=O(h)\).
+\parДля симметричного метода \(\psi^{(1)}_i=-\dfrac{u_{i+1}-u_i}{h}+\dfrac{f(x_i,u_i)+f(x_{i+1},u_{i+1})}{2}\). \textbf{СРС}.
+
+
+\subsection{Методы Рунге-Кутты.}
+
+\ 
+\par\(\dfrac{y_{i+1}-y_i}{h}=\sum_{j=1}^m\sigma_jk_j\), где \(k_1=f(x_i,y_i),k_2=f(x_i+a_2h,y_i+b_{21}hk_1),k_3=f(x_i+a_3h,y_i+b_{31}hk_1+b_{32}hk_2),k_4=f(x_i+a_4h,y_i+b_{41}hk_1+b_{42}hk_2+b_{43}hk_3)\).
+\parПри \(m=2\): \(\dfrac{y_{i+1}-y_i}{h}=\sigma_1k_1+\sigma_2k_2=\sigma_1f(x_i,y_i)+\sigma_2f(x_i+a_2h,y_i+b_{21}hf(x_i,y_i))\). Неизвестные \(\sigma_1,\sigma_2,...\) ищем такие, чтобы погрешность была \(\psi_i=O(h^2)\). \(\psi_i=-\dfrac{u_{i+1}-u_i}{h}+\sigma_1f(x_i,y_i)+\sigma_2f(x_i+a_2h,y_i+b_{21}hf(x_i,y_i))\). Формула Тейлора: \(u_{i+1}=u_i+hu_i'+\frac{h^2}{2}u_i''+O(h^3),f(x_i+a_2h,y_i+b_{21}hf(x_i,y_i))=f(x_i,u_i)+a_2h\dfrac{\partial f}{\partial x}+b_{21}h\dfrac{\partial f}{\partial u}f+O(h^2)\). \(u''=\dfrac{\partial f}{\partial x}+\dfrac{\partial f}{u}f\Rightarrow \psi_i=-u_i'-\dfrac{h}{2}(\dfrac{\partial f}{\partial x}+\dfrac{\partial f}{\partial u}f)+O(h^2)+\sigma_1f_i+\sigma_2a_2h\dfrac{\partial f}{\partial x}+\sigma_2b_{21}h\dfrac{\partial f}{\partial u}f+O(h^2)\). Получается система
+\[\left\{\begin{array}{l}
+    \sigma_1+\sigma_2-1=0 \\
+    -\frac{h}{2}+\sigma_2a_2h=0 \\
+    -\frac{h}{2}+\sigma_2b_{21}h=0
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{l}
+    \sigma_1+\sigma_2=1 \\
+    \sigma_2a_2=\frac{1}{2} \\
+    \sigma_2b_{21}=\frac{1}{2}
+\end{array}\right.\Leftarrow \sigma_1=0,\sigma_2=1,a_2=\frac{1}{2},b_{21}=\frac{1}{2}.\]
+
+\section{Численные методы решения краевых задач для ОДУ 2 порядка.}
+
+\ 
+\par\textbf{1. Постановка:} 
+\[\left\{\begin{array}{ll}
+    -ku''+q(x)u=f(x) & 0<x<l,q(x)\ge0,k>0 \\
+    u(0)=M_1,u(l)=M_2 & 
+\end{array}\right.\]
+\par\textbf{2. Метод конечных разностей.} \(u(x)\) --- точное решение (непрерывное). Сетка \(w_h=\{x|x_i=i*h,h=\frac{l}{N},i=\overline{0,N}\}\), и \(y_i=y(x_i)\) --- приближенное решение.
+\par\textit{Метод непосредственной аппроксимации.} Правая разностная производная \(\dfrac{y_{i+1}-y_i}{h}\); левая \(\dfrac{y_i-y_{i-1}}{h}\); центральная \(\dfrac{y_{i+1}-y_{i-1}}{2h}\). Для производной второй степени \(\dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2}\). Краевые условия \(u(0)=y_0,u(l)=y_N,u'(0)=\dfrac{y_1-y_0}{h},u'(l)=\dfrac{u_N-u_{N-1}}{h}\). \parРазностная схема:
+\[\left\{\begin{array}{ll}
+    -k\dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2}+q_iy_i=f_i, & i=\overline{1,N-1} \\
+    y_0=M_1 \\
+    y_N=M_2
+\end{array}\right.\]
+--- СЛАУ из $n$ уравнений. Первое уравнение \(-\dfrac{k}{h^2}y_{i-1}+(q_i+\dfrac{2k}{h^2})y_i-\dfrac{k}{h^2}y_{i+1}=f_i\) можно записать как \(\alpha y_{i-1}-\gamma y_i+\beta y_{i+1}=\varphi\). Тогда получится разреженная трехдиагональная матрица.
+\par\textbf{3. Решение сеточных уравнений.} Прямым методом (методом прогонки) \(Ay=f\), где \[\left(
+\begin{array}{cccccc}
+    1 & 0 & 0 & 0 & \cdots & 0 \\
+    \alpha & -\gamma & \beta & 0 & \cdots & 0 \\
+    0 & \alpha & -\gamma & \beta & \cdots & 0 \\
+    \cdots \\
+    0 & 0 & 0 & 0 & \cdots & 1
+\end{array}\right)\cdot\left(
+\begin{array}{l}
+    y_0 \\
+    y_1 \\
+    y_2 \\
+    \cdots \\
+    y_N
+\end{array}
+\right)=\left(
+\begin{array}{l}
+    M_1 \\
+    f_1 \\ 
+    f_2 \\
+    \cdots \\
+    M_2
+\end{array}
+\right)\]
+Решение ищем в виде \boxed{y_i=\xi_{i+1}y_{i+1}+\nu_{i+1}}, где \(\xi_{i+1},\nu_{i+1}\) --- прогоночные коэффициенты. \(y_{i-1}=\xi_iy_i+\nu_i\Rightarrow\alpha(\xi_iy_i+\nu_i)-\gamma y_i+\beta y_{i+1}=\varphi\Rightarrow y_i=\dfrac{-\beta}{\alpha\xi_i-\gamma}y_{i+1}+\dfrac{\varphi-\alpha\nu_i}{\alpha\xi_i-\gamma}\Rightarrow\xi_{i+1}=\dfrac{-\beta}{\alpha\xi_i-\gamma},\nu_{i+1}=\dfrac{\varphi-\alpha\nu_i}{\alpha\xi_i-\gamma}\).
+\par\(\underline{i=0}:\ y_0=\xi_1y_1+\nu_1, y_0=M_1\Rightarrow\xi_1=0,\nu_1=M_1\).
+\par\(\underline{i=N}:\ y_{N-1}=\xi_Ny_N+\nu_N,y_N=M_2\Rightarrow y_N=M_2\).
+\par\textbf{Алгоритм:}
+\par1) \(\xi_1=0,\nu_1=M_1\);
+\par2) \(\xi_{i+1}=\dfrac{-\beta}{\alpha\xi_i-\gamma},\nu_{i+1}=\dfrac{\varphi-\alpha\nu_i}{\alpha\xi_i-\gamma}\);
+\par3) \(y_N=M_2\);
+\par4) \(y_i=\xi_{i+1}y_{i+1}+\nu_{i+1}\).
+
+\section{Численное решение одномерного уравнения теплопроводности.}
+
+\ 
+\par\textbf{1. Постановка.}
+\[\left\{
+\begin{array}{ll}
+    \dfrac{\partial u}{\partial t}=\dfrac{\partial^2u}{\partial x^2}+f(x,t), & 0<x<l, 0<t\le T \\
+    u(x,0) = u_0(x), & 0\le x\le l \\
+    u(0,t) = \mu_1(t),u(l,t)=\mu_2(t)
+\end{array}\right.\]
+\parСетка \(\omega_h\times\omega_\tau\):
+\[\omega_h=\{x|x_i=ih,i=\overline{0,N},h=\frac{l}{N}\}\]
+\[\omega_\tau=\{t|t_j=j\tau,j=\overline{0,M},\tau=\frac{T}{M}\}\]
+\[\begin{array}{c|c}
+    \textup{непр.} & \textup{дискр.} \\
+    \hline
+    u(x,t),\ 0<x<l,0<t\le T& y(x_i,t_j)=y_i^j,y(x_i,t_{j+1})=\hat y_i,y(x_i, t_{j-1})=\check y_i \\
+    \hline
+    \dfrac{\partial u}{\partial t} & \dfrac{y_i^{j+1}-y_i^j}{\tau} \\
+    \hline
+    \dfrac{\partial u}{\partial x} & \dfrac{y_{i+1}-y_i}{h} \\
+    \hline
+    \dfrac{\partial^2 u}{\partial x^2} & \dfrac{y_{i+1}^?-2y_{i}^?+y_{i-1}^?}{h^2},?=j\textup{ --- явная, }?=j+1\textup{ --- неявная} \\
+    \hline
+    u(0,t) & y_0^{j+1} \\
+    \hline
+    u(l,t) & y_N^{j+1} \\
+    \hline 
+    u'(0,t) & \dfrac{y_1^{j+1}-y_0^{j+1}}{h} \\
+    \hline
+    u'(l,t) & \dfrac{y_N^{j+1}-y_{N-1}^{j+1}}{h} \\
+\end{array}\]
+\parг) \textbf{Схема с весами:}
+\[\dfrac{y_i^{j+1}-y_i^j}{\tau}=\sigma\dfrac{y_{i+1}^{j+1}-2y_i^{j+1}+y_{i-1}^{j+1}}{h^2}+(1-\sigma)\dfrac{y_{i+1}^j-2y_i^j+y_{i-1}^j}{h^2}.\]
+При \(\sigma=0\) --- \textit{явная схема}, \(\sigma=1\) --- \textit{неявная схема}, \(\sigma=\frac{1}{2}\) --- \textit{симметричная схема}.
+\parд) \textbf{Каноническая форма двухслойных разностных схем:}
+\[B\dfrac{y^{j+1}-y^j}{\tau}+\mathcal Ay^j=\varphi.\]
+
+\section{Численное решение одномерных параболических уравнений}
+
+\ 
+\par\textbf{1. Постановка}
+\[\left\{
+\begin{array}{ll}
+    \dfrac{\partial u}{\partial t}=\dfrac{\partial}{\partial x}(k(x)\dfrac{\partial u}{\partial x}), & 0<x<l,0<t\le T \\
+    -k(0)\dfrac{\partial u}{\partial x}(0,t)+\sigma_1u(0,t)=\mu_1(t), & 0<t\le T \\
+    k(l)\dfrac{\partial u}{\partial x}(l,t)+\sigma_2u(l,t)=\mu_2(t), & 0<t\le T \\
+    u(x,0)=v_0(x), & 0\le x\le l
+\end{array}\right.\]
+\par\textbf{Разностная схема}
+\parСетка \(\omega_h\times\omega_\tau\):
+\[\omega_h=\{x|x_i=ih,i=\overline{0,N},h=\frac{l}{N}\}\]
+\[\omega_\tau=\{t|t_j=j\tau,j=\overline{0,M},\tau=\frac{T}{M}\}\]
+\[\begin{array}{c|c}
+    \textup{непр.} & \textup{дискр.} \\
+    \hline
+    u(x,t),\ 0<x<l,0<t\le T& y(x_i,t_j)=y_i^j,y(x_i,t_{j+1})=\hat y_i,y(x_i, t_{j-1})=\check y_i \\
+    \hline
+    \dfrac{\partial u}{\partial t} & \dfrac{y_i^{j+1}-y_i^j}{\tau} \\
+    \hline
+    \dfrac{\partial u}{\partial x} & \dfrac{y_{i+1}-y_i}{h} \\
+    \hline
+    \dfrac{\partial}{\partial x}(k(x)\dfrac{\partial u}{\partial x}) & \dfrac{1}{h}\left(a_{i+1}\dfrac{y_{i+1}^?-y_{i}^?}{h}-a_i\dfrac{y_i^?-y_{i-1}^?}{h}\right),?=j\textup{ --- явная, }?=j+1\textup{ --- неявная} \\
+    \hline
+     & -k_{\frac{1}{2}}\dfrac{y_1^{j+1}-y_0^{j+1}}{h}+ \sigma_1y_0^{j+1}=\mu_1(t_{j+1}) \\ 
+    \hline
+     & k_{N-\frac{1}{2}}\dfrac{y_N^{j+1}-y_{N-1}^{j+1}}{h}+ \sigma_2y_N^{j+1}=\mu_2(t_{j+1})
+\end{array}\]
+\par\textbf{СРС 2: метод прогонки}
+\par\(a_{i+1}=\dfrac{k_{i+1}+k_i}{2}\) или \(a_{i+1}=k(x_i+0.5h)\);
+\[\alpha y_{i-1}-\gamma y_i+\beta y_{i+1}=\varphi,\quad\dfrac{y_i^{j+1}-y_i^j}{\tau}=\dfrac{1}{h}\left(a_{i+1}\dfrac{y_{i+1}^{j+1}-y_{i}^{j+1}}{h}-a_i\dfrac{y_i^{j+1}-y_{i-1}^{j+1}}{h}\right)\Rightarrow\]
+\[\dfrac{a_i}{h^2}y_{i-1}^{j+1}-\left(\dfrac{a_{i+1}+a_i}{h^2}+\dfrac{1}{\tau}\right)y_i^{j+1}+\dfrac{a_{i+1}}{h^2}y_{i+1}^{j+1}=-\dfrac{y_i^j}{\tau}\Rightarrow\]
+\[\alpha=\dfrac{k_i+k_{i-1}}{2h^2},\quad \gamma=\dfrac{k_{i+1}+2k_i+k_{i-1}}{2h^2}+\dfrac{1}{\tau},\quad \beta=\dfrac{k_{i+2}+k_{i+1}}{2h^2},\quad\varphi=-\dfrac{y_i^j}{\tau}.\]
+
+
+\section{Численное решение эллиптических уравнений}
+
+\ 
+\par\textbf{1. Постановка}
+\[\left\{
+\begin{array}{ll}
+    \dfrac{\partial^2u}{\partial x_1^2}+\dfrac{\partial^2u}{\partial x_2^2}=-f(x), & (x_1,x_2)\in G \\
+    u(x_1,x_2)=0, & (x_1,x_2)\in\Gamma
+\end{array}\right.\]
+\parСетка
+\[\omega_h=\{x=(x_1,x_2)|x_\alpha=i_\alpha h_\alpha, h_\alpha=\frac{l_\alpha}{N_\alpha},\alpha=1,2\}\]
+\[u(x_1,x_2) \to y(x_i,x_j)=y_{ij}\]
+\[\left\{
+\begin{array}{ll}
+    \dfrac{y_{i+1,j}-2y_{ij}+y_{i-1,j}}{h_1^2}+\dfrac{y_{i,j+1}-2y_{ij}+y_{i,j-1}}{h_2^2}=-f_{ij} &  \\
+    y_{i0}=0,y_{i,N_2}=0, & i=\overline{1,N_1} \\
+    y_{0j}=0,y_{N_1,j}=0, & j=\overline{1,N_2}
+\end{array}\right.\]
+\par\textbf{3. Итерационный метод}
+\parНачальной приближение \(y_{ij}^s,s=0\);
+\parСледующее приближение \(y_{ij}^{s+1},i=\overline{1,N_1-1},j=\overline{1,N_2-1}\): 
+\[\dfrac{y_{i+1,j}^s-2y_{ij}^{s+1}+y_{i-1,j}^s}{h_1^2}+\dfrac{y_{i,j+1}^s-2y_{ij}^{s+1}+y_{i,j-1}^s}{h_2^2}=-f_{ij}\]
+
+\subsection{Матричная запись граничных условий II-го рода}
+
+\ 
+\par\textbf{1. Постановка}
+\[\left\{\begin{array}{l}
+    \dfrac{\partial^2u}{\partial x^2}=-f \\
+     \dfrac{\partial}{\partial x}u(0)=a,\ \dfrac{\partial}{\partial x}u(l)=b
+\end{array}\right.\]
+\par\textbf{Разностная схема \& сетка}
+\[\left\{\begin{array}{l}
+    \dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2}=-f \\
+    \dfrac{y_1-y_0}{h}=a,\ \dfrac{y_n-y_{n-1}}{h}=b
+\end{array}\right.\Rightarrow i=1:\left\{ \begin{array}{l}
+    -\dfrac{y_2-2y_1+y_0}{h^2}=\varphi_{1} \\
+    y_0=y_1-ah
+\end{array}\right.\Rightarrow\]
+\[\Rightarrow\boxed{\dfrac{1}{h^2}(y_1-y_2)=\varphi_1-\dfrac{a}{h}}.\]
+\[\left\{\begin{array}{l}
+    \dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2}=-f \\
+    \dfrac{y_1-y_0}{h}=a,\ \dfrac{y_n-y_{n-1}}{h}=b
+\end{array}\right.\Rightarrow i=n-1:\left\{ \begin{array}{l}
+    -\dfrac{y_n-2y_{n-1}+y_{n-2}}{h^2}=\varphi_{n-1} \\
+    y_n=y_{n-1}+bh
+\end{array}\right.\Rightarrow\]
+\[\Rightarrow\boxed{\dfrac{1}{h^2}(y_{n-1}-y_{n-2})=\varphi_{n-1}+\dfrac{b}{h}}.\]
+\[\forall i = \overline{2,n-2}:\boxed{-\dfrac{1}{h^2}(y_{i+1}-2y_i+y_{i-1})=\varphi_i}.\]
+\par\textbf{Матричная запись}
+\[\dfrac{1}{h^2}\left(
+\begin{array}{ccccccc}
+    1 & -1 & 0 & ... & 0 & 0 & 0 \\
+    -1 & 2 & -1 & ... & 0 & 0 & 0 \\
+    0 & -1 & 2 & ... & 0 & 0 & 0 \\
+    ... & ... & ... & ... & ... & ... & ... \\
+    0 & 0 & 0 & ... & 2 & -1 & 0 \\
+    0 & 0 & 0 & ... & -1 & 2 & -1 \\
+    0 & 0 & 0 & ... & 0 & -1 & 1
+\end{array}
+\right)\cdot\left(
+\begin{array}{c}
+    y_1 \\ y_2 \\ y_3 \\ ... \\ y_{n-3} \\ y_{n-2} \\ y_{n-1}
+\end{array}
+\right)=\left(
+\begin{array}{c}
+    \varphi_1-\frac{a}{h} \\
+    \varphi_2 \\ \varphi_3 \\ ... \\ \varphi_{n-3} \\ \varphi_{n-2} \\
+    \varphi_{n-1}+\frac{b}{h}
+\end{array}
+\right)\]
+
+\section{Численное решение многомерного уравнения теплопроводности}
+
+\ 
+\par\textbf{1. Постановка}
+\[\left\{
+\begin{array}{ll}
+    \dfrac{\partial u}{\partial t}=\dfrac{\partial^2u}{\partial x_1^2}+\dfrac{\partial^2u}{\partial x_2^2}, & x=(x_1,x_2)\in G \\
+    u(x,t)=\mu(x,t),u(x,0)=u_0(x), & x\in\Gamma, 0\le t\le T
+\end{array}
+\right.\]
+\par\textbf{2. Разностная схема}
+\[\omega_\tau=\{t_n=n\tau|n=\overline{0,k-1},k\tau=T\]
+\[\Omega_h=\{x_{ij}=(x_1^{(i)},x_2^{(j)})|x_1^{(i)}=ih_1,x_2^{(i)}=ih_2,i=\overline{0,N_1},j=\overline{0,N_2}\}\]
+\parВ неявной разностной схеме \(\dfrac{y_{ij}^{n+1}-y_{ij}^n}{\tau}=\Delta y_{ij}^{n+1}\) будет 5 неизвестных, что не дает решать ее методом прогонки. Поэтому используем \textbf{метод переменных направлений} (Писмена-Рэкфорда). Вводится промежуточный слой \(y^{n+0.5}\).
+\[\left\{
+\begin{array}{l}
+    \dfrac{y_{ij}^{n+0.5}-y_{ij}^n}{\tau}=\Delta^{n+0.5}_{x_1}y_{ij}+\Delta^{n}_{x_2}y_{ij}  \\
+    \dfrac{y_{ij}^{n+1}-y_{ij}^{n+0.5}}{\tau}=\Delta^{n+0.5}_{x_1}y_{ij}+\Delta^{n+1}_{x_2}y_{ij}
+\end{array}
+\right..\]
+Как видно, этот метод работает только для четных \(n\).
+\parДля общего случая есть \textbf{локальная одномерная схема}:
+\[\left\{
+\begin{array}{l}
+    \dfrac{y^{n+0.5}-y^n}{\tau}=\Delta_{x_1}^{n+0.5}y \\
+    \dfrac{y^{n+1}-y^{n+0.5}}{\tau}=\Delta_{x_2}^{n+1}y
+\end{array}
+\right.\]
+
+\section{Численное решение задачи Коши для ОДУ I-го порядка}
+
+\ 
+\par\textbf{1. Постановка}
+\[\left\{
+\begin{array}{l}
+    y'=f(x,y) \\
+    y(x_0)=y_0
+\end{array}
+\right.\]
+\par\textbf{2. Разностная схема}
+\[\omega_h=\{x|x_i=x_0+ih,i=\overline{1,n},hn=l\}\]
+\par\textbf{a)} Метод Эйлера;
+\par\textbf{б)} Методы Рунге-Кутты;
+\par\textbf{в)} Методы Адамса
+\[y_i=y_{i-1}+h\sum_{j=0}^mb_jf_{i-j},\quad b_0,...,b_m=?\]
+При \(i=m\) имеем:
+\[y_i=y_{i-1}+h(b_0f_m+b_1f_{m-1}+...+b_mf_0).\]
+Если \(b_0=0\), то метод будет явным.
+При \(m=1\):
+\[y_i=y_{i-1}+h(b_0f_i+b_1f_{i-1})\]
+
+\subsection{Построение разностных схем методом баланса. Интегро-интерполяционный метод.}
+
+\ 
+\par\textbf{1. Постановка.}
+\[\left\{\begin{array}{ll}
+    (k(x)u'(x))'-q(x)u(x)+f(x)=0, & 0<x<l,\ k(x)>0,\ q(x)\ge0 \\
+    -k(0)u'(0)+\beta u(0)=\mu_1, & \textup{--- краевые условия III рода}\\
+    u(l)=\mu_2, & \textup{--- краевые условия I рода}
+\end{array}\right.\]
+\par\textbf{2. Построить разностную схему.}
+\[\omega_h=\{x|x_i=ih,\ i=\overline{1,N}\},\quad x_{i\pm\frac{1}{2}}=x\pm\frac{1}{2}h\textup{ --- половинный узел}\]
+\parОбозначим \(w(x)=k(x)u'(x)\) --- поток, \(w_{i+\frac{1}{2}}=w(x_{i+\frac{1}{2}}\). Проинтегрируем уравнение (1) на \([x_{i-\frac{1}{2}},x_{i+\frac{1}{2}}]:\)
+\[\dfrac{\omega_{i+1}-\omega_{i-\frac{1}{2}}}{h}-\dfrac{\int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}q(x)u(x)dx}{h}+\dfrac{\int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}f(x)dx}{h}=0\]
+Первый интеграл можно посчитать по формуле центральных прямоугольников \(d_i=\frac{1}{h}\int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}q(x)dx\),  второй \(\varphi_i=\frac{1}{h}u_i\int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}f(x)dx\).
+\[w(x)=k(x)u'(x)\Rightarrow u'(x)=\dfrac{w(x)}{k(x)}\]
+\parПроинтегрируем \([x_{i-1},x_i]:\)
+\[\int_{x_{i-1}}^{x_i}u'(x)dx=\int_{x_{i-1}}^{x_i}\dfrac{w(x)}{k(x)dx},\ u_i-u_{i-1}=w_{i-\frac{1}{2}}\int_{x_{i-1}}^{x_i}\dfrac{1}{k(x)}dx\]
+\[\Rightarrow w_{i-\frac{1}{2}}=\left(\int_{x_{i-1}}^{x_i}\dfrac{1}{k(x)}dx\right)^{-1}\cdot\dfrac{u_i-u_{i-1}}{h}.\]
+\parРазностная схема:
+\[\dfrac{1}{h}\left(a_{i+1}\dfrac{u_{i+1}-u_i}{h}-a_i\dfrac{u_i-u_{i-1}}{h}\right)-d_iu_i+\varphi_i=0\]
+\par\textit{Консервативная разностная схема} --- это схема, которая учитывает законы сохранения.
+\par\textbf{Аппроксимация краевого условия методом Баланса:}
+\[-k(0)u'(x)+\beta u(0)=\mu_1.\]
+Интегрируем исходное уравнение на отрезке \([0,x_{\frac{1}{2}}]:\)
+\[w_\frac{1}{2}-w_0-\int_0^{x_\frac{1}{2}}q(x)u(x)dx+\int_0^{x_{1/2}}f(x)dx=0,\quad w_\frac{1}{2}=a_1\dfrac{u_1-u_0}{h}\]
+\[x=0\textup{ из краевого условия: }-w_0+\beta u_0=\mu_1\Rightarrow w_0=-\mu_1+\beta u_0\]
+\[\dfrac{a_1\dfrac{u_1-u_0}{h}+\mu_1-\beta u_0}{0.5h}-d_0u_0+\varphi_0=0,\quad\textup{где }d_0=\dfrac{\int q(x)dx}{0.5h},\ \varphi_0=\dfrac{\int f(x)dx}{0.5h}\]
+\[a_1\dfrac{u_1-u_0}{h}-u_0(\beta+d_0\cdot0.5h)=-\mu_1-0.5h\varphi_0,\quad O(h^2)\]
+\par\textbf{СРС:} написать аппроксимацию для краевого условия \(k(l)u'(l)+\beta_2 u(l)=\mu_2\).
+\[w_N-w_{N-\frac{1}{2}}\]
+
+\subsection{Условие устойчивости разностных схем для уравнения теплопроводности}
+
+\ 
+\par\textbf{1. Постановка:}
+\[\left\{\begin{array}{ll}
+    \dfrac{\partial u}{\partial t}=\dfrac{\partial^2u}{\partial x^2}, & 0<x<l,\ 0<t\le T \\
+    u(x,0)=u_0(x), & 0\le x\le l \\
+    u(0,t)=u(l,t)=0, & 0<t\le T
+\end{array}\right.\]
+\par\textbf{2. Разностная схема:}
+\[\omega_h=\{x|x_i=ih,\ i = \overline{0,N},\ h = \frac{l}{N}\}\]
+\[\omega_\tau=\{t|t_j=j\tau,\ j=\overline{0,M},\ \tau=\frac{T}{M}\}\]
+\par\textbf{3. Устойчивость разностных схем.} Будем рассматривать для канонического вида.
+
+\subsection{Устойчивость двухслойных разностных схем}
+
+\ 
+\par\textbf{1. Постановка}
+\[\begin{array}{ll}
+    \dfrac{\partial u}{\partial t}=\dfrac{\partial^2u}{\partial x^2}, & 0<x<l,\ 0<t\le T \\
+    u(x,0)=u_0(x), & 0<t\le T\\
+    u(0,t)=\mu_1(t),\ u(l,t)=\mu_2(t), & 0<t\le T
+\end{array}\]
+\parКорректная: \(\exists,\ \exists!\) и устойчиво:
+\parУстойчиовсть \(\equiv\) принцип максимума: максимальная температура достигается либо на грани, либо в начальный момент при отсутствии источников:
+\[||u(x,t)||_C\le\max\{||u_0(x)||_C,\ ||\mu_1(t)||_C,\ ||\mu_2(t)||_C\}+M||f(x,t)||_C\]
+\par\textbf{2. Приближенное решение} --- метод конечных разностей.
+\parПрименим двухслойную разностную схему:
+\parа) явная р/c --- условно устойчива
+\[\left\{
+\begin{array}{ll}
+    \dfrac{y_i^{j+1}-y_i^j}{\tau}=\dfrac{y_{i+1}^j-2y_i^j+y_{i-1}^j}{h^2}, & i=\overline{1,N-1},\ j=\overline{0,M-1} \\
+    y_i^0=u_0(x_i), & i=\overline{0,N} \\
+    y_0^{j+1}=\mu_1(t_{j+1}),\ y_N^{j+1}=\mu_2(t_{j+1}) & \\
+\end{array}
+\right.\]
+\parб) 
+\[\left\{
+\begin{array}{ll}
+    \dfrac{y^{j+1}_i-y_i^j}{\tau}=\dfrac{y_{i+1}^{j+1}-2y_i^{j+1}+y_{i-1}^{j+1}}{h^2}=\Lambda y^{j+1} &  \\
+    y_i^0=u_0(x_i), & i=\overline{0,N} \\
+    y_0^{j+1}=\mu_1(t_{j+1}),\ y_N^{j+1}=\mu_2(t_{j+1}) & \\
+\end{array}
+\right.\]
+\parв)
+\[\left\{
+\begin{array}{ll}
+    \dfrac{y_i^{j+1}-y_i^j}{\tau}=\sigma\Lambda y^{j+1}+(1-\sigma)\Lambda y^j &  \\
+    y_i^0=u_0(x_i), & i=\overline{0,N} \\
+    y_0^{j+1}=\mu_1(t_{j+1}),\ y_N^{j+1}=\mu_2(t_{j+1}) & \\
+\end{array}
+\right.\]
+\parДискретная задача должна быть также корректной.
+\parИсследуем только каноническую форму \(B\dfrac{y^{j+1}-y^j}{\tau}+Ay^j=\varphi_j,\ j=\overline{0,M-1}\).
+\par\textbf{Определение.} Двухслойная р/c называется \textit{устойчивой}, если \(\exists\) такие постоянные \(M_\alpha>0\):
+\[||y^j||\le M_1||y^0||+M_2\displaystyle\max_{k\in[0,M]}||\varphi_k||\]
+\parИз устойчивости следует сходимость.
+\par\textbf{Определение.} Определение \(\rho\)-устойчивости:
+\[||y^{j+1}||_D\le \rho||y^j||_D,\ (y,w)_D=(Dy,w)\]
+\par\textbf{Теорема.} Необходимое и достаточное условие сходимости при \(A=A^*>0\) и \(B\ge 0.5\tau A\).
+\parИсследуем на устойчивость явную р/c:
+\[ \dfrac{y_i^{j+1}-y_i^j}{\tau}=\dfrac{y_{i+1}^j-2y_i^j+y_{i-1}^j}{h^2},\]
+перепишем в каноническом виде:
+\[\dfrac{y_i^{j+1}-y_i^j}{\tau}-y_{\overline{x}x}^j=0,\]
+т.е \(B=E,\ Ay=-y_{\overline{x}x}\).
+\parРассмотрим оператор \(Ay=-y_{\overline{x}x}\):
+\[A=A^*>0:\ (Ay,v)=(y,A^*v),\ (Ay,y)>0\]
+\[\delta E\le A\le \Delta E,\quad \delta = \dfrac{8}{h^2}\min(k(x)),\ \Delta =\frac{4}{h^2}\max(k(x))\]
+\parПокажем, что явная р/c является условно-устойчивой:
+\[B-0.5\tau A\ge 0\textup{ при }A=A^*>0\]
+\[((E-0.5\tau A)y,y)\ge0\Leftrightarrow(y,y)-0.5\tau(Ay,y)\ge0\]
+\[\Leftrightarrow \dfrac{||y||^2}{(Ay,y)}-0.5\tau\ge0,\quad (Ay,y)\le\dfrac{4}{h^2}||y||^2\]
+\[\dfrac{h^2}{4}-0.5\tau\ge0\Rightarrow\dfrac{\tau}{h^2}\le0.5\]
+--- получили условие устойчивости явной р/c.
+
+
+\end{document}

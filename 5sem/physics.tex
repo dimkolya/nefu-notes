@@ -1,0 +1,729 @@
+\documentclass[9pt]{article}
+\input{header.tex}
+\usetikzlibrary{hobby}
+\usetikzlibrary{decorations.pathmorphing,patterns}
+
+\begin{document}
+
+\begin{center}
+    \huge\textbf{Физика.}
+\end{center}
+
+\par\textit{Задачник: Савельев И.П. -- сборник вопросов и задач по общей физике. 1988 год.}
+\par\textit{Учебник: Лозовской Б.Н. -- курс физики, 2 тома. 2001 год.}
+
+\section{Введение.}
+
+\par\ 
+\parПеречень \textbf{природных} явлений:
+\par-- Первый вид природных явлений -- это \textit{химический}. Химические явления связаны с изменением состава вещества;
+\par-- Второй вид -- \textit{биологические}, связаны с изменениями в флоре и фауне;
+\par-- Третий вид -- \textit{гидрометеоролигеческие} -- изменения, связанные с погодой, климат;
+\par-- Последний вид называется \textit{астрофизическим}.
+\parДанные явления являются сложными, но состоят из элементарных явлений -- физических.
+\par\textbf{Физическими} называют элементарные явления природы.
+\parНаблюдение, проводимое со специальной целью, в определенных условиях, называется  \textit{экспериментом}. Все физические измерения носят случайный характер. Действующих причин на результат измерения бесконечное количество. Чтобы произвести измерения, оставляют только значительные величины/параметры, остальными пренебрегают. Не учитываемые факторы дают обязательность \textit{погрешность} измерений.
+
+\section{Механика.}
+
+\par\ 
+\par\textit{Механическое движение} -- изменение местоположения тела относительно других тел с течением времени.
+\par1. Материальная точка -- тело, размерами которого пренебрегают;
+\par2. Твердое тело -- тело, при изучении которого пренебрегают изменением формы и объема (деформацией);
+\par3. Сплошная среда. Элементами сплошной среды являются кубики очень малых размеров, вплотную лежащие друг к другу. Через эту модель изучают движение жидкостей и газов.
+
+\subsection{Механика материальной точки.}
+
+\par\ 
+\parСистема отсчета:
+\par1. Тело отсчета;
+\par2. Система координат:
+\par-- прямоугольная (\(x, y, z\));
+\par-- цилиндрическая (\(\rho, \varphi, z\));
+\par-- сферическая (\(\rho, \varphi, \theta\)).
+\par3. Механизм, отсчитывающий время.
+
+\begin{wrapfigure}[9]{l}{0pt}
+\begin{tikzpicture}
+    
+\coordinate (I) at (0.3,0,0);
+\coordinate (K) at (0,0.3,0);
+\coordinate (J) at (0,0,0.3);
+\coordinate (O) at (0,0,0) node[color=blue, anchor=north]{\(O\)};
+\coordinate (R1) at (0.5,0.8,0.6);
+\coordinate (X1) at (0.5,0,0);
+\coordinate (Z1) at (0,0.8,0);
+\coordinate (Y1) at (0,0,0.6);
+\coordinate (X1Y1) at (0.5,0,0.6);
+\coordinate (R2) at (0.7,0.85,0.5);
+\draw[axis] (0,0,0) -- (1,0,0) node[anchor=north east]{\(x\)};
+\draw[axis] (0,0,0) -- (0,1,0) node[anchor=north west]{\(z\)};
+\draw[axis] (0,0,0) -- (0,0,1) node[anchor=north east]{\(y\)};
+\draw[vector] (O) -- (R1) node[anchor=east]{\(\vec r_1\)};
+\draw[vector] (O) -- (R2) node[anchor=north west]{\(\vec r_2\)};
+\draw[vector] (R1) -- (R2) node[anchor=south east]{\(\Delta \vec r\)};
+\draw[vector] (O) -- (I) node[anchor=north east]{\(\vec i\)};
+\draw[vector] (O) -- (K) node[anchor=east]{\(\vec k\)};
+\draw[vector] (O) -- (J) node[anchor=south]{\(\vec j\)};
+\draw[vector] (O) -- (X1) node[anchor=north west]{\(x_1\)};
+\draw[vector] (O) -- (Z1) node[anchor=east]{\(z_1\)};
+\draw[vector] (O) -- (Y1) node[anchor=north]{\(y_1\)};
+\draw[vector guide] (R1) -- (X1Y1);
+\draw[vector guide] (X1Y1) -- (Y1);
+\draw[vector guide] (X1Y1) -- (X1);
+\draw[vector guide] (Z1) -- (R1);
+\draw[vector guide] (O) -- (X1Y1);
+
+\end{tikzpicture}
+\end{wrapfigure}
+
+\parРадиус-вектор \(\vec{r} = x\cdot\vec{i} + y\cdot\vec{j} + z\cdot\vec{k}\), где \(|i| = |j| = |k| = 1\) -- ортонормированные векторы.
+\(\Delta \vec r = \vec r_2 - \vec r_1\) -- перемещение из точки \(r_1\) в точку \(r_2\).
+\parПусть:
+\(\left\{
+\begin{array}{r}
+\vec r_1  = x_1\cdot\vec{i} + y_1\cdot\vec{j} + z_1\cdot\vec{k}
+\\ \vec r_2 = x_2\cdot\vec{i} + y_2\cdot\vec{j} + z_2\cdot\vec{k}
+\end{array}
+\right.\Rightarrow\)
+\newline\(\Rightarrow\) перемещение \(\Delta\vec r = \Delta x\cdot\vec{i} + \Delta y\cdot\vec{j} + \Delta z\cdot\vec{k}\), где \(\Delta x = x_2 - x_1, \Delta y = y_2 - y_1, \Delta z = z_2 - z_1\). Можем вычислить: \(|\Delta\vec r|=\sqrt{\Delta x^2+\Delta y^2+\Delta z^2}\).
+
+\par\(S\) -- пройденный путь, длина траектории. \(\vec v _{avg} = \dfrac{\Delta \vec r}{\Delta t}\) -- средняя скорость. Если взять предел \(\displaystyle\lim_{\Delta t \to 0}\dfrac{\Delta\vec r}{\Delta t} =\) \boxed{\dfrac{d\vec r}{dt} = \vec v} -- мгновенная скорость (перемещение за единицу времени). \(\vec v = \dfrac{d\vec r}{dt} = \dfrac{d}{dt}(x\cdot\vec{i} + y\cdot\vec{j} + z\cdot\vec{k}) \Rightarrow \vec v = v_x\cdot\vec i + v_y\cdot\vec j + v_z\cdot\vec k,\ v_x=\dfrac{dx}{dt},\ v_y=\dfrac{dy}{dt},\ v_z=\dfrac{dz}{dt}\). Модуль, или абсолютная величина \(|\vec v|=\sqrt{v_x^2+v_y^2+v_z^2}\) где \(v_x,v_y,v_z\) -- проекции \(\vec v\) по осям координат.
+
+\begin{wrapfigure}[6]{r}{0pt}
+\raisebox{0pt}[\dimexpr\height-2\baselineskip\relax]{
+\begin{tikzpicture}
+    
+\coordinate (O) at (0,0,0) node[color=blue, anchor=north]{\(O\)};
+\draw[axis] (0,0,0) -- (1,0,0) node[anchor=north east]{\(x\)};
+\draw[axis] (0,0,0) -- (0,0.7,0) node[anchor=north west]{\(z\)};
+\draw[axis] (0,0,0) -- (0,0,1) node[anchor=north east]{\(y\)};
+\draw (0.1,0.3,0.6) .. controls (0.7,1.33,1) and (0.8,0.3,1) .. (1.2,0.8,1);
+\draw[vector] (0.58,0.82,1) -- (0.4,0.4,0.6) node[anchor=south west]{\(\vec a_n\)};
+\draw[vector] (0.58,0.82,1) -- (0.78,0.84,1) node[anchor=south east]{\(\vec a_\tau\)};
+\draw[vector] (0.58,0.82,1) -- (0.88,0.85,1) node[anchor=south east]{\(\vec v\)};
+
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par\textit{Ускорение} -- изменение мгновенной скорости за единицу времени, обозначается \(a = \dfrac{d\vec v}{dt}=\dfrac{d}{dt}(v_x\cdot\vec i + v_y\cdot\vec j + v_z\cdot\vec k),\ \vec a = a_x\cdot\vec i + a_y\cdot\vec j + a_z\cdot\vec k \Rightarrow a_x = \dfrac{dv_x}{dt},\ a_y = \dfrac{dv_y}{dt},\ a_z = \dfrac{dv_z}{dt}\) -- проекции \(\vec a\) по осям координат, \(|\vec a| = \sqrt{a_x^2+a_y^2+a_z^2}\).
+\parСкорость \(\vec v\) направлена по касательной к траектории. Ускорение разбивается на две составляющие: \(\vec a = \vec a_\tau + \vec a_n\), где \(|\vec a_\tau| = a_\tau = \dfrac{dv}{dt}\) -- тангенциальное ускорение, а \(\vec a_n\) -- нормальное ускорение.
+\par\(\vec a_\tau\uparrow\uparrow\vec v\) -- ускорение, скорость \(|\vec v|\) увеличивается;
+\par\(\vec a_\tau\uparrow\downarrow\vec v\) -- замедление, скорость \(|\vec v|\) уменьшается.
+\par\(\vec a_n\) направлена \(\perp\vec{v}\), к центру кривизны траектории.
+
+\begin{wrapfigure}[2]{r}{0pt}
+\raisebox{0pt}[\dimexpr\height-7\baselineskip\relax]{
+\begin{tikzpicture}
+
+\draw (0,0) .. controls (0.3,0.7) and (0.6,-1.1) .. (1,0.3);
+\draw[red, dashed] (0.16, 0.09) circle (0.07);
+\draw[red, dashed] (0.67,-0.12) circle (0.12);
+
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par\fbox{
+\begin{minipage}{32em}
+\textbf{Замечание.} \textit{Любую сложную траекторию можно разбить на участки движения по дугам окруженостей. Даже прямую можно представить как окружность бесконечно большого радиуса.}
+\end{minipage}}
+
+\usetikzlibrary{3d,patterns,angles,quotes}
+\begin{wrapfigure}[9]{l}{0pt}
+\begin{tikzpicture}
+
+\draw[vector guide] (0,-0.5,0) -- (0,0.5,0);
+\begin{scope}[canvas is zx plane at y=0]
+    \draw[black, dashed] (0,0) circle (0.5);
+    \draw[black] (0,0.2) arc (90:53:0.2);
+\end{scope}
+\coordinate (O) at (0,0,0);
+\coordinate (first) at (0.4,0,0.3);
+\coordinate (second) at (0.5,0,0);
+\draw[vector] (O) -- (second);
+\draw[vector] (O) -- (first) node[anchor=north east]{\(\vec R\)};
+\draw[vector] (first) -- (0.52,0,0.14) node[anchor=north]{\(\vec v\)};
+\draw[vector] (second) -- (0.5,0,-0.2) node[anchor = west]{\(\vec v\)};
+\node (phi) at (0.2,0.05,0) {\(\varphi\)};
+\draw[vector] (O) -- (0,0.3,0) node[color=black, anchor=east]{\(\vec\omega\)};
+\draw[vector] (O) -- (0,0.2,0) node[color=black,anchor=west]{\(d\vec\varphi\)};
+
+\end{tikzpicture}
+\end{wrapfigure}
+
+\par\(\varphi\) -- угол поворота (в радианах).
+\par\boxed{\vec{\omega} = \dfrac{d\vec\varphi}{dt}} -- угловая скорость (рад/с), \(\vec{\omega}\uparrow\uparrow\ d\vec\varphi\);
+\par\(\vec\varepsilon = \dfrac{d\vec\varphi}{dt}\) -- угловое ускорение (рад/с\textsuperscript{2}).
+\par-- \(\vec{\varepsilon}\uparrow\uparrow\vec{\omega}\) (ускорение);
+\par-- \(\vec{\varepsilon}\uparrow\downarrow\vec{\omega}\) (замедление).
+\parС помощью \textit{векторного произведения} можно записать следующие формулы связи:\[\vec v = [\vec \omega, \vec R],\quad\vec a_\tau=[\vec\varepsilon,\vec R],\quad\vec a_n=[\vec\omega,[\vec\omega,\vec R]].\]
+
+\subsection{Динамика материальной точки.}
+
+\ 
+\par\textbf{\textit{Динамика}} -- раздел физики, который изучает причины движения. Есть две причины движения тела: \textit{по инерции} и в результате \textit{взаимодействия с другими телами}. Инерция -- свойство тела сохранять свое первоначальное состояние движения. Инертность тела измеряется через массу \(m\). Массу называют \textit{мерой инертности тела}.
+\par\textbf{\textit{Первый закон Ньютона.}} Существуют такие системы отсчета относительно которых тело сохраняет первоначальное состояние движения \boxed{\vec v=\const,\ \vec a = 0}.
+\parСистема отсчета, о которой говорил Ньютон называется \textit{инерциальной}, то есть эти системы отсчета двигаются друг относительно друга с постоянной скоростью. В природе таких систем не бывает (идеализированный случай), все тела движутся друг относительно друга с ускорением. Но за малый промежуток времени тела не успевают сильно менять свою скорость. В таком случае используют инерциальную систему отсчета (ИСО).
+\par\textbf{\textit{Второй закон Ньютона.}} Ускорение прямо пропорционально действующей силе и обратно пропорционально его массе \boxed{a\sim F,\ a\sim \dfrac{1}{m}}.
+\par\(\displaystyle\sum^n_{i=1}\vec F_i=m\vec a\) -- это не закон Ньютона, а уравнения движения материальной точки.
+\par\textbf{\textit{Третий закон Ньютона.}} Относительно инерциальных систем тела действуют с силами, равными по модулю, но направленными в противоположные стороны.
+\parПервый закон Ньютона самый главный -- он систему отсчета для двух остальных законов.
+\parИсаак Ньютон еще ввел величину \textit{импульс} -- \(\vec p=m\vec v\). Импульс является количественной характеристикой движения материальной точки по Ньютону.
+\par\(\dfrac{d\vec p}{dt}=\dfrac{d(m\vec v)}{dt}=m\dfrac{d\vec v}{dt}=m\vec a=\vec F\Rightarrow\) \boxed{\dfrac{d\vec p}{dt}=\vec F} -- уравнение движения материальной точки.
+
+\subsection{Механика твердого тела.}
+
+\ 
+\parОснователем данной теории был Исаак Ньютон.
+\par\textbf{\textit{Твердое тело}} состоит из материальных точек, масса которых \(dm, dv, dS, dl,\) а масса всего тело является суммой \(m = \displaystyle \sum_{i=1}^nm_i\Rightarrow m=\int_m dm\). Твердое тело изучают как систему материальных точек, расстояние между которыми остается постоянным. Изучают два вида движения твердого тела:
+\par1. \textit{\textbf{Поступательное движение.}}
+
+\begin{wrapfigure}[7]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[scale = 0.25]
+    \draw[vector guide, color=red] (0,0) .. controls (2,0.5) .. (4,0);
+    \draw[vector guide, color=red] (1,0) .. controls (3,0.5) .. (5,0);
+    \draw[vector guide, color=red] (1,2) .. controls (3,2.5) .. (5,2);
+    \draw[vector guide, color=red] (0,2) .. controls (2,2.5) .. (4,2);
+    \draw (0, 0) rectangle (1, 2);
+    \draw[color=blue] (0, 0) -- (1, 2);
+    \draw (4, 0) rectangle (5, 2);
+    \draw[color=blue] (4, 0) -- (5, 2);
+    \draw[color=blue] (2, 0.37) -- (3, 2.37);
+    \filldraw[black] (2,0.37) circle (2pt);
+    \filldraw[black] (3,2.37) circle (2pt);
+    \filldraw[black] (0,0) circle (2pt);
+    \filldraw[black] (4,0) circle (2pt);
+    \filldraw[black] (1,2) circle (2pt);
+    \filldraw[black] (5,2) circle (2pt);
+    \node[anchor=north east] (A) at (0,0) {\(A\)};
+    \node[anchor=north west] (B) at (1,0) {\(B\)};
+    \node[anchor=north west] (C) at (1,2) {\(C\)};
+    \node[anchor=north east] (D) at (0,2) {\(D\)};
+    \node[anchor=north east] (A1) at (4,0) {\(A\)};
+    \node[anchor=north west] (B1) at (5,0) {\(B\)};
+    \node[anchor=north west] (C1) at (5,2) {\(C\)};
+    \node[anchor=north east] (D1) at (4,2) {\(D\)};
+    \node[anchor=south east] at (1.8,0.4) {\(S_A\)};
+    \node[anchor=south] at (3.2,0.4) {\(S_B\)};
+    \node[anchor=south west] at (3.5,2.3) {\(S_C\)};
+    \node[anchor=south] at (1.8,2.4) {\(S_D\)};
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par1) \(S_A=S_B=S_C=S_D\);
+\par2) отрезок \(AC\) остается параллельным.
+\par\textit{Поступательным движением} называется такое движение твердого тела, 1) при котором все точки движутся по одинаковым и параллельным траекториям; 2) при котором любой отрезок, соединяющий две любые точки тела остается параллельным самому себе в любой момент времени.
+\parЕсть особая точка тела -- \textit{центр масс}. Центром масс называется особая точка твердого тела, при действии на которое тело движется поступательно. \textbf{Поступательное движение изучают как движение материальной точки, которая находится в центре масс, обладает массой всего тела.}
+\par2. \textit{\textbf{Вращательное движение.}}
+
+\begin{wrapfigure}[8]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.25]
+    \draw[axis] (0,-2) -- (0,2) node[anchor=west]{\(z\) -- ось вращения};
+    \draw[closed] (0,-1.5) .. (0.7,-0.8) .. (0.7, -0.2) .. (0.8,0.6) .. (0,1.5) .. (-0.4,1.2) .. (-0.6,1) .. (-0.6, 0.9) .. (-0.8,0) .. (-0.6,-0.4);
+    \filldraw[black] (-0.6, 0, 0) circle (2pt) node[anchor=east]{\(m_1\)};
+    \filldraw[black] (0.4, 1, 0) circle (2pt) node[anchor=north]{\(m_2\)};
+    \filldraw[black] (0.3, -1, 0) circle (2pt) node[anchor=south]{\(m_3\)};
+    \begin{scope}[canvas is zx plane at y=1]
+        \draw[dashed] (0,0) circle (0.4);
+    \end{scope}
+    \begin{scope}[canvas is zx plane at y=0]
+        \draw[dashed] (0,0) circle (0.6);
+    \end{scope}
+    \begin{scope}[canvas is zx plane at y=-1]
+        \draw[dashed] (0,0) circle (0.3);
+    \end{scope}
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par1. Все точки движутся по окружностям;
+\par2. Плоскость окружностей \(\perp\) оси вращения;
+\par3. Ось вращения -- прямая линия из центром окружностей.
+\par\textit{Вращательным движением} называют такое движение твердого тела, при котором все точки движутся по окружностям, плоскости которых перпендикулярны оси вращения. \textit{Осью вращения} называют прямую линию, состояющую из центров этих окружностей.
+\parДанное движение характеризуют \(\vec\varphi,\ \vec\omega=\dfrac{d\vec\varphi}{dt},\ \vec\varepsilon=\dfrac{d\vec\omega}{dt}\). А также выполнено \(S_1\neq S_2\neq S_3,\ \varphi_1=\varphi_2=\varphi_3\).
+\par\fbox{\textit{\textbf{Замечание.} Любое сложное движение изучают как наложение этих двух видов движения.}}
+\parСила не полностью характеризует движение, поэтому ввели \textit{момент силы} \(\vec M_i=[\vec r_i, \vec F_i]\), суммируя получаем \(\vec M=\displaystyle\sum_{i=1}^n\vec M_i\) момент вращения тела. \(\vec F_i=m\vec a_{\tau i},\ \vec a_{\tau i}=[\vec\varepsilon, \vec r_i]\), пусть \(\vec r_i\) -- радиус окружности, тогда \(|\vec a_{\tau i}|=\varepsilon r_i,\ r_i\perp\vec F_i,\ F_i=m_i\varepsilon r_i\).\[\displaystyle\sum_{i=1}^n[\vec r_i, \vec F_i]=\sum_{i=1}^nm_i\varepsilon r_i\cdot r_i=\varepsilon\sum_{i=1}^nm_ir_i^2.\]
+\par\boxed{J=\displaystyle\sum_{i=1}^nm_ir_i^2, J=\int_mr^2dm} -- \textit{момент инерции}.
+\par\boxed{\vec M=J\vec\varepsilon} -- \textit{основное уравнение вращательного движения твердого тела.}
+\[\vec\varepsilon=\dfrac{d\vec\omega}{dt}\Rightarrow\vec M=J\dfrac{d\vec\omega}{dt}=\dfrac{d(J\vec\omega)}{dt} \Rightarrow\]
+\par\(\vec L=J\vec\omega\) -- момент импульса; \boxed{\vec M=\dfrac{d\vec L}{dt}}.
+
+\par\textbf{\textit{Задача.}} Необходимо найти \(J\) -- момент инерции цилиндра с массой \(m\), радиусом \(R\) и высотой \(h\).
+
+\usetikzlibrary{3d,patterns,angles,quotes}
+\begin{wrapfigure}[8]{l}{0pt}
+\begin{tikzpicture}[scale=0.25]
+\draw[axis] (0,-0.5,0) -- (0,3.5,0) node[anchor=west]{\(z\)};
+\begin{scope}[canvas is zx plane at y=0]
+    \draw (0,0) circle (1);
+\end{scope}
+\begin{scope}[canvas is zx plane at y=2.5]
+    \draw (0,0) circle (1);
+\end{scope}
+\draw (0.9487,0,-0.3162) -- (0.9487,2.5,-0.3162);
+\draw (-0.9487,0,0.3162) -- (-0.9487,2.5,0.3162);
+\draw[->,thin,color=red] (0,0,0) -- (0.8,0,0.6) node[anchor=south, color=black]{\(R\)};
+\filldraw[black] (0, 0, 0) circle (2pt);
+\filldraw[black] (0, 2.5, 0) circle (2pt);
+\draw[<->,color=red] (1.25,0.15,0) -- (1.25,2.65,0);
+\node[anchor=west] at (1.25,1.25,0) {\(h\)};
+\node[anchor=east] at (-1,2.5,0) {\(m\)};
+\end{tikzpicture}
+\end{wrapfigure}
+
+\par\textit{Решение.} \(J=\displaystyle\int_mr^2dm\); \(dm=\rho dV=\rho rdrd\varphi dz\) (ЦСК) \[\Rightarrow J=\displaystyle\int_0^h\int_0^{2\pi}\int_0^R\rho r^3drd\varphi dz=\dfrac{\rho\pi R^4h}{2}.\]
+\parВычислим объем по формуле \(V_{cylinder}=\pi R^2h\Rightarrow m_{cylinder} =\rho V_{cylinder}=\rho\pi R^2h\Rightarrow\)\boxed{J=\dfrac{mR^2}{2}}.
+
+\parЕсли ось вращения сдвинуть на \(\vec a\), то \(J=J_0+ma^2\) -- принцип Гюйгенса (теорема Штейнера).
+\parЕсли тело неподвижно, ось движения можно выбирать произвольным удобным образом. Обычно проводят через точку, где приложена одна из неизвестных сил.
+
+\subsection{Законы сохранения.}
+
+\ 
+\par\textit{\textbf{Замкнутой}} или \textit{\textbf{изолированной}} называют такую систему тел, на которую не действуют тела не принадлежащие данной системе или их действие взаимокомпенсировано\[\left\{
+\begin{array}{l}
+    \displaystyle\sum_{i=1}^n\vec F_{\textup{внеш}_i}=0 \\
+    \displaystyle\sum_{i=1}^n\vec M_{\textup{внеш}_i}=0
+\end{array}\right..\]
+\par\(\vec p_\textup{общ}=\displaystyle\sum_{i=1}^n\vec p_i\), где \(\vec p_i\) -- импульс тела, принадлежащей системе. \(\vec F=\dfrac{d\vec p}{dt}\).
+\[\displaystyle\sum_{i=1}^n\vec F_{\textup{внеш}_i}=\dfrac{d\vec p_\textup{общ}}{dt}=0\quad(\textup{замкнутая система}).\]
+\par\textbf{\textit{Закон сохранения импульса:}} суммарный импульс тел, составляющих замкнутую или изолированную систему, все время остается постоянной \boxed{\vec p_\textup{общ}=\const}.
+\parМомент импульса \(\vec L_\textup{общ}=\displaystyle\sum_{i=1}^n\vec L_i,\ \vec M=\dfrac{d\vec L}{dt},\ \vec M_\textup{внеш}=\dfrac{d\vec L_\textup{общ}}{dt}\), в замкнутой системе \(\vec M_\textup{внеш}=0=\dfrac{d\vec L_\textup{общ}}{dt}\). Суммарный момент импульса замкнутой системы тел все время остается постоянным \boxed{\vec L_\textup{общ}=\const}.
+
+\subsection{Энергия. Работа.}
+
+\ 
+\par\textit{\textbf{Энергия}} -- универсальная мера движения. Эта величина не только показывает количество механического движения, но и качественное изменение другого вида энергии.
+\par\textit{\textbf{Работа}}. Элемент работы:
+\par1. \(\delta A=(\vec F, d\vec r)\) -- для материальной точки;
+\par2. \(\delta A=(\vec M, d\vec\varphi)\) -- для твердого тела;
+\par3. \(\delta A=pdV\) -- для сплошной среды.
+\par\textit{\textbf{Кинетической энергией}} называют работу, которую может совершить тело до полной остановки. 
+\parДля материальной точки \(\delta A=(\vec F,d\vec r)\). \(\vec F=m\vec a,\ \vec a = \dfrac{d\vec v}{dt} \Rightarrow \delta A=m(\dfrac{d\vec v}{dt},d\vec r)=m(d\vec v,\dfrac{d\vec r}{dt})=m(d\vec v,\vec v)\). Замедление \(d\vec v\uparrow\downarrow\vec v \Rightarrow \delta A = -mvdv,\ E_k=-\displaystyle\int_v^0mvdv=\dfrac{mv^2}{2}\Rightarrow\)\boxed{E_k=\dfrac{mv^2}{2}}.
+\parДля твердого тела \(\delta A=(\vec M, d\vec\varphi),\ \vec M=J\vec\varepsilon,\ \vec\varepsilon=\dfrac{d\vec \omega}{dt},\ \vec\omega=\dfrac{d\vec\varphi}{dt}\Rightarrow\delta A=(J\vec\varepsilon,d\vec\varphi)=(J\dfrac{d\vec \omega}{dt},d\vec\varphi)=(Jd\vec\omega, \dfrac{d\vec\varphi}{dt})=(Jd\vec\omega, \vec\omega)\). Замедление \(d\vec\omega\uparrow\downarrow\vec\omega\Rightarrow,\delta A=-J\omega d\omega,\ E_k=-\int_\omega^0J\omega d\omega\Rightarrow\)\boxed{E_k=\dfrac{J\omega^2}{2}}.
+\parТак как твердое тело движется одновременно поступательно и вращательно, то \boxed{E_k=\dfrac{mv^2}{2}+\dfrac{J\omega^2}{2}}.
+\par\textit{\textbf{Потенциальная энергия.}}
+\parПо теории дальнедействия взаимодействие между телами происходит мгновенно без посредника.
+\parПо теории близкодействия тела взаимодействуют через поле. Действие передается от одного тела к другому с конечной скоростью.
+
+\begin{wrapfigure}[3]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.25]
+    \draw (0, 0) circle (0.2);
+    \draw (2, 0) circle (0.2);
+    \draw[vector] (0,0) -- (2,0);
+    \node[anchor=south] at (0,0.2) {\(m_1\)};
+    \node[anchor=south] at (1,0) {\(\vec r\)};
+    \node[anchor=south] at (2,0.2) {\(m_1\)};
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\parИзучают:
+\par1. Гравитационное поле, через которую взаимопритягиваются тела, имеющие массу \boxed{\vec F=-\gamma\dfrac{m_1m_2\vec r}{r^3}};
+\par2. Электромагнитное поле, через которую взаимодействуют тела, имеющие электрический заряд.
+\par3. Короткодействующее поле. Через данное поле взаимодействуют нуклоны. Нуклоны -- это частицы ядра: протоны и нейтроны. Известно, что короткодействующее поле действует на очень малых расстояниях не центральносимметрично.
+\par4. Слабые взаимодействия.
+
+\begin{wrapfigure}[3]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.25]
+    \draw (0,0) -- (2,0);
+    \draw (1,2) circle (0.1) node[anchor = west]{\(m\)};
+    \draw (1,0.1) circle (0.1);
+    \draw[-stealth,color=blue,very thick] (1,0.1) -- (1,2);
+    \draw[<->,red] (0.7,0.1) -- (0.7,2);
+    \node[anchor=east] at (0.8, 1){\(h\)};
+    \fill[pattern=north east lines] (0,0) rectangle (2,-0.2);
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\parДля изменения расстояния между телами (поднятии тела над поверхностью относительно земли) \(\delta A=(\vec F,d\vec r),\ F=mg \Rightarrow\delta A=(m\vec g,d\vec r)=-mgdr\Rightarrow E_p=-\int_h^0mgdr=mgh\Rightarrow\)\boxed{E_p=mgh}.
+
+\begin{wrapfigure}[2]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[use Hobby shortcut, scale = 0.25]
+    \draw (0,0) -- (0,1);
+    \draw (0,0) -- (2,0);
+    \draw (1.5,0.3) circle (0.3); 
+    \draw[decoration={aspect=0.1, segment length=3, amplitude=3,coil},decorate] (0,0.3)--(1.2,0.3);
+    \node[anchor = south] at(1.5,0.5) {\(m\)};
+    \fill[pattern=north east lines] (0,0) rectangle (-0.2,1);
+    \fill[pattern=north east lines] (-0.2,0) rectangle (2,-0.2);
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\parДля пружинки \boxed{E_p=\dfrac{kx^2}{2}}, где \(k\) -- коэффициент жесткости пружины, а \(x\) -- деформация (растяжение/сжатие).
+\parВ замкнутой системе \(\vec F_\textup{внеш}=0,\ \vec M_\textup{внеш}=0\Rightarrow A_\textup{внеш}=0.\) \boxed{A=E_1-E_2}.
+\parПолная механическая энергия \(E=E_k+E_p\). В замкнутой системе \boxed{E=\const} -- \textit{\textbf{закон сохранения полной механической энергии}}.
+\parВ замкнутой системе полная механическая энергия системы тел остается постоянной.
+
+\subsection{Сплошная среда.}
+
+
+\begin{wrapfigure}[10]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[scale=0.25]
+\draw (-1,0,0) -- (4,0,0);
+\draw (-1,0,1) -- (4,0,1);
+\draw (-1,1,0) -- (4,1,0);
+\draw (-1,1,1) -- (4,1,1);
+\draw (-1,2,0) -- (4,2,0);
+\draw (-1,2,1) -- (4,2,1);
+\draw (-1,3,0) -- (4,3,0);
+\draw (-1,3,1) -- (4,3,1);
+
+\draw (0,-1,0) -- (0,4,0);
+\draw (0,-1,1) -- (0,4,1);
+\draw (1,-1,0) -- (1,4,0);
+\draw (1,-1,1) -- (1,4,1);
+\draw (2,-1,0) -- (2,4,0);
+\draw (2,-1,1) -- (2,4,1);
+\draw (3,-1,0) -- (3,4,0);
+\draw (3,-1,1) -- (3,4,1);
+
+\draw[very thick] (1,1,0) -- (1,1,1);
+\draw[very thick] (2,1,0) -- (2,1,1);
+\draw[very thick] (2,2,0) -- (2,2,1);
+\draw[very thick] (1,2,0) -- (1,2,1);
+
+\draw[very thick] (1,1,0) -- (2,1,0);
+\draw[very thick] (1,2,0) -- (2,2,0);
+\draw[very thick] (1,1,1) -- (2,1,1);
+\draw[very thick] (1,2,1) -- (2,2,1);
+
+\draw[very thick] (1,1,0) -- (1,2,0);
+\draw[very thick] (1,1,1) -- (1,2,1);
+\draw[very thick] (2,1,0) -- (2,2,0);
+\draw[very thick] (2,1,1) -- (2,2,1);
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}[scale=0.25]
+\draw[axis] (2,0,0) -- (3.5,0,0) node[anchor=west]{\(x\)};
+\draw[axis] (0,2,0) -- (0,3.5,0) node[anchor=west]{\(z\)};
+\draw[axis] (0,0,2) -- (0,0,3.5) node[anchor=east]{\(y\)};
+\draw[dashed, thick, color=blue] (0,0,0) -- (2,0,0);
+\draw[dashed, thick, color=blue] (0,0,0) -- (0,2,0);
+\draw[dashed, thick, color=blue] (0,0,0) -- (0,0,2);
+\draw[very thick] (0,0,2) -- (2,0,2);
+\draw[very thick] (2,0,2) -- (2,0,0);
+\draw[very thick] (0,0,2) -- (0,2,2);
+\draw[very thick] (0,2,2) -- (2,2,2);
+\draw[very thick] (2,2,2) -- (2,2,0);
+\draw[very thick] (2,0,0) -- (2,2,0);
+\draw[very thick] (0,2,2) -- (0,2,0);
+\draw[very thick] (0,2,0) -- (2,2,0);
+
+\draw[color=red, <->,very thin] (2.2,0,0) -- (2.2,0,2);
+\node at (2.6,0,1) {\(dy\)};
+\draw[color=red, <->,very thin] (0,0,2.3) -- (2,0,2.3);
+\node at (1,0,2.7) {\(dx\)};
+\draw[color=red, <->,very thin] (-0.2,0,2) -- (-0.2,2,2);
+\node at (-0.6,1,2) {\(dz\)};
+
+\begin{scope}[canvas is yz plane at x=2]
+    \fill[pattern=north west lines] (0,0) rectangle (2,1);
+\end{scope}
+
+\draw[vector] (1,1,1) -- (3.5,3,2) node[anchor=west]{\(\vec F\)};
+\draw[vector] (1,1,1) -- (3.5,1,1) node[anchor=west, color=black]{\(\vec F_x\)};
+\draw[very thick] (2,0,2) -- (2,2,2);
+\begin{scope}[canvas is yz plane at x=2]
+    \fill[pattern=north west lines] (0,1) rectangle (2,2);
+\end{scope}
+\draw[vector] (1,1,1) -- (1,1,2) node[anchor=south east, color=black]{\(\vec F_y\)};
+\draw[vector] (1,1,1) -- (1,3,1) node[anchor=south, color=black]{\(\vec F_z\)};
+\filldraw[black] (1,1,1) circle (2pt);
+
+\draw[dashed] (3.5,3,2) -- (1,3,1);
+\draw[dashed] (3.5,3,2) -- (3.5,1,2);
+\draw[dashed] (3.5,1,2) -- (1,1,2);
+\draw[dashed] (3.5,1,2) -- (3.5,1,1);
+\draw[dashed] (3.5,1,2) -- (1,1,1);
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\ 
+\parСплошная среда состоит из кубиков, так как мы хотим, чтобы у сплошной среды не было <<зазоров>>. Объем \textit{кубического элемента} \(dV = dxdydx,\ \vec F = \vec F_x + \vec F_y + \vec F_z\). Действие силы при изучении сплошной среды зависит от площади действия. Величина \(\vec F_x\) действует \(\perp dydz\) (нормально), а \(\vec F_y\) и \(\vec F_z\) действуют \(||dydz\).
+\par\(\sigma=\dfrac{F_x}{S_{yz}}\) -- \textit{нормальное механическое напряжение}, \(\tau=\dfrac{F_y}{S_{yz}},\ \tau=\dfrac{F_z}{S_{yz}}\) -- \textit{тангенциальные механические напряжения}. На элемент спрошной среды можно представить как 3 нормальных и 6 тангенциальных напряжений.
+\parСплошную среду, в изучении которого пренебрегают тангенциальными взаимодействиями элементов сплошной среды называют \textit{текучей сплошной средой}. Такое тело не имеет собственной формы, принимает форму сосуда. Через эту модель изучают движение жидкостей и газов.
+\parВ другом случае, где учитываются трения между элементами сплошной среды (тангенциальными взаимодействиями), называют \textit{нетекучей сплошной средой}. Черех эту модель изучают деформации тел.
+\parЧерез модель сплошной среды изучают распространение волн.
+
+\subsection{Упругие деформации.}
+
+\begin{wrapfigure}[5]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[scale=0.25]
+\draw[axis] (0,0) -- (0,2) node[anchor=west]{\(\sigma\)};
+\draw[axis] (0,0) -- (3,0) node[anchor=west]{\(\varepsilon\)};
+\draw[dashed, thin] (0.8,0.8) -- (0,0.8) node[anchor=east]{\(\sigma_\textup{упр}\)};
+\draw[dashed, thin] (2,1.2) -- (0,1.2) node[anchor=east]{\(\sigma_\textup{тек}\)};
+\draw[very thick, color=red] (0,0) -- (0.8,0.8);
+\draw[very thick, color=red] plot[smooth] coordinates {(0.8,0.8) (1.2,1) (1.6,1.15) (2,1.2)} node[anchor=south west,color=black]{разрыв};
+\filldraw[black] (0.8, 0.8) circle (2pt);
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\ 
+\parПри \(\sigma<\sigma_\textup{упр}\) -- объект упруг (после прекращения деформации принимает свою первоначальную форму.
+\par\textbf{\textit{Закон Гука}} гласит: в пределах упругости действие прямо пропорционально деформации.
+
+\begin{wrapfigure}[4]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[scale=0.25]
+\draw (0,0) -- (2,0);
+\fill[pattern=north east lines] (0,0) rectangle (2,0.2);
+\draw (0.8,0) -- (0.8,-2);
+\draw (1.2,0) -- (1.2,-2);
+\begin{scope}[canvas is xz plane at y=-2]
+    \draw[black] (1,0) circle (0.2);
+\end{scope}
+\begin{scope}[canvas is xz plane at y=-1.6]
+    \filldraw[pattern=north west lines] (1,0) circle (0.2);
+\end{scope}
+\draw[vector] (1,-1.6) -- (1,-2.3) node[anchor=west]{\(\vec F\)};
+\draw[<->, color=red, very thin] (0.6,0) -- (0.6,-1.6);
+\draw[<->, color=red, very thin] (0.6,-1.6) -- (0.6,-2);
+\node at (0.2,-0.8) {\(l_0\)};
+\node at (0.1,-1.8) {\(\Delta l\)};
+\node at (1.5,-1.6) {\(S\)};
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par\textbf{Деформация растяжения (сжатия).}
+\parОтносительное удлинение \(\varepsilon=\dfrac{\Delta l}{l_0},\ \varepsilon>0\) (удлинение) \(\varepsilon < 0\) (сжатие), \(\sigma =\dfrac{F}{S}\). В пределах упругости \(S=\const\). По закону Гука \(\sigma \sim\varepsilon\). \boxed{\sigma=E\varepsilon}, где \(E\) -- \textit{модуль Юнга}, зависит только от материала.
+
+\begin{wrapfigure}[5]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[scale=0.25]
+\draw[very thin] (0,0,0) -- (2,0,0);
+\draw[very thin] (2,0,0) -- (2,0,-1);
+\draw[very thin] (0,1.2,0) -- (2,1.2,0);
+\draw[very thin] (2,1.2,0) -- (2,1.2,-1);
+\draw[very thin] (0,1.2,-1) -- (2,1.2,-1);
+\draw[very thin] (0,1.2,0) -- (0,1.2,-1);
+\draw[very thin] (0,0,0) -- (0,1.2,0);
+\draw[very thin] (2,0,0) -- (2,1.2,0);
+\draw[very thin] (2,0,-1) -- (2,1.2,-1);
+\draw[very thin, dashed] (0,0,0) -- (0,0,-1);
+\draw[very thin, dashed] (0,0,-1) -- (2,0,-1);
+\draw[very thin, dashed] (0,0,-1) -- (0,1.2,-1);
+
+\begin{scope}[canvas is xz plane at y=1.2]
+    \fill[pattern=north west lines] (0,0) rectangle (2,-1);
+\end{scope}
+
+\draw[very thick] (0,0,0) -- (2,0,0);
+\draw[very thick] (2,0,0) -- (2,0,-1);
+\draw[very thick] (0.3,1.2,0) -- (2.3,1.2,0);
+\draw[very thick] (2.3,1.2,0) -- (2.3,1.2,-1);
+\draw[very thick] (0.3,1.2,-1) -- (2.3,1.2,-1);
+\draw[very thick] (0.3,1.2,0) -- (0.3,1.2,-1);
+\draw[very thick] (0,0,0) -- (0.3,1.2,0);
+\draw[very thick] (2,0,0) -- (2.3,1.2,0);
+\draw[very thick] (2,0,-1) -- (2.3,1.2,-1);
+\draw[very thick, dashed] (0,0,0) -- (0,0,-1);
+\draw[very thick, dashed] (0,0,-1) -- (2,0,-1);
+\draw[very thick, dashed] (0,0,-1) -- (0.3,1.2,-1);
+
+\draw[vector] (0.6,1.2,-0.5) -- (1.6,1.2,-0.5);
+\draw[black] (0,0.7) arc (90:76:0.7);
+\node at (-0.3,0.6){\(\varphi\)};
+
+\node at (1,1.8,-0.5) {\(\vec F\)};
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par\textbf{Деформация сдвига.}
+\par\(\tau =\dfrac{F}{S},\ \gamma=\tan\varphi\). По закону Гука: \(\tau\sim\gamma\). \boxed{\tau=G\gamma}, где \(G\) -- \textit{модуль Гиббса}, который зависит от материала.
+\parВышеуказанные деформации называются \textit{однородными}, так как все элементы сплошной среды деформируются одинаково.
+
+\begin{wrapfigure}[5]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[scale=0.25]
+\draw (0,0) -- (2,0);
+\fill[pattern=north east lines] (0,0) rectangle (2,0.2);
+\draw (0.8,0) -- (0.8,-2);
+\draw (1.2,0) -- (1.2,-2);
+\draw (1,0,0.2) -- (1,-2,0.2);
+\draw[thick, color=red] plot[smooth] coordinates {(1,0,0.2) (1.12,-2,0.16)};
+\begin{scope}[canvas is xz plane at y=0]
+    \draw[black] (1,0) circle (0.2);
+\end{scope}
+\begin{scope}[canvas is xz plane at y=-2]
+    \draw[black] (1,0) circle (0.2);
+    \draw[vector] (0.3,0) arc (180:90:0.7);
+\end{scope}
+\node at (0.6,-2.6) {\(\vec M\)};
+\node at (1.1,-2.3) {\(\varphi\)};
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par\textbf{Деформация кручения}.
+\parПо закону Гука: \(M\sim \varphi\). \boxed{M=f\varphi}, где \(f\) -- \textit{коэффициент кручения}, зависит от материала и геометрических параметров тела. Данная деформация является \textit{неоднородной}, также к силам упругости относится реакция опоры (хотя нет деформации), натяжение нити (хотя нет удлинения).
+
+\subsection{Релятивистская механика.}
+
+\ 
+\parДанный раздел механики основан на специальной теории относительности (СТО), которая состоит из двух постулатов, выдвинутых \textit{Альбертом Эйнштейном:}
+\par1. \textbf{\textit{Принцип относительности.}} Все физические явления в инерциальных системах отсчета (ИСО) протекают одинаково;
+\par2. \textbf{\textit{Принцип постоянства скорости света \(c\).}} Скорость света в вакууме одинакова во всех ИСО и не зависит от движения и приемника света, то есть является универсальной величиной.
+
+
+\begin{wrapfigure}[6]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[scale=0.25]
+\draw[axis] (0,0,0) -- (2,0,0) node[anchor=north]{\(x\)};
+\draw[axis] (0,0,0) -- (0,2,0) node[anchor=east]{\(z\)};
+\draw[axis] (0,0,0) -- (0,0,2) node[anchor=east]{\(y\)};
+\draw[axis] (0.5,0.4,0.5) -- (2.5,0.4,0.5) node[anchor=west]{\(x'\)};
+\draw[axis] (0.5,0.4,0.5) -- (0.5,2.4,0.5) node[anchor=west]{\(z'\)};
+\draw[axis] (0.5,0.4,0.5) -- (0.5,0.4,2.5) node[anchor=west]{\(y'\)};
+\draw[vector] (0.5,0.4,0.5) -- (1.5,0.4,0.5) node[anchor=south]{\(\vec v\)};
+\draw[vector] (1,1.5,0.5) -- (2,1.2,0.8) node[anchor=south]{\(\vec w\)};
+\filldraw (1,1.5,0.5) circle (3pt);
+\end{tikzpicture}
+}
+\end{wrapfigure}
+
+\par\((x',y',z')\) относительно \((x,y,z)\) движется со скоростью \(\vec v\) параллельно оси \(x\). Относительно \((x',y',z')\) движется тело со скоростью \(\vec w\). Координаты тела при переходе от \((x',y',z')\) к \((x,y,z)\):
+\[x=\dfrac{x'+vt}{\sqrt{1-\dfrac{v^2}{c^2}}},\quad y=y',\quad z=z',\ t=\dfrac{t'+x'\dfrac{v}{c^2}}{\sqrt{1-\dfrac{v^2}{c^2}}}.\]
+При \(v << c\) получаем знакомые преобразования:
+\[x=x'+vt,\quad y = y',\quad z = z',\quad t = t'\quad \textup{(относительность движения по Галилею)}.\]
+\parСледствия из преобразований Лоренца:
+\par1. Наглядно демонстрируется неразрывная связь пространственных и временных свойств мира;
+\par2. Описывается относительность одновременности, то есть два одновременных события в одной ИСО не одновременны относительно другой;
+\par3. Скорость света одна и та же в различных ИСО и является максимальной скоростью движения;
+\par4. Классический закон сложения скоростей не справедлив при движении тел со скоростями, близкими к скорости света.
+\par\textbf{Релятивистский закон сложения скоростей:}
+\[\vec u = u_x\vec i+u_y\vec j+u_z\vec k,\quad \vec u' = u_x'\vec i+u_y'\vec j+u_z'\vec k\]
+\[u_x=\dfrac{u_x'+v}{1+\dfrac{u_x'v}{c^2}},\quad u_y=\dfrac{u_y'\sqrt{1-\dfrac{v^2}{c^2}}}{1+\dfrac{u_x'v}{c^2}},\quad u_z=\dfrac{u_z'\sqrt{1-\dfrac{v^2}{c^2}}}{1+\dfrac{u_z'v}{c^2}}.\]
+В случае \(v << c\):
+\[u_x=u_x'+v,\quad u_y=u_y',\quad u_z=u_z'.\]
+\par\textbf{Релятивистская масса:} \(m=\dfrac{m_0}{\sqrt{1-\dfrac{v^2}{c^2}}}\), где \(m_0\) -- масса покоя, масса тела при \(v<<c\).
+\par\textbf{Релятивистский импульс:} \(p=mv=\dfrac{m_0v}{\sqrt{1-\dfrac{v^2}{c^2}}}\).
+\par\textbf{Полная энергия тела:} \(E=mc^2=\dfrac{m_0c^2}{\sqrt{1-\dfrac{v^2}{c^2}}}\).
+\par\textbf{Кинетическая энергия:} \(E_0=m_0c^2\) -- энергия покоя, \(E=mc^2\) -- полная энергия \(\Rightarrow E_k=E-E_0=m_0c^2\left(\dfrac{c}{\sqrt{c^2-v^2}}-1\right)\).
+\parВремя также, как пространственные координаты преобразовывается при переходе из одной ИСО в другую. Это демонстрирует неразрывную взаимосвязь пространства и времени. Констатируют тот факт, что наш мир \textit{четырехмерный}.
+\parСобытие, происходящее с любой материальной частицей в пространстве-времени определяется координатами \(x,y,z,ct\). Точка с такими координатами называется \textit{мировой точкой}, а линия, соответствующая частице (даже неподвижной) называется \textit{мировой линией}. Расстояние между двумя точками
+\[\Delta s=\sqrt{c^2(t_2-t_1)^2-(x_2-x_1)^2-(y_2-y_1)^2-(z_2-z_1)^2}\]
+четырехмерный вектор, описывающий мировую линию имеет проекции \(ct, x, y, z\).
+
+\section{Электричество и магнетизм.}
+
+\ 
+\par\textit{\textbf{Электричество}} -- это раздел физики, который изучает движение и взаимодействие электрически заряженных тел. Появление электрического заряда при некоторых действиях называется \textit{электризацией}. Электризация может быть при:
+\par1. Трение;
+\par2. Сильное нагревание;
+\par3. Облучение;
+\par4. и т.д.
+\parОт природы электрическим зарядом обладают электроны (\(e=-1,6\cdot10^{-19}\) Кл) и протоны (\(e_p=+1,6\cdot10^{-19}\) Кл). Атом состоит из ядра и электронов, движущихся вокруг ядра по своим орбитам. Ядро стабильное, то есть не меняется число протонов. Электроны могут <<уходить>> или <<приходить>> в атом. Если в атоме число протонов \(N_p\) равно числу электронов \(N_e\) в орбитах, то атом имеет нейтральный заряд \(q=0\). Если \(N_e>N_p\Rightarrow q<0\), если \(N_e<N_p\Rightarrow q>0\). Тело, состоящее или включающее отрицательные ионы имеет отрицательный заряд, иначе положительный. При электризации происходит обмен электронами.
+\begin{wrapfigure}[3]{l}{0pt}
+\raisebox{0pt}[\dimexpr\height-1\baselineskip\relax]{
+\begin{tikzpicture}[scale=0.25]
+\filldraw (0,0) circle (2pt) node[anchor=south]{\(q_1\)};
+\filldraw (1.5,0) circle (2pt) node[anchor=south]{\(q_2\)};
+\draw[vector] (0,0) -- (1.5,0) node[anchor=north]{\(\vec r\)};
+\end{tikzpicture}
+}
+\end{wrapfigure}
+\par\textbf{Закон Кулона} гласит: сила взаимодействия двух заряженных тел прямо пропорционально произведению модулей зарядов и обратно пропорционально квадрату расстояния между ними. \boxed{\vec F=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_1q_2}{r^3}\vec r} -- сила взаимодействия двух точечных зарядов, где \(\varepsilon_0=8,85\cdot10^{-12}\ \frac{\textup{Ф}}{\textup{м}},\ k=\dfrac{1}{4\pi\varepsilon_0}\approx9\cdot10^9\ \frac{\textup{Н}\cdot\textup{м}^2}{\textup{Кл}^2}\). Точечным называется модель заряда, при использовании которой пренебрегают формой и размерами.
+\parС курса механики известно, что тела взаимодействуют на расстоянии через особый вид материи -- \textit{поле}. Электрические заряды взаимодействуют через электростатическое поле, основной характеристикой которого является \(\vec E=\dfrac{\vec F}{q}\) -- \textit{напряженность электрического поля}. Электростатическое поле является стационарным полем, то есть силовые линии не замкнуты. Силовыми называют линии, по касательной которых направлен вектор \(\vec E\).
+\parДля точечного заряда: \boxed{\vec E=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_0}{r^3}\vec r}. \(\varphi\) -- потенциал, \(\varphi=\dfrac{W_p}{q},\ W_p=\dfrac{1}{4\pi\varepsilon_0}\dfrac{qq_0}{r}\Rightarrow\varphi=\dfrac{q_0}{4\pi\varepsilon_0 r}\), \(u\) -- напряжение, \(u=\dfrac{A}{q}=\varphi_1-\varphi_2=\dfrac{W_{p_1}-W_{p_2}}{q}\)
+\parТело, имеющее форму и размер состоит из точечных зарядов. \(d\vec E=\dfrac{1}{4\pi\varepsilon_0}\dfrac{dq}{r^3}\vec r,\ d\varphi=\dfrac{1}{4\pi\varepsilon}\dfrac{dq}{r},\ \vec E=\int d\vec E,\ \varphi=\int d\varphi\).
+\par\textbf{Теорема Остроградского-Гаусса:} \boxed{\oint_S(\vec E, d\vec S)=\dfrac{q_0}{\varepsilon\varepsilon_0}}
+\par\textbf{Пуассон:} \boxed{\grad\varphi=-\vec E,\ \oint_l(\vec E,d\vec l)=0}.
+
+\subsection{Магнетизм.}
+
+\ 
+\parМагнитное поле -- вид материи, через которую взаимодействуют движущиеся заряды. Электрические заряды при условии движения взаимодействуют не только через электрическое поле, но и через магнитное.
+\par\textbf{Закон Био-Савара-Лапласа:} \boxed{d\vec B=\dfrac{\mu\mu_0J[d\vec l,\vec r]}{4\pi r^3}}, где \(\mu_0=4\pi\cdot10^{-7}\ \frac{\textup{Гн}}{\textup{м}},\ \mu=1\) для немагнетиков, \(\mu<1\) -- парамегнетики, \(\mu>1\) -- диомагнетики и \(\mu\sim10^3\) для ферромагнетиков.
+\par\textit{Немагнетики} -- это тела, не реагирующие на магнитное поле;
+\parДля отдельного заряда \(J=\dfrac{dq}{dt},\ d\vec B=\dfrac{\mu\mu_0\dfrac{dq}{dt}[d\vec l,\vec r]}{4\pi r^3}\Rightarrow d\vec B=\dfrac{\mu\mu_0dq[\dfrac{d\vec l}{dt},\vec r]}{4\pi r^3},\ \dfrac{d\vec l}{dt}=\vec v\Rightarrow \vec B=\int d\vec B,\ \vec B=\dfrac{\mu\mu_0q[\vec v,\vec r]}{4\pi r^3}\).
+\par\(d\vec F_A=J[d\vec l,\vec B]\).
+\parСила Ампера. \(J=\dfrac{dq}{dt},\ d\vec F=\dfrac{dq}{dt}[d\vec l,\vec B],\ \dfrac{d\vec l}{dt}=\vec v\Rightarrow d\vec F=dq[\vec v,\vec B]\Rightarrow \vec F=q[\vec v,\vec B]\).
+\parСила Лоренца (действие э/м поля на \(q\)): \(\vec F=\vec Eq+q[\vec v,\vec B]\).
+\parВ квазиклассическом случае: \(\vec L=m_e[\vec v,\vec r]\) -- момент импульса электрона.
+\parМагнитный момент: \(\vec p_m=-\dfrac{e}{2m_e}\vec L\).
+\parКаждый электрон в атоме создает магнитное поле. Вектор намагниченности \(\vec P_m=\dfrac{\displaystyle\sum_{i=1}^n\vec p_{m_i}}{V}\).
+\par1. Для немагнетиков \(\displaystyle\sum_{i=1}^n\vec p_{m_i}=0\);
+\parМагнетики:
+\par2. Для парамагнетиков \(\displaystyle\sum_{i=1}^n\vec p_{m_i}<0\);
+\par3. Для диамагнетиков \(\displaystyle\sum_{i=1}^n\vec p_{m_i}>0\).
+
+\subsection{Электромагнитное поле.}
+
+\ 
+\parПри изменении магнитного поля возле проводника с током появляется индукционный ток.
+\par\textit{\textbf{Закон электромагнитной индукции.}} \(\varepsilon_i=-\dfrac{d\Phi}{dt},\ \Phi=(\vec B,\vec S)\) -- поток \(\vec B\) через \(\vec S\), \(\varepsilon_i=\oint_l(\vec E,d\vec l)\) -- э.д.с индукции, где \(l\) -- контур, опоясывающий \(S\). Что примечательно, электрической поле, порождаемое магнитный полем является вихревым, в отличии от электростатического. Вот так было обнаружено появление электрического поля при изменении магнитного. 
+\parМаксвелл обнаружил, что при изменении электрического поля создается магнитное и ввел величину \(\vec D=\varepsilon\varepsilon_0\vec E+\vec p\) -- вектор электромагнитного смещения, где \(\vec p\) -- поляризованность диэлектрика, \(\vec J_{\textup{см}}=\dfrac{\partial\vec D}{\partial t}\). То есть изменение вектора \(\vec D\) равен току смещения. Ток смещения -- это физическая величина, показывающая изменение электрического поля \(\oint_S(\vec B,d\vec l)=\mu\mu_0(I+I_{\textup{см}}),\ \int(\vec I_{\textup{см}},d\vec S)=I_{\textup{см}}\). Доказал, что при изменении электрического поля появляется магнитное поле. Таким образом, было доказано, что магнитное и электрическое поле -- два разных проявления одного и того же поля -- \textit{электромагнитного}.
+\parТеория электромагнитное поля раскрывается через уравнение Максвелла.
+\par1. \boxed{\oint_l(\vec E,d\vec l)=-\int_S(\dfrac{\partial B}{\partial t},d\vec S)}\(,\ \oint_l(\vec B,d\vec l)=\int_S(\rot\vec E,d\vec S)\) -- теорема Стокса, \boxed{\int_S(\rot \vec E=-\dfrac{\partial B}{\partial t}}.
+\par2. \boxed{\oint_S(\vec E,d\vec S)=\dfrac{q}{\varepsilon\varepsilon_0}} --теорема Остроградского-Гаусса \(\oint_S(\vec E,d\vec S)=\int_V\di \vec Edv,\ q=\int_V\rho dV\), \(\rho\) -- объемная плотность \(q,\ \int_V\di\vec Edv=\dfrac{1}{\varepsilon\varepsilon_0}\int_V\rho dV\), \boxed{\di \vec E=\dfrac{\rho}{\varepsilon\varepsilon_0}};
+\par3. ... че тут происходит зачем мы это учим.
+
+\subsection{Энергии электрического и магнитного полей.}
+
+\ 
+\parУстройство, где можно сохранить электрический заряд или создавать локальное электрическое поле называется \textit{конденсатор}. Простейший конденсатор состоит из двух проводящих пластин, разделенных диэлектриком. \(C=\varepsilon\varepsilon_0\dfrac{S}{d},\ \varepsilon_0=8,85\cdot10^{-12}\frac{\textup{Ф}}{\textup{м}}\) -- электрическая постоянная, \(\varepsilon\) -- диэлектрическая проницаемость среды.
+\par\(\left\{\begin{array}{l}
+    q=CU \\
+    U=Ed
+\end{array}\right.,\ W=\dfrac{CU^2}{2}=\dfrac{q^2}{2C},\) объемная плотность энергии \(w=\dfrac{dW}{dV}=\dfrac{\varepsilon\varepsilon_0E^2}{2}\).
+
+\section{Квантовая физика.}
+
+\subsection{Потенциал.}
+
+\ 
+\parВ классической физике состояние частицы определяется шестью числами -- координаты \(x,y,z,vx,vy,vz\); а состояние волны только функцией от координат. Волновая функция \(\psi=\psi(x,y,z,t)\) -- называется \(\psi\)-\textit{функцией}, объединяет волновые и ??? свойства микрочастиц.
+\par\textbf{Уравнение Шредингера.} \(i\hbar\dfrac{\partial \psi}{\partial t}=\hat{H}\psi\), где \(\hbar=\dfrac{h}{4\pi}\) -- постоянная Планка, \(\hat{H}=\dfrac{\hbar^2}{2m}\left(\dfrac{\partial}{\partial x^2}+\dfrac{\partial}{\partial y^2}+\dfrac{\partial}{\partial z^2}\right)+\hat{u}\), \(\hat{u}\) -- функция потенциальной энергии.
+\parСледующей моделью квантовой физики является потенциальная яма. Это область пространства, где потенциальная энергия микрочастицы в силовом поле достигает локального минимума. \textit{Стационарным} называется состояние с определенным значением энергии. Они бывают локализованные (связанные) и нелокализованные. Потенциальная яма -- необходимое условие возникновения локализованного стационарного состояния. В квантовой физике энергия локализованных состояний дискретна.
+\par\(\psi(x,y,z,t)=\psi(x,y,z)e^{i\omega t}\), где \(w=\dfrac{E}{\hbar}\)
+\par\(i\hbar\dfrac{\partial \psi}{\partial t}=\hat H\psi\).
+\par\textbf{Стационарное уравнение Шредингера.}
+\[\Delta\psi(x,y,z)+\dfrac{2m}{\hbar}(E-u(x,y,z))\psi(x,y,z)=0\]
+давайте это упростим:
+\[\dfrac{\partial^2\psi(x)}{\partial x^2}+\dfrac{2m}{\hbar}(E-u(x))\psi(x)=0.\]
+Пусть: \(u(x)=\left\{
+\begin{array}{ll}
+    0, & x\in(0,a) \\
+    u_0, & x\notin(0,a)
+\end{array}\right.\)
+Решение:
+\[\psi(x)=\left\{
+\begin{array}{ll}
+    Ae^{k_1x}+Be^{-k_1x}, & x\notin(0,a) \\
+    C\sin(k_2x)+D\cos(k_2x), & x\in(0,a)
+\end{array}\right.,\]
+где \(k_1^2=\dfrac{2m}{\hbar}(u_0-E),\ k_2^2=\dfrac{2m}{\hbar}E\).
+\parСтандартные условия: однозначность, непрерывность, ограниченность.
+\parДля области \(x\in(0,a)\): \(E_n=\dfrac{\pi^2\hbar^2n^2}{2ma^2}\), где \(n\) -- целое число. Для гармонического осциллятора \(E_n=\hbar\omega(n+\frac{1}{2})\).
+\parЕсли моноэнергетический пучок частиц попадает в тормозящее поле, то кинетическая энергия частиц по мере движения уменьшается, а потенциальная возрастает. Такое силовое поле называют \textit{потенциальным барьером}.
+\par1. При замедлении частиц уменьшается их скорость и импульс, что приводит к увеличению де Бройльской длины волны \boxed{p=\dfrac{\hbar}{\lambda}}. При прохождении, к примеру, электронов через тонкую фольгу наблюдают явление дефракции, интерференции (явлений, происходящих только с волнами);
+\par2. Пучок частиц в области потенциального барьера частично отражается. Коэффициент отражения \(R=\left(\dfrac{k_1-k_2}{k_1+k_2}\right)^2\), \(D=\dfrac{4k_1k_2}{(k_1+k_2)^2}\), где \(k_1=\dfrac{1}{\hbar}\sqrt{2mE},\ k_2=\dfrac{1}{\hbar}\sqrt{2m(E-u_0)}\).
+
+\subsection{Тепловое излучение.}
+
+\ 
+\parВсякое нагретое тело испускает электромагнитные излучения, называемое тепловым. Это может быть инфракрасное, видимый свет, ультрафиолетовое. Данное явление связано с испусканием фотона при переходе атома из возбужденного состояния на основное. Мощность, приходящаяся на единицу поверхности тела называется энергетической светимостью \(R_\textup{э}=\dfrac{N}{S}\). Абсолютно черным называют тело, которое поглощает падающие на него излучения полностью \(R=0\), абсолютно белым -- которое отражает все излучения \(R=1\).
+\parСамым простым является изучение черного тела. Известны три закона излучения абсолютно черного тела:
+\par1. \textit{Закон Стефана-Больцмана}. \(R_{\textup{э}}=\sigma T^4\), где \(\sigma=5,67\cdot10^{-18} \dfrac{\textup{Вт}}{\textup{м}^2\textup{К}^4}\) -- постоянная Стефана-Больцмана;
+\par2. \textit{Закон Планка}. \(r_\omega(\omega)=\dfrac{1}{(2\pi c)^2}\dfrac{\hbar\omega^3}{e^{\frac{\hbar\omega}{kT}}-1}\), \(\omega\) -- циклическая частота, \(r_\omega(\omega)=\dfrac{dR_\textup{э}(\omega)}{d\omega}\) -- лучеиспускательная способность;
+\par3. \textit{Закон смещения Вина}. \(\lambda_{max} T=b\), где \(b=2,9\cdot10^{-3} \textup{м}\cdot\textup{К}\) -- постоянная Вина. утверждает, что с ростом температуры максимум излучательной способности смещается в область более коротких длин волн или высоких частот.
+
+\end{document}
