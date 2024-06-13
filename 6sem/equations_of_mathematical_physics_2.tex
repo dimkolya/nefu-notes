@@ -1,0 +1,446 @@
+\documentclass[9pt]{article}
+\input{header.tex}
+
+\begin{document}
+
+\begin{center}
+    \huge\textbf{Уравнения математической физики.}
+\end{center}
+
+\section{Уравнения параболического типа.}
+
+\ 
+\parОсновным представителем является уравнение теплопроводности \(\dfrac{\partial u}{\partial t}=a^2\Delta u, u(x,t), x\in \mathbb{R}^n,\Delta u\) -- оператор Лапласа.
+\parПри \(n=1\): \(\dfrac{\partial u}{\partial t}=a^2\frac{\partial^2u}{\partial x^2}+f(x,t)\).
+\par\textbf{Вывод уравнения тепла стержня}. Будем рассматривать однородный стержень длины \(l\), теплоизолированный с боков, температура в поперечном сечении одинакова. Если будем поддерживать тепло на концах \(u_1,u_2\), то будет линейное распространение \(u(x)=u_1+\dfrac{u_2-u_1}{l}x\). Пусть сечение стержня имеет площадь \(S\) и количество тепла, которое протекает через сечение стержня за единицу времени дается экспериментальной формулой
+\begin{equation}
+    Q=-k\dfrac{u_2-u_1}{l}S=-k\dfrac{\partial u}{\partial x}S.
+\end{equation}
+\parЧерез функцию \(u(x,t)\) обозначим температуру с абсциссей \(x\) в момент времени \(t\). И рассморим физические законы.
+\par1. \textbf{Закон Фурье.} Количество тепла, которая протекает через сечение \(x\) за промежуток времени от \(t\) до \(t+dt\): \(d=qSdt\), где \(q=-k(x)\dfrac{\partial u}{\partial x}\) --- это плотность теплового потока. Это обобщает формулу (1) и мы можем ей придать интегральную форму.
+\begin{equation}
+    Q=\int_{t_1}^{t_2}-k\dfrac{\partial u}{\partial x}Sdt.
+\end{equation}
+\par2. Количество тепла, которое необходимо сообщить однородному телу, чтобы повысить его температуру на \(\Delta u\): \(Q=cm\Delta u=c\rho V\Delta u\). Если стержень неоднородный, на участке струны
+\begin{equation}
+    Q=\int_{x_1}^{x_2}c\rho S\Delta udx.
+\end{equation}
+\par3. Внутри стержня может возникать или поглощаться тепло. Пусть выделение тепла характеризуется плотностью тепловых источников \(F(x,t)\). Рассмотрим результат действия этих источников на участке стержня за промежуток времени: \(dQ=SF\Delta x\Delta t\).
+\begin{equation}
+    Q=\int_{t_1}^{t_2}\int_{x_1}^{x_2}SFdxdt
+\end{equation}
+\[S\int_{x_1}^{x_2}c\rho\Delta u(\xi,t_2)-c\rho\Delta u(\xi,t_1)d\xi-S
+\int_{t_1}^{t_2}k\dfrac{\partial u(x,\tau)}{\partial x}|_{x=x_2}-k\dfrac{\partial u(x,\tau)}{\partial x}|_{x=x_1}d\tau=S\int_{t_1}^{t_2}\int_{x_1}^{x_2}F(\xi,\tau)d\xi d\tau\].
+\par Воспользуемся теоремой о среднем:
+\[c\rho (u(\xi,t_2)-u(\xi,t_1))|_{x=x_3}\Delta x-(k\dfrac{\partial u(x,\tau)}{\partial x}|_{x=x_2}-k\dfrac{\partial u(x,\tau)}{\partial x}|_{x=x_1})|_{\xi=t_3}\Delta t=F(\xi,\tau)|_{\xi=x_4,\tau=t_4}\]
+\par Применяем теорему о конечных разностях:
+\[c\rho\dfrac{\partial u}{\partial t}|_{x=x_3,t=t_3}\Delta x\Delta t-\dfrac{\partial}{\partial x}(k\dfrac{\partial u}{\partial x})|_{x=x_6,t=t_3}\Delta x\Delta t=F(\xi,\tau)|_{\xi=x_4,\tau=t_4}\Delta x\Delta t.\]
+\begin{equation}
+    c\rho\dfrac{\partial u}{\partial t}=\dfrac{\partial}{\partial x}(k\dfrac{\partial u}{\partial x})+F(x,t).
+\end{equation}
+\parЕсли \(k,c,\rho\) --- \(\const\):
+\begin{equation}
+    \dfrac{\partial u}{\partial t}=a^2\dfrac{\partial^2 u}{\partial x^2}+F(x,t).
+\end{equation}
+Если отсутствуют источники тепла.
+\begin{equation}
+    u_t=a^2u_{xx}.
+\end{equation}
+\par4. Плотность тепловых источников может зависеть от температуру. Если происходит теплообмен с окружающей средой по закону Ньютона, то количество тепла, теряемая стержнем \(F_0=h(u-\Theta)\), где \(\Theta\) -- температура окружающей среды. Тогда плотность тепловых источников \(F(x,t)=F_1-h(u-\Theta)\), где \(F_1\) -- плотность других источников тепла. Для однородного стержня
+\begin{equation}
+    u_t=a^2u_{xx}-\alpha u+f(x,t),\quad \alpha = \dfrac{h}{c\rho}, f=\dfrac{F_1-h\Theta}{c\rho}.
+\end{equation}
+
+\subsection{Постановка основных краевых задач.}
+
+\ 
+\par\textbf{I краевая задача}:
+\begin{equation}
+    u_t=a^2u_{xx}+f(x,t),0<x<l,0<t\le T,
+\end{equation}
+\begin{equation}
+    u(x,0)=\varphi(x),c\le q\le l
+\end{equation}
+\begin{equation}
+    u(0,t)=\mu_1(t),u(l,t)=\mu_2(t),0\le t\le T
+\end{equation}
+\par\textbf{II краевая задача}: (1),(2)
+\begin{equation}
+    u_x(0,t)=\nu_1(t),u_x(l,t)=\nu_2(t),0\le t\le T.
+\end{equation}
+Задана величина теплового потока на концах стержня.
+\par\textbf{III краевая задача}: (1),(2)
+\begin{equation}
+    \dfrac{\partial u}{\partial x}_{x=0}=\lambda(u-\Theta(x,t))|_{x=0},
+    \dfrac{\partial u}{\partial x}_{x=1}=-\lambda(u-\Theta(x,t))|_{x=l},0\le t\le T.
+\end{equation}
+Теплообмен по закону Ньютона.
+\parПусть стержень имеет очень большую длину --- задача Коши (только с начальными условиями).
+\[\left\{
+\begin{array}{l}
+    u_t=a^2u_{xx}+f(x,t),-\infty<x<\infty,t>0 \\
+    u(x,0)=\varphi(x),-\infty<x<\infty
+\end{array}
+\right.\]
+\[u_t=a^2u_{xx}+f(x,t),0\le x\le l, t>0, u(0,t)=\mu_1(t),u(l,t)=\mu_2(t), 0\le t\]
+\[u_t=a^2u_{xx}+f(x,t),x>0,t>0, u(0,t)=\mu_1(t),t\ge0, u(x,0)=\varphi(x),x\ge0\]
+Пусть теперь \(n\) произвольный, \(x\in\Omega\), \(\delta\Omega\) -- граница, \(\overline{\Omega}=\Omega\bigcap\delta\Omega\)
+\[u_t=a^2\Delta u+f(x,t),x\in\Omega,0<t\le T, u(x,0)=\varphi(x),x\in\overline{\Omega},u|_{\delta\Omega}=\mu(x,t),0\le t\le T\]
+\[\dfrac{\partial u}{\partial n}|_{\delta\Omega}=\nu(x,t),0\le t\le T\]
+\[\dfrac{\partial u}{\partial n}|_{\delta\Omega}=\lambda(u-\Theta(x,t))|_{\delta\Omega},0\le t\le T\]
+Задача Коши:
+\[\left\{\begin{array}{l}
+    u_t=a^2u_{xx}+f(x,t),x\in\mathbb{R}^n,0<t\le T \\
+    u(x,0)=\varphi(x),x\in\mathbb{R}^n
+\end{array}\right.\]
+
+\subsection{Принцип максимума для уравнения теплопроводности.}
+
+\ 
+\par\textbf{Теорема.} Если функция \(u(x,t)\) определенная и непрерывная в замкнутой области \(0\le x \le l,0\le t\le T\) удовлетворяет однородному условию теплопроводности
+\begin{equation}
+    u_t=a^2u_{xx},\quad 0<x<l,0<t\le T,
+\end{equation} то максимальные значения \(u(x,t)\) достигаются или в начальный момент времени или \(x=0,x=l\).
+\par\textbf{Замечание.} \(u(x,t)=C\) максимум достигается в любой точке.
+\par\textbf{Следствие.} Пусть существует две функции \(u_1(x,t)\) и \(u_2(x,t):\ u_t=a^2u_{xx},u_1(x,0)\le u_2(x,0),u_1(0,t)\le u_2(0,t),u_1(l,t)\le u_2(l,t)\). Тогда \(u_1(x,t)\le u_2(x,t),\ 0\le x\le l, 0\le t\le T\).
+\par\textit{Доказательство.} Рассмотрим функцию \(v(x,t)=u_2(x,t)-u_1(x,t)\). Заметим, что \(v_t=a^2v_{xx}\) и \(v(x,0)\ge0,v(0,t)\ge0,v(l,t)\ge0\). Если \(v\) принимает отрицательное значение во внутренней точке, что противоречит теореме \(\Rightarrow u_2(x,t)\ge u_1(x,t)\blacksquare\).
+\par\textbf{Следствие.} Пусть \(u(x,t),\underline u(x,t),\overline u(x,t):\ u_t=a^2u_{xx},\underline u \le u\le \overline u\) для начальных условий. Тогда \(\underline u\le u\le \overline u\) во всех точках прямоугольника.
+\par\textbf{Следствие.} Пусть \(u_1(x,t),u_2(x,t):\ u_t=a^2u_{xx},\ |u_1-u_2|\le \varepsilon\) для начальных значений. Тогда \(|u_1-u_2|\le\varepsilon\) для всего прямоугольника.
+\parСледствие показывает выполнение условия устойчивости для I-й краевой задачи.
+
+\subsection{Теоремы единственности решений первой краевой задачи и задачи Коши.}
+
+\ 
+\par\textbf{Теорема.} Если две функции \(u_1\) и \(u_2\) удовлетворяют неоднородному уравнению теплопроводности \(u_t=a^2u_{xx}+f(x,t)\) и одинаковым начальным и граничным условиям \(u(x,0)=\varphi(x),u(0,t)=\mu(t),u(l,t)=\nu(t)\Rightarrow u_1=u_2\).
+\par\textbf{Теорема.} Если даны две функции \(u_1\) и \(u_2\) непрерывные и ограниченные во всей области изменения переменных, удовлетворяют одному и тому же однородному уравнению и одному и тому же начальному условию \(u(x,0)=\varphi(x)\). Тогда эти функции эквивалентны \(u_1=u_2\).
+
+\subsection{Вывод формулы Пуассона для уравнения теплопроводности. Фундаментальное решение.}
+
+\ 
+\parРассмотрим функцию \(n=3,\ G(x,y,z,t,\xi,\eta,\chi)=\left(\dfrac{1}{2\sqrt{\pi a^2t}}\right)^3\cdot \exp{-\dfrac{(x-\xi)^2+(y-\eta)^2+(z-\chi)^2}{4a^2t}}\), для краткости, пусть степень экспоненты \(\mu\).
+\par\textbf{Лемма 1.} Функция \(G\) удовлетворяет однородному уравнению теплопроводности.
+\par\textbf{Лемма 2.} \(\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}Gd\xi d\eta d\chi=1\).
+\parФункция \(G\) представляет собой температуру в точке \(M(x,y,z)\) в момент времени \(t\), вызванную точечным источником тепла мощностью \(Q=c\rho\), помещенную в момент времени \(t=0\) в точку с координатами \(M'(\xi,\eta,\chi)\). Функцию \(G\) называют функцией температурного влияния мгновенного источника тепла или фундаментальным решением уравнения теплопроводности.
+\begin{equation}
+    u_t=a^2(u_{xx}+u_{yy}+u_{zz}),\quad -\infty<x,y,z<+\infty,t>0
+\end{equation}
+\begin{equation}
+    u(x,y,z,0)=\varphi(x,y,z),\quad -\infty<x,y,z<+\infty
+\end{equation}
+\parРассмотрим задачу Коши (4), (5). Начальное условие (5) можно представить как результат суперпозиции действия мгновенных источников, создающих начальную температуру. Это тепло создает в точке \(M'\) в момент времени \(t\) температуру, равную \(\dfrac{dQ}{c\rho}G=\varphi(\xi,\eta,\chi)G(x,y,z,\xi,\eta,\chi)d\xi d\eta d\chi\). По принципу суперпозиции, решение можно получить, интегрируя
+\[u=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\varphi(\xi,\eta,\chi)G(x,y,z,\xi,\eta,\chi)d\xi d\eta d\chi.\]
+\parРешение называется формулой Пуассона.
+
+\subsection{Обоснования формулы Пуассона.}
+
+\ 
+\begin{equation}
+  u_t=a^2(u_{xx}+u_{yy}+u_{zz}),\ -\infty<x,y,z<+\infty,t>0  
+\end{equation}
+\begin{equation}
+    u(x,y,z,0)=\varphi(x,y,z),\ -\infty<x,y,z<+\infty
+\end{equation}
+\begin{equation}
+    u(x,y,z,t)=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}G(x,y,z,\xi,\eta,\chi,t)\varphi(\xi,\eta,\chi)d\xi d\eta d\chi
+\end{equation}
+\par\textbf{Теорема.} Если функция \(\varphi\) непрерывная и ограничена \(|\varphi|<A\), то функция \(u\), определенная формулой (3), удовляетворяет:
+\par1. Ограничена, \(|u|<A\);
+\par2. \(u\) удовлетворяет условию (1);
+\par3. \(u\to\varphi\) при \(t\to0\).
+\par\textit{Доказательство.} 1. Рассмотрим \(|u|=|\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}G\varphi d\xi d\eta d\chi|\le\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}|G||\varphi|d\xi d\eta d\chi\), причем \(G=\dfrac{1}{(2a\sqrt{\pi t})^3}\cdot \exp{-\dfrac{(x-\xi)^2+(y-\eta)^2+(z-\chi)^2}{4a^2t}}\). Значит \(|u|<A\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}G d\xi d\eta d\chi=A\).
+\par2. Дифференцирование по параметру под знаком несобственного интеграла возможно, если производная а) по параметру произвольной функции непрерывна; б) интеграл, полученный после формального дифференцирования равномерно сходится.
+\par\(\dfrac{\partial u}{\partial x}=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\dfrac{1}{(2a\sqrt{\pi t})^3}e^{-\mu}(-\dfrac{2(x-\xi)}{4a^3t})\varphi d\xi d\eta d\chi\). Тогда \(u_{xx}=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}G_{xx}\varphi d\xi d\eta d\chi\). Подставим \(u_t-a^2\Delta u=0\). Проверим \(\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\varphi(G_t-a^2\Delta G)d\xi d\eta d\chi=0\) из леммы 1.
+\par3. Обозначим \(M=(x,y,z),M'(\xi,\eta,\chi),d\nu=d\xi d\eta d\chi\). Тогда формулу (3) можно записать как: \(u(M,t)=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}G(M,M',t)\varphi(M')d\nu\). Рассмотрим (.) \(M_0\) с коориднатами \((x_0,y_0,z_0)\). Утверждение \(\forall\varepsilon>0\exists\delta(\varepsilon):\ |u(M,t)-\varphi(M_0)|<\varepsilon,\forall|MM_0|<\delta,t<\delta\). Рассмотрим область \(V_1\ni M_0\) и \(V_2\cup V_1=\mathbb R^3\). Тогда \(u(M,t)=\int_{\mathbb R^3}G(M,M',t)\varphi(M') d\nu=\int_{V_1}G(M,M',t)\varphi(M') d\nu+\int_{V_2}G(M,M',t)\varphi(M') d\nu\). \(\varphi(M_0)=\int_{V_1}G(M,M',t)\varphi(M_0)d\nu+\int_{V_2}G(M,M',t)\varphi(M_0) d\nu\). Вычтем из первого вторую формулу: \(|u(M,t)-\varphi(M_0)|=|\int-\int|\le|\int|+|\int|\).
+\begin{equation}
+    a
+\end{equation}
+\begin{equation}
+    u_t=a^2(u_{xx}+u_{yy}+u_{zz})+f(x,y,z,t),\ -\infty<x,y,z<+\infty,t>0
+\end{equation}
+\begin{equation}
+    u(x,y,z,0)=0,\ -\infty<x,y,z<+\infty
+\end{equation}
+\par\(dQ=c\rho fd\nu d\tau\)
+
+\subsection{Метод разделения переменных (Фурье) для однородного уравнения теплопроводности.}
+
+\ 
+\begin{equation}
+    u_t=a^2u_{xx}\quad 0<x<l,0<t\le T
+\end{equation}
+\begin{equation}
+    u(0,t)=0,u(l,t)=0\quad0\le t\le T
+\end{equation}
+\begin{equation}
+    u(x,0)=\varphi(x)\quad 0\le x\le l
+\end{equation}
+\par\textbf{Вспомогательная задача.} Найти решение уравнения (1), удовлетворяющего граничным условиям (2) в виде \(u(x,t)=X(x)T(t)\).
+\par\(u_t=X(x)T'(t);\ u_{xx}=X''(x)T(t)\Rightarrow\dfrac{T'(t)}{a^2T(t)}=\dfrac{X''(x)}{X(x)}\). Это равенство возможно только если они оба равны \(\const=-\lambda\Rightarrow\)
+\begin{equation}
+    T'(t)+\lambda a^2T(t)=0
+\end{equation}
+\begin{equation}
+    X''(x)+\lambda X(x)=0
+\end{equation}
+\[u(0,t)=X(0)T(t)=0,\ u(l,t)=X(l)T(t)=0\]
+\begin{equation}
+    X(0)=0,X(l)=0
+\end{equation}
+\parЗадача Штурма-Лиувилля: найти значение параметра \(\lambda\), при котором существует нетривиальное решение задачи (5),(6) и найти эти решения. \(\lambda\) --- собственные значения, а решения --- собственные функции.
+\[\lambda>0:\ \lambda_k=(\dfrac{\pi k}{l})^2,k\in \mathbb Z,\ X_k(x)=\sin(\dfrac{\pi k}{l}x)\]
+\[\dfrac{dT}{dt}=-\lambda a^2T;\ \int\dfrac{dT}{T}=\int-\lambda a^2dt\Rightarrow\ln T=-\lambda a^2t+C_1\]
+\[\Rightarrow T(t)=e^{C_1-\lambda a^2t}=Ce^{-\lambda a^2t}=Ce^{-\lambda a^2t}\Rightarrow T_k(t)=C_ke^{-(\frac{\pi k}{l})^2a^2t}\]
+\[u_k(x,t)=X_k(x)T_k(t)=C_k\sin(\dfrac{\pi k}{l}x)e^{-(\frac{\pi k}{l})^2a^2t},\quad k\in\mathbb Z\].
+\begin{equation}
+    u(x,t)=\displaystyle\sum_{k=0}^\infty u_k(x,t)
+\end{equation}
+\parПодставим в (7) в (3):
+\[u(x,0)=\displaystyle\sum_{k=0}^\infty C_k\sin(\dfrac{\pi k}{l}x)=\varphi(x)\]
+\[\Rightarrow\varphi(x)=\displaystyle\sum_{k=0}^\infty\varphi_k\sin(\dfrac{\pi k}{l}x),\ \varphi_k=\dfrac{2}{l}\int_0^l\varphi(\xi)\sin(\dfrac{\pi k}{l}\xi)d\xi,\quad c_k=\varphi_k\]
+\parНужно доказать, что \(u(x,t)\) дифференцируема, удовлетворяет уравнению (1) и непрерывна в точках границы области. Второе верно, если ряд сходится. Продифференцируем: \[u_t=\displaystyle\sum_{k=1}^\infty \dfrac{\partial u_k}{\partial t}\]
+\[u_{xx}=\displaystyle\sum_{k=1}^\infty \dfrac{\partial^2 u_k}{\partial x^2}\]
+\parПроверим на сходимость:
+\[|\dfrac{\partial u_k}{\partial t}|=|C_ke^{-(\frac{\pi k}{l})^2a^2t}\cdot(-(\dfrac{\pi k}{l})^2a^2t)\sin(\dfrac{\pi k}{l}x)\le|C_k|e^{-(\frac{\pi k}{l})^2a^2t}\dfrac{\pi k}{l})^2a^2t\]
+\parПусть функция \(\varphi(x)\) ограничена некоторым числом \(M\).
+\[|C_k|<\dfrac{2}{l}M,\ \xi|_0^l=\dfrac{2}{l}Ml=2M\]
+\[|\dfrac{\partial u_k}{\partial t}|<2M(\dfrac{\pi k}{l})^2a^2e^{-(\frac{\pi k}{l})^2a^2t}\]
+\[|\dfrac{\partial^2u_k}{\partial x^2}|=|C_ke^{-(\frac{\pi k}{l})^2a^2t}\sin(\dfrac{\pi k}{l}x)(-(\dfrac{\pi k}{l})^2)|<2M(\dfrac{\pi k}{l})^2e^{-(\frac{\pi k}{l})^2a^2t}\]
+\[|\dfrac{\partial^{n+m}u}{\partial x^m\partial t^n}|<2M((\dfrac{\pi k}{l})^2a^2)^ne^{-\frac{\pi k}{l}}(\dfrac{\pi k}{l})^m=2M(\dfrac{\pi k}{l})^{2n+m}a^{2n}e^{-(\frac{\pi k}{l})^2a^2t}\]
+\parКритерий Даламбера:
+\[\displaystyle\lim_{k\to\infty}|\dfrac{\alpha_{k+1}}{\alpha_k}|=(1+\dfrac{1}{k})^{2n+m}e^{-(\dfrac{-\pi}{l})^2(2k+1)a^2\overline{t}}\to0\]
+\parЕсли функция \(\varphi(x)\) непрерывна, имеет кусочно-непрерывную производную и удовлетворяет граничным условиям, тогда ряд (7) определяет непрерывную функцию при \(t\ge0\). Таким образом, решение задачи полностью получено.
+\begin{equation}
+    u_x(0,t)=0,u(l,t)=0\quad0\le t\le T
+\end{equation}
+\begin{equation}
+    u(x,t)=\sum_{k=0}^\infty e^{-(\frac{\pi +2\pi k}{2l})^2a^2t}\cos(\dfrac{\pi + 2\pi k}{2l}x)
+\end{equation}
+\begin{equation}
+    u(0,t)=0,u_x(l,t)=0\quad0\le t\le T
+\end{equation}
+\begin{equation}
+    u(x,t)=\sum_{k=0}^\infty e^{-(\frac{\pi +2\pi k}{2l})^2a^2t}\sin(\dfrac{\pi + 2\pi k}{2l}x)
+\end{equation}
+\begin{equation}
+    u_x(0,t)=0,u_x(l,t)=0\quad0\le t\le T
+\end{equation}
+\begin{equation}
+    u(x,t)=\sum_{k=0}^\infty C_ke^{-(\frac{\pi k}{l})^2a^2t}\cos(\dfrac{\pi k}{l}x)
+\end{equation}
+
+\subsection{Метод Фурье.}
+
+\ 
+\par1. \(u_t=a^2u_{xx}+f(x,t)\);
+\par2. Граничные условия не 0.
+\par\(u_t=a^2u_{xx},\ 0<x<l,0< t\le T\quad u(0,t)=0,u(l,t)=0,u(x,t)=\varphi(x)\) для этого случая находили решение, представимое в виде ряда \(u(x,t)=\displaystyle\sum c_ke^{-(\frac{\pi k}{l})^2a^2t}\sin(\frac{\pi k}{l}x)\).
+\begin{equation}
+    u_t=a^2u_{xx}+f(x,t),\ 0<x<l,0<t\le T
+\end{equation}
+\begin{equation}
+    u(0,t)=0,u(l,t)=0,\ t\ge0
+\end{equation}
+\begin{equation}
+    u(x,0)=\varphi(x)\ (u(x,0)=0)
+\end{equation}
+\par Решение будем искать в виде ряда
+\begin{equation}
+    u(x,t)=\sum_{k=0}^\infty X_k(x)T_k(t)=\sum_{k=0}^\infty T_k(t)\sin(\frac{\pi k}{l}x),
+\end{equation}
+где нужно найт \(T_k(t)\).
+\parБудем дифференцировать под знаком суммы:
+\[u_t=\displaystyle\sum_{k=0}^\infty T_k'(t)\sin(\dfrac{\pi k}{l}x),\quad u_{xx}=-\displaystyle\sum_{k=0}^\infty T_k(t)\sin(\dfrac{\pi k}{l}x)\left(\dfrac{\pi k}{l}\right)^2.\]
+\parРяд Фурье:
+\[f(x,t)=\displaystyle\sum_{k=1}^\infty f_k(t)\sin(\dfrac{\pi k}{l}x),\ f_k(t)=\dfrac{2}{l}\int_0^lf(x,t)\sin(\dfrac{\pi k}{l}x)dx,\]
+\[\varphi(x)=\displaystyle\sum_{k=1}^\infty \varphi_k\sin(\dfrac{\pi k}{l}x),\ \varphi_k=\dfrac{2}{l}\int_0^l\varphi(x)\sin(\dfrac{\pi k}{l}x)dx.\]
+\[u_t-a^2u_{xx}-f(x,t)=0\]
+\[\displaystyle\sum_{k=1}^\infty\sin(\dfrac{\pi k}{l}x)(T'_k(t)+a^2\left(\dfrac{\pi k}{l}\right)^2T_k(t)-f_k(t))=0\]
+\begin{equation}
+    T'_k(t)+a^2\left(\dfrac{\pi k}{l}\right)^2T_k(t)-f_k(t)=0
+\end{equation}
+\[u(x,0)=\displaystyle\sum_{k=1}^\infty T_k(0)\sin(\dfrac{\pi k}{l}x)=\varphi(x)=\displaystyle\sum_{k=1}^\infty \varphi_k\sin(\dfrac{\pi k}{l}x),\ T_k(0)=\varphi_k.\]
+\[\left\{
+\begin{array}{ll}
+    T'_k(t)+a^2\left(\dfrac{\pi k}{l}\right)^2T_k(t)=f_k(t) &  \\
+    T_k(0)=\varphi_k, & k=1,2,...
+\end{array}\right.\]
+\parРешая дифференциальное уравнение получим \(T_k^\textup{одн.ур.}=C_ke^{-a^2(\frac{\pi k}{l})^2t}\).
+
+\section{Уравнения эллиптического типа.}
+
+\subsection{Задачи, приводящие к уравнениям Лапласа и Пуассона. Постановка краевых задач.}
+
+\ 
+\parК уравнениям эллиптического типа относятся стационарные процессы (т.е. те, которые не меняются со временем).
+\[\Delta u = 0\quad\textup{уравнение Лапласа},\]
+\[\Delta u = \overline f(x,t)\quad\textup{уравнение Пуассона}.\]
+\par\textbf{Первая краевая задача (задача Дирихле) для уравнения Пуассона.} Рассмотрим область \(D\) размерности \(n=2\) с границей \(S\).
+\[\left\{\begin{array}{ll}
+    \Delta u=f(x,y), & (x,y)\in D \\
+    u|_S=\mu(x,y)
+\end{array}\right.\]
+\par\textbf{Вторая краевая задача (задача Неймана) для уравнения Пуассона.}
+\[\left\{\begin{array}{ll}
+    \Delta u=f(x,y), & (x,y)\in D \\
+    \left.\dfrac{\partial u}{\partial n}\right|_S=\nu(x,y)
+\end{array}\right.\]
+\par\textbf{Третья краевая задача.}
+\[\left\{\begin{array}{ll}
+    \Delta u=f(x,y), & (x,y)\in D \\
+    \left.\left(\dfrac{\partial u}{\partial n}+h(u-\Theta(x,y))\right)\right|_S=0
+\end{array}\right.\]
+
+\subsection{Фундаментальное решение уравнения Лапласа.}
+
+\ 
+\par\textbf{Определение.} Функция \(u(x,y)\) называется \textit{гармонической} в конечной области \(D\), если она в этой области имеет непрерывные производные до второго порядка и удовлетворяет уравнению Лапласа в области \(D\).
+\par\textbf{Лемма 1.} Функция
+\begin{equation}
+    u=\ln \frac{1}{n}=\ln\frac{1}{\sqrt{(x-x_0)^2+(y-y_0)^2}}
+\end{equation}
+является гармонической в любой области плоскости, не содержащей точку \((x_0,y_0)\). Функцию (1) называют фундаментальным решением уравнения Лапласа на плоскости.
+\parФункция
+\begin{equation}
+    u=\frac{1}{r}=\frac{1}{\sqrt{(x-x_0)^2+(y-y_0)^2+(z-z_0)^2}}
+\end{equation}
+называется фундаментальным решением уравнения Лапласа в пространстве.
+\par\textbf{Лемма 2.} Функция \(u\), определяемая формулой (5) является гармонической в любой области пространства, не содержащей точки \((x_0,y_0,z_0)\).
+
+\subsection{Формулы Грина, интегральная теорема Гаусса.}
+
+\subsubsection{Формула Грина}
+
+\ 
+\parРассмотрим некоторую область \(D\) с границей \(S\), функции \(u(x,y),v(x,y)\). Это функции, непрерывные вместе со своими первыми производными \(D\bigcup S\) и имеющие непрерывные вторые производные внутри области \(D\).
+\[\int\int_D\left(\dfrac{\partial P}{\partial x}+\dfrac{\partial Q}{\partial y}\right)dxdy=\int_S(P\cos\alpha+Q\sin\alpha)d S\]
+\[P=u\dfrac{\partial v}{\partial x},Q=u\dfrac{\partial v}{\partial y},\Rightarrow\dfrac{\partial P}{\partial x}=\dfrac{\partial u}{\partial x}\dfrac{\partial v}{\partial x}+u\dfrac{\partial^2v}{\partial x^2},\dfrac{\partial Q}{\partial y}=\dfrac{\partial u}{\partial y}\dfrac{\partial v}{\partial y}+u\dfrac{\partial^2v}{\partial y^2}\Rightarrow\]
+\[\int\int_D\left(\dfrac{\partial u}{\partial x}\dfrac{\partial v}{\partial x}+\dfrac{\partial u}{\partial y}\dfrac{\partial v}{\partial y}\right)dxdy+\int\int_D u\left(\dfrac{\partial^2 v}{\partial x}+\dfrac{\partial^2 v}{\partial y}\right)=\int_Su\left(\dfrac{\partial v}{\partial x}\cos\alpha+\dfrac{\partial v}{\partial y}\sin\alpha\right)dS\]
+\begin{equation}
+    \int\int_Du\Delta vdxdy=\int_Su\dfrac{\partial v}{\partial n}dS-\int\int_D\left(\dfrac{\partial u}{\partial x}\dfrac{\partial v}{\partial x}+\dfrac{\partial u}{\partial y}\dfrac{\partial v}{\partial y}\right)dxdy
+\end{equation}
+\begin{equation}
+    \int\int_D(u\Delta v-v\Delta u)dxdy=\int_S\left(u\dfrac{\partial v}{\partial n}-v\dfrac{\partial u}{\partial n}\right)dS
+\end{equation}
+
+\subsubsection{Интегральная теорема Гаусса}
+
+\ 
+\parПусть \(v\) --- гармоническая в области \(D\), ограниченной границей \(S\). Тогда
+\begin{equation}
+    \int_S\dfrac{\partial v}{\partial n}dS=0.
+\end{equation}
+\par\textit{Доказательство.} Воспользуемся первой формулой Грина, \(v\) --- гармоническая, \(u=1\).
+
+\subsection{Интегральное представление гармонических функций.}
+
+\ 
+\parПусть функция \(u(M)\) --- непрерывная вместе с первыми производными в области \(D\bigcup S\) и имеющая вторые производные в \(D\), где \(S\) --- граница области \(D\). В качестве функции \(v=\ln\frac{1}{r}\), где \(r=\sqrt{(x-x_0)^2+(y-y_0)^2}\), \(M_0(x_0,y_0)\in D\) --- фиксированная точка. Применим формулу Грина (2). Вырежем из области \(D\backslash\{\textup{круг}\}=D_\varepsilon\).
+\begin{equation}
+    \int\int_{D_\varepsilon}(u\Delta \ln\frac{1}{r}-\ln\frac{1}{r}\Delta u)dxdy=\int_S(u\dfrac{\partial}{\partial n}\ln\frac{1}{r}-\ln\frac{1}{r}\dfrac{\partial u}{\partial n})dS+\int_{S_\varepsilon}(u\dfrac{\partial }{\partial n}\ln\frac{1}{r}-\ln\frac{1}{r}\dfrac{\partial u}{\partial n})dS
+\end{equation}
+\[\int_{S_\varepsilon}u\dfrac{\partial }{\partial n}(\ln\frac{1}{r})dS=\int_{S_\varepsilon}\dfrac{u}{\varepsilon}dS=2\pi u^*\]
+\[-\int_{S_\varepsilon}\ln\frac{1}{r}\dfrac{\partial u}{\partial n}dS\]
+\begin{equation}
+-\int\int_{D_\varepsilon}\ln\frac{1}{r}\Delta udxdy=\int_S(u\dfrac{\partial }{\partial n}\ln\frac{1}{r}-\ln\frac{1}{r}\dfrac{\partial u}{\partial n})dS+2\pi u^*-\ln\frac{1}{\varepsilon}(\dfrac{\partial u}{\partial n})^*2\pi\varepsilon
+\end{equation}
+\[\varepsilon\to0,D_\varepsilon\to D,u^*\to u(M_0),\quad\displaystyle\lim_{\varepsilon\to0}\ln\frac{1}{\varepsilon}(\dfrac{\partial u}{\partial n})^*2\pi\varepsilon=0\]
+\begin{equation}
+    \Sigma u(M_0)=-\int\int_D\ln\frac{1}{r}\Delta udxdy-\int_S(u\dfrac{\partial }{\partial n}\ln\frac{1}{r}-\ln\frac{1}{r}\dfrac{\partial u}{\partial n}dS
+\end{equation}
+\parЕсли \(M_0\notin D\), то \(0\cdot u(M_0)\);
+\parЕсли \(M_0\in S\), то \(\pi\cdot u(M_0)\)
+\begin{equation}
+    \Sigma=\left\{
+    \begin{array}{ll}
+        2\pi, & M_0\in D \\
+        0, & M_0\notin D \\
+        \pi, & M_0\in S
+    \end{array}\right.
+\end{equation}
+\parЕсли \(u\) --- гармоническая, \(\Delta u=0\)
+\begin{equation}
+    u(M_0)=\dfrac{1}{2\pi}\int_S(\ln\frac{1}{r}\dfrac{\partial u}{\partial n}-u\dfrac{\partial }{\partial n}\ln\frac{1}{r})dS
+\end{equation}
+--- интегральное представление гармонической функции.
+
+\subsection{Теоремы о среднем для гармонической функции}
+
+\subsubsection{Для окружности}
+
+\ 
+\parЕсли функция \(u(M)\) гармонична в некоторой области \(D\) и непрерывна вместе с первыми производными на \(D\cup S\), а \(M_0\) --- какая-то точка, лежащая внутри \(D\), то имеет место формула
+\begin{equation}
+    u(M_0)=\dfrac{1}{2\pi}\int_{S_a}udS,
+\end{equation}
+где \(S_a\) --- некоторая окружность радиуса \(a\) с центром в точке \(M_0\).
+\par\textit{Доказательство.} Воспользуемся (5) и интегральной теоремой Гаусса.
+
+\subsubsection{Для круга}
+
+\ 
+\parЕсли функция \(u(M)\) гармонична в некоторой области \(D\) и непрерывна вместе с первыми производными на \(D\cup S\), а \(M_0\) --- какая-то точка, лежащая внутри \(D\), то имеет место формула
+\begin{equation}
+    u(M_0)=\dfrac{1}{\pi a^2}\int\int_{K_a}udxdy,
+\end{equation}
+где \(K_a\) --- круг радиуса \(a\) с центром в точке \(M_0\).
+\par\textit{Доказательство.} Для доказательства воспользуемся (1): \(2\pi\rho u(M_0)=\int_{S_\rho}udS\) и проинтегрируем.
+
+\subsection{Принцип максимума для гармонических функций}
+
+\ 
+\par\textbf{Теорема.} Если функция \(u(M)\) определенная и непрерывная в замкнутой обасти \(D\bigcup S\), удовлетворяет уравнению Лапласа \(\Delta u=0\) внутри области \(D\) то минимальные и максимальные значения функции достигаются на границе \(S\).
+\par\textit{Доказательство.} Допустим, что функция \(u(M)\) достигается максимального (для определенности) значения в некоторой внутренней точке \(M_0\in D\). Обозначим через \(u_0=u(M_0)\ge u(M),\ \forall M\in D\). Построим окружность с центром в точке \(M_0\) и радиусом \(\rho\), целиком лежащим внутри области \(D\) и обозначим его \(S_\rho\). Так как в \(M_0\) достигается наибольшее значение функции, то значение функции \(u|_{S_\rho}\le u(M_0)\). Применим теорему о среднем для окружности \(S_\rho\). \(u(M_0)=\dfrac{1}{2\pi \rho}\int_{S_\rho}udS\le \dfrac{1}{2\pi\rho}\int_{S_\rho}u(M_0)dS=u(M_0)\). Если предположим, что хотя бы в одной точке окружности \(u(M)<u(M_0)\), то мы получим противоречие \(\Rightarrow u(M)\equiv u(M_0)\) на \(S_\rho\). Пусть \(\rho_0^m\) --- минимальное расстояние \(M_0\) до \(S\). Возьмем эту точку на границе, которая равна \(u_0\).
+\par\textbf{Следствие.} Пусть даны две функции \(u,v\) --- непрерывные на \(D\bigcup S\), гармоничны в \(D\) и выполняется неравенство \(u\le v\) на границе \(S\Rightarrow u\le v\) в области \(D\). Для доказательства достаточно взять \(w=v-u\).
+\par\textbf{Следствие.} Пусть даны две функции \(u,v\) --- непрерывные на \(D\bigcup S\), гармоничны в \(D\) и выполняется неравенство \(|u|\le v\) на границе \(S\Rightarrow |u|\le v\) в области \(D\).
+\par\textbf{Следствие.} Рассмотрим функцию \(u\) непрерывную в \(D\bigcup S\), гармоничную в \(D\) и для которой выполняется \(|u|\le\max|u||_S\Rightarrow\) выполняется в \(D\bigcup S\).
+
+\subsection{Задачи Дирихле. Теоремы единственности и устойчивости.}
+
+\ 
+\parЗапишем более подробно задачу Дирихле: найти функцию \(u\), которая удовлетворяет 3 условиям:
+\par1. Определена и непрерывна в \(D\bigcup S\);
+\par2. Удовлетворяет \(\Delta u=0\) в \(D\);
+\par3. \(u|_S=g\).
+\parУсловие непрерывности --- условие единственности. 
+\par\textbf{Теорема о единственности.} Первая внутренняя краевая задача для уравнения Лапласа имеет единственное решение.
+\par\textit{Доказательство.} Пусть существуют два решения \(u_1\) и \(u_2\), которые удовлетворяют всем трем условиям. Рассмотрим функцию \(v=u_2-u_1\).
+\par\textbf{Теорема устойчивости.} Решение первой краевой задачи непрерывно зависит от граничных данных.
+\par\textit{Доказательство.} Рассмотрим две функции \(u_1\) и \(u_2\), являющимся решениями задачи Дирихле. \(|g_1-g_2|\le\varepsilon\Rightarrow|u_1-u_2|\le\varepsilon\) на \(S\). Из следствия теоремы о максимуме \(|u_1-u_2|\le\varepsilon\) в \(D\).
+
+\subsection{Функция Грина}
+
+\ 
+\parПусть \(u(M)\) --- гармоническая внутри конечной области \(D\) и непрерывная вместе с производными первого порядка в \(D\bigcup S\) функция.
+\begin{equation}
+    u(M_0)=\dfrac{1}{2\pi}\int_S\ln\dfrac{1}{r}\dfrac{\partial u}{\partial u}-u\dfrac{\partial}{\partial n}\ln\dfrac{1}{r}dS,\ r=|M_0M|,M_0\in D,M\in S
+\end{equation}
+\par1. Функция \(g(M,M_0)\) как от переменной \(M\) является гармонической внутри \(D\), имеет первые производные в \(D\bigcup S\);
+\par2. Фнукция \(g(M,M_0)|S=\dfrac{1}{2\pi}\ln\dfrac{1}{r}\).
+\[\int\int_D(u\Delta v-v\Delta u)dxdy=\int_S(u\dfrac{\partial v}{\partial n}-v\dfrac{\partial u}{\partial n})dS\]
+\par Подставим \(u\) и \(g\):
+\[\int_S(u(M)\dfrac{\partial g(M,M_0)}{\partial n}-g(M,M_0)\dfrac{\partial u(M)}{\partial n})dS=0\]
+\begin{equation}
+    \int_S(u(M)\dfrac{\partial g(M,M_0)}{\partial n}+\dfrac{1}{2\pi}\ln\dfrac{1}{r}\dfrac{\partial u(M)}{\partial n})dS=0
+\end{equation}
+\parВычтем (1) - (2):
+\[u(M_0)=-\int_Su(M)\dfrac{\partial}{\partial n}(\dfrac{1}{2\pi}\ln\dfrac{1}{r}+g(M,M_0))dS\]
+и учитывая, что \(\dfrac{1}{2\pi}\ln\dfrac{1}{r}+g(M,M_0)=0\) получаем ноль справа.
+\begin{equation}
+    G(M,M_0)=\dfrac{1}{2\pi}\ln\dfrac{1}{r}+g(M,M_0)
+\end{equation}
+\par\textbf{Определение.} Функцией Грина задачи Дирихле для уравнения Лапласа называется функция \(G(M,M_0)\):
+\par1. как функция от \(M\) является гармонической в \(D\backslash\{M_0\}\);
+\par2. \(G|_S=0\);
+\par3. В области \(D\) представляется по формуле 3.
+\parС помощью функции Грина решение внутренней задачи Дирихле дается формулой
+\begin{equation}
+    u(M)|_S=f(M)
+\end{equation}
+\begin{equation}
+    u(M_0)=-\int_Sf(M)\dfrac{\partial G(M,M_0)}{\partial n}dS
+\end{equation}
+\parФормула (5) не давая доказательства существования решения, дает интегральное представление существующих достаточно гладких решений задачи Дирихле.
+
+
+
+\end{document}

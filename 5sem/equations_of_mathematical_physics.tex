@@ -1,0 +1,670 @@
+\documentclass[9pt]{article}
+\input{header.tex}
+
+\begin{document}
+
+\begin{center}
+    \huge\textbf{Уравнения математической физики.}
+\end{center}
+
+\section{Введение.}
+
+\par\ 
+\parРассмотрим множество \(D \subset R^n\), \(x = (x_1,...,x_n)\), и функцию \(u:D\to\mathbb R\).
+\begin{equation}
+F(x_1,...,x_n,\dfrac{\partial u}{\partial x_1},...,\dfrac{\partial u}{\partial x_n},\dfrac{\partial^2 u}{\partial x_1^2},...,\dfrac{\partial^{k_1+...+k_n} u}{\partial x_1^{k_1}...\partial x_n^{k_n}},...) = 0
+\end{equation}\(F\) -- заданная функция своих аргументов (дифференциальный оператор с частными производными), \(D\) -- область задания уравнения (1).
+\par\textbf{Определение.} Уравнение (1) называется \textit{линейным}, если \(F\) является линейной функцией \(u\) и ее частных производных.
+\begin{equation}
+\sum^m_{k=0}\sum_{k_i}a_{k_1...k_n}(x)\cdot\dfrac{\partial^{k_1+...+k_n}u}{\partial x_1^{k_1}...\partial x_n^{k_n}} = f(x)
+\end{equation}
+\par\textbf{Определение.} Уравнение (2) называется \textit{однородным/неоднородным}, если \(f(x)=0\)/\(f(x)\neq0\).
+\par\textbf{Определение.} Уравнение (1) называется \textit{квазилинейным}, если \(F\) линейно зависит только от старших производных.
+\par\textbf{Определение.} Порядок старшей производной, входящей в уравнение (1), называется \textit{порядком уравнения}.
+\par\textbf{Пример.}
+\par1. \(u_{x_1}+...+u_{x_n}+u^2=0\) -- квазилинейное однородное уравнение первого порядка;
+\par2. \(u_{x_1x_1}+...+u_{x_nx_n}+x_1u_{x_1}+...+x_nu_{x_n}+\sin(u)=0\) -- линейное однородное уравнение второго порядка;
+\par3. \(u_{x_1}u_{x_1x_2x_3}+u_{x_1x_2}+u_{x_1x_3}=\cos(x_1x_2)\) -- квазилинейное неоднородное уравнение третьего порядка;
+\par4. \(\left(\dfrac{\partial u}{\partial x}\right)^2+\left(\dfrac{\partial u}{\partial y}\right)^2=0\) -- нелинейное однородное уравнение первого пордяка.
+\par\textbf{Определение.} Определенное в \(D\) задание уравнения (1) функция \(u(x)\) непрерывная вместе с частными производными, входящими в это уравнение и обращающее его в тождество называется\textit{классическим решением} уравнения с частными производными.
+\parУСЧП 1-го порядка с двумя/тремя независимыми переменными:
+\begin{equation}
+    F(x,y,u,u_x,u_y)=0
+\end{equation}
+\begin{equation}
+    F(x,y,z,u,u_x,u_y,u_z)=0
+\end{equation}
+\parУСЧП 2-го порядка с двумя независимыми переменными:
+\begin{equation}
+    F(x,y,u,u_x,u_y,u_{xx},u_{yy},u_{xy})=0
+\end{equation}
+\parЛУ 1-го порядка с \(n\) независимыми переменными:
+\begin{equation}
+    \sum^n_{i=1}b_i(x)\dfrac{\partial u}{\partial x_i}+c(x)u=f(x)
+\end{equation}
+\parЛУ 2-го порядка с \(n\) независимыми переменными:
+\begin{equation}
+    \sum^n_{i,j=1}a_{ij}(x)\dfrac{\partial^2 u}{\partial x_i \partial x_j}+\sum^n_{i=1}b_i(x)\dfrac{\partial u}{\partial x_i}+c(x)u=f(x)
+\end{equation}
+\parВ уравнениях (6) и (7) левую часть обозначим \(L(u)=Lu\). Тогда уравнение (6) и (7) принимают вид: \(Lu=f(x)\) -- операторное уравнение, \(L\) -- линейный дифференциальный оператор 1-го и 2-го порядка соответственно. Свойства:
+\par1. \(L(Cu)=CL(u)\)
+\par2. \(L(u_1+u_2)=Lu_1+Lu_2\)
+\parИз этих свойств следует три утверждения:
+\par\textbf{Утверждение 1.} Если функция \(u(x)\) является решением однородного уравнения \(Lu=0\), то \(C\cdot u\) также является решением этого уравнения.
+\par\textbf{Утверждение 2.} Если имеются два решения \(u_1,u_2\) операторного уравнения \(Lu=0\), то их сумма \(u_1+u_2\) также является решением этого уравнения.
+\par\textbf{Утверждение 3.} Если имеются решения \(u_1,...,u_n\) операторного уравнения \(Lu=0\), то их линейная комбинация \(C_1u_1+...+C_nu_n\) также является решением этого уравнения.
+\par\textbf{Пример.} Уравнение:
+\begin{equation}
+    x\cdot \dfrac{\partial u}{\partial x}+y\cdot \dfrac{\partial u}{\partial y}+z\cdot \dfrac{\partial u}{\partial z}=0
+\end{equation}
+\par1. \(u=\dfrac{x^2}{y^2}+\dfrac{y^2}{x^2}\).
+\par Берем первые частные производные: \(\dfrac{\partial u}{\partial x} = \dfrac{2x}{y^2}\), \(\dfrac{\partial u}{\partial y} = -\dfrac{2x^2}{y^3}+\dfrac{2y}{z^2}\), \(\dfrac{\partial u}{\partial z} = -\dfrac{2y^2}{z^3}\). Подставляя в уравнение (8) получаем тождество.
+\par2. \(u=xyz\).
+\par Берем первые частные производные: \(\dfrac{\partial u}{\partial x} = yz\), \(\dfrac{\partial u}{\partial x} = xz\), \(\dfrac{\partial u}{\partial x} = xy\). Подставляя в уравнение (8) получаем, что данная функция не является решением.
+\par\(\Delta=\displaystyle\sum_{i=1}^n \dfrac{\partial^2}{\partial x_i^2}\) -- оператор Лапласа, \(\Delta u=0\) -- уравнение Лапласа.
+\par\(\dfrac{\partial^2u}{\partial t^2} = \Delta u\) -- волновое уравнение (гиперболическое); \(\dfrac{u}{t}=\Delta u\) -- тепловое уравнение (параболическое).
+
+\section{Классификация линейных уравнений с частными производными II-го пордяка с \(n\) независимыми переменными.}
+
+\par\ 
+\parРассмотрим уравнение второго порядка
+
+\begin{equation}
+    \sum^n_{i,j=1}a_{ij}(x)\dfrac{\partial^2 u}{\partial x_i \partial x_j}+\sum^n_{i=1}b_i(x)\dfrac{\partial u}{\partial x_i}+c(x)u=f(x)
+\end{equation}
+
+\par\(a_{ij}(x) \in D\) -- коэффициенты, \(a_{ij} = a_{ji}\). Зафиксируем точку \(x^0 \in D\) и составим характеристическую форму
+\begin{equation}
+    Q(\lambda_1,...,\lambda_n) = \sum^n_{i,j=1}a_{ij}(x^0)\lambda_i\lambda_j
+\end{equation}
+\parВ каждой точке \(x \in D\) форма \(Q\) может быть приведена к каноническому виду
+\begin{equation}
+    Q(\xi_1,...,\xi_n)=\sum^n_{i=1}\alpha_i\xi^2_i,\quad\alpha_i \in \{-1,0,1\}
+\end{equation}
+\par\textbf{Определение.} Говорят, что уравнение (1) \textit{эллиптическое} в области \(D\), если в каждой точке этой области коэффициенты \(\alpha_i\) формы (3) все отличны от нуля и все одного знака. \textit{Гиперболическое}, если \(\alpha_i\) все отличны от нуля, но не все одного знака. \textit{Параболическое} -- хотя бы один из коэффициентов \(\alpha_i\) равен нулю, но не все.
+\par\textbf{Пример.} 
+\par1. \(4u_{xx}-4u_{xy}+2u_{yy}+u_x+u_y+2u = 0\).
+\parПриводим к каноническому виду: \(Q(\lambda_1,\lambda_2)=4\lambda_1^2-4\lambda_1\lambda_2+2\lambda_2^2 = (2\lambda_1-\lambda_2)^2+\lambda_2^2 \Rightarrow \xi_1=2\lambda_1-\lambda_2,\ \xi_2=\lambda_2 \Rightarrow Q(\xi_1,\xi_2)=\xi_1^2+\xi_2^2\) -- \textit{эллиптический} тип.
+\par2. \(4u_{xx}+2u_{yy}-6u_{zz}+6u_{xy}+10u_{xz}+4u_{yz}-u_x+5u_z=0\).
+\parПриводим к каноническому виду: \(Q(\lambda_1,\lambda_2,\lambda_3)=(2\lambda_1+\frac{3}{2}\lambda_2+\frac{5}{2}\lambda_3)^2-\frac{1}{4}\lambda_2^2-\frac{49}{4}\lambda_3^2-\frac{7}{2}\lambda_2\lambda_3=(2\lambda_1+\frac{3}{2}\lambda_2+\frac{5}{2}\lambda_3)^2-(\frac{1}{2}\lambda_2+\frac{7}{2}\lambda_3)^2 \Rightarrow \xi_1=2\lambda_1+\frac{3}{2}\lambda_2+\frac{5}{2}\lambda_3,\ \xi_2 = \frac{1}{2}\lambda_2+\frac{7}{2}\lambda_3,\ \xi_3=\lambda_3 \Rightarrow Q(\xi_1,\xi_2,\xi_3)=\xi_1^2-\xi_2^2+0\cdot\xi_3^2\) -- \textit{параболический} тип.
+\par3. \(u_{xx}+4u_{yy}+u_{zz}-4u_{xy}+2u_{xz}=0\).
+\parПриводим к каноническому виду: \(Q(\lambda_1,\lambda_2,\lambda_3)=(\lambda_1-2\lambda_2+\lambda_3)^2+4\lambda_2\lambda_3=(\lambda_1-2\lambda_2+\lambda_3)^2+(\lambda_2+\lambda_3)^2-(\lambda_2-\lambda_3)^2 \Rightarrow Q = \xi_1^2+\xi_2^2-\xi_3^2\) -- \textit{гиперболический} тип.
+\parВ примерах вида \(\lambda_1\lambda_2+\lambda_1\lambda_3+\lambda_2\lambda_2\), где нет квадратов нужно сделать замену \(\lambda_1=\gamma_1+\gamma_2,\ \lambda_2=\gamma_1-\gamma_2,\ \lambda_3=\gamma_3\).
+
+\subsection{Классификация линейных уравнений с частными производными II-го порядка с двумя независимыми переменными.}
+
+\ 
+\parУравнение второго порядка с двумя независимыми переменными.
+\begin{equation}
+    F(x,y,u,u_x,u_y,u_{xx},u_{xy},u_{yy})=0.
+\end{equation}
+Уравнение (1) называется \textit{линейным относительно старших производных}, если имеет вид
+\begin{equation}
+    a_{11}u_{xx}+2a_{12}u_{xy}+a_{22}u_{yy}+F(x,y,u,u_x,u_y)=0,
+\end{equation}
+где \(a_{ij}(x,y)\) -- функции. Если \(a_{ij}\) являются функциями \(a_{ij}(x,y,u,u_x,u_y)\), то (2) называется \textit{квазилинейным}.
+\begin{equation}
+    a_{11}u_{xx}+2a_{12}u_{xy}+a_{22}u_{yy}+b_1u_x+b_2u_y+cu=f
+\end{equation}
+Уравнение (3) называется полностью линейным, где \(a_{ij},b_i,c,f\) -- функции от \(x\) и \(y\).
+
+\parУравнение
+\begin{equation}
+    a_{11}(dy)^2-2a_{12}dxdy+a_{22}(dx)^2=0
+\end{equation} называется \textit{характеристическим уравнением}, соответсвтующим уравнению (3). Интегралы уравнения (4) называются \textit{характеристиками}.
+\parРешим уравнение (4):
+\par1. \(a_{11}=0 \Rightarrow dx(-2a_{12}dy+a_{22}dx)=0\)
+\[\left[
+\begin{array}{l}
+    dx=0\\
+    -2a_{12}dy+a_{22}dx=0
+\end{array}\right.\Rightarrow x=c.\]
+\par2. \(a_{11}\neq0.\)
+\[a_{11}\left(\dfrac{dy}{dx}\right)^2-2a_{12}\left(\dfrac{dy}{dx}\right)+a_22=0\]
+Решаем данное квадратное уравнение: \(D=4(a_{12}^2-a_{11}a_{22}) \Rightarrow \dfrac{dy}{dx}=\dfrac{a_{12}\pm\sqrt{a_{12}^2-a_{11}a_{22}}}{a_{11}}\). Возьмем \(\Delta=a_{12}^2-a_{11}a_{22}\). Тогда запишем
+\begin{equation}
+    \dfrac{dy}{dx}=\dfrac{a_{12}\pm\sqrt{\Delta}}{a_{11}}
+\end{equation}
+\par\textbf{Определение.} Уравнение (3) называется в точке \(M\) уравнением: \par1. \textit{Гиперболического типа}, если \(\Delta>0\);
+\par2. \textit{Параболического типа}, если \(\Delta=0\);
+\par3. \textit{Эллиптического типа}, если \(\Delta<0\).
+\parРассмотрим \(G\subset\mathbb R^2\), где уравнение сохраняет тип:
+\par1. Для уравнения гиперболического типа имеем 2 действительные семейства характеристик;
+\par2. Имеются 2 совпадающих действительных семейства (1 действительное семейство);
+\par3. Имеются 2 сопряженных комплексных семейства характеристик.
+\par\textbf{Пример.}
+\par1. Определить тип уравнения \(8u_{xx}-10u_{xy}+2u_{yy}-4u_x+5u_y+2u+xy=0\).
+\par\textit{Решение.} \(a_{11}=8, a_{12}=-5, a_{22}=2\). Подставляем в формулу (5). \(\Delta =(-5)^2-8\cdot2=9 \Rightarrow\)\[\dfrac{dy}{dx}=\dfrac{-5\pm\sqrt{9}}{8}=-\dfrac{1}{4};-1\]
+\[\left[
+\begin{array}{l}
+    \dfrac{dy}{dx}=-\dfrac{1}{4} \Rightarrow \int4dy=\int-dx \Rightarrow4y=-x+C\\
+    \dfrac{dy}{dx}=-1 \Rightarrow \int dy=\int-dx \Rightarrow y=-x+C
+\end{array}
+\right.\Rightarrow\left[
+\begin{array}{l}
+    4y+x=C \\
+    y+x=C
+\end{array}\right.\] -- два действительных семейства.\(\blacksquare\)
+\par2. Определить тип уравнения \(3u_{xx}-12u_{xy}+12u_{yy}+5u=0\).
+\par\textit{Решение.} \(3dy^2+12dydx+12dx^2=0\Rightarrow 3(\dfrac{dy}{dx})^2+12\dfrac{dy}{dx}+12=0\Rightarrow D = 12^2-4\cdot3\cdot12=0\Rightarrow\dfrac{dy}{dx}=-2\). Получаем единственное действительное семейство \(y+2x=C\).\(\blacksquare\)
+\par3. Определить тип уравнения \(5u_{xx}+4u_{xy}+4u_{yy}+u_x-2u_y+x=0\).
+\par\textit{Решение.} \(a_{11}=5,a_{12}=2,a_{22}=4\Rightarrow\Delta=2^2-5\cdot4=-16<0\) -- эллиптический тип.
+\[\dfrac{dy}{dx}=\dfrac{2\pm4i}{5}\Rightarrow\left[
+\begin{array}{l}
+    5y-2x-4xi=C \\
+    5y-2x+4xi=C
+\end{array}\right.\] -- два комплексных семейства характеристик.\(\blacksquare\)
+\par4. Определить тип уравнения \(u_{xx}-2\sin xu_{xy}-\cos^2xu_{yy}-\cos xu_y+x=0\).
+\par\textit{Решение.} \(dy^2+2\sin xdydx-\cos^2xdx^2=0 \Rightarrow (\dfrac{dy}{dx})^2+2\sin x\dfrac{dy}{dx}-\cos^2x=0\Rightarrow D=(2\sin x)^2-4(-\cos^2x)=4>0\Rightarrow \dfrac{dy}{dx}=-\sin x+-1\)
+\[\left[
+\begin{array}{l}
+    dy=(-\sin x+1)dx\\
+    dx=(-\sin x-1)dx
+\end{array}
+\right.\Rightarrow\left[
+\begin{array}{l}
+    y-\cos x-x=C\\
+    y-\cos x+x=C
+\end{array}
+\right.\]
+-- два действительных семейства характеристик.\(\blacksquare\)
+
+\parХарактеристическая форма \(Q(\lambda_1,\lambda_2)=a_{11}\lambda_1^2+2a_{12}\lambda_1\lambda_2+a_{22}\lambda_2^2=(\sqrt{a_{11}}\lambda_1+\dfrac{a_{12}}{\sqrt{a_{11}}}\lambda_2)^2-\dfrac{a_{12}^2}{a_{11}}\lambda_2^2+a_{22}\lambda_2^2=(\sqrt{a_{11}}\lambda_1+\dfrac{a_{12}}{\sqrt{a_{11}}}\lambda_2)^2-\dfrac{a_{12}^2-a_{11}a_{22}}{a_{11}}\cdot\lambda^2_2\).
+\par1. \(\Delta < 0\) -- эллиптический тип.
+\par\(\xi_1^2+\xi_2^2,\quad a_{11}>0\);
+\par\(-\xi_1^2-\xi_2^2,\quad a_{11}<0\).
+\par2. \(\Delta > 0\) -- гиперболический тип.
+\par\(\xi_1^2-\xi_2^2,\quad a_{11}>0\);
+\par\(-\xi_1^2+\xi_2^2,\quad a_{11}<0\).
+\par3. \(\Delta = 0\) -- параболический тип.
+\par\(\pm\xi_1^2\);
+\par\(\pm\xi_2^2\).
+
+\section{Приведение к каноническому виду линейных уравнений II-го порядка с двумя независимыми переменными.}
+
+\ 
+\parРассмотрим линейное уравнение
+\begin{equation}
+    a_{11}u_{xx}+2a_{12}u_{xy}+a_{22}u_{yy}+b_1u_x+b_2y+cu=f
+\end{equation}
+\begin{align*}
+    \xi=\varphi(x,y);\quad x=x(\xi,\eta)\\
+    \eta=\psi(x,y);\quad y=y(\xi,\eta)
+\end{align*}
+\parФормулы преобразования переменных в новые:
+\begin{align*}
+    u_x=\xi_xu_\xi+\eta_xu_\eta\\
+    u_y=\xi_yu_\xi+\eta_yu_\eta
+\end{align*}
+\parВторого порядка
+\begin{align*}
+u_{xx}=\xi_x^2u_{\xi\xi}+2\xi_x\eta_xu_{\xi\eta}+\eta^2_x+u_{\eta\eta}+\xi_{xx}u_\xi+\eta_{xx}u_\eta\\
+u_{yy}=\xi_y^2u_{\xi\xi}+2\xi_y\eta_yu_{\xi\eta}+\eta^2_y+u_{\eta\eta}+\xi_{y}u_\xi+\eta_{yy}u_\eta\\
+u_{xy}=\xi_x\xi_yu_{\xi\xi}+(\xi_x\eta_y+\xi_y\eta_x)u_{\xi\eta}+\eta_x\eta_y+u_{\eta\eta}+\xi_{xy}u_\xi+\eta_{xy}u_\eta
+\end{align*}
+\parПодставим эти производные в уравнение (1):
+\[
+\overline{a_{11}}u_{\xi\xi}+2\overline{a_{12}}u_{\xi\eta}+\overline{a_{22}}u_{\eta\eta}+\beta_1u_\xi+\beta_2u_\eta+\gamma u=g,
+\]
+где \(\overline{a_{11}}=a_{11}\xi_x^2+2a_{12}\xi_x\xi_y+a_{22}\xi_y^2,\quad\overline{a_{22}}=a_{11}\eta_x^2+2a_{12}\eta_x\eta_y+a_{22}\eta_y^2,\quad\overline{a_{12}}=a_{11}\xi_x\eta_x+a_{12}(\xi_x\eta_y+\eta_x\xi_y)+a_{22}\xi_y\eta_y\).
+
+
+\subsection{Приведение к каноническому виду.}
+
+\ 
+\parРассматриваем
+\begin{equation}
+a_{11}u_{xx}+a_{22}u_{yy}+a_{33}u_{zz}+2a_{12}u_{xy}+2a_{23}u_{yz}+2a_{13}u_{xz}+\Phi(x,y,z,u,u_x,u_y,u_z)=0
+\end{equation}
+Выпишем характеристическую форму \(Q(\lambda_1,\lambda_2,\lambda_3)\) и приводим к каноническому виду
+\[Q(\xi_1,\xi_2,\xi_3)=\alpha_1\xi_1^2+\alpha_2\xi_2^2+\alpha_3\xi_3^2,\quad\alpha_i\in\{-1,0,1\}.\]
+Преобразование:
+\[\left\{\begin{array}{ll}
+    \xi_1=\beta_{11}\lambda_1+\beta_{12}\lambda_2+\beta_{13}\lambda_3, & 
+    \lambda_1=\alpha_{11}\xi_1+\alpha_{12}\xi_2+\alpha_{13}\xi_3\\
+    \xi_2=\beta_{21}\lambda_1+\beta_{22}\lambda_2+\beta_{23}\lambda_3, &
+    \lambda_2=\alpha_{21}\xi_1+\alpha_{22}\xi_2+\alpha_{23}\xi_3\\
+    \xi_3=\beta_{31}\lambda_1+\beta_{32}\lambda_2+\beta_{33}\lambda_3, &
+    \lambda_3=\alpha_{31}\xi_1+\alpha_{32}\xi_2+\alpha_{33}\xi_3
+\end{array}\right.\]
+Выпишем матрицу преобразования:
+\[M=\left(
+\begin{array}{ccc}
+    \alpha_{11} & \alpha_{12} & \alpha_{13} \\
+    \alpha_{21} & \alpha_{22} & \alpha_{23} \\
+    \alpha_{31} & \alpha_{32} & \alpha_{33}
+\end{array}
+\right)\]
+Транспонируем:
+\[M^T=\left(
+\begin{array}{ccc}
+    \alpha_{11} & \alpha_{21} & \alpha_{31} \\
+    \alpha_{12} & \alpha_{22} & \alpha_{32} \\
+    \alpha_{13} & \alpha_{23} & \alpha_{33}
+\end{array}
+\right)\]
+И получаем обратное преобразование:
+\[\left\{\begin{array}{l}
+    \xi=\alpha_{11}x+\alpha_{12}y+\alpha_{13}z \\
+    \eta=\alpha_{21}x+\alpha_{22}y+\alpha_{23}z \\
+    \rho=\alpha_{31}x+\alpha_{32}y+\alpha_{33}z
+\end{array}\right.\]
+Первые производные через новые переменные:
+\[\left\{\begin{array}{l}
+    u_x=u_\xi\xi_x+u_\eta\eta_x+u_\rho\rho_x \\
+    u_y=u_\xi\xi_y+u_\eta\eta_y+u_\rho\rho_y \\
+    u_z=u_\xi\xi_z+u_\eta\eta_z+u_\rho\rho_z
+\end{array}\right.\]
+Также и для вторых производных:
+\[\left\{\begin{array}{l}
+    u_{xx}=u_{\xi\xi}\xi_x^2+u_{\eta\eta}\eta_x^2+u_{\rho\rho}\rho_x^2+2u_{\xi\eta}\xi_x\eta_x+2u_{\eta\rho}\eta_x\rho_x+2u_{\xi\rho}\xi_x\rho_x +u_\xi\xi_{xx}+u_\eta\eta_{xx}+u_\rho\rho_{xx}\\
+    u_{yy}=u_{\xi\xi}\xi_y^2+u_{\eta\eta}\eta_y^2+u_{\rho\rho}\rho_y^2+2u_{\xi\eta}\xi_y\eta_y+2u_{\eta\rho}\eta_y\rho_y+2u_{\xi\rho}\xi_y\rho_y +u_\xi\xi_{yy}+u_\eta\eta_{yy}+u_\rho\rho_{yy}\\
+    u_{zz}=u_{\xi\xi}\xi_z^2+u_{\eta\eta}\eta_z^2+u_{\rho\rho}\rho_z^2+2u_{\xi\eta}\xi_z\eta_z+2u_{\eta\rho}\eta_z\rho_z+2u_{\xi\rho}\xi_z\rho_z +u_\xi\xi_{zz}+u_\eta\eta_{zz}+u_\rho\rho_{zz}\\
+    u_{xy}=u_{\xi\xi}\xi_x\xi_y+u_{\eta\eta}\eta_x\eta_y+u_{\rho\rho}\rho_x\rho_y+u_{\xi\eta}(\xi_x\eta_y+\xi_y\eta_x)+u_{\eta\rho}(\eta_x\rho_y+\eta_y\rho_x)+u_{\xi\rho}(\xi_x\rho_y+\xi_y\rho_x)\\
+    u_{yz}=u_{\xi\xi}\xi_y\xi_z+u_{\eta\eta}\eta_y\eta_z+u_{\rho\rho}\rho_y\rho_z+u_{\xi\eta}(\xi_y\eta_z+\xi_z\eta_y)+u_{\eta\rho}(\eta_y\rho_z+\eta_z\rho_y)+u_{\xi\rho}(\xi_y\rho_z+\xi_z\rho_y)\\
+    u_{xz}=u_{\xi\xi}\xi_x\xi_z+u_{\eta\eta}\eta_x\eta_z+u_{\rho\rho}\rho_x\rho_z+u_{\xi\eta}(\xi_x\eta_z+\xi_z\eta_x)+u_{\eta\rho}(\eta_x\rho_z+\eta_z\rho_x)+u_{\xi\rho}(\xi_x\rho_z+\xi_z\rho_x)\\
+\end{array}\right.\]
+И, наконец, канонический вид \boxed{\alpha_1u_{\xi\xi}+\alpha_2u_{\eta\eta}+\alpha_3u_{\rho\rho}+\Phi(\xi,\eta,\rho,u,u_\xi,u_\eta,u_\rho)}.
+
+\section{Общее решение уравнения II-го порядка с двумя переменными.}
+
+\ 
+\parРассматриваем
+\begin{equation}
+a_{11}u_{xx}+2a_{12}u_{xy}+a_{22}u_{yy}+b_1u_x+b_2u_y+cu+f=0
+\end{equation}
+Канонический вид гиперболического типа
+\[u_{\xi\eta}+\overline b_1u_\xi+\overline b_2u_\eta+\overline\gamma u+\overline f=0\]
+\[u_{\xi\xi}-u_{\eta\eta}+\overline b_1u_\xi+\overline b_2u_\eta+\overline\gamma u+\overline f=0\]
+Для параболического
+\[u_{\eta\eta}+\overline b_1u_\xi+\overline b_2u_\eta+\overline\gamma u+\overline f=0\]
+Для эллиптического
+\[u_{\xi\xi}+u_{\eta\eta}+\overline b_1u_\xi+\overline b_2u_\eta+\overline\gamma u+\overline f=0\]
+Возьмем \(u=e^{\lambda\xi+\mu\eta}v\), тогда 
+\[\left\{
+\begin{array}{l}
+    u_\xi=\lambda e^{\lambda\xi+\mu\eta}v+e^{\lambda\xi+\mu\eta}v_\xi \\
+    u_\eta=\mu e^{\lambda\xi+\mu\eta}+e^{\lambda\xi+\mu\eta}v_\eta \\
+    u_{\xi\xi}=\lambda^2e^{\lambda\xi+\mu\eta}v+2\lambda e^{\lambda\xi+\mu\eta}v_\xi+e^{\lambda\xi+\mu\eta}v_{\xi\xi}\\
+    u_{\eta\eta}=\mu^2e^{\lambda\xi+\mu\eta}v+2\mu e^{\lambda\xi+\mu\eta}v_\eta+e^{\lambda\xi+\mu\eta}v_{\eta\eta}\\
+    u_{\xi\eta}=\lambda\mu e^{\lambda\xi+\mu\eta}v+\lambda e^{\lambda\xi+\mu\eta}v_\eta+\mu e^{\lambda\xi+\mu\eta}v_\xi+e^{\lambda\xi+\mu\eta}v_{\xi\eta}
+\end{array}
+\right.\]
+\parРассмотрим частные случаи канонического вида \(u_{\xi\eta}+\overline b_1u_\xi+\overline b_2u_\eta+\overline\gamma u+\overline f=0\).
+\par1. \(u_{\xi\eta}=0,\ \dfrac{\partial^2u}{\partial\xi\partial\eta}=0;\ \dfrac{\partial u}{\partial \xi},\ \dfrac{\partial u}{\partial \xi}=f_1(\xi)\Rightarrow u=f(\xi)+g(\eta)\) -- общее решение. Переходим обратно к \(x\) и \(y\): \(u(x,y)=f(\xi(x,y))+g(\eta(x,y)).\)
+\par2. \(u_{\xi\eta}+\overline b_2u_\eta=0,\ u_\eta=v;\ u_{\xi\eta}=v_\xi,\ v_\xi+\overline b_2 v=0,\ \overline b_2=\const,\ \dfrac{\partial v}{\partial \xi}=-\overline b_2v,\Rightarrow \ln v=-\overline b_2\xi+f_1(\eta)\Rightarrow v=f_2(\eta)e^{-\overline b_2\xi}\Rightarrow u=f_3(\eta)e^{-\overline b_2\xi}+g(\xi).\)
+\par3. \(u_{\xi\eta}+\overline b_1u_\xi=0;\) Аналогично \(u=f_3(\xi)e^{-\overline b_1\eta}+g(\eta).\)
+\par4. \(u_{\xi\eta}+\overline f(\xi,\eta)=0\); Пусть \(u_{\xi\eta}+\eta\sin\xi=0\). Тогда \(u_\xi=\int\eta\sin\xi d\eta=-\dfrac{\eta^2}{2}\sin\eta+f_1(\xi)\Rightarrow u=\int-\dfrac{\eta^2}{2}\sin\xi+f_1(\xi)d\xi=\dfrac{\eta^2}{2}\cos\xi+f_2(\xi)+g(\eta).\)
+\par5. \(u_{\xi\eta}+\overline b_1u_\xi+\overline b_2u_\eta+\overline\gamma u+\overline cu,\ u=ve^{\lambda\xi+\mu\eta};\) Возьмем производные \[u_\xi=\lambda e^{\lambda\xi+\mu\eta}v+e^{\lambda\xi+\mu\eta}v_\xi,\]
+\[u_\eta=\mu e^{\lambda\xi+\mu\eta}+e^{\lambda\xi+\mu\eta}v_\eta,\] \[u_{\xi\eta}=\lambda\mu e^{\lambda\xi+\mu\eta}v+\lambda e^{\lambda\xi+\mu\eta}v_\eta+\mu e^{\lambda\xi+\mu\eta}v_\xi+e^{\lambda\xi+\mu\eta}v_{\xi\eta}.\] Подставляем полученные производные в исходное уравнение и получаем: 
+\[\lambda\mu e^{\lambda\xi+\mu\eta}v+\lambda e^{\lambda\xi+\mu\eta}v_\eta+\mu e^{\lambda\xi+\mu\eta}v_\xi+e^{\lambda\xi+\mu\eta}v_{\xi\eta}+\overline b_1(\lambda e^{\lambda\xi+\mu\eta}v+e^{\lambda\xi+\mu\eta}v_\xi)+\overline b_2(\mu e^{\lambda\xi+\mu\eta}+e^{\lambda\xi+\mu\eta}v_\eta)+\overline cve^{\lambda\xi+\mu\eta}=0\]
+\[\Rightarrow v_{\xi\eta}+v_{\xi}(\mu+\overline b_1)+v_\eta(\lambda+\overline b_2)+v(\lambda\mu+\overline b_1\lambda+\overline b_2\eta+\overline c)=0,\ \mu=-\overline b_1,\ \lambda =-\overline b_2.\]
+\parВ итоге
+\[u_{\xi\eta}+v(\overline c - \overline b_1\overline b_2)=0.\]
+
+\section{Задача коши для линейного уравнения II-го порядка гиперболического типа}
+
+\ 
+\parРассматриваем
+\begin{equation}
+a_{11}u_{xx}+2a_{12}u_{xy}+a_{22}u_{yy}+b_1u_x+b_2u_y+cu+f=0
+\end{equation}
+\parДля гиперболического \(\Delta = a_{12}^2-a_{11}a_{22}>0\), \(a_{ij},b_j, c, f\) -- функции от \(x, y\). Задаются дополнительные условия 
+\begin{equation}
+    u|_\Gamma=\varphi(x,y),\ \dfrac{\partial u}{\partial l}|_\Gamma=\psi(x,y), 
+\end{equation} кривая \(\Gamma\subset D\cap \fr D\).
+\parЕсли в каждой точке кривой \(\Gamma\) направление \(l\) не является касательным к кривой \(\Gamma\) и касательная направлением кривой \(\Gamma\) не является характеристическим, то в области \(D\), ограниченной характеристиками, проходящими через концы кривой \(\Gamma\), при достаточной гладкости коэффициентов уравнения (1) и данных условий (2) существует единственное решение задачи Коши.
+\parВ случае \(u_{\xi\eta}=\Phi(\xi,\eta)\Rightarrow u(\xi,\eta)=f(\xi)+g(\eta)+M(\xi,\eta),\ M_{\xi\eta}=\Phi,\ f, g\) -- неизвестные функции. Для их нахождения и задаются дополнительные условия (2).
+\parПусть в каноническом виде получились \(u_{\xi\eta}+Au_\xi+Bu_\eta+Cu=H\). Замена \(u=ve^{\lambda\xi+\mu\eta}\).
+\[u_\xi=\lambda e^{\lambda\xi+\mu\eta}v+e^{\lambda\xi+\mu\eta}v_\xi,\]
+\[u_\eta=\mu e^{\lambda\xi+\mu\eta}+e^{\lambda\xi+\mu\eta}v_\eta,\]
+\[u_{\xi\eta}=\lambda\mu e^{\lambda\xi+\mu\eta}v+\lambda e^{\lambda\xi+\mu\eta}v_\eta+\mu e^{\lambda\xi+\mu\eta}v_\xi+e^{\lambda\xi+\mu\eta}v_{\xi\eta}\]
+\parПодставим их в исходное уравнение:
+\[e^{\lambda\xi+\mu\eta}(v_{\xi\eta}+\mu v_\xi+\lambda v_\eta +\lambda\mu v+A(v_\xi+\lambda v)+B(v_\eta+\mu v)+Cv)=H,\]
+\parИ пусть выполнено \(AB=C\):
+\[v_{\xi\eta}+v_\xi(\mu+A)+v_\eta(\lambda+B) +v(\lambda\mu+A+B+C)=He^{-\lambda\xi-\mu\eta},\ -\mu=A,\ -\lambda=B\Rightarrow\]
+\[v_{\xi\eta}=\Phi(\xi,\eta).\]
+
+\subsection{Задача Коши для линейного уравнения II-го пордяка с аналитическими данными. Формулировка теоремы Коши-Ковалевской.}
+
+\ 
+\parРассмотрим уравнение с частными производными второго порядка вида
+\begin{equation}
+    \dfrac{\partial^2u}{\partial x_1^2}=F(x,u,\dfrac{\partial u}{\partial x_1},...,\dfrac{\partial u}{\partial x_n},\dfrac{\partial^2u}{\partial x_1x_2},...,\dfrac{\partial^2u}{\partial x_n^2})
+\end{equation}
+Уравнения вида (1) называется \textit{нормальными} или \textit{уравнениями Коши-Ковалевской}.
+\begin{equation}
+\dfrac{\partial^2u}{\partial x_1^2}=\displaystyle\sum_{i,j=\overline{1,n}}a_{ij}(x)\dfrac{\partial^2u}{\partial x_ix_j}+\sum_{i=1}^nb_i(x)\dfrac{\partial u}{\partial x_i}+c(x)u+f(x)
+\end{equation}
+\begin{equation}
+    u|_{x_1=x_1^0}=\varphi_0(x_2,...,x_n),\ \dfrac{\partial u}{\partial x_1}=\varphi_1(x_2,...,x_n)
+\end{equation}
+\par\textbf{Определение.} Функция комплексной переменной \(f(z_1,...,z_m)\) называется \textit{аналитической} в окрестности точки \(M^0=(z_1^0,...,z_m^0)\), если она разлагается в степенной ряд
+\[f(z_1,...,z_m)=\displaystyle\sum_{k_1\ge0...k_m\ge0}a_{k_1...k_m}(z_1-z_1^0)^{k_1}...(z_m-z_m^0)^{k_m},\]
+сходящейся при достаточно малых \(|z_i-z^0_i|,\ i=\overline{1,m}\), при этом бесконечно дифференцируемо в \(M^0\) и вычисляется как \(a_{k_1...k_m}=\dfrac{1}{k_1!...k_m!}\cdot\dfrac{\partial^{k_1+...+k_m}f}{\partial^{k_1}x_1...\partial^{k_m}x_m}\).
+\par\textbf{Теорема Коши-Ковалевской.} Пусть функции \(\varphi_0\) и \(\varphi_1\) являются аналитическими функциями в окрестности точки \((x_2^0,...,x_n^0)\) и функция \(F\) аналитична в окрестности точки тогда задача Коши (1), (3) имеет аналитическое решение в некоторой окрестности \((x_1^0,...,x_n^0)\), при том единственное в классе аналитических функций.
+\par\textbf{Замечание 1.}
+\par\textbf{Замечение 2.} Данная теорема расписана для очень большого класса уравнений (1), но решения задачи Коши существуют и единственны только в малой окрестности заданной точки.
+
+\section{Системы двух линейных уравнений с частными производными первого порядка.}
+
+\ 
+\parПусть будет \(n\) независимых переменных \(x_1,...,x_n,\ u(x); v(x)\).
+\begin{equation}
+\begin{array}{l}
+    \displaystyle\sum_{i=1}^na_{1i}\dfrac{\partial u}{\partial x_i}+\sum^n_{i=1}b_{1i}\dfrac{\partial v}{x_i}+c_1u+d_1v=0 \\
+    \displaystyle\sum_{i=1}^na_{2i}\dfrac{\partial u}{\partial x_i}+\sum^n_{i=1}b_{2i}\dfrac{\partial v}{x_i}+c_2u+d_2v=0
+\end{array}
+\end{equation}
+где \(a_{ji}(x),\ b_{ji}(x),\ c_j(x),\ d_j(x)\) -- коэффициенты \(f_1(x),\ f_2(x)\) в области \(D\in \mathbb R^n\).
+\begin{equation}
+    Q(\lambda_1,...,\lambda_2)=\displaystyle\left|
+\begin{array}{cc}
+    \sum^n_{i=1}a_{1i}\lambda_i & \sum^n_{i=1}b_{1i}\lambda_i \\
+    \sum^n_{i=1}a_{2i}\lambda_i & \sum^n_{i=1}b_{2i}\lambda_i
+\end{array}\right|
+\end{equation}
+\[Q(\xi_1,...,\xi_n)=\displaystyle\sum^n_{i=1}\alpha_i\xi_i^2,\quad \alpha_i=-1,0,1.\]
+\parТеперь рассмотрим частный случай, когда у нас два независимых переменных.
+\[
+\begin{array}{l}
+    a_{11}(x,y)u_x+a_{12}(x,y)v_x+b_{11}(x,y)u_y+b_{12}(x,y)v_y+c_{11}(x,y)u+c_{12}v=f(x,y) \\
+    a_{21}(x,y)u_x+a_{22}(x,y)v_x+b_{21}(x,y)u_y+b_{22}(x,y)v_y+c_{21}(x,y)u+c_{22}v=f(x,y) \\
+\end{array}
+\]
+\[A=\left(\begin{array}{cc}
+    a_{11} & a_{12} \\
+    a_{21} & a_{22}
+\end{array}\right),\quad B=\left(\begin{array}{cc}
+    b_{11} & b_{12} \\
+    b_{21} & b_{22}
+\end{array}\right),\quad C=\left(\begin{array}{cc}
+    c_{11} & c_{12} \\
+    c_{21} & c_{22}
+\end{array}\right),\quad w=\left(\begin{array}{c}
+    u \\
+    v
+\end{array}\right),\quad t=\left(\begin{array}{c}
+    f_1 \\
+    f_2
+\end{array}\right)\]
+\begin{equation}
+    Aw_x+Bw_y+cw=f
+\end{equation}
+\begin{equation}
+    Q(\lambda_1,\lambda_2)=\det ||A\lambda_1+B\lambda_2||
+\end{equation}
+\[Q(\xi_1,\xi_2)=\alpha_1\xi_1^2+\alpha_2\xi_2^2.\]
+\[\left\{\begin{array}{l}
+    u_x=v_y \\
+    u_y=-v_x
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{l}
+    u_x-v_y=0 \\
+    u_y+v_x=0
+\end{array}\right.\Rightarrow\]
+\[A=\left(\begin{array}{cc}
+    1 & 0 \\
+    0 & 1
+\end{array}\right),\quad B=\left(\begin{array}{cc}
+    0 & -1 \\
+    1 & 0
+\end{array}\right),\quad A\lambda_1+B\lambda_2=A=\left(\begin{array}{cc}
+    \lambda_1 & -\lambda_2 \\
+    \lambda_2 & \lambda_1
+\end{array}\right)\]
+\[\left|
+\begin{array}{cc}
+    \lambda_1 & -\lambda_2 \\
+    \lambda_2 & \lambda_1
+\end{array}\right|=\lambda_1^2+\lambda_2^2 - \textup{ эллиптический}.\]
+\[\left|
+\begin{array}{cc}
+    A & B \\
+    Edx & Edy
+\end{array}\right|=0,\quad\left|
+\begin{array}{cccc}
+    a_{11} & a_{12} & b_{11} & b_{12} \\
+    a_{21} & a_{22} & b_{21} & b_{22} \\
+    dx & 0 & dy & 0 \\
+    0 & dx & 0 & dy
+\end{array}\right|=0.\]
+\[\left\{
+\begin{array}{cc}
+    u_x=v_y & u_x-v_y=0 \\
+    u_y=-v_x & u_y+v_x=0
+\end{array}\right.,\quad\left|
+\begin{array}{cccc}
+    1 & 0 & 0 & -1 \\
+    0 & 1 & 1 & 0 \\
+    dx & 0 & dy & 0 \\
+    0 & dx & 0 & dy
+\end{array}\right|=(dy)^2+(dx)^2=0\Rightarrow\]
+\[(dy)^2=-(dx)^2,\ dy=\pm idx\Rightarrow
+\begin{array}{l}
+    y-ix=C \\
+    y+ix=C
+\end{array}\]
+\par\textbf{Пример.}
+\par1. Найти условие гиперболичности системы.
+\[\left\{\begin{array}{l}
+    \dfrac{\partial u}{\partial t}+\alpha\dfrac{\partial u}{\partial x}+\beta\dfrac{\partial v}{\partial x} \\
+    \dfrac{\partial u}{\partial t}+\gamma\dfrac{\partial u}{\partial x}+\delta\dfrac{\partial v}{\partial x}
+\end{array}\right.,\quad A=\left(
+\begin{array}{cc}
+    1 & 0 \\
+    0 & 1
+\end{array}\right),\quad B=\left(
+\begin{array}{cc}
+    \alpha & \beta \\
+    \gamma & \delta
+\end{array}\right).\]
+\par\textit{Решение.}
+\[\left|
+\begin{array}{cccc}
+    1 & 0 & \alpha & \beta \\
+    0 & 1 & \gamma & \delta \\
+    dt & 0 & dx & 0 \\
+    0 & dt & 0 & dx
+\end{array}\right|=(dx)^2+(-\delta-\alpha)dxdt+(\alpha\delta-\beta\gamma)(dt)^2=0.\]
+\[\Rightarrow\left(\dfrac{dx}{dt}\right)^2+(-\delta-\alpha)\dfrac{dx}{dt}+(\alpha\delta-\beta\gamma)=0,\quad D=(-\delta-\alpha)^2-4(\alpha\delta-\beta\gamma)>0\ \blacksquare\]
+\par2. Найти характеристики системы
+\[\left\{\begin{array}{l}
+    u_x-bv_x-cv_y=0 \\
+    -av_x+u_y+bv_y=0
+\end{array}\right.,\quad A=\left(
+\begin{array}{cc}
+    1 & -b \\
+    0 & -a
+\end{array}\right),\quad B=\left(
+\begin{array}{cc}
+    0 & -c \\
+    1 & b
+\end{array}\right).\]
+\par\textit{Решение.} \[\left|
+\begin{array}{cccc}
+    1 & -b & 0 & -c \\
+    0 & -a & 1 & b \\
+    dx & 0 & dy & 0 \\
+    0 & dx & 0 & dy
+\end{array}\right|=c(dx)^2-2bdxdy-a(dy)^2=0\]
+\[\Rightarrow a\left(\dfrac{dy}{dx}\right)^2-2b\dfrac{dy}{dx}-c=0,\ D=4b^2+4ac\Rightarrow ady=(b\pm \sqrt{b^2+ac})\ \blacksquare\]
+\par3. С помощью соотношений на характеристиках, найти общее решение системы
+\[\left\{\begin{array}{l}
+    2u_t-6v_t-3u_x+2v_x=0 \\
+    -u_t+3u_x-4v_x=0
+\end{array}\right.,\quad A=\left(
+\begin{array}{cc}
+    2 & -6 \\
+    -1 & 0
+\end{array}\right),\quad B=\left(
+\begin{array}{cc}
+    -3 & 8 \\
+    3 & -4
+\end{array}\right).\]
+\par\textit{Решение.}
+\[\left|
+\begin{array}{cccc}
+    2 & -6 & -3 & 8 \\
+    -1 & 0 & 3 & -4 \\
+    dt & 0 & dx & 0 \\
+    0 & dt & 0 & dx
+\end{array}\right|=-12(dt)^2-18dxdt-6(dx)^2=0\Rightarrow\]
+\[\left(\dfrac{dx}{dt}\right)^2+3\dfrac{dx}{dt}+2=0,\ D=9 -4\cdot2=1 \Rightarrow \dfrac{dx}{dt}=\dfrac{-3\pm\sqrt 1}{2}=-2;-1\Rightarrow\]
+\[\begin{array}{cc}
+    dx=-2dt & x+2t=C \\
+    dx=-dt & x+t=C
+\end{array}\]
+\parВводим новые переменные \(\xi=x+t,\ \eta=x+2t\):
+\[u_x=u_\xi+u_\eta,\ u_t=u_\xi+2u_\eta,\ v_x=v_\xi+v_\eta,\ v_t=v_\xi+2v_\eta\]
+и подставляем:
+\[\left\{\begin{array}{l}
+    -u_\xi+u_\eta+2v_\xi-4u_\eta \\
+    2u_\xi+u_\eta-4v_\xi-4u_\eta
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{l}
+    -3u_\xi+6v_\xi=0 \\
+    3u_\eta-12v_\eta=0
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{l}
+    u_\xi-2v_\xi=0 \\
+    u_\eta-4v_\eta=0
+\end{array}\right.\]
+\[\Rightarrow
+\left\{\begin{array}{l}
+    u-2v=f(\eta) \\
+    u-4v=g(\xi)
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{l}
+    u=2f(\eta)-g(\xi) \\
+    v=\frac{1}{2}(f(\eta)-g(\xi))
+\end{array}\right.\]
+и, наконец, подставляем \(\xi\) и \(\eta\):
+\[\Rightarrow
+\left\{\begin{array}{l}
+    u=2f(x+2t)-g(x+t) \\
+    v=\frac{1}{2}(f(x+2t)-g(x+t))
+\end{array}\right.\]
+
+\section{Корректность постановки задач математической физики. Пример Адамара.}
+
+\ 
+\parОсновные виды рассматриваемых задач:
+\par1) Задача Коши для уравнений гиперболического и параболического типа. Задаются только начальные условия, граничных условий нет, область задачи совпадает со всем пространством \(G=\mathbb R^n\);
+\par2) Краевая задача для уравнений эллиптического типа. Начальных условий нет, только граничные условия \(G\subset\mathbb R^n\).
+\par3) Смешанная краевая задача для гиперболических и параболических типов. Есть и начальные, и конечные условия, \(G\subset\mathbb R^n\).
+\par\textbf{Определение.} Задача математической физики считается поставленной \textit{корректно по Адамару}, если ее решение:
+\par1. \(\exists p\in M_1\);
+\par2. \(!\exists p\in M_2\);
+\par3. Это решение устойчивое (малым изменениям входных данных соответствуют малые изменения решения).
+\parПересечение \(M_1\cap M_2\) называется \textit{классом корректности} задач.
+\parРассматривается задача Коши для уравнения \(\dfrac{\partial^2u}{\partial t^2}+\dfrac{\partial^2u}{\partial x^2}=0,\ u|_{t=0}=\varphi(x)=0;\ \dfrac{\partial u}{\partial t}=\psi(x)=\dfrac{1}{k}\sin(kx).\)
+\par\(u_1=\dfrac{1}{k^2}\sinh(kt)\sin(kx),\ \dfrac{\partial^2u}{\partial t^2}=\sinh(kt)\sin(kx),\ \dfrac{\partial^2u}{\partial x^2}=\dfrac{1}{k}\cosh(kt)\sin(kx)\), \(u_1|_{t=0}=0,\ \dfrac{\partial u}{\partial t}|_{t=0}=\dfrac{1}{k}\sin(kx)\)
+\(\varphi_1(x)=0,\ \psi_1(x)=0,\ u_2(x,t)\equiv0,\ |\psi(x)-\psi_1(x)|=|\dfrac{1}{k}\sin(kx)|\to0,\ (u_1-u_2)=|\dfrac{1}{k^2}\sinh(kt)\sin(kx)|\nrightarrow0.\) Поэтому задача поставлена некорректно.
+
+\section{Уравнения гиперболического типа.}
+
+\subsection{Вывод уравнений колебаний струны.}
+
+\ 
+\parПри исследования идеального процесса выделяют:
+\par1. \(u(x_1,...,x_n,t),\ v(x_1,...,x_n,t)\);
+\par2. Область \(\Omega\);
+\par3. Уравнение с частными производными;
+\par4. Дополнительные условия: граничные и начальные.
+\par I. Задача Коши: НУ+, ГУ-, \(\Omega =\mathbb R^n\), гиперболический и параболический тип;
+\par II. Краевая Задача: НУ-, ГУ+, \(\Omega\subset\mathbb R^n\), эллиптический тип;
+\par III. НКЗ: НУ+, ГУ+, \(\Omega \subset \mathbb R^n\) гиперболический и параболический.
+\parОбщее уравнение
+\begin{equation}
+    \dfrac{\partial^2u}{\partial t^2}=a^2\Delta_xu+f(x,t),\quad x=(x_1,...,x_n),\ \Delta_xu=\sum_{i=1}^n\dfrac{\partial^2u}{\partial x_i^2}
+\end{equation}
+-- волновое уравнение гиперболического типа.
+\par\(n=1:\ \dfrac{\partial^2u}{\partial t^2}=a^2\dfrac{\partial^2u}{\partial x^2}+f(x,t)\);
+\par\(n=2:\ \dfrac{\partial^2u}{\partial t^2}=a^2\left(\dfrac{\partial^2u}{\partial x^2}+\dfrac{\partial^2u}{\partial y^2}\right)+f(x,y,t)\);
+\par\(n=3:\ \dfrac{\partial^2u}{\partial t^2}=a^2\left(\dfrac{\partial^2u}{\partial x^2}+\dfrac{\partial^2u}{\partial y^2}+\dfrac{\partial^2u}{\partial z^2}\right)+f(x,y,z,t)\);
+\parРассмотрим тонкую (длина намного больше ширины) упругую (сила напряжения направлена по касательной к ее профилю) гибкую (не оказывает сопротивления изменению) нить -- \textit{струну}.
+
+\subsection{Задача Коши для однородного колебания одной струны. Формулы Даламбера.}
+
+\ 
+\begin{equation}
+    u_{tt}=a^2u_{xx},\ -\infty<x<\infty,\ t>0
+\end{equation}
+\begin{equation}
+    u(x,0)=\varphi(x);\ u_t(x,0)=\psi(x),\ -\infty<x<\infty
+\end{equation}
+\par\(u_{tt}-a^2u_{xx}\Rightarrow (dx)^2-a^2(dt)^2=0\Rightarrow\xi=x-at,\ \eta=x+at\Rightarrow u_x=u_\xi+u_\eta;\ u_t=-au_\xi+au_\eta,\ u_{xx}=u_{\xi\xi}+2u_{\xi\eta}+u_{\eta\eta};\ u_{tt}=a^2u_{\xi\xi}+2a^2u_{\xi\eta}+a^2u_{\eta\eta}\Rightarrow u_{\xi\eta}=0,\ u=f(x-at)+g(x+at)\).
+\par\(u_t(x,t)=-af'_t(x-at)+ag_t'(x+at),\Rightarrow\)
+\[\left\{
+\begin{array}{l}
+    u(x,0)=f(x)+g(x)=\varphi(x) \\
+    u_t(x,0)=-af'(x)+ag'(x)=\psi(x)
+\end{array}\right.
+\Rightarrow
+\left\{
+\begin{array}{l}
+    f(x)=\frac{1}{2}\varphi(x)-\frac{1}{2a}\int_0^x\psi(\alpha)d\alpha-C_1 \\
+    g(x)=\frac{1}{2}\varphi(x)+\frac{1}{2a}\int_0^x\psi(\alpha)d\alpha+C_1x
+\end{array}\right.\]
+\par\(\Rightarrow u=\frac{1}{2}\varphi(x-at)+\frac{1}{2}\varphi(x+at)+\frac{1}{2}\int_{x-at}^{x+at}\psi(\alpha)d\alpha\ \blacksquare\) -- формула Даламбера.
+
+\subsection{Задача Коши для неоднородного уравнения колебаний струны. Метод Дюамеля.}
+
+\ 
+\begin{equation}
+    u_{tt}=a^2u_{xx},\ -\infty<x<\infty,\ t>0
+\end{equation}
+\begin{equation}
+    u(x,0)=\varphi(x);\ u_t(x,0)=\psi(x),\ -\infty<x<\infty
+\end{equation}
+\par\(u(x,t)=v(x,t)+w(x,t)\)
+\begin{equation}
+    b:\left\{
+\begin{array}{l}
+    v_{tt}=a^2v_{xx} \\
+    v(x,0)=\varphi(x) \\
+    v_t(x,0)=\varphi(x)
+\end{array}\right.
+\end{equation}
+\begin{equation}
+    w:\left\{
+\begin{array}{l}
+    w_{tt}=a^2w_{xx}+f(x,t) \\
+    w(x,0)=0 \\
+    w_t(x,0)=0
+\end{array}\right.
+\end{equation}
+\begin{equation}
+    \left\{\begin{array}{ll}
+        \dfrac{\partial^2g_f}{\partial t^2}=a^2\dfrac{\partial^2g_f}{\partial x^2}, & -\infty<x<\infty,\ t>\tau\\
+        g_f(x,\tau,\tau)=0; & \dfrac{\partial g_f(x,\tau,\tau)}{\partial t}=f(x,\tau),\ -\infty<x<\infty
+    \end{array}\right.
+\end{equation}
+\par\(g_f(x,t,\tau)=g_f(x,t-\tau,\tau)=\dfrac{1}{2a}\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\alpha,\tau)d\alpha\)
+\par\(u(x,t)=\dfrac{\partial g_\varphi(x,t,0)}{\partial t}+g_\psi(x,t,\tau),\ t=\tau=0,\ g_\varphi=\dfrac{1}{2a}\int_{x-at}^{x+at}\varphi(\alpha,\tau)d\alpha;\ g_\psi=\dfrac{1}{2a}\int_{x-at}^{x+at}\psi(\alpha,\tau)d\alpha,\ u(x,t)=\dfrac{\varphi(x+at)+\varphi(x-at)}{2}+\dfrac{1}{2a}\int_{x-at}^{x+at}\psi(\alpha)d\alpha\).
+\par\(\dfrac{\partial g_\varphi}{\partial t}=\dfrac{1}{2}\varphi(x+at)-\dfrac{1}{2}\varphi(x-at)\).
+\par\textbf{Лемма.} Решение задачи Коши (4) имеет вид
+\begin{equation}
+    w(x,t)=\int_0^tg_f(x,t,\tau)d\tau
+\end{equation}
+\par\(w(x,0)=0,\ w_t=g_f(x,t,t)+\int_0^t\dfrac{\partial g_f}{\partial t}d\tau;\ w_t(x,0)=0\).
+\par\(w_{tt}=\dfrac{\partial g_f(x,t,t)}{\partial t}+\int_0^t\dfrac{\partial^2g_f}{\partial t^2}d\tau;\).
+\par\(w_{xx}=\int_0^t\dfrac{\partial^2g_f(x,t,\tau)}{\partial x^2}d\tau,\ w_{tt}=a^2w_{xx}+f(x,t)\)
+\par\(f(x,t)+\int^t_0\dfrac{\partial^2g_f}{\partial t^2}d\tau=a^2\int_0^t\dfrac{\partial^2g_f}{\partial x^2}d\tau+f(x,t) \blacksquare\).
+\begin{equation}
+u(x,t)=\dfrac{\varphi(x+at)+\varphi(x-at)}{2}+\dfrac{1}{2a}\int_{x-at}^{x+at}\psi(\alpha)d\alpha+\int_0^t\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\alpha,\tau)d\alpha d\tau
+\end{equation}
+
+\subsection{Устойчивость решения задачи Коши по начальным данным и по правой части уравнения.}
+
+\ 
+\par\textbf{Теорема.} \(\forall t\in[0,t_0] \forall\varepsilon>0 \exists\delta(\varepsilon,t_0)>0:\ |\varphi_1(x)-\varphi_2(x)|<\delta;\ |\psi_1(x)-\psi_2(x)|<\delta\Rightarrow|u_1(x,t)-u_2(x,t)|<\varepsilon\).
+\par\textit{Доказательство.} \(|u_1(x,t)-u_2(x,t)|=|\dfrac{\varphi_1(x+at)+\varphi_1(x-at)}{2}+\dfrac{1}{2a}\int_{x-at}^{x+at}\psi_1(\alpha)d\alpha-\dfrac{\varphi_2(x+at)-\varphi_2(x-at)}{2}-\dfrac{1}{2a}\int_{x-at}^{x+at}\psi_2(\alpha)d\alpha|\le\dfrac{|\varphi_1(x+at)-\varphi_2(x+at)|}{2}+\dfrac{|\varphi_1(x-at)-\varphi_2(x-at)|}{2}+\dfrac{1}{2a}|\int_{x-at}^{x+at}(\psi_1(\alpha)-\psi_2(\alpha))d\alpha|<\dfrac{\delta}{2}+\dfrac{\delta}{2}+\dfrac{1}{2a}\int_{x-at}^{x+at}|\psi_1(\alpha)-\psi_2(\alpha)|d\alpha<\delta+\dfrac{1}{2a}\int_{x-at}^{x+at}\delta d\alpha=\delta(1+t)\le\delta(1+t_0)\). То есть возьмем \(\delta=\dfrac{\varepsilon}{1+t_0}\).
+
+\section{Интеграл энергии, теорема единственности решения первой краевой задачи для уравнений вынужденных колебаний неоднородной струны.}
+
+\ 
+\parФизическое явление, описываемое решением \(u(x,t)\) волнового уравнения называется распротранением волны, а само решение \(u(x,t)\) называется волной. Из формулы Кирхгофа (8) следует, что соответствующая задача (7) -- волна, в случае 3 пространственных переменных определяется значениями \(\varphi, \dfrac{\partial \varphi}{\partial n}, \psi\).
+
+\end{document}
